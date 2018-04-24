@@ -1,0 +1,528 @@
+<!-----------------
+Hacked By _HsH_Hacked By 
+Hacker Sakit Hati
+------------------->
+<html><meta content='Hacked by Hacker Sakit Hati' name='subject'><meta content='Hacked by Hacker Sakit Hati' name='Abstract'><meta name='keywords' content='HsH, Antonio Hacker Sakit Hati, Hacked by Hacker Sakit Hati, hacked by Hacker Sakit Hati Was Here, Indonesian Hacker , Indonesian Defacer'><meta content='y0u g0t HacKed' name='description'><meta content='Hacker Sakit Hati' name='copyright'><meta content='Hacker Sakit Hati' name='author'><title>Hacked By Hacker Sakit Hati</title><link href='http://i48.servimg.com/u/f48/16/08/07/74/indone10.gif' rel='shortcut icon' type='image/x-icon' /><body style="background-color:#000;background-image:url(https://lh5.googleusercontent.com/-T5qbgs84EPM/VMAgX3fTHOI/AAAAAAAAAGw/o7lqCvK3sno/w1125-h1344-no/HsH-2015.png);background-repeat:repeat-y;background-position:top center ;"><object type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" width="0" height="0"><param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" /><param name="bgcolor" value="#ffffff" /><param name="FlashVars" value="mp3=https://htmlscript.googlecode.com/svn/jones.mp3&amp;width=0&amp;height=0&amp;loop=1&amp;autoplay=1&amp;volume=100"/></object><script type='text/javascript'>
+<!--//
+
+
+
+function tb9_makeArray(n){
+
+
+
+    this.length = n;
+
+
+
+    return this.length;
+
+
+
+}
+
+
+
+tb9_messages = new tb9_makeArray(4);
+
+
+
+tb9_messages[0] = 'Hacker Sakit Hati';
+
+
+
+tb9_messages[1] = 'Hacker Sakit Hati';
+
+
+
+tb9_messages[2] = '';
+
+
+
+tb9_messages[3] = 'Hacked By ';
+
+
+
+tb9_messages[4] = '<========== Hacked By  ==========>';
+
+
+
+tb9_messages[5] = ' <===== Hacked By  =====> ';
+
+
+
+tb9_rptType = 'infinite';
+
+
+
+tb9_rptNbr = 5;
+
+
+
+tb9_speed = 75;
+
+
+
+tb9_delay = 2000;
+
+
+
+var tb9_counter=1;
+
+
+
+var tb9_currMsg=0;
+
+
+
+var tb9_timerID = null
+
+
+
+var tb9_bannerRunning = false
+
+
+
+var tb9_state = ''
+
+
+
+tb9_clearState()
+
+
+
+function tb9_stopBanner() { 
+
+
+
+    if (tb9_bannerRunning)      
+
+
+
+    clearTimeout(tb9_timerID)   
+
+
+
+    tb9_timerRunning = false
+
+
+
+}
+
+
+
+function tb9_startBanner() {    
+
+
+
+    tb9_stopBanner()    
+
+
+
+    tb9_showBanner()
+
+
+
+}
+
+
+
+function tb9_clearState() { 
+
+
+
+    tb9_state = ''  
+
+
+
+    for (var i = 0; i < tb9_messages[tb9_currMsg].length; ++i) {        
+
+
+
+        tb9_state += '0'    
+
+
+
+    }
+
+
+
+}
+
+
+
+function tb9_showBanner() { 
+
+
+
+if (tb9_getString()) {      
+
+
+
+    tb9_currMsg++       
+
+
+
+    if (tb9_messages.length <= tb9_currMsg) {       
+
+
+
+        if ((tb9_rptType == 'finite') && (tb9_counter==tb9_rptNbr)){
+
+
+
+            tb9_stopBanner();
+
+
+
+            return;
+
+
+
+        }
+
+
+
+        tb9_counter++;
+
+
+
+        tb9_currMsg=0;
+
+
+
+    }
+
+
+
+    tb9_clearState()        
+
+
+
+    tb9_timerID = setTimeout('tb9_showBanner()', tb9_delay) 
+
+
+
+} 
+
+
+
+else {      
+
+
+
+    var tb9_str = ''        
+
+
+
+for (var j = 0; j < tb9_state.length; ++j) {            
+
+
+
+    tb9_str += (tb9_state.charAt(j) == '1') ? tb9_messages[tb9_currMsg].charAt(j) : '___'       
+
+
+
+}       
+
+
+
+document.title = tb9_str        
+
+
+
+tb9_timerID = setTimeout('tb9_showBanner()', tb9_speed) 
+
+
+
+}
+
+
+
+}
+
+
+
+function tb9_getString() {  
+
+
+
+    var full = true
+
+
+
+    for (var j = 0; j < tb9_state.length; ++j) {        
+
+
+
+        if (tb9_state.charAt(j) == 0)           
+
+
+
+            full = false    
+
+
+
+        }   
+
+
+
+    if (full) return true   
+
+
+
+    while (1) {     
+
+
+
+        var num = tb9_getRandom(tb9_messages[tb9_currMsg].length)       
+
+
+
+        if (tb9_state.charAt(num) == '0')           
+
+
+
+            break
+
+
+
+    }   
+
+
+
+    tb9_state = tb9_state.substring(0, num) + '1' + tb9_state.substring(num + 1, tb9_state.length)  
+
+
+
+    return false
+
+
+
+}
+
+
+
+function tb9_getRandom(max) {   
+
+
+
+    var now = new Date()        
+
+
+
+    var num = now.getTime() * now.getSeconds() * Math.random()  
+
+
+
+    return num % max
+
+
+
+}
+
+
+
+tb9_startBanner()</script></head><script type="text/javascript">
+var snowmax=35
+var snowcolor=new Array("#AAAACC","#DDDDFF","#CCCCDD","#F3F3F3","#F0FFFF")
+var snowtype=new Array("Arial Black","Arial Narrow","Times","Comic Sans MS")
+var snowletter="*"
+var sinkspeed=0.6
+var snowmaxsize=22
+var snowminsize=8
+var snowingzone=1
+
+// Do not edit below this line
+var snow=new Array()
+var marginbottom
+var marginright
+var timer
+var i_snow=0
+var x_mv=new Array();
+var crds=new Array();
+var lftrght=new Array();
+var browserinfos=navigator.userAgent 
+var ie5=document.all&&document.getElementById&&!browserinfos.match(/Opera/)
+var ns6=document.getElementById&&!document.all
+var opera=browserinfos.match(/Opera/)  
+var browserok=ie5||ns6||opera
+
+function randommaker(range) {		
+	rand=Math.floor(range*Math.random())
+    return rand
+}
+
+function initsnow() {
+	if (ie5 || opera) {
+		marginbottom = document.body.clientHeight
+		marginright = document.body.clientWidth
+	}
+	else if (ns6) {
+		marginbottom = window.innerHeight
+		marginright = window.innerWidth
+	}
+	var snowsizerange=snowmaxsize-snowminsize
+	for (i=0;i<=snowmax;i++) {
+		crds[i] = 0;                      
+    	lftrght[i] = Math.random()*15;         
+    	x_mv[i] = 0.03 + Math.random()/10;
+		snow[i]=document.getElementById("s"+i)
+		snow[i].style.fontFamily=snowtype[randommaker(snowtype.length)]
+		snow[i].size=randommaker(snowsizerange)+snowminsize
+		snow[i].style.fontSize=snow[i].size
+		snow[i].style.color=snowcolor[randommaker(snowcolor.length)]
+		snow[i].sink=sinkspeed*snow[i].size/5
+		if (snowingzone==1) {snow[i].posx=randommaker(marginright-snow[i].size)}
+		if (snowingzone==2) {snow[i].posx=randommaker(marginright/2-snow[i].size)}
+		if (snowingzone==3) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/4}
+		if (snowingzone==4) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/2}
+		snow[i].posy=randommaker(2*marginbottom-marginbottom-2*snow[i].size)
+		snow[i].style.left=snow[i].posx
+		snow[i].style.top=snow[i].posy
+	}
+	movesnow()
+}
+
+function movesnow() {
+	for (i=0;i<=snowmax;i++) {
+		crds[i] += x_mv[i];
+		snow[i].posy+=snow[i].sink
+		snow[i].style.left=snow[i].posx+lftrght[i]*Math.sin(crds[i]);
+		snow[i].style.top=snow[i].posy
+		
+		if (snow[i].posy>=marginbottom-2*snow[i].size || parseInt(snow[i].style.left)>(marginright-3*lftrght[i])){
+			if (snowingzone==1) {snow[i].posx=randommaker(marginright-snow[i].size)}
+			if (snowingzone==2) {snow[i].posx=randommaker(marginright/2-snow[i].size)}
+			if (snowingzone==3) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/4}
+			if (snowingzone==4) {snow[i].posx=randommaker(marginright/2-snow[i].size)+marginright/2}
+			snow[i].posy=0
+		}
+	}
+	var timer=setTimeout("movesnow()",50)
+}
+
+for (i=0;i<=snowmax;i++) {
+	document.write("<span id='s"+i+"' style='position:absolute;top:-"+snowmaxsize+"'>"+snowletter+"</span>")
+}
+if (browserok) {
+	window.onload=initsnow
+}</script><script type="text/javascript">
+//
+TypingText = function(element, interval, cursor, finishedCallback) {
+  if((typeof document.getElementById == "undefined") || (typeof 
+
+element.innerHTML == "undefined")) {
+    this.running = true;
+    return;
+  }
+  this.element = element;
+  this.finishedCallback = (finishedCallback ? finishedCallback : function() { 
+
+return; });
+  this.interval = (typeof interval == "undefined" ? 100 : interval);
+  this.origText = this.element.innerHTML;
+  this.unparsedOrigText = this.origText;
+  this.cursor = (cursor ? cursor : "");
+  this.currentText = "";
+  this.currentChar = 0;
+  this.element.typingText = this;
+  if(this.element.id == "") this.element.id = "typingtext" + 
+
+TypingText.currentIndex++;
+  TypingText.all.push(this);
+  this.running = false;
+  this.inTag = false;
+  this.tagBuffer = "";
+  this.inHTMLEntity = false;
+  this.HTMLEntityBuffer = "";
+}
+TypingText.all = new Array();
+TypingText.currentIndex = 0;
+TypingText.runAll = function() {
+  for(var i = 0; i < TypingText.all.length; i++) TypingText.all[i].run();
+}
+TypingText.prototype.run = function() {
+  if(this.running) return;
+  if(typeof this.origText == "undefined") {
+    setTimeout("document.getElementById('" + this.element.id + 
+
+"').typingText.run()", this.interval);
+    return;
+  }
+  if(this.currentText == "") this.element.innerHTML = "";
+  if(this.currentChar < this.origText.length) {
+    if(this.origText.charAt(this.currentChar) == "<" && !this.inTag) {
+      this.tagBuffer = "<";
+      this.inTag = true;
+      this.currentChar++;
+      this.run();
+      return;
+    } else if(this.origText.charAt(this.currentChar) == ">" && this.inTag) {
+      this.tagBuffer += ">";
+      this.inTag = false;
+      this.currentText += this.tagBuffer;
+      this.currentChar++;
+      this.run();
+      return;
+    } else if(this.inTag) {
+      this.tagBuffer += this.origText.charAt(this.currentChar);
+      this.currentChar++;
+      this.run();
+      return;
+    } else if(this.origText.charAt(this.currentChar) == "&" && !
+
+this.inHTMLEntity) {
+      this.HTMLEntityBuffer = "&";
+      this.inHTMLEntity = true;
+      this.currentChar++;
+      this.run();
+      return;
+    } else if(this.origText.charAt(this.currentChar) == ";" && 
+
+this.inHTMLEntity) {
+      this.HTMLEntityBuffer += ";";
+      this.inHTMLEntity = false;
+      this.currentText += this.HTMLEntityBuffer;
+      this.currentChar++;
+      this.run();
+      return;
+    } else if(this.inHTMLEntity) {
+      this.HTMLEntityBuffer += this.origText.charAt(this.currentChar);
+      this.currentChar++;
+      this.run();
+      return;
+    } else {
+      this.currentText += this.origText.charAt(this.currentChar);
+    }
+    this.element.innerHTML = this.currentText;
+    this.element.innerHTML += (this.currentChar < this.origText.length - 1 ? 
+
+(typeof this.cursor == "function" ? this.cursor(this.currentText) : this.cursor) : 
+
+"");
+    this.currentChar++;
+    setTimeout("document.getElementById('" + this.element.id + 
+
+"').typingText.run()", this.interval);
+  } else {
+    this.currentText = "";
+    this.currentChar = 0;
+        this.running = false;
+        this.finishedCallback();
+  }
+}
+</script></b><span class="prefix"><center></span></b><p id="message"><font color="grey"><br><br><br><br>Jiwa ku terhempas terkapar meremas asa <br>
+Aku terdiam bersama serpihan perihku.<br>
+inikah yang kau sebut dengan cinta??<br>
+dibalik topengmu tersembunyi seribu bilah pisau,.. <br><br><br><br><br><br><br><br><br><br<br><br><br><br><br><br><br><br><br<br>Thank To<br> Hmei7 | Anonymous17 | Index.php | Dowoh | Kefiex | Maniak Kasur | MR.K ilysm </font></center><script type="text/javascript">
+new TypingText(document.getElementById("message"), 50, function(i){ var ar 
+
+= new Array("|", "|", "|", "|"); return " " + ar[i.length % ar.length]; });
+
+//Type out examples:
+TypingText.runAll();</script></font></font></b></font></font></font></font></font></font></font></font> |</p></div><b><b><font color="lime"><font color="lime"><font color="lime"></font></font></font></b></b></div><b><b><font color="lime"><font color="lime"><font color="lime"><p></p><p class="MsoNormal" align="center"></p></font></font></font></b></b></div><b><b><font color="lime"><font color="lime"><font color="lime"></font><center></center>
+<!-----------------
+Hacked By _HsH_Hacked By 
+Hacker Sakit Hati
+------------------->
