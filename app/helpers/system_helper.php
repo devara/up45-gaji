@@ -63,6 +63,34 @@ if (!function_exists('convert_second')) {
 	}
 }
 
+if (!function_exists('tanggal_indo')) {
+	function tanggal_indo($tgl){
+		$day = date('d',strtotime($tgl));
+	    $month = date('m',strtotime($tgl));
+	    $year = date('Y',strtotime($tgl));
+	    $month_new = str_replace(
+            array('01','02','03','04','05','06','07','08','09','10','11','12'),
+            array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'),
+            $month
+        );
+        return $day.' '.$month_new.' '.$year;
+	}
+}
+
+if (!function_exists('hari_indo')) {
+	function hari_indo($tgl){
+	    $tanggal = strtotime($tgl);
+	    $convert = date("l", $tanggal);
+	    $day = strtolower($convert);
+	    $hari = str_replace(
+	      array('sunday','monday','tuesday','wednesday','thursday','friday','saturday'),
+	      array('Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'),
+	      $day
+	    );
+	    return $hari;
+	}
+}
+
 if(!function_exists('menu_active'))
 {
 	function menu_active($slug2)

@@ -35,13 +35,5 @@ class Lib_Calendar {
     );
     return $hari;
   }
-  function hari_indo($day){
-    $hari = str_replace(
-      array('sunday','monday','tuesday','wednesday','thursday','friday','saturday'),
-      array('Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'),
-      $day
-    );
-
-    return $hari;
-  }
+  
 }

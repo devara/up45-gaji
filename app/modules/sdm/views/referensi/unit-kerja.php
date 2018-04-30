@@ -20,7 +20,7 @@
             <div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ModalaAdd">Tambah Unit Kerja</a>
+						<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ModalaAdd"><i class="fa fa-plus"></i> Tambah Unit Kerja</a>
 						<br/><br/>
 						<div id="reload">
 							<table id="table-jab" class="table table-striped table-bordered">

@@ -46,6 +46,16 @@ class Lib_login{
 		}
 	}
 
+	function is_kabag()
+	{
+		if ($this->ci->session->userdata('kabag')=='yes') {
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 	function cek_login($uname,$pwd,$level)
 	{
 		$user = $this->ci->m_user->get_user_by_username($uname);
@@ -53,10 +63,29 @@ class Lib_login{
 		if ($level=='karyawan') {
 			if ($user) {
 				if ($user->row('password') == md5($pwd)) {
-					$this->ci->session->set_userdata(array(
-            'username'  => $user->row('username'),
-            'password'   => $user->row('password')
-          ));
+					$jab = field_value('data_pegawai','username',$uname,'kode_jabatan');
+					$cek_kabag = $this->ci->my_lib->get_data('master_jabatan',array('under_of_jabatan'=>$jab));
+					if ($cek_kabag) {
+						$this->ci->session->set_userdata(array(
+							'nip'		=> $user->row('nip'),
+							'nama'	=> $user->row('nama'),
+	            'username'  => $user->row('username'),
+	            'password'   => $user->row('password'),
+	            'level'	=> $level,
+	            'kabag' => 'yes'
+	          ));
+					}
+					else{
+						$this->ci->session->set_userdata(array(
+							'nip'		=> $user->row('nip'),
+							'nama'	=> $user->row('nama'),
+	            'username'  => $user->row('username'),
+	            'password'   => $user->row('password'),
+	            'level'	=> $level,
+	            'kabag' => 'no'
+	          ));
+					}
+					
           $hasil['status'] = 200;
           $hasil['level'] = 'karyawan';
 				}
@@ -74,10 +103,12 @@ class Lib_login{
 				if ($user->row('kode_unit') == $level) {
 					if ($user->row('password') == md5($pwd)) {
 						$this->ci->session->set_userdata(array(
+							'nip'		=> $user->row('nip'),
               'nama'	=> $user->row('nama'),
               'username'  => $user->row('username'),
               'password'   => $user->row('password'),
-              'level'  => $user->row('kode_unit')
+              'level'  => $user->row('kode_unit'),
+              'kabag' => 'no'
             ));
             $hasil['status'] = 200;
             $hasil['level'] = $user->row('kode_unit');

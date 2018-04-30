@@ -36,10 +36,10 @@ class Login extends CI_Controller
     		if ($login['level']=='SDM') {
           redirect(base_url().'sdm/');
         }
-        elseif ($login['level']=='Akademik') {
+        elseif ($login['level']=='AKD') {
           redirect(base_url().'akademik/');
         }
-        elseif ($login['level']=='Keuangan') {
+        elseif ($login['level']=='KEU') {
           redirect(base_url().'keuangan/');
         }
         elseif ($login['level']=='karyawan') {

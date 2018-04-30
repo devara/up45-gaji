@@ -12,6 +12,7 @@
     <script src="<?php echo base_url()?>assets/admin/js/app.js"></script>
     <script src="<?php echo base_url()?>assets/admin/js/style.js"></script>
     <script src="<?php echo base_url()?>assets/admin/js/sweetalert2.min.js"></script>
+    <script src="<?php echo base_url()?>assets/admin/js/printThis.js"></script>
     <!-- Bootstrap -->
     <script src="<?php echo base_url()?>assets/admin/js/form.js"></script>
     <?php

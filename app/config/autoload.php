@@ -68,7 +68,8 @@ $autoload['libraries'] = array(
   'my_lib',
   'lib_login',
   'lib_bootstrap',
-  'lib_calendar'
+  'lib_calendar',
+  'lib_rand'
   );
 
 /*

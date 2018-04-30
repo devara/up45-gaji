@@ -12,7 +12,6 @@
         </a>
         <ul class="dropdown-menu dropdown-usermenu pull-right">
           <li><a href="javascript:;"> Profil</a></li>
-          <li><a href="javascript:;"> Pengaturan</a></li>
           <li><a href="<?php echo base_url()?>keluar"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
         </ul>
 			</li>

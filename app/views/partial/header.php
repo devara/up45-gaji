@@ -29,7 +29,7 @@
       <!-- sidebar menu -->
 
       <!-- top navigation -->
-      <div class="top_nav">
+      <div class="top_nav navbar-fixed-top">
         <?php require_once('topnav.php');?>
       </div>
       <!-- /top navigation -->

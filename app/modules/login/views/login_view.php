@@ -43,7 +43,7 @@
 		          			<option value="karyawan">Karyawan</option>
 		          			<option value="SDM">SDM</option>
 		          			<option value="AKD">Akademik</option>
-		          			<option value="KUI">Keuangan</option>
+		          			<option value="KEU">Keuangan</option>
 		          			<option value="pimpinan">Pimpinan</option>
 		          		</select>
 		          	</div>
