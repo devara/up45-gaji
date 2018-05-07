@@ -27,8 +27,9 @@
 												<?php $peng = $this->my_lib->get_data('data_ujian_pengawas',array('id_ujian'=>$row->id_ujian));
 												if ($peng) { ?>
 													<ul>
-													<?php foreach ($peng as $pe) { ?>
-														<li><?=$pe->nip?></li>
+													<?php foreach ($peng as $pe) { 
+													$nm_pegawai = field_value('data_pegawai','nip',$pe->nip,'nama'); ?>
+														<li><?=$nm_pegawai?></li>
 												<?php	} ?>
 												 	</ul>
 												<?php } else { ?>

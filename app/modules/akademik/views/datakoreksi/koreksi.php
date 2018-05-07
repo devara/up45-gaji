@@ -4,7 +4,7 @@
 	<div>
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Data Ujian</h3>
+				<h3>Korektor Ujian</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -13,7 +13,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Manajemen Data Ujian (UTS/UAS)</h2>
+						<h2>Manajemen Data Korektor Ujian (UTS/UAS)</h2>
 						<ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -58,17 +58,14 @@
                 	<a href="#data" role="tab" id="data-tab" data-toggle="tab" aria-expanded="true">Data UTS/UAS</a>
                 </li>
                 <li role="presentation" class="" id="li-pengawas">
-                	<a href="#pengawas" id="pengawas-tab" role="tab" data-toggle="tab" aria-expanded="false">Pengawas UTS/UAS</a>
+                	<a href="#pengawas" id="pengawas-tab" role="tab" data-toggle="tab" aria-expanded="false">Korektor UTS/UAS</a>
                 </li>
                 <li role="presentation" class="" id="li-cekpeng">
-                	<a href="#cekpeng" id="cekpeng-tab" role="tab" data-toggle="tab" aria-expanded="false">Cek Data Pengawas UTS/UAS</a>
+                	<a href="#cekpeng" id="cekpeng-tab" role="tab" data-toggle="tab" aria-expanded="false">Cek Data Korektor UTS/UAS</a>
                 </li>
               </ul>
               <div id="myTabContent" class="tab-content">
               	<div role="tabpanel" class="tab-pane fade <?php if($aktifTab == 'data'): ?> active in <?php endif; ?>" id="data" aria-labelledby="data-tab">
-              		<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ModalAdd"><i class="fa fa-plus"></i> Tambah Ujian</a>
-									<br/>
-									<div><button type="button" onclick="showData()" class="btn btn-sm btn-primary">Refresh</button></div>
 									<br/>
 									<div id="dataUjian">
 										<table id="tblujian" class="table table-striped table-bordered">
@@ -78,7 +75,7 @@
 												<th>Tanggal</th>
 												<th>Tipe Ujian</th>
 												<th>Mata Kuliah</th>
-												<th>Pengawas</th>
+												<th>Korektor</th>
 												<th>Pilihan</th>
 											</tr>
 										</thead>
@@ -97,11 +94,11 @@
 												<td style="text-transform: uppercase;"><?=$row->tipe?></td>
 												<td><?=field_value('master_matakuliah','kode_matakuliah',$kode,'nama_matakuliah');?></td>
 												<td>
-												<?php $peng = $this->my_lib->get_data('data_ujian_pengawas',array('id_ujian'=>$row->id_ujian));
-												if ($peng) { ?>
+												<?php $korektor = $this->my_lib->get_data('data_ujian_korektor',array('id_ujian'=>$row->id_ujian));
+												if ($korektor) { ?>
 													<ul>
-													<?php foreach ($peng as $pe) { 
-													$nm_pegawai = field_value('data_pegawai','nip',$pe->nip,'nama'); ?>
+													<?php foreach ($korektor as $kor) { 
+													$nm_pegawai = field_value('data_pegawai','nip',$kor->nip,'nama'); ?>
 														<li><?=$nm_pegawai?></li>
 												<?php	} ?>
 												 	</ul>
@@ -121,14 +118,14 @@
               	</div>
 
               	<div role="tabpanel" class="tab-pane fade" id="pengawas" aria-labelledby="pengawas-tab">
-              		<form id="demo-form" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?=akademik()?>ujian/input_pengawas">
+              		<form id="demo-form" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?=akademik()?>koreksi/input_korektor">
               			<div class="form-group">
               				<label for="ujianlist" class="control-label col-md-2 col-sm-3 col-xs-12">Pilih Ujian <span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="ujianlist" id="ujianlist" class="select2_single form-control" required="required" title="Pilih Ujian" style="width: 100% !important;padding: 0;">
                         	<option selected="" disabled="">Pilih Ujian</option>
                         <?php 
-                        $listujian = $this->my_lib->get_data('data_ujian',array('selesai'=>'belum'));
+                        $listujian = $this->my_lib->get_data('data_ujian',array('koreksi'=>'belum'));
                         if($listujian):
                         foreach ($listujian as $u) { 
                         	$nm = field_value('master_matakuliah','kode_matakuliah',$u->kode_matakuliah,'nama_matakuliah');?> ?>
@@ -198,7 +195,7 @@
               		</form>
               		<br>
               		<br>
-              		<div id="tampilCekPengawas">
+              		<div id="tampilCekKorektor">
               			
               		</div>
               	</div>
@@ -211,92 +208,5 @@
 	</div>
 </div>
 
-<div class="modal fade bs-example-modal-md" id="ModalAdd" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Input Data Ujian</h4>
-      </div>
-      <div class="modal-body">
-        <div id="loading"></div>
-        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-          <div class="form-group">
-		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_per">Periode <span class="required">*</span>
-		        </label>
-		        <div class="col-md-8 col-sm-6 col-xs-12">
-		          <select class="form-control select2_single" name="id_per" id="id_per" required="required" style="width: 100% !important;padding: 0;" onchange="cekPer()">
-		        		<option value="0" selected="" disabled="">Pilih</option>
-		         		<?php foreach ($periode as $per) { 
-							  	$mulai = $this->lib_calendar->convert($per->mulai);
-							  	$akhir = $this->lib_calendar->convert($per->akhir);
-							  ?>
-							  	<option value="<?=$per->id_periode?>">Periode <?php echo "".$per->bulan." ".$per->tahun." ( ".$mulai." - ".$akhir." )"; ?></option>
-							  <?php } ?>
-		         	</select>
-		        </div>
-		      </div>
-		      <div class="form-group">
-		      	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl">Tanggal Ujian <span class="required">*</span>
-		        </label>
-		        <div class="col-md-4 col-sm-6 col-xs-12">
-		          <input type="date" id="tgl" name="tgl" required="required" class="form-control col-md-7 col-xs-12">
-		        </div>
-		      </div>
-		      <div class="form-group">
-		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipe">Tipe Ujian <span class="required">*</span>
-		        </label>
-		        <div class="col-md-4 col-sm-6 col-xs-12">
-		          <select class="form-control" name="tipe" id="tipe" required="required">
-		        		<option selected="" disabled="">Pilih</option>
-		         		<option value="UTS">Ujian Tengah Semester (UTS)</option>
-		         		<option value="UAS">Ujian Akhir Semester (UAS)</option>
-		         	</select>
-		        </div>
-		      </div>
-		      <div class="form-group">
-		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="prodi">Program Studi <span class="required">*</span>
-		        </label>
-		        <div class="col-md-8 col-sm-6 col-xs-12">
-		          <select name="prodi" id="prodi" class="select2_single form-control" required="required" title="Pilih" style="width: 100% !important;padding: 0;" onchange="get_makul()">
-		          	<option value="0" selected="" disabled="">Pilih</option>
-		            <?php 
-		            $prodi = $this->my_lib->get_data('master_program_studi','','nama_program_studi ASC');
-		            foreach ($prodi as $val) { ?>
-		              <option value="<?=$val->kode_program_studi?>"><?=$val->nama_program_studi?></option>
-		            <?php } ?>
-		          </select>
-		        </div>
-		      </div>
-		      <div id="loadmakul"></div>
-		      <div class="form-group">
-		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="makul">Mata Kuliah <span class="required">*</span>
-		        </label>
-		        <div class="col-md-8 col-sm-6 col-xs-12">
-		          <select name="makul" id="makul" class="select2_single form-control" required="required" title="Pilih" style="width: 100% !important;padding: 0;">
-		          	<option selected="" disabled="">Pilih</option>
-		            
-		          </select>
-		        </div>
-		      </div>
-		      <div class="form-group">
-		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="addket">Keterangan <span class="required">*</span>
-		        </label>
-		        <div class="col-md-6 col-sm-6 col-xs-12">
-		         	<textarea class="form-control" id="addket" name="addket" required="required"></textarea>
-		        </div>
-		      </div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-              <button type="button" class="btn btn-sm btn-success" id="btn_tambah">Simpan</button>
-              <a class="btn btn-sm btn-danger" data-dismiss="modal">Batal</a>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
 <?php include_once( APPPATH.'views/partial/footer.php' ); ?>

@@ -17,8 +17,10 @@ class Ujian extends CI_Controller
 	{
 		$data['ujian'] = $this->my_lib->get_data('data_ujian');
 		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['pegawai'] = $this->my_lib->get_data('data_pegawai');
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('dataujian/ujian-js',$data,true);
+		$data['aktifTab'] = 'data';
 		$this->load->view('dataujian/ujian',$data);
 	}
 
@@ -89,5 +91,51 @@ class Ujian extends CI_Controller
 		$this->output
         ->set_content_type('application/json')
         ->set_output(json_encode($data));
+	}
+
+	function input_pengawas()
+	{
+		$idUjian = $this->input->post('ujianlist');
+		$nm = $this->input->post('peg_ganda');
+		$result = array();
+	  foreach($nm AS $key => $val){
+	    $result[] = array(
+	    	'id_ujian' => $idUjian,
+	  	  'nip' 	=> $_POST['peg_ganda'][$key]
+	    );
+	  }
+	  $update = $this->my_lib->edit_row('data_ujian',array('selesai'=>'sudah'),array('id_ujian'=>$idUjian));
+	  $insert= $this->db->insert_batch('data_ujian_pengawas',$result);
+	  if ($insert) {
+	  	$alert_type = "success";
+      $alert_title ="Berhasil input pengawas Ujian";
+			set_header_message($alert_type,'Input Pengawas Ujian',$alert_title);
+			redirect(akademik().'ujian');
+	  }
+	}
+
+	function cek_data_pengawas()
+	{
+		$this->form_validation->set_rules('per', 'Periode Kerja', 'required');
+		$this->form_validation->set_rules('nip', 'Nama Pegawai', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$per = $this->input->post('per');
+			$nip = $this->input->post('nip');
+			$param = array(
+				'id_periode'=>$per,
+				'nip'=>$nip
+			);
+			$join = 'data_ujian_pengawas.id_ujian = data_ujian.id_ujian';
+			$data['cekPengawas'] = $this->my_lib->get_data_join('data_ujian_pengawas','data_ujian',$param,$join);
+			$data['cekPegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+			$tabel = $this->load->view('dataujian/ujian-pengawas-tabel',$data,true);
+			$message[] = array('code'=>200,'message'=>'Data Tersedia.','tabel'=>$tabel);
+		}
+		else{
+			$message[] = array('code'=>404,'message' => validation_errors('<div class="error">', '</div>'));
+		}
+		$this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($message));
 	}
 }

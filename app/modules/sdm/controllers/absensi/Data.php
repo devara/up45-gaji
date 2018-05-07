@@ -65,7 +65,9 @@ class Data extends CI_Controller
 					'id_periode'=>$per,
 					'nip'=>$nip
 				);
+				$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
 				$data['absensi'] = $this->my_lib->get_data('absensi_data',$param);
+				$data['rekap'] = $this->my_lib->get_data('absensi_rekap',$param);
 				$data['jenis'] = 'single';
 				$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
 			}

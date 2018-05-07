@@ -11,10 +11,6 @@ $(document).ready(function() {
 		var $tab_data = $('#data');
 		var $tab_pengawas = $('#pengawas');
 		var $tab_cek = $('#cekpeng');
-  	
-  		$li_data.addClass('active');
-  		$tab_data.addClass('active in');
-  	
   
 });
 
@@ -110,6 +106,46 @@ $('#btn_tambah').click(function(e){
 		}
 	});
 	e.preventDefault();
+});
+
+$('#btn_cek').click(function(e){
+  var idPer = $('#cekPeriode').val();
+  var nip = $('#cekPeg').val();
+  $.ajax({
+    type  : "POST",
+    url   : "<?php echo akademik()?>ujian/cek_data_pengawas",
+    dataType : "json",
+    data : {per:idPer, nip:nip},
+    beforeSend: function(){
+      $("#cekloading").html(loader_green);
+      $("#tampilCekPengawas").html("");
+    },
+    success: function(response){
+      $("#cekloading").html("");
+      if (response[0].code==200) {
+        $("#tampilCekPengawas").html(response[0].tabel);
+        $('#tblCekPengawas').dataTable({
+          "pageLength": 10,
+          "language": {
+            "lengthMenu": "Tampilkan _MENU_ data per halaman",
+            "zeroRecords": "Maaf, hasil pencarian tidak ada",
+            "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+            "infoEmpty": "Tidak ada data",
+            "infoFiltered": "(Filter dari _MAX_ jumlah data)",
+            "search": "Cari ",
+            "paginate": {
+              "next":       "Selanjutnya",
+              "previous":   "Sebelumnya"
+            }
+          },
+        });
+      }
+      else{
+        $("#cekloading").html(alert_red(response[0].message));
+      }
+    }
+  });
+  e.preventDefault();
 });
 
 function showData(){
