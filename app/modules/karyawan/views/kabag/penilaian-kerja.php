@@ -4,7 +4,7 @@
 	<div>
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Rapat</h3>
+				<h3>Penilaian Kinerja</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -12,7 +12,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Data Rapat Karyawan</h2>
+						<h2>Beri Penilaian Kinerja Pegawai</h2>
 						<ul class="nav navbar-right panel_toolbox">
               <li>
               	<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -53,10 +53,9 @@
 							?>
 						</div>
 						<div>
-							<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-								<input type="hidden" name="nip" id="nip" value="<?php echo $this->session->userdata('nip'); ?>">
+							<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?=karyawan()?>kabag/penilaian_kerja/input_penilaian">
 								<div class="form-group">
-									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="idPer">Pilih Periode <span class="required">*</span></label>
+									<label class="control-label col-md-1 col-sm-3 col-xs-12" for="idPer">Periode <span class="required">*</span></label>
 									<div class="col-md-4 col-sm-6 col-xs-12">
 										<select class="form-control select2_single" name="idPer" id="idPer" required="required">
 					          	<option selected="" disabled="">Pilih</option>
@@ -69,21 +68,34 @@
 					          </select>
 									</div>
 								</div>
+								<table class="table table-striped table-bordered">
+								<?php foreach($pegawai as $peg): ?>
+								<tr>
+									<td>
+										<input type="hidden" name="nip[]" value="<?=$peg->nip?>">
+										<?=$peg->nama?><br>
+										( <?=$peg->nama_jabatan?> )
+									</td>
+									<td><input type="number" max="100" name="jam[]" class="form-control" placeholder="40jam/minggu" required=""></td>
+									<td><input type="number" name="disiplin[]" class="form-control" placeholder="kedisiplinan" required=""></td>
+									<td><input type="number" name="loyalitas[]" class="form-control" placeholder="loyalitas" required=""></td>
+									<td><input type="number" name="pelayanan[]" class="form-control" placeholder="pelayanan" required=""></td>
+									<td><input type="number" name="propeka[]" class="form-control" placeholder="propeka" required=""></td>
+
+								</tr>
+								<?php endforeach; ?>
+								</table>
 								<div class="form-group">
-									<div class="col-md-offset-2 col-md-4">
-										<button type="button" id="btn_tampil" class="btn btn-sm btn-success">Tampilkan</button>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-md-offset-2 col-md-4">
-										<div id="loading"></div>
+									<div class="col-md-4">
+										<button type="submit" class="btn btn-sm btn-primary">Simpan Penilaian</button>
 									</div>
 								</div>
 							</form>
+							<div id="loading"></div>
 							<br><br>
 						</div>
-						<div id="tampilRapat">
-							
+						<div class="referensi">
+							<img src="<?=base_url()?>assets/images/penilaian-kerja.PNG" class="img-responsive">
 						</div>
 					</div>
 				</div>

@@ -58,7 +58,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="idPer">Pilih Periode <span class="required">*</span></label>
 									<div class="col-md-4 col-sm-6 col-xs-12">
-										<select class="form-control select2_single" name="idPer" id="idPer" required="required">
+										<select class="form-control select2_single" name="idPer" id="idPer">
 					          	<option selected="" disabled="">Pilih</option>
 					          	<?php foreach ($periode as $per) { 
 					          		$mulai = $this->lib_calendar->convert($per->mulai);
@@ -71,11 +71,16 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-2 col-md-4">
-										<button type="button" id="btn_tampil" class="btn btn-sm btn-success">Tampilkan</button>
+										<button type="button" id="btn_tampil" class="btn btn-sm btn-success">Cek Absensi</button>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-offset-2 col-md-4">
+										<div id="loading"></div>
 									</div>
 								</div>
 							</form>
-							<div id="loading"></div>
+							
 							<br><br>
 						</div>
 						<div id="tampilAbsensi">

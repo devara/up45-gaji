@@ -1,7 +1,7 @@
 <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            &copy; 2018 Sistem Informasi Penggajian Universitas Proklamasi 45
           </div>
           <div class="clearfix"></div>
         </footer>

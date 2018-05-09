@@ -34,6 +34,7 @@ class Absensi extends CI_Controller
 			);
 			$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
 			$data['absensi'] = $this->my_lib->get_data('absensi_data',$param);
+			$data['rekap'] = $this->my_lib->get_data('absensi_rekap',$param);
 			$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
 			$tabel = $this->load->view('master/absensi-tabel',$data,true);
 			$message[] = array('code'=>200,'message'=>'Data Tersedia.','tabel'=>$tabel);

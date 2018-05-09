@@ -72,6 +72,7 @@ class Lib_login{
 	            'username'  => $user->row('username'),
 	            'password'   => $user->row('password'),
 	            'level'	=> $level,
+	            'jabatan' => $user->row('kode_jabatan'),
 	            'kabag' => 'yes'
 	          ));
 					}
@@ -82,6 +83,7 @@ class Lib_login{
 	            'username'  => $user->row('username'),
 	            'password'   => $user->row('password'),
 	            'level'	=> $level,
+	            'jabatan' => $user->row('kode_jabatan'),
 	            'kabag' => 'no'
 	          ));
 					}
@@ -108,6 +110,7 @@ class Lib_login{
               'username'  => $user->row('username'),
               'password'   => $user->row('password'),
               'level'  => $user->row('kode_unit'),
+	            'jabatan' => $user->row('kode_jabatan'),
               'kabag' => 'no'
             ));
             $hasil['status'] = 200;

@@ -18,7 +18,9 @@ class Login extends CI_Controller
     	redirect(keuangan());
     }
     else{
-      $this->load->view('login_view');
+      $data['datatables'] = 'no';
+      $data['javascript'] = $this->load->view('login-js',$data,true);
+      $this->load->view('login_view',$data);
     }
   }
 
@@ -47,20 +49,20 @@ class Login extends CI_Controller
         }
     	}
       elseif ($login['status']==404) {
-        $this->session->set_flashdata('flash_message','Username atau password Anda salah.');
+        $this->session->set_flashdata('login_message','Username atau password Anda salah.');
         redirect(base_url().'login/');
       }
     	elseif ($login['status']==500) {    		
-        $this->session->set_flashdata('flash_message','Akun Anda bukan level '.$level.'.');
+        $this->session->set_flashdata('login_message','Akun Anda bukan level '.$level.'.');
         redirect(base_url().'login/');
     	}
     	elseif ($login['status']==505) {
-    		$this->session->set_flashdata('flash_message','Akun Anda tidak aktif.');
+    		$this->session->set_flashdata('login_message','Akun Anda tidak aktif.');
         redirect(base_url().'login/');
     	}
     }
     else{
-    	$this->session->set_flashdata('flash_message','Semua data harus diisi.');
+    	$this->session->set_flashdata('login_message','Semua data harus diisi.');
       redirect(base_url().'login/');
     }
   }
@@ -69,5 +71,22 @@ class Login extends CI_Controller
   {
     $this->lib_login->logout();
     redirect(base_url());
+  }
+
+  function action_form()
+  {
+    $act = $this->input->post('act');
+    if ($act == 'forget') {
+      $data['action'] = 'forget';      
+    }
+    else{
+      $data['action'] = 'login';
+    }
+    $action_form = $this->load->view('action-form',$data,true);
+    $message[] = array('code'=>200,'message'=>'Data Tersedia.','form'=>$action_form);
+
+    $this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($message));
   }
 }

@@ -108,8 +108,8 @@
 
 		<?php 
 		if($this->session->userdata('level') == 'karyawan'): ?>
-		<div class="menu_section" style="padding: 10px; border: 4px solid;">
-			<div class="text-center"><a href=""><h3>Dashboard</h3></a></div>
+		<div class="menu_section" style="padding: 10px;background-color: #2B5DD1;box-shadow: rgba(0,0,0,.25) 0 1px 0, inset rgba(255,255,255,.16) 0 1px 0;">
+			<div style="padding-left: 30px;"><a href=""><h3><i class="fa fa-home"></i> Dashboard</h3></a></div>
 		</div>
 		<div class="menu_section">
 			<h3>Modul Karyawan</h3>
@@ -166,7 +166,7 @@
 	          <li><a href="<?=karyawan()?>kabag/cek_laporan">Laporan Bulanan Staff</a></li>
 	        </ul>
 				</li>
-				<li><a href="<?=karyawan()?>kabag/beri_penilaian"><i class="fa fa-thumbs-up"></i> Penilaian Kinerja</a></li>
+				<li><a href="<?=karyawan()?>kabag/penilaian_kerja"><i class="fa fa-thumbs-up"></i> Penilaian Kinerja</a></li>
 				<li><a href="<?=karyawan()?>kabag/cek_absensi_susulan"><i class="fa fa-clock-o"></i> Permintaan Absensi Susulan</a></li>
 			</ul>
 		</div>
@@ -177,13 +177,13 @@
 	<!-- menu footer buttons -->
 	<div class="sidebar-footer hidden-small">
 		<a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo base_url()?>keluar">
-	    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+	    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
 	  </a>
 	  <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="toggleFullScreen()">
-	    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+	    <span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
 	  </a>
 	  <a data-toggle="tooltip" data-placement="top" title="Lock">
-	    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+	    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 	  </a>
 	  <?php if($this->session->userdata('level') == 'karyawan'): ?>
 	  <a data-toggle="tooltip" data-placement="top" title="Profil" href="<?=karyawan()?>profil">

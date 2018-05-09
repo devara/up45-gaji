@@ -94,7 +94,7 @@
 		<?php endif; ?>
 		</table>
 	</div>
-	<table id="tblabsensi" class="table table-striped table-bordered">
+	<table id="tblabsensi2" class="table table-striped table-bordered">
 		<thead>
 			<tr>
 				<th>Tanggal</th>

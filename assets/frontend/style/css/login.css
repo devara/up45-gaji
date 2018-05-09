@@ -1,31 +1,63 @@
-@import "https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700";
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 300;
+  src:url('../fonts/Quicksand-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 400;
+  src:url('../fonts/Quicksand-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 500;
+  src:url('../fonts/Quicksand-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 700;
+  src:url('../fonts/Quicksand-Bold.ttf') format('truetype');
+}
 body{
 	background: -webkit-linear-gradient(to right, #1565C0 , #90CAF9); /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to right, #1565C0 , #90CAF9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-	font-family:quicksand,sans-serif;
+	font-family:Quicksand,sans-serif;
 }
 .content{
-	margin-top: 100px;
+	position: relative;
+	top: 100px;
+}
+.content-logo {
+	text-align: center;
+}
+.content-logo img {
+	width: 300px;
 }
 .content-title {
-	margin-top: 100px;
 	margin-bottom: 20px;
 }
 .content-title .title {
 	color: #FFFFFF;
-	font-size: 50px;
+	font-size: 46px;
 	line-height: 55px;
-	font-weight: 600;
+	font-weight: 700;
 	text-align: center;
 }
 .content-copyright{
 	color: #FFFFFF;
 	text-align: center;
 }
-.login-box{
+.forgot-section {
+	display: none;
+}
+#action-box {
 	box-shadow: -2px 5px 50px black;
   background-color: transparent;
-  border-radius: 5px;
+  border-radius: 10px;
   color:white;
   padding:20px;
   -webkit-transition: all 0.3s ease;
@@ -34,11 +66,27 @@ body{
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-.login-box .login-title{
+.login-box{
+	
+}
+.login-box .login-title h3 {
 	color: #FFFFFF;
-	font-size: 24px;
-	font-weight: 600;
+	font-size: 28px;
+	font-weight: 700;
 	text-align: center;
+}
+.login-box .panel-body {
+	font-weight: 500;
+}
+.login-box .form-control option {
+	font-weight: 500;
+}
+.login-btn {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 20px;
+	font-size: 18px;
+	font-weight: 500;
 }
 .z-depth-1{
 	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);

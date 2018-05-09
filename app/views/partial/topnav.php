@@ -7,7 +7,7 @@
 			<!-- Dropdown profile menu -->
 			<li>
 				<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <img src="<?php echo base_url()?>assets/images/img.jpg" alt=""><?php echo $this->session->userdata('nama'); ?>
+          <img src="<?php echo base_url()?>assets/images/picture.jpg" alt=""><?php echo $this->session->userdata('nama'); ?>
           <span class=" fa fa-angle-down"></span>
         </a>
         <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -17,7 +17,7 @@
 			</li>
 			<!-- /Dropdown profile menu -->
 
-			<!-- Dropdown notification -->
+			<!-- Dropdown notification 
 			<li role="presentation" class="dropdown">
 				<a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
 					<i class="fa fa-envelope-o"></i>
@@ -58,7 +58,7 @@
           </li>
 				</ul>
 			</li>
-			<!-- /Dropdown notification -->
+			 /Dropdown notification -->
 		</ul>
 	</nav>
 </div>
