@@ -11,6 +11,13 @@ class Data_pegawai extends CI_Controller
     	redirect(base_url());
     }
 	}
+
+	function print()
+	{
+		$mpdf = new \Mpdf\Mpdf();
+		$mpdf->WriteHTML('<h1>Hello world!</h1>');
+		$mpdf->Output('Contoh print','D');
+	}
 	
 	function index()
 	{

@@ -70,6 +70,8 @@ class Data extends CI_Controller
 				$data['rekap'] = $this->my_lib->get_data('absensi_rekap',$param);
 				$data['jenis'] = 'single';
 				$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+				$data['nip'] = $nip;
+				$data['id_per'] = $per;
 			}
 			$tabel = $this->load->view('absensi/data-tabel',$data,true);
 			$message[] = array('code'=>200,'message'=>'Data Tersedia.','tabel'=>$tabel);
@@ -81,5 +83,24 @@ class Data extends CI_Controller
 		$this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($message));
+	}
+
+	function absensi_pdf()
+	{
+		$periode = $_GET['per'];
+		$nip = $_GET['nip'];
+		$param = array(
+					'id_periode'=>$periode,
+					'nip'=>$nip
+		);
+		$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$periode));
+		$data['absensi'] = $this->my_lib->get_data('absensi_data',$param);
+		$data['rekap'] = $this->my_lib->get_data('absensi_rekap',$param);
+		$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+		$pdf_content = $this->load->view('absensi/absensi-pdf',$data,true);
+		$nama = field_value('data_pegawai','nip',$nip,'nama');
+		$mpdf = new \Mpdf\Mpdf();
+		$mpdf->WriteHTML($pdf_content);
+		$mpdf->Output('Rekap Absensi '.$nama.'.pdf','D');
 	}
 }

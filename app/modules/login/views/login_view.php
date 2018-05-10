@@ -107,18 +107,16 @@
 					          </div>
 					          <?php endif; ?>
 					          <div class="form-group">
-					        	 	<div class="">				          		
-					           		<button class="btn blue darken-2 z-depth-1 login-btn" type="submit">Reset Password&nbsp;&nbsp;<span class="navicon-right"><i class="icon ion-unlocked"></i></span></button>
-					           	</div>
-					           	<div>
-					           		<a class="white-text activate-section" href="#" data-section="login-section">Login</a>
-					           	</div>
+					        	 	<button class="btn blue darken-2 z-depth-1 login-btn" type="submit">Reset Password&nbsp;&nbsp;<span class="navicon-right"><i class="icon ion-unlocked"></i></span></button>
 					          </div>
 					          <div class="form-group">
-					          	 <div class="alert alert-danger alert-dismissible text-center" role="alert">
+					          	<div class="alert alert-danger alert-dismissible text-center" role="alert">
 						            Reset token hanya berlaku satu (1) jam
 						          </div>
-					          </div>
+						          <div>
+					           		<a class="white-text activate-section" href="#" data-section="login-section">Login</a>
+					           	</div>
+					          </div>					           	
 				          </div>
 								</div>
 							</form>
@@ -135,19 +133,6 @@
 	<script>
     (function ($) {
         "use strict";
-
-        if (jQuery().validate) {
-
-            //Login
-            $('#login-form').validate();
-
-            //Register
-            $('#register-form').validate();
-
-            //Forgot Password
-            $('#forgot-form').validate();
-        }
-
         /*-----------------------------------------------------------------------------------*/
         /* Modal dialog for Login and Register
          /*-----------------------------------------------------------------------------------*/
@@ -163,6 +148,5 @@
 
     })(jQuery);
 </script>
-	<?php if(isset($javascript) and $javascript) echo $javascript; ?>
 </body>
 </html>

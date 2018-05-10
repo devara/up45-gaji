@@ -28,6 +28,7 @@
 		</tbody>
 	</table>
 <?php } else { ?>
+	
 	<div class="col-md-6">
 		<table class="table table-striped table-bordered">
 			<tr>
@@ -93,6 +94,14 @@
 			</tr>
 		<?php endif; ?>
 		</table>
+	</div>
+	<div class="col-md-12">
+		<form method="POST" action="<?=sdm()?>absensi/data/absensi_pdf">
+			<input type="hidden" name="periode_kerja" value="<?=$id_per?>">
+			<input type="hidden" name="nip_pegawai" value="<?=$nip?>">
+			<button type="submit" class="btn btn-primary"><i class="fa fa-file-pdf-o" title="PDF"></i></button>
+		</form>
+		<a href="<?=sdm()?>absensi/data/absensi_pdf?per=<?=$id_per?>&nip=<?=$nip?>&time=<?=time()?>" class="btn btn-primary" title="PDF"><i class="fa fa-file-pdf-o"></i>&nbsp;Download PDF</a>
 	</div>
 	<table id="tblabsensi2" class="table table-striped table-bordered">
 		<thead>
