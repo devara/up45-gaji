@@ -28,6 +28,7 @@
 	<table id="tblRKH" class="table table-striped table-bordered">
 		<thead>
 			<tr>
+				<th>No</th>
 				<th>Tanggal</th>
 				<th>Hari</th>
 				<th>Status</th>
@@ -40,9 +41,11 @@
 			$end = $end->modify('+1 day');
 			$interval = DateInterval::createFromDateString('1 day');
 			$period = new DatePeriod($begin, $interval, $end);
+			$no = 1;
 			foreach($period as $pe): ?>
 			<?php if(hari_indo($pe->format("Y-m-d")) != 'Minggu'): ?>
 			<tr>
+				<td><?=$no?></td>
 				<td><?php echo $this->lib_calendar->convert($pe->format("Y-m-d"));?></td>
 				<td><?=hari_indo($pe->format("Y-m-d"))?></td>
 				<td>
@@ -54,6 +57,7 @@
 					endif; ?>
 				</td>
 			</tr>
+			<?php $no++; ?>
 			<?php endif; ?>
 			<?php endforeach; ?>
 		</tbody>

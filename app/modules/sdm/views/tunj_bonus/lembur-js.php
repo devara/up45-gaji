@@ -38,4 +38,59 @@ $('#btn_tampil').click(function(e){
   });
   e.preventDefault();
 });
+
+$('#btnSimpan').click(function(e){
+	var $form = get_formdata($("#demo-form"));
+  $.ajax({
+    type  : "POST",
+    url   : "<?php echo sdm()?>tunjangan_bonus/lembur/input",
+    dataType : "json",
+    data : $form,
+    beforeSend: function(){
+      $("#inputloading").html(loader_green);
+    },
+    success: function(response){
+      $("#inputloading").html("");
+      if (response[0].code==200) {
+        $("#inputloading").html(alert_green(response[0].message));
+        $('#idPeriode').val(0);
+			  $('#tanggal').val("");
+			  $('#idPegawai').val(0);
+			  $('#addmulai').val("");
+			  $('#addsampai').val("");
+			  $('#addket').val("");
+      }
+      else{
+        $("#inputloading").html(alert_red(response[0].message));
+      }
+    }
+  });
+  e.preventDefault();
+});
+
+function getTanggal(){
+	var per = $('#idPeriode').val();
+	$.ajax({
+    url: "<?php echo ajaxpublic_url().'cekper/'; ?>"+per,
+    beforeSend: function(){
+      $("#tanggal").disabled = true;
+    },
+    success: function(response){      
+      if (response[0].code!=404) {
+      	document.getElementById("tanggal").disabled = false;
+      	document.getElementById("tanggal").min = response[0].min;
+      	document.getElementById("tanggal").max = response[0].max;
+      } else{
+        $("#tanggal").disabled = true;
+      }
+    }
+  });
+}
+
+$('#begin').datetimepicker({
+  format: 'HH:mm:ss'
+});
+$('#end').datetimepicker({
+  format: 'HH:mm:ss'
+});
 </script>

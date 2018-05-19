@@ -28,3 +28,11 @@ function alert_cyan(pesan){
 function alert_orange(pesan){
   return '<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+pesan+'</div>';
 }
+function get_formdata($form){
+  var unindexed_array = $form.serializeArray();
+  var indexed_array = {};
+  $.map(unindexed_array, function(n, i){
+    indexed_array[n['name']] = n['value'];
+  });
+  return indexed_array;
+}

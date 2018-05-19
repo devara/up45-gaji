@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<div class="content-copyright">
-						<p>&copy; 2018 Universitas Prokalamasi 45 | developed by Devara Eko</p>
+						<p>&copy; 2018 Universitas Prokalamasi 45 <br> developed by Devara Eko</p>
 					</div>
 				</div>
 				<div class="col-md-5">
@@ -87,7 +87,7 @@
 						</div>
 
 						<div class="action-section forgot-section">
-							<form method="POST" action="<?=base_url()?>login/reset_password">
+							<form method="POST" action="<?=base_url()?>login/forget_password/submit">
 								<div class="login-box">
 									<div class="login-title">
 				            <h3>Reset Password</h3>
@@ -97,7 +97,7 @@
 					            <label for="email">Alamat Email</label>
 					            <div class="input-group">
 					              <div class="input-group-addon"><i class="icon ion-email" style="font-size: 18px;"></i></div>
-					              <input type="text" class="form-control" name="email" id="email" placeholder="Masukan Email Anda" autocomplete="off" />
+					              <input type="text" class="form-control" name="email" id="email" placeholder="Masukan Email Anda" autocomplete="off" required="" />
 					            </div>
 					          </div>
 					           <?php if((isset($flash_message) and !empty($flash_message)) or($this->session->flashdata('flash_message'))): ?>
@@ -111,7 +111,7 @@
 					          </div>
 					          <div class="form-group">
 					          	<div class="alert alert-danger alert-dismissible text-center" role="alert">
-						            Reset token hanya berlaku satu (1) jam
+						            Reset token hanya berlaku 24 jam
 						          </div>
 						          <div>
 					           		<a class="white-text activate-section" href="#" data-section="login-section">Login</a>

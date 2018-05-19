@@ -57,7 +57,10 @@
                 	<a href="#data" role="tab" id="data-tab" data-toggle="tab" aria-expanded="true">Data Lembur</a>
                 </li>
                 <li role="presentation" class="">
-                	<a href="#pengajuan" id="pengajuan-tab" role="tab" data-toggle="tab" aria-expanded="false">Data Pengajuan Lembur</a>
+                	<a href="#input" role="tab" id="input-tab" data-toggle="tab" aria-expanded="true">Input Lembur</a>
+                </li>
+                <li role="presentation" class="">
+                	<a href="#pengajuan" id="pengajuan-tab" role="tab" data-toggle="tab" aria-expanded="false">Data Pengajuan Lembur (Coming Soon)</a>
                 </li>
               </ul>
               <div id="myTabContent" class="tab-content">
@@ -108,7 +111,81 @@
               			
               		</div>
               	</div>
-
+              	<div role="tabpanel" class="tab-pane fade" id="input" aria-labelledby="input-tab">
+              		<form id="demo-form" data-parsley-validate class="form-horizontal form-label-left">
+              			<div class="form-group">
+              				<label class="control-label col-md-2 col-sm-3 col-xs-12" for="idPeriode">Periode <span class="required">*</span>
+                      </label>
+                      <div class="col-md-5 col-sm-6 col-xs-12">
+                        <select name="idPeriode" id="idPeriode" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;" onchange="getTanggal()">
+                          <option disabled="" selected="" value="0">Pilih Periode</option>
+                          <?php foreach ($periode as $per) { 
+							          		$mulai = $this->lib_calendar->convert($per->mulai);
+							          		$akhir = $this->lib_calendar->convert($per->akhir);
+							          	 ?>
+							          		<option value="<?=$per->id_periode?>">Periode <?php echo "".$per->bulan." ".$per->tahun." ( ".$mulai." - ".$akhir." )"; ?></option>
+							          	<?php } ?>
+                        </select>
+                      </div>
+              			</div>
+              			<div class="form-group">
+		                  <label class="control-label col-md-2 col-sm-3 col-xs-12" for="tanggal">Tanggal
+		                  </label>
+		                  <div class="col-md-3 col-sm-6 col-xs-12">
+		                	  <input type="date" id="tanggal" name="tanggal" required="required" class="form-control col-md-7 col-xs-12" disabled="true">
+		                  </div>
+		                </div>
+              			<div class="form-group">
+              				<label class="control-label col-md-2 col-sm-3 col-xs-12" for="idPegawai">Pegawai <span class="required">*</span>
+                      </label>
+                      <div class="col-md-5 col-sm-6 col-xs-12">
+                        <select name="idPegawai" id="idPegawai" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;">
+                          <option disabled="" selected="" value="0">Pilih Pegawai</option>
+                          <?php foreach ($pegawai as $peg) { ?>
+							          		<option value="<?=$peg->nip?>"><?=$peg->nama?></option>
+							          	<?php } ?>
+                        </select>
+                      </div>
+              			</div>
+              			<div class="form-group">
+              				<label class="control-label col-md-2 col-sm-3 col-xs-12" for="detail">Jam Lembur <span class="required">*</span>
+                      </label>
+                      <div class="col-md-2">
+                      	<div class='input-group' id='begin'>
+                          <input type="text" name="addmulai" id="addmulai" class="form-control" placeholder="Mulai" />
+                          <span class="input-group-addon">
+                          	<span class="fa fa-clock-o"></span>
+                        	</span>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                      	<div class='input-group' id='end'>
+                          <input type="text" name="addsampai" id="addsampai" class="form-control" placeholder="Sampai" />
+                          <span class="input-group-addon">
+                          	<span class="fa fa-clock-o"></span>
+                        	</span>
+                        </div>
+                      </div>
+              			</div>
+              			<div class="form-group">
+              				<label class="control-label col-md-2 col-sm-3 col-xs-12" for="detail">Keterangan <span class="required">*</span>
+                      </label>
+                      <div class="col-md-4">
+                      	<textarea name="addket" id="addket" class="form-control"></textarea>
+                      </div>
+              			</div>
+              			<div class="form-group">
+              				<div class="col-md-offset-2 col-md-4">
+              					<button type="button" id="btnSimpan" class="btn btn-sm btn-success">Simpan</button>
+              				</div>
+              			</div>
+              			<div class="form-group">
+                    	<div class="col-md-offset-2 col-md-4">
+                    		<div id="inputloading"></div>
+                    	</div>
+                    </div>
+              		</form>
+              	</div>
               	<div role="tabpanel" class="tab-pane fade" id="pengajuan" aria-labelledby="pengajuan-tab">
               		
               	</div>
