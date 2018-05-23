@@ -39,7 +39,7 @@ class Get extends CI_Controller
 			}
 		}
 		else{
-			$data = array('code'=>'404','message'=>'Tidak ditemukan...');
+			$data[] = array('code'=>'404','message'=>'Data tidak ditemukan...');
 		}
 		$this->output
         ->set_content_type('application/json')

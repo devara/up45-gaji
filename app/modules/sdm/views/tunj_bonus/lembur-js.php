@@ -1,12 +1,42 @@
 <script type="text/javascript">
+function lisPeg(){
+  var kdUnit = $('#cekUnit').val();
+  $.ajax({
+    url: "<?php echo ajaxpublic_url();?>get_peg_by_unit/"+kdUnit+"",
+    dataType:"json",
+    beforeSend: function(){
+      $("#loadPeg").html(loader_green);
+    },
+    success: function(data){
+      $("#loadPeg").html("");
+      if (data[0].code!=404) {
+        var html = '';
+        var i;
+        var jum = data.length;
+        html += '<option value="all">Semua</option>';
+        for(i=0; i<jum; i++){          
+          html += '<option value="'+data[i].nip+'">';
+          html += ''+data[i].nama+'';
+          html += '</option>';
+        }
+        $('#pegawai').html(html);
+      } else {
+        $("#loadPeg").html(alert_red(data[0].message));
+        $('#pegawai').html("");
+      }
+    }
+  });
+}
+
 $('#btn_tampil').click(function(e){
   var idPer = $('#cekPer').val();
-  var unit = $('#cekUnit').val();
+  var unit = $('#cekUnit').val();  
+  var nip = $('#pegawai').val();
   $.ajax({
     type  : "POST",
     url   : "<?php echo sdm()?>tunjangan_bonus/lembur/tampil",
     dataType : "json",
-    data : {per:idPer, unit:unit},
+    data : {per:idPer, unit:unit, nip:nip},
     beforeSend: function(){
       $("#loading").html(loader_green);
       $("#tampilLembur").html("");

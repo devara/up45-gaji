@@ -13,8 +13,12 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/login.css"; ?>" media="screen,projection" />
   <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/color.css"; ?>" />
 
+  <script src="<?php echo base_url().'assets/frontend/jquery/jquery.min.js'; ?>"></script>
+	<script src="<?php echo base_url().'assets/frontend/bootstrap/js/bootstrap.min.js'; ?>"></script>
+	<script src="<?php echo base_url().'assets/frontend/style/js/sweetalert2.min.js'; ?>"></script>
+	<script src="<?php echo base_url().'assets/frontend/style/js/login.js'; ?>"></script>
 </head>
-<body>
+<body id="login">
 	<div class="container">
 		<div class="content">
 			<div class="row">
@@ -90,7 +94,7 @@
 							<form method="POST" action="<?=base_url()?>login/forget_password/submit">
 								<div class="login-box">
 									<div class="login-title">
-				            <h3>Reset Password</h3>
+				            <h3>Lupa Password</h3>
 				          </div>
 				          <div class="panel-body">
 					          <div class="form-group">
@@ -100,12 +104,7 @@
 					              <input type="text" class="form-control" name="email" id="email" placeholder="Masukan Email Anda" autocomplete="off" required="" />
 					            </div>
 					          </div>
-					           <?php if((isset($flash_message) and !empty($flash_message)) or($this->session->flashdata('flash_message'))): ?>
-					          <div class="alert alert-danger alert-dismissible" role="alert">
-					            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					            <?php echo $this->session->flashdata('flash_message'); ?>
-					          </div>
-					          <?php endif; ?>
+					         
 					          <div class="form-group">
 					        	 	<button class="btn blue darken-2 z-depth-1 login-btn" type="submit">Reset Password&nbsp;&nbsp;<span class="navicon-right"><i class="icon ion-unlocked"></i></span></button>
 					          </div>
@@ -126,16 +125,9 @@
 			</div>
 		</div>
 	</div>
-
-	<script src="<?php echo base_url().'assets/frontend/jquery/jquery.min.js'; ?>"></script>
-	<script src="<?php echo base_url().'assets/frontend/bootstrap/js/bootstrap.min.js'; ?>"></script>
-	<script src="<?php echo base_url().'assets/frontend/style/js/login.js'; ?>"></script>
 	<script>
     (function ($) {
         "use strict";
-        /*-----------------------------------------------------------------------------------*/
-        /* Modal dialog for Login and Register
-         /*-----------------------------------------------------------------------------------*/
         var actionBox = $('#action-box'),
             modalSections = actionBox.find('.action-section');
 

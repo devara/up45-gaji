@@ -51,7 +51,7 @@ class Data extends CI_Controller
 			$per = $this->input->post('per');
 			$unit = $this->input->post('unit');
 			$nip = $this->input->post('nip');
-			if ($nip == 'all') {
+			if ($nip == NULL || $nip == 'all') {
 				$param = array(
 					'id_periode'=>$per,
 					'kode_unit'=>$unit

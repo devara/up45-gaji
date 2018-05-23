@@ -103,28 +103,34 @@
 		</form>
 		<a href="<?=sdm()?>absensi/data/absensi_pdf?per=<?=$id_per?>&nip=<?=$nip?>&time=<?=time()?>" class="btn btn-primary" title="PDF"><i class="fa fa-file-pdf-o"></i>&nbsp;Download PDF</a>
 	</div>
-	<table id="tblabsensi2" class="table table-striped table-bordered">
-		<thead>
-			<tr>
-				<th>Tanggal</th>
-				<th>Hari</th>
-				<th>Time IN</th>
-				<th>Time OUT</th>
-				<th>Lama Kerja</th>
-				<th>Keterangan</th>
-				</tr>
-			</thead>
-		<tbody>
-			<?php if($absensi): foreach ($absensi as $row): ?>
-				<tr>
-					<td><?=$row->tanggal?></td>
-					<td><?=$row->hari?></td>
-					<td><?=$row->datang?></td>
-					<td><?=$row->pulang?></td>
-					<td><?=$row->lama_kerja?></td>
-					<td><?=$row->keterangan?></td>
-				</tr>
-			<?php endforeach; endif; ?>
-		</tbody>
-	</table>
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table id="tblabsensi2" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Tanggal</th>
+						<th>Hari</th>
+						<th>Time IN</th>
+						<th>Time OUT</th>
+						<th>Lama Kerja</th>
+						<th>Keterangan</th>
+						</tr>
+					</thead>
+				<tbody>
+					<?php if($absensi): $no = 1; foreach ($absensi as $row): ?>
+						<tr>
+							<td><?=$no?></td>
+							<td><?=$row->tanggal?></td>
+							<td><?=$row->hari?></td>
+							<td><?=$row->datang?></td>
+							<td><?=$row->pulang?></td>
+							<td><?=$row->lama_kerja?></td>
+							<td><?=$row->keterangan?></td>
+						</tr>
+					<?php $no++; endforeach; endif; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
 <?php } ?>

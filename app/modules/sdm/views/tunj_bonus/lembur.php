@@ -85,7 +85,7 @@
               			<div class="form-group">
                       <label for="cekUnit" class="control-label col-md-2 col-sm-3 col-xs-12">Unit Kerja <span class="required">*</span></label>
                       <div class="col-md-4 col-sm-6 col-xs-12">
-                        <select name="cekUnit" id="cekUnit" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
+                        <select name="cekUnit" id="cekUnit" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;" onchange="lisPeg()">
                         	<option value="all" selected="">Semua</option>
                           <?php foreach ($unit as $un) { ?>
                               <option value="<?=$un->kode_unit?>"><?=$un->nama_unit?></option>
@@ -93,6 +93,19 @@
                         </select>
                     	</div>
                     </div>
+                    <div class="form-group">
+											<div class="col-md-offset-2 col-md-4">
+												<div id="loadPeg"></div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label col-md-2 col-sm-3 col-xs-12" for="pegawai">Pilih Pegawai <span class="required">*</span></label>
+											<div class="col-md-4 col-sm-6 col-xs-12">
+												<select class="form-control select2_single" name="pegawai" id="pegawai">
+							          	
+							          </select>
+											</div>
+										</div>
                     <div class="form-group">
                     	<div class="col-md-offset-2 col-md-4">
                     		<button type="button" id="btn_tampil" class="btn btn-sm btn-success">Cek Data</button>

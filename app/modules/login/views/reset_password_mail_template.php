@@ -280,14 +280,14 @@
 					<table class="email-content" width="100%" cellpadding="0" cellspacing="0">
 						<tr>
               <td class="email-masthead">
-                <a href="https://gaji.up45..ac.id" class="email-masthead_logo align-center">
+                <a href="https://gaji.up45.ac.id" class="email-masthead_logo align-center">
                   <img src="https://qoxq.stripocdn.email/content/guids/CABINET_57fc396e01acabfd66d70f0eb945dc03/images/68601526627979315.png" alt="Smart home logo" title="Smart home logo" width="118" style="display:inline-block;border:0;outline:none;text-decoration:none;">
                 </a>
               </td>
             </tr>
 						<tr>
 							<td class="email-masthead">
-								<a href="https://gaji.up45..ac.id" class="email-masthead_name">
+								<a href="https://gaji.up45.ac.id" class="email-masthead_name">
 									Sistem Informasi Penggajian Universitas Proklamasi 45
 								</a>
 							</td>
@@ -300,7 +300,7 @@
 									<tr>
 										<td class="content-cell">
 											<h1>Hi <?=$nama?>,</h1>
-											<p>Anda baru saja mengirim permintaan untuk reset password akun Sistem Informasi Penggajian Universitas Proklamasi 45 Yogyakarta. <strong>Token Anda adalah <?=$token?> dan hanya berlaku untuk 24 jam.</strong></p>
+											<p>Anda baru saja mengirim permintaan untuk reset password akun Sistem Informasi Penggajian Universitas Proklamasi 45 Yogyakarta. Token Anda adalah <strong><?=$token?></strong> dan hanya berlaku untuk 24 jam.</p>
 											<!-- Action -->
 											<table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
 												<tr>
@@ -313,7 +313,7 @@
 																	<table border="0" cellspacing="0" cellpadding="0">
 																		<tr>
 																			<td>
-																				<a href="<?=$token?>" class="button button--green" target="_blank">Reset Kata Sandi</a>
+																				<a href="<?=base_url()?>reset-password/<?=$username?>?tokenRef=<?=$token?>" class="button button--green" target="_blank">Reset Kata Sandi</a>
 																			</td>
 																		</tr>
 																	</table>
@@ -332,7 +332,7 @@
 													<td>
 														<p class="sub">Jika Anda mengalami masalah dengan tombol/button di atas, silahkan menggunakan link URL di bawah ini.
 														</p>
-														<p class="sub">https://gaji.up45.ac.id/reset-password/<?=$token?></p>
+														<p class="sub"><?=base_url()?>reset-password/<?=$username?>?tokenRef=<?=$token?></p>
 													</td>
 												</tr>
 											</table>

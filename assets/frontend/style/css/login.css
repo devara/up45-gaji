@@ -22,9 +22,14 @@
   font-weight: 700;
   src:url('../fonts/Quicksand-Bold.ttf') format('truetype');
 }
-body{
+#login{
 	background: -webkit-linear-gradient(to right, #1565C0 , #90CAF9); /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to right, #1565C0 , #90CAF9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	font-family:Quicksand,sans-serif;
+}
+#reset{
+	background: -webkit-linear-gradient(to right, #a10000, #b80001); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #a10000, #b80001); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	font-family:Quicksand,sans-serif;
 }
 .content{
@@ -108,3 +113,48 @@ body{
 		margin-bottom: 50px;
 	}
 }
+
+/*Cookie Consent Begin*/
+#cookieConsent {
+    background-color: rgba(20,20,20,0.8);
+    min-height: 26px;
+    font-size: 16px;
+    color: #ccc;
+    line-height: 26px;
+    padding: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    z-index: 9999;
+}
+#cookieConsent a {
+    color: #4B8EE7;
+    text-decoration: none;
+}
+#closeCookieConsent {
+    float: right;
+    display: inline-block;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+}
+#closeCookieConsent i {
+	color: #F1D600;
+	font-size: 20px;
+}
+#cookieConsent a.cookieConsentOK {
+    background-color: #F1D600;
+    color: #000;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0 15px;
+    cursor: pointer;
+    float: right;
+    margin: 0 60px 0 10px;
+}
+#cookieConsent a.cookieConsentOK:hover {
+    background-color: #E0C91F;
+}
+/*Cookie Consent End*/

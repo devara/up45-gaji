@@ -31,22 +31,42 @@ class Lembur extends CI_Controller
 		if ($this->form_validation->run() == TRUE) {
 			$per = $this->input->post('per');
 			$unit = $this->input->post('unit');
+			$nip = $this->input->post('nip');
 			if ($unit=='all') {
 				$param = array(
 					'id_periode'=>$per,
 					'acc'=>'ya'				
 				);
+				$data['jenis'] = 'all_unit';
 				$join = 'data_pegawai.nip = data_lembur.nip';
 				$data['cekLembur'] = $this->my_lib->get_data_join('data_pegawai','data_lembur',$param,$join);
 			}
 			else{
-				$param = array(
-					'kode_unit'=>$unit,
-					'id_periode'=>$per,
-					'acc'=>'ya'
-				);
-				$join = 'data_pegawai.nip = data_lembur.nip';
-				$data['cekLembur'] = $this->my_lib->get_data_join('data_pegawai','data_lembur',$param,$join);
+				if ($nip == NULL || $nip == 'all') {
+					$param = array(
+						'kode_unit'=>$unit,
+						'id_periode'=>$per,
+						'acc'=>'ya'
+					);
+					$data['jenis'] = 'one_unit';
+					$join = 'data_pegawai.nip = data_lembur.nip';
+					$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
+					$data['unit'] = $this->my_lib->get_data('master_unit_kerja',array('kode_unit'=>$unit));
+					$data['cekLembur'] = $this->my_lib->get_data_join('data_pegawai','data_lembur',$param,$join);
+				}
+				else{
+					$param = array(
+						'id_periode'=>$per,
+						'data_lembur.nip' => $nip,
+						'acc'=>'ya'
+					);
+					$data['jenis'] = 'one_person';
+					$join = 'data_pegawai.nip = data_lembur.nip';
+					$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
+					$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+					$data['cekLembur'] = $this->my_lib->get_data_join('data_pegawai','data_lembur',$param,$join);
+				}
+				
 			}
 			$tabel = $this->load->view('tunj_bonus/lembur-tabel',$data,true);
 			$message[] = array('code'=>200,'message'=>'Data Tersedia.','tabel'=>$tabel);

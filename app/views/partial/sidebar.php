@@ -1,21 +1,18 @@
 <div  class="left_col scroll-view">	
 	<div class="navbar nav_title" style="border: 0;">
-    <a href="index.html" class="site_title">
+    <a href="" class="site_title">
     	<i class="fa fa-users"></i>
     	<span>SI Penggajian</span>
     </a>
   </div>
 	<div class="clearfix"></div>
-	<!-- menu profile quick info -->
   <div class="profile clearfix">
     
     <div class="profile_info">
       <span>Selamat datang, <b><?php echo $this->session->userdata('nama'); ?></b></span>
     </div>
   </div>
-  <!-- /menu profile quick info -->
 	<br />
-	<!-- sidebar menu -->
 	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 		<?php 
 		if($this->session->userdata('level') == 'SDM'): ?>
@@ -70,8 +67,8 @@
 				<li>
 					<a>Propeka (Cooming Soon)<span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-	          <li><a href="<?php echo sdm()?>rkhlh">Laporan Harian</a></li>
 	          <li><a href="<?php echo sdm()?>rkh">Rencana Kerja Harian</a></li>
+	          <li><a href="<?php echo sdm()?>rkhlh">Laporan Harian</a></li>
 	          <li><a href="<?php echo sdm()?>checklist_lap">Checklist & Laporan Bulanan</a></li>
 	        </ul>
 				</li>
@@ -172,9 +169,6 @@
 		</div>
 		<?php endif;?>
 	</div>
-	<!-- /sidebar menu -->
-
-	<!-- menu footer buttons -->
 	<div class="sidebar-footer hidden-small">
 		<a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo base_url()?>keluar">
 	    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
@@ -199,5 +193,4 @@
 	  </a>
 		<?php endif; ?>
 	</div>
-	<!-- /menu footer buttons -->
 </div>

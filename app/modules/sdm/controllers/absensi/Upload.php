@@ -34,7 +34,10 @@ class Upload extends CI_Controller
     	$upload_data = $this->upload->data();
     	$filename = $upload_data['file_name'];
     	$this->upload_absensi->up_absensi($filename,$idPer);
-    	redirect(sdm().'absensi/upload/berhasil/'.$filename);
+    	$alert_type = "success";
+	    $alert_title =" Upload Absensi berhasil";
+			set_header_message($alert_type,'Upload Absensi',$alert_title);
+    	redirect(sdm().'absensi/upload/');
     } else{
     	$alert_type = "danger";
       $alert_title =" Upload Absensi gagal";
