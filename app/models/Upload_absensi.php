@@ -115,8 +115,8 @@ class Upload_absensi extends CI_Model
     foreach ($peg as $p) {
     	$nip = $p->nip;
     	$tot =0;
-    	$tepat_waktu = $this->my_lib->row_count('absensi_data',array('nip'=>$nip,'telat'=>0));
-    	$data_absen = $this->my_lib->get_data('absensi_data',array('nip'=>$nip));
+    	$tepat_waktu = $this->my_lib->row_count('absensi_data',array('id_periode'=>$idPer,'nip'=>$nip,'telat'=>0));
+    	$data_absen = $this->my_lib->get_data('absensi_data',array('id_periode'=>$idPer,'nip'=>$nip));
 
     	if (!empty($data_absen)) {
     		foreach ($data_absen as $absen) {

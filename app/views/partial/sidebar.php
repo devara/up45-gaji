@@ -37,7 +37,6 @@
 					<ul class="nav child_menu">
 						<li><a href="<?php echo sdm()?>unit_kerja">Unit Kerja</a></li>
 	          <li><a href="<?php echo sdm()?>jabatan">Jabatan</a></li>
-	          <li><a href="<?php echo sdm()?>agama">Agama</a></li>
 	        </ul>
 				</li>
 				<li>
@@ -53,7 +52,7 @@
 					<ul class="nav child_menu">
 	          <li><a href="<?php echo sdm()?>absensi/upload">Import/Upload Absensi</a></li>
 	          <li><a href="<?php echo sdm()?>absensi/data">Data Absensi</a></li>
-	          <li><a href="<?php echo sdm()?>absensi/rekap">Rekap Absensi</a></li>
+	          <li><a href="<?php echo sdm()?>absensi/kelola">Kelola Absensi</a></li>
 	          <li><a href="<?php echo sdm()?>absensi/susulan">Absensi Susulan</a></li>
 	        </ul>
 				</li>
@@ -87,9 +86,9 @@
 				<li>
 					<a><i class="fa fa-home"></i> Master Akademik <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-	          <li><a href="index.html">Fakultas</a></li>
-	          <li><a href="index2.html">Program Studi</a></li>
-	          <li><a href="index3.html">Mata Kuliah</a></li>
+	          <li><a href="#">Fakultas</a></li>
+	          <li><a href="#">Program Studi</a></li>
+	          <li><a href="#">Mata Kuliah</a></li>
 	        </ul>
 				</li>
 				<li>

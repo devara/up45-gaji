@@ -1,34 +1,89 @@
 <?php if ($jenis == 'multiple') { ?>
-	<table id="tblabsensi" class="table table-striped table-bordered">
-		<thead>
-			<tr>
-				<th>Tanggal</th>
-				<th>Hari</th>
-				<th>NIP</th>
-				<th>Nama</th>
-				<th>Time IN</th>
-				<th>Time OUT</th>
-				<th>Lama Kerja</th>
-				<th>Keterangan</th>
-				</tr>
-			</thead>
-		<tbody>
-			<?php if($absensi): foreach ($absensi as $row): ?>
-				<tr>
-					<td><?=$row->tanggal?></td>
-					<td><?=$row->hari?></td>
-					<td><?=$row->nip?></td>
-					<td><?=$row->nama?></td>
-					<td><?=$row->datang?></td>
-					<td><?=$row->pulang?></td>
-					<td><?=$row->lama_kerja?></td>
-					<td><?=$row->keterangan?></td>
-				</tr>
-			<?php endforeach; endif; ?>
-		</tbody>
-	</table>
-<?php } else { ?>
+<div class="row">
+	<div class="col-md-12">
+		<button type="button" id="printAllAbsensi" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</button>
+	</div>
+</div>
+</br>
+<div class="showArea" style="display: none;">
+	<div class="row">
+		<div class="col-md-12">
+			<table id="tblabsensi" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Tanggal</th>
+						<th>Hari</th>
+						<th>NIP</th>
+						<th>Nama</th>
+						<th>Time IN</th>
+						<th>Time OUT</th>
+						<th>Lama Kerja</th>
+						<th>Keterangan</th>
+						</tr>
+					</thead>
+				<tbody>
+					<?php if($absensi): foreach ($absensi as $row): ?>
+						<tr>
+							<td><?=$row->tanggal?></td>
+							<td><?=$row->hari?></td>
+							<td><?=$row->nip?></td>
+							<td><?=$row->nama?></td>
+							<td><?=$row->datang?></td>
+							<td><?=$row->pulang?></td>
+							<td><?=$row->lama_kerja?></td>
+							<td><?=$row->keterangan?></td>
+						</tr>
+					<?php endforeach; endif; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="printAllArea">
+	<div class="row">
+		<div class="col-md-12">
+			<table id="tblAllAbsensi" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Tanggal</th>
+						<th>Hari</th>
+						<th>NIP</th>
+						<th>Nama</th>
+						<th>Time IN</th>
+						<th>Time OUT</th>
+						<th>Lama Kerja</th>
+						<th>Keterangan</th>
+						</tr>
+					</thead>
+				<tbody>
+					<?php if($absensi): foreach ($absensi as $row): ?>
+						<tr>
+							<td><?=$row->tanggal?></td>
+							<td><?=$row->hari?></td>
+							<td><?=$row->nip?></td>
+							<td><?=$row->nama?></td>
+							<td><?=$row->datang?></td>
+							<td><?=$row->pulang?></td>
+							<td><?=$row->lama_kerja?></td>
+							<td><?=$row->keterangan?></td>
+						</tr>
+					<?php endforeach; endif; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 	
+<?php } else { ?>
+<div class="row">
+	<div class="col-md-12">
+		<button type="button" id="printAbsensi" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</button>
+		<a href="<?=sdm()?>absensi/data/absensi_pdf?per=<?=$id_per?>&nip=<?=$nip?>&time=<?=time()?>" class="btn btn-primary" title="PDF"><i class="fa fa-file-pdf-o"></i>&nbsp;Download PDF</a>
+	</div>
+</div>
+</br>
+<div class="printArea">
+<div class="row">
 	<div class="col-md-6">
 		<table class="table table-striped table-bordered">
 			<tr>
@@ -96,14 +151,6 @@
 		</table>
 	</div>
 	<div class="col-md-12">
-		<form method="POST" action="<?=sdm()?>absensi/data/absensi_pdf">
-			<input type="hidden" name="periode_kerja" value="<?=$id_per?>">
-			<input type="hidden" name="nip_pegawai" value="<?=$nip?>">
-			<button type="submit" class="btn btn-primary"><i class="fa fa-file-pdf-o" title="PDF"></i></button>
-		</form>
-		<a href="<?=sdm()?>absensi/data/absensi_pdf?per=<?=$id_per?>&nip=<?=$nip?>&time=<?=time()?>" class="btn btn-primary" title="PDF"><i class="fa fa-file-pdf-o"></i>&nbsp;Download PDF</a>
-	</div>
-	<div class="col-md-12">
 		<div class="table-responsive">
 			<table id="tblabsensi2" class="table table-striped table-bordered">
 				<thead>
@@ -133,4 +180,20 @@
 			</table>
 		</div>
 	</div>
+</div>
+</div>
+	
 <?php } ?>
+
+<script type="text/javascript">
+	$('#printAbsensi').on("click", function () {
+    $('.printArea').printThis({
+     	header: "<h4>Data Absensi Pegawai</h5>",
+    });
+  });
+  $('#printAllAbsensi').on("click", function () {
+    $('.printAllArea').printThis({
+     	header: "<h4>Data Absensi Pegawai</h5>",
+    });
+  });
+</script>
