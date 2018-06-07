@@ -49,11 +49,18 @@
 				<td><?php echo $this->lib_calendar->convert($pe->format("Y-m-d"));?></td>
 				<td><?=hari_indo($pe->format("Y-m-d"))?></td>
 				<td>
-					<?php $cek = $this->my_lib->get_data('data_rkhlh',array('id_periode'=>$per->id_periode,'nip'=>$peg->nip,'tanggal'=>$pe->format("Y-m-d"))); 
-					if($cek): ?>
-					<a class="btn btn-xs btn-success">Ada</a> | <a href="#" class="blue-text">Lihat</a>
+					<?php $cek_rkh = $this->my_lib->get_data('data_rkhlh',array('id_periode'=>$per->id_periode,'tanggal'=>$pe->format("Y-m-d"),'nip'=>$peg->nip));
+					if($cek_rkh): ?>
+						<?php $id_rkhlh = $this->my_lib->get_row('data_rkhlh',array('id_periode'=>$per->id_periode,'tanggal'=>$pe->format("Y-m-d"),'nip'=>$peg->nip),'id_rkhlh');
+						$cek_lh = $this->my_lib->cek('data_rkhlh_detail',array('id_rkhlh'=>$id_rkhlh,'rkh_lh_lengkap'=>'tidak'));
+						if($cek_lh == TRUE): ?>
+							<a class="btn btn-sm btn-primary">LH belum di isi</a>
+						<?php else: ?>
+							<a class="btn btn-sm btn-success">RKH dan LH lengkap</a> | <a href="#" class="blue-text">Lihat</a>
+						<?php endif; ?>
+					
 					<?php else: ?>
-						<a class="btn btn-xs btn-danger">Belum ada</a>
+						<a class="btn btn-sm btn-danger">RKH belum ada</a>
 					<?php endif; ?>
 				</td>
 			</tr>

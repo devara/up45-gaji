@@ -62,7 +62,7 @@ class Rkh extends CI_Controller
 			);
 			$cekData = $this->my_lib->get_data('data_rkhlh',$param);
 			if ($cekData) {
-				$message[] = array('code'=>200,'message'=>'Data Tersedia.','status'=>'Anda sudah membuat untuk tanggal ini');
+				$message[] = array('code'=>200,'message'=>'Data Tersedia.','status'=>'Anda sudah membuat RKH untuk tanggal ini');
 			}
 			else {
 				$message[] = array('code'=>500,'message'=>'Data Belum Tersedia.','status'=>'tidak');
