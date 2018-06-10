@@ -42,6 +42,7 @@
 						<th>Keterangan Lembur</th>
 						<th>Jam Lembur</th>
 						<th>Durasi</th>
+						<th>Tunjangan Lembur</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,11 +53,12 @@
 							<td><?=$row->keterangan?></td>
 							<td><?=$row->jam_mulai?> - <?=$row->jam_selesai?></td>
 							<td><?=$row->durasi?></td>
+							<td><?=$row->total?></td>
 						</tr>
 					<?php endforeach; 
 					else: ?>
 						<tr>
-							<td colspan="4" align="center">Tidak ada data untuk periode ini</td>
+							<td colspan="6" align="center">Tidak ada data untuk periode ini</td>
 						</tr>
 					<?php endif; ?>
 				</tbody>

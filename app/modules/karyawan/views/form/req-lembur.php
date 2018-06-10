@@ -54,56 +54,16 @@
 						<div class="" role="tabpanel" data-example-id="togglable-tabs">
 							<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
 								<li role="presentation" class="active">
-									<a href="#data" role="tab" id="data-tab" data-toggle="tab" aria-expanded="true">Data Lembur</a>
+									<a href="#input" role="tab" id="input-tab" data-toggle="tab" aria-expanded="true">Input Pengajuan Lembur</a>
 								</li>
 								<li role="presentation" class="">
-									<a href="#input" role="tab" id="input-tab" data-toggle="tab" aria-expanded="true">Input Lembur</a>
-								</li>
-								<li role="presentation" class="">
-									<a href="#pengajuan" id="pengajuan-tab" role="tab" data-toggle="tab" aria-expanded="false">Data Pengajuan Lembur (Coming Soon)</a>
+									<a href="#data" role="tab" id="data-tab" data-toggle="tab" aria-expanded="true">Status Pengajuan Lembur</a>
 								</li>
 							</ul>
 							<div id="myTabContent" class="tab-content">
-								<div role="tabpanel" class="tab-pane fade active in" id="data" aria-labelledby="data-tab">
-									<br/>
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-										<div class="form-group">
-											<label class="control-label col-md-2 col-sm-3 col-xs-12" for="cekPer">Periode <span class="required">*</span>
-											</label>
-											<div class="col-md-5 col-sm-6 col-xs-12">
-												<select name="cekPer" id="cekPer" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;">
-													<option disabled="" selected="">Pilih Periode</option>
-													<?php foreach ($periode as $per) { 
-														$mulai = $this->lib_calendar->convert($per->mulai);
-														$akhir = $this->lib_calendar->convert($per->akhir);
-													 ?>
-														<option value="<?=$per->id_periode?>">Periode <?php echo "".$per->bulan." ".$per->tahun." ( ".$mulai." - ".$akhir." )"; ?></option>
-													<?php } ?>
-												</select>
-											</div>
-										</div>
-										
-										
-										<div class="form-group">
-											<div class="col-md-offset-2 col-md-4">
-												<button type="button" id="btn_tampil" class="btn btn-sm btn-success">Cek Data</button>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-md-offset-2 col-md-5">
-												<div id="loading"></div>
-											</div>
-										</div>
-									</form>
-
-									<br>
-									<br>
-									<div id="tampilLembur">
-										
-									</div>
-								</div>
-								<div role="tabpanel" class="tab-pane fade" id="input" aria-labelledby="input-tab">
-									<form id="demo-form" data-parsley-validate class="form-horizontal form-label-left">
+								<div role="tabpanel" class="tab-pane fade active in" id="input" aria-labelledby="input-tab">
+									<form id="demo-form" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?=karyawan()?>form/req_lembur/pengajuan">
+										<input type="hidden" name="nip" value="<?=$this->session->userdata('nip')?>">
 										<div class="form-group">
 											<label class="control-label col-md-2 col-sm-3 col-xs-12" for="idPeriode">Periode <span class="required">*</span>
 											</label>
@@ -124,18 +84,6 @@
 											</label>
 											<div class="col-md-3 col-sm-6 col-xs-12">
 												<input type="date" id="tanggal" name="tanggal" required="required" class="form-control col-md-7 col-xs-12" disabled="true">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-md-2 col-sm-3 col-xs-12" for="idPegawai">Pegawai <span class="required">*</span>
-											</label>
-											<div class="col-md-5 col-sm-6 col-xs-12">
-												<select name="idPegawai" id="idPegawai" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;">
-													<option disabled="" selected="" value="0">Pilih Pegawai</option>
-													<?php foreach ($pegawai as $peg) { ?>
-														<option value="<?=$peg->nip?>"><?=$peg->nama?></option>
-													<?php } ?>
-												</select>
 											</div>
 										</div>
 										<div class="form-group">
@@ -167,19 +115,49 @@
 										</div>
 										<div class="form-group">
 											<div class="col-md-offset-2 col-md-4">
-												<button type="button" id="btnSimpan" class="btn btn-sm btn-success">Simpan</button>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-md-offset-2 col-md-4">
-												<div id="inputloading"></div>
+												<button type="submit" class="btn btn-sm btn-success">Simpan Pengajuan</button>
 											</div>
 										</div>
 									</form>
 								</div>
-								<div role="tabpanel" class="tab-pane fade" id="pengajuan" aria-labelledby="pengajuan-tab">
-									
+								<div role="tabpanel" class="tab-pane fade" id="data" aria-labelledby="data-tab">
+									<br/>
+									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+										<input type="hidden" name="nipPegawai" id="nipPegawai" value="<?=$this->session->userdata('nip')?>">
+										<div class="form-group">
+											<label class="control-label col-md-2 col-sm-3 col-xs-12" for="cekPer">Periode <span class="required">*</span>
+											</label>
+											<div class="col-md-5 col-sm-6 col-xs-12">
+												<select name="cekPer" id="cekPer" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;">
+													<option disabled="" selected="">Pilih Periode</option>
+													<?php foreach ($periode as $per) { 
+														$mulai = $this->lib_calendar->convert($per->mulai);
+														$akhir = $this->lib_calendar->convert($per->akhir);
+													 ?>
+														<option value="<?=$per->id_periode?>">Periode <?php echo "".$per->bulan." ".$per->tahun." ( ".$mulai." - ".$akhir." )"; ?></option>
+													<?php } ?>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-offset-2 col-md-4">
+												<button type="button" id="btn_tampil" class="btn btn-sm btn-success">Cek Data</button>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-offset-2 col-md-5">
+												<div id="loading"></div>
+											</div>
+										</div>
+									</form>
+
+									<br>
+									<br>
+									<div id="tampilLembur">
+										
+									</div>
 								</div>
+								
 							</div>
 						</div>
 					</div>

@@ -30,7 +30,8 @@ class Lembur extends CI_Controller
 			$nip = $this->input->post('nip');
 			$param = array(
 				'id_periode'=>$per,
-				'nip'=>$nip
+				'nip'=>$nip,
+				'acc'=>'ya'
 			);
 			
 			$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));

@@ -83,6 +83,7 @@
 					           	</div>
 					           	<div>
 					           		<a class="white-text activate-section" href="#" data-section="forgot-section">Lupa Password ?</a>
+					           		<a class="white-text activate-section" href="#" data-section="aktivasi-section" style="float: right;">Aktivasi Akun</a>
 					           	</div>
 					          </div>
 				          </div>
@@ -120,12 +121,59 @@
 								</div>
 							</form>
 						</div>
+
+						<div class="action-section aktivasi-section">
+							<form method="POST" action="<?=base_url()?>login/aktivasi/submit">
+								<div class="login-box">
+									<div class="login-title">
+				            <h3>Aktivasi Akun</h3>
+				          </div>
+				          <div class="panel-body">
+					          <div class="form-group">
+					            <label for="nip">NIP Pegawai</label>
+					            <div class="input-group">
+					              <div class="input-group-addon"><i class="icon ion-person" style="font-size: 18px;"></i></div>
+					              <input type="text" class="form-control" name="nip" id="nip" placeholder="Masukan NIP Anda" autocomplete="off" required="" />
+					            </div>
+					          </div>
+					          <div class="form-group">
+					          	<div class="input-group">
+					              <div class="input-group-addon"><button type="button" id="btn_cek" class="btn btn-sm btn-success">Cek</button></div>
+					              <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Anda" readonly="" />
+					            </div>
+					          </div>
+					          <div class="form-group">
+					          	<input type="hidden" name="nip_pegawai" id="nip_pegawai">
+					            <label for="email_pegawai">Alamat Email Anda</label>
+					            <div class="input-group">
+					              <div class="input-group-addon"><i class="icon ion-ios-email" style="font-size: 18px;"></i></div>
+					              <input type="text" class="form-control" name="email_pegawai" id="email_pegawai" placeholder="Masukan Email Anda" autocomplete="off" required="" />
+					            </div>
+					          </div>
+					         
+					          <div class="form-group">
+					        	 	<button id="btn_aktivasi" class="btn blue darken-2 z-depth-1 login-btn" type="submit" disabled="">Aktivasi Akun&nbsp;&nbsp;<span class="navicon-right"><i class="icon ion-unlocked"></i></span></button>
+					          </div>
+					          <div class="form-group">
+					          	<div class="alert alert-danger alert-dismissible text-center" role="alert">
+						            Format Input NIP<br>
+						            Input NIP tanpa tanda titik (.) dan (/)
+						          </div>
+						          <div>
+					           		<a class="white-text activate-section" href="#" data-section="login-section">Login</a>
+					           	</div>
+					          </div>					           	
+				          </div>
+								</div>
+							</form>
+						</div>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
+	<script type="text/javascript">
     (function ($) {
         "use strict";
         var actionBox = $('#action-box'),
@@ -139,6 +187,31 @@
         });
 
     })(jQuery);
+
+$('#btn_cek').click(function(e){
+	var nip = $('#nip').val();
+	$.ajax({
+		type  : "POST",
+		url   : "<?php echo ajaxpublic_url()?>get_pegawai_by_nip",
+		dataType : "json",
+		data : {nip:nip},
+		beforeSend: function(){
+			$("#nama").val("");
+		},
+		success: function(response){
+			if (response[0].code==200) {
+				$("#nama").val(response[0].nama);
+				$("#nip_pegawai").val(response[0].nip);
+				document.getElementById("btn_aktivasi").disabled = false;
+			}
+			else{
+				$("#nama").val("NIP Tidak Valid");
+				document.getElementById("btn_aktivasi").disabled = true;
+			}
+		}
+	});
+	e.preventDefault();
+});
 </script>
 </body>
 </html>

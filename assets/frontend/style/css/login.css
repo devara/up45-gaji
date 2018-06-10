@@ -55,7 +55,7 @@
 	color: #FFFFFF;
 	text-align: center;
 }
-.forgot-section {
+.forgot-section, .aktivasi-section {
 	display: none;
 }
 #action-box {
