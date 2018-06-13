@@ -12,7 +12,17 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/ionicons.min.css";?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/login.css"; ?>" media="screen,projection" />
   <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/color.css"; ?>" />
-
+  <style type="text/css">
+  	.field-icon {
+  		color: black;
+		  float: right;
+		  font-size: 20px;
+		  margin-top: -30px;
+		  margin-right: 10px;
+		  position: relative;
+		  z-index: 9999;
+		}
+  </style>
   <script src="<?php echo base_url().'assets/frontend/jquery/jquery.min.js'; ?>"></script>
 	<script src="<?php echo base_url().'assets/frontend/bootstrap/js/bootstrap.min.js'; ?>"></script>
 	<script src="<?php echo base_url().'assets/frontend/style/js/sweetalert2.min.js'; ?>"></script>
@@ -34,7 +44,7 @@
 						</div>
 					</div>
 					<div class="content-copyright">
-						<p>&copy; 2018 Universitas Prokalamasi 45 <br> developed by Devara Eko</p>
+						<p>&copy; 2018 Universitas Prokalamasi 45 <br> made with &#128147; by Devara Eko</p>
 					</div>
 				</div>
 				<div class="col-md-5">
@@ -68,7 +78,8 @@
 					            <label for="password">Password</label>
 					            <div class="input-group">
 					              <div class="input-group-addon"><i class="icon ion-locked" style="font-size: 18px;"></i></div>
-					              <input type="password" class="form-control" name="password" id="password" placeholder="Password" autocomplete="off" />
+					              <input type="password" class="form-control" name="password" id="password-field" placeholder="Password" autocomplete="off" />
+					              <span toggle="#password-field" class="icon ion-eye field-icon toggle-password"></span>
 					            </div>
 					          </div>
 					           <?php if((isset($flash_message) and !empty($flash_message)) or($this->session->flashdata('login_message'))): ?>
@@ -152,7 +163,7 @@
 					          </div>
 					         
 					          <div class="form-group">
-					        	 	<button id="btn_aktivasi" class="btn blue darken-2 z-depth-1 login-btn" type="submit" disabled="">Aktivasi Akun&nbsp;&nbsp;<span class="navicon-right"><i class="icon ion-unlocked"></i></span></button>
+					        	 	<button id="btn_aktivasi" class="btn red darken-2 z-depth-1 login-btn" type="submit" disabled="">Aktivasi Akun&nbsp;&nbsp;<span class="navicon-right"><i class="icon ion-unlocked"></i></span></button>
 					          </div>
 					          <div class="form-group">
 					          	<div class="alert alert-danger alert-dismissible text-center" role="alert">
@@ -188,30 +199,43 @@
 
     })(jQuery);
 
-$('#btn_cek').click(function(e){
-	var nip = $('#nip').val();
-	$.ajax({
-		type  : "POST",
-		url   : "<?php echo ajaxpublic_url()?>get_pegawai_by_nip",
-		dataType : "json",
-		data : {nip:nip},
-		beforeSend: function(){
-			$("#nama").val("");
-		},
-		success: function(response){
-			if (response[0].code==200) {
-				$("#nama").val(response[0].nama);
-				$("#nip_pegawai").val(response[0].nip);
-				document.getElementById("btn_aktivasi").disabled = false;
-			}
-			else{
-				$("#nama").val("NIP Tidak Valid");
-				document.getElementById("btn_aktivasi").disabled = true;
-			}
-		}
-	});
-	e.preventDefault();
-});
+    $(".toggle-password").click(function() {
+
+		  $(this).toggleClass("ion-eye ion-eye-disabled");
+		  var input = $($(this).attr("toggle"));
+		  if (input.attr("type") == "password") {
+		    input.attr("type", "text");
+		  } else {
+		    input.attr("type", "password");
+		  }
+		});
+
+		$('#btn_cek').click(function(e){
+			var nip = $('#nip').val();
+			$.ajax({
+				type  : "POST",
+				url   : "<?php echo ajaxpublic_url()?>get_pegawai_by_nip",
+				dataType : "json",
+				data : {nip:nip},
+				beforeSend: function(){
+					$("#nama").val("");
+				},
+				success: function(response){
+					if (response[0].code==200) {
+						$("#nama").val(response[0].nama);
+						$("#nip_pegawai").val(response[0].nip);
+						$("#btn_aktivasi").removeClass('red').addClass('blue');
+						document.getElementById("btn_aktivasi").disabled = false;
+					}
+					else{
+						$("#nama").val("NIP Tidak Valid");
+						$("#btn_aktivasi").removeClass('blue').addClass('red');
+						document.getElementById("btn_aktivasi").disabled = true;
+					}
+				}
+			});
+			e.preventDefault();
+		});
 </script>
 </body>
 </html>

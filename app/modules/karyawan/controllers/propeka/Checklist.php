@@ -75,4 +75,49 @@ class Checklist extends CI_Controller
       ->set_content_type('application/json')
       ->set_output(json_encode($message));
 	}
+
+	function tambah()
+	{
+		$periode = $this->input->post('periode');
+		$nip = $this->input->post('pegawai');
+		$data = array(
+			'id_periode'	=> $periode,
+			'nip'	=> $nip,
+			'tgl_buat_checklist' => date('Y-m-d H:i:s')
+		);
+		$add_checklist = $this->db->insert('data_checklist_laporan_bulanan',$data);
+		if ($add_checklist) {
+			$cbID = $this->my_lib->last_insert_id();
+			$keg = $this->input->post('keg');
+			$result = array();
+			foreach ($keg as $key => $val) {
+				$result[] = array(
+	      'id_cb_lb'	=> $cbID,
+	      'kegiatan' 	=> $_POST['keg'][$key],
+	      'cb_tgl_mulai'	=> $_POST['dari'][$key],
+	      'cb_tgl_selesai' => $_POST['sampai'][$key],
+	      'cb_lb_lengkap' => 'tidak'
+	    	);
+			}
+			$add_detail = $this->db->insert_batch('data_checklist_laporan_bulanan_detail', $result);
+			if ($add_detail) {
+				$alert_type = "success";
+	      $alert_message ="Berhasil input checklist bulanan";
+				set_header_message($alert_type,'Checklist Bulanan',$alert_message);
+				redirect(karyawan().'propeka/checklist');
+			}
+			else{
+				$alert_type = "danger";
+		    $alert_message ="Gagal input checklist bulanan";
+				set_header_message($alert_type,'Checklist Bulanan',$alert_message);
+				redirect(karyawan().'propeka/checklist');
+			}
+		}
+		else{
+			$alert_type = "danger";
+	    $alert_message ="Gagal input checklist bulanan";
+			set_header_message($alert_type,'Checklist Bulanan',$alert_message);
+			redirect(karyawan().'propeka/checklist');
+		}
+	}
 }

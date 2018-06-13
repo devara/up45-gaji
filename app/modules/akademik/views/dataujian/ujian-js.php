@@ -65,12 +65,13 @@ $('#btn_tambah').click(function(e){
 	var tgl = $('#tgl').val();
 	var tipe = $('#tipe').val();
 	var makul = $('#makul').val();
+	var jum_mhs = $('#addjum').val();
 	var ket = $('#addket').val();
 	$.ajax({
 		type: "POST",
 		url: "<?php echo akademik()?>ujian/tambah",
 		dataType: "json",
-		data: {idper:idper, tgl:tgl, tipe:tipe, makul:makul, ket:ket},
+		data: {idper:idper, tgl:tgl, tipe:tipe, makul:makul, jum:jum_mhs, ket:ket},
 		beforeSend: function(){
 			$("#loading").html(loader_green);
 		},
@@ -82,6 +83,7 @@ $('#btn_tambah').click(function(e){
 				$('#tipe').val("");
 				$('#prodi').val(0);
 				$('#makul').html("");
+				$('#addjum').html("");
 				$('#addket').val("");
 				swal({
 				  type: 'success',

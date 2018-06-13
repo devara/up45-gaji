@@ -124,9 +124,9 @@
 					<a><i class="fa fa-pencil"></i> Form Pengajuan <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
 	          <li><a href="<?=karyawan()?>form/req_lembur">Pengajuan Lembur</a></li>
-	          <li><a href="<?=karyawan()?>form/absen_susulan">Absensi Susulan</a></li>
-	          <li><a href="#">Ijin (Cooming Soon)</a></li>
-	          <li><a href="#">Cuti (Cooming Soon)</a></li>
+	          <li><a href="#">Absensi Susulan (Coming Soon)</a></li>
+	          <li><a href="#">Ijin (Coming Soon)</a></li>
+	          <li><a href="#">Cuti (Coming Soon)</a></li>
 	        </ul>
 				</li>
 				<li>

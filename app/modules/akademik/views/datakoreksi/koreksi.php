@@ -137,9 +137,8 @@
               			<div class="form-group">
               				<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Pilih Pegawai <span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="peg_ganda[]" id="peg_ganda" class="select2_single form-control" multiple required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
+                        <select name="peg_ganda[]" id="peg_ganda" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
                         <?php 
-                        $pegawai = $this->my_lib->get_data('data_pegawai','','nama ASC');
                         foreach ($pegawai as $row) { ?>
                           <option value="<?=$row->nip?>"><?=$row->nama?></option>
                         <?php } ?>

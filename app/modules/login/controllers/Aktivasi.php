@@ -24,8 +24,9 @@ class Aktivasi extends CI_Controller
 				$data['nama'] = $this->my_lib->get_row('data_pegawai',array('nip'=>$nip),'nama');
 
 				$value = array(
-					'token' => $encrypted_id,
-					'token_expired' => $expired
+					'email' => $email,
+					'aktivasi_token' => $encrypted_id,
+					'aktivasi_token_expired' => $expired
 				);
 				$param = array(
 					'id' => $id

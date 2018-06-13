@@ -12,6 +12,17 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/ionicons.min.css";?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/login.css"; ?>" media="screen,projection" />
   <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/color.css"; ?>" />
+  <style type="text/css">
+  	.field-icon {
+  		color: black;
+		  float: right;
+		  font-size: 20px;
+		  margin-top: -30px;
+		  margin-right: 10px;
+		  position: relative;
+		  z-index: 9999;
+		}
+  </style>
 </head>
 <body id="login">
 	<div class="container">
@@ -35,27 +46,35 @@
 				<div class="col-md-5">
 					<div id="action-box">
 						<div class="action-section">
-							<form method="POST" action="<?=base_url()?>reset/submit">
+							<form method="POST" action="<?=base_url()?>reset/submit" accept-charset="utf-8">
 								<div class="login-box">
 									<div class="login-title">
 				            <h3>Reset Password</h3>
 				          </div>
 				          <div class="panel-body">
+				          	<input type="hidden" name="token" value="<?=$token?>">
+				          	<div class="form-group">
+				          		<label for="email">Username</label>
+				          		<div class="input-group">
+					              <div class="input-group-addon"><i class="icon ion-person" style="font-size: 18px;"></i></div>
+					              <input type="text" class="form-control" name="username" id="username" value="<?=$username?>" readonly />
+					            </div>
+				          	</div>
 					          <div class="form-group">
 					            <label for="email">Password Baru</label>
 					            <div class="input-group">
 					              <div class="input-group-addon"><i class="icon ion-locked" style="font-size: 18px;"></i></div>
-					              <input type="text" class="form-control" name="new_pass" id="new_pass" placeholder="Masukan password baru Anda" autocomplete="off" required="" />
+					              <input type="password" class="form-control" name="new_pass" id="password-field" placeholder="Masukan password baru Anda" autocomplete="off" required="" />
+					              <span toggle="#password-field" class="icon ion-eye field-icon toggle-password"></span>
 					            </div>
 					          </div>
 					          <div class="form-group">
 					            <label for="email">Ulangi Password</label>
 					            <div class="input-group">
 					              <div class="input-group-addon"><i class="icon ion-locked" style="font-size: 18px;"></i></div>
-					              <input type="text" class="form-control" name="verif_pass" id="verif_pass" placeholder="Ulangi password" autocomplete="off" required="" />
+					              <input type="password" class="form-control" name="verif_pass" id="verif_pass" placeholder="Ulangi password" autocomplete="off" required="" />					              
 					            </div>
-					          </div>
-					         
+					          </div>					         
 					          <div class="form-group">
 					        	 	<button class="btn blue darken-2 z-depth-1 login-btn" type="submit">Reset Password&nbsp;&nbsp;<span class="navicon-right"><i class="icon ion-unlocked"></i></span></button>
 					          </div>				           	
@@ -70,7 +89,7 @@
 	</div>
 	<div id="cookieConsent">
     <div id="closeCookieConsent"><i class="ion ion-close-circled"></i></div>
-    Token Anda tersimpan dalam <i>Browser Session</i>. <a href="#" target="_blank">Info detail</a>. <a class="cookieConsentOK">Oke, Saya mengerti!</a>
+    Token Anda tersimpan dalam <i>Browser Session</i>. <a class="cookieConsentOK">Oke, Saya mengerti!</a>
 	</div>
 
 	<script src="<?php echo base_url().'assets/frontend/jquery/jquery.min.js'; ?>"></script>
@@ -86,5 +105,17 @@
 	    }); 
 		}); 
 	</script>
+	<script type="text/javascript">
+		$(".toggle-password").click(function() {
+
+		  $(this).toggleClass("ion-eye ion-eye-disabled");
+		  var input = $($(this).attr("toggle"));
+		  if (input.attr("type") == "password") {
+		    input.attr("type", "text");
+		  } else {
+		    input.attr("type", "password");
+		  }
+		});
+  </script>
 </body>
 </html>

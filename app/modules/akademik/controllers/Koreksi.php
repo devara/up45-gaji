@@ -17,7 +17,7 @@ class Koreksi extends CI_Controller
 	{
 		$data['ujian'] = $this->my_lib->get_data('data_ujian');
 		$data['periode'] = $this->my_lib->get_data('master_periode');
-		$data['pegawai'] = $this->my_lib->get_data('data_pegawai');
+		$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('kode_status_pegawai'=>'MUL'));
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('datakoreksi/koreksi-js',$data,true);
 		$data['aktifTab'] = 'data';

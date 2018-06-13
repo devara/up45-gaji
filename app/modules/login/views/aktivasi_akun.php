@@ -273,7 +273,7 @@
 		</style>
 	</head>
 	<body>
-		<span class="preheader">Token Aktivasi hanya berlaku 24 jam.</span>
+		<span class="preheader">Token Aktivasi Akun hanya berlaku 24 jam.</span>
 		<table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="center">
@@ -281,7 +281,7 @@
 						<tr>
 							<td class="email-masthead">
 								<a href="https://gaji.up45.ac.id" class="email-masthead_logo align-center">
-									<img src="https://qoxq.stripocdn.email/content/guids/CABINET_57fc396e01acabfd66d70f0eb945dc03/images/68601526627979315.png" alt="Smart home logo" title="Smart home logo" width="118" style="display:inline-block;border:0;outline:none;text-decoration:none;">
+									<img src="https://gaji.up45.ac.id/logo.png" alt="Logo UP45" title="Logo UP45" width="118" style="display:inline-block;border:0;outline:none;text-decoration:none;">
 								</a>
 							</td>
 						</tr>

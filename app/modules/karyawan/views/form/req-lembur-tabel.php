@@ -66,7 +66,7 @@
 					<?php endforeach; 
 					else: ?>
 						<tr>
-							<td colspan="4" align="center">Tidak ada data untuk periode ini</td>
+							<td colspan="6" align="center">Tidak ada data untuk periode ini</td>
 						</tr>
 					<?php endif; ?>
 				</tbody>

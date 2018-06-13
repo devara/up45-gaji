@@ -41,12 +41,14 @@ class Ujian extends CI_Controller
 		$this->form_validation->set_rules('tgl', 'Tanggal Ujian', 'required');
 		$this->form_validation->set_rules('tipe', 'Tipe Ujian', 'required');
 		$this->form_validation->set_rules('makul', 'Mata Kuliah', 'required');
+		$this->form_validation->set_rules('jum', 'Jumlah Mahasiswa', 'required');
 		$this->form_validation->set_rules('ket', 'Keterangan Ujian', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			$per = $this->input->post('idper');
 			$tgl = $this->input->post('tgl');
 			$tipe = $this->input->post('tipe');
 			$makul = $this->input->post('makul');
+			$jum_mhs = $this->input->post('jum');
 			$ket = $this->input->post('ket');
 
 			$val = array(
@@ -54,6 +56,7 @@ class Ujian extends CI_Controller
 				'tanggal' => $tgl,
 				'tipe'	=> $tipe,
 				'kode_matakuliah' => $makul,
+				'jumlah_mahasiswa' => $jum_mhs,
 				'keterangan' => $ket
 			);
 			$insert = $this->my_lib->add_row('data_ujian',$val);
