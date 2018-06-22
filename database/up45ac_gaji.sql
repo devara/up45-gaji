@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 19 Mei 2018 pada 11.55
--- Versi Server: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Host: localhost
+-- Generation Time: Jun 22, 2018 at 09:30 AM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `absensi_data`
+-- Table structure for table `absensi_data`
 --
 
 CREATE TABLE `absensi_data` (
@@ -42,11 +42,11 @@ CREATE TABLE `absensi_data` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `absensi_data`
+-- Dumping data for table `absensi_data`
 --
 
 INSERT INTO `absensi_data` (`id_absensi`, `id_periode`, `tanggal`, `hari`, `nip`, `datang`, `pulang`, `lama_kerja`, `telat`, `keterangan`) VALUES
-(1, 3, '2018-02-21', 'Rabu', '210316/UP45/0223', '08:17:25', '16:07:44', '06:50:19', 1, 'Hadir'),
+(1, 3, '2018-02-21', 'Rabu', '210316/UP45/0223', '08:10:00', '16:20:00', '07:10:00', 0, 'Hadir'),
 (2, 3, '2018-02-22', 'Kamis', '210316/UP45/0223', '10:32:45', '18:53:28', '07:20:43', 1, 'Hadir'),
 (3, 3, '2018-02-23', 'Jumat', '210316/UP45/0223', '08:18:32', '13:50:30', '04:31:58', 1, 'Hadir'),
 (4, 3, '2018-02-24', 'Sabtu', '210316/UP45/0223', '08:23:19', '13:00:00', '04:36:41', 1, 'Hadir'),
@@ -146,7 +146,7 @@ INSERT INTO `absensi_data` (`id_absensi`, `id_periode`, `tanggal`, `hari`, `nip`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `absensi_rekap`
+-- Table structure for table `absensi_rekap`
 --
 
 CREATE TABLE `absensi_rekap` (
@@ -159,11 +159,11 @@ CREATE TABLE `absensi_rekap` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `absensi_rekap`
+-- Dumping data for table `absensi_rekap`
 --
 
 INSERT INTO `absensi_rekap` (`id_rekap`, `id_periode`, `nip`, `total_jam`, `rerata`, `tepat_waktu`) VALUES
-(1, 3, '210316/UP45/0223', '140:06:55', '35:01:43', 14),
+(1, 3, '210316/UP45/0223', '140:26:36', '35:06:39', 15),
 (2, 3, '160315/UP45/0211', '160:19:36', '40:04:54', 20),
 (3, 3, '010916/UP45/0207', '160:00:00', '40:00:00', 24),
 (4, 3, '200817UP450207', '154:22:49', '38:35:42', 22);
@@ -171,7 +171,56 @@ INSERT INTO `absensi_rekap` (`id_rekap`, `id_periode`, `nip`, `total_jam`, `rera
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_insentif_op`
+-- Table structure for table `data_checklist_laporan_bulanan`
+--
+
+CREATE TABLE `data_checklist_laporan_bulanan` (
+  `id_cb_lb` int(11) NOT NULL,
+  `id_periode` int(4) NOT NULL,
+  `nip` varchar(30) NOT NULL,
+  `tgl_buat_checklist` datetime NOT NULL,
+  `tgl_buat_laporan_bulanan` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `data_checklist_laporan_bulanan`
+--
+
+INSERT INTO `data_checklist_laporan_bulanan` (`id_cb_lb`, `id_periode`, `nip`, `tgl_buat_checklist`, `tgl_buat_laporan_bulanan`) VALUES
+(1, 3, '040917/UP45/0107', '2018-06-11 19:50:16', '2018-06-11 23:54:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_checklist_laporan_bulanan_detail`
+--
+
+CREATE TABLE `data_checklist_laporan_bulanan_detail` (
+  `id_data_detail` int(11) NOT NULL,
+  `id_cb_lb` int(11) NOT NULL,
+  `kegiatan` varchar(200) NOT NULL,
+  `cb_tgl_mulai` date NOT NULL,
+  `cb_tgl_selesai` date NOT NULL,
+  `lb_tgl_mulai` date DEFAULT NULL,
+  `lb_tgl_selesai` date DEFAULT NULL,
+  `keterangan` varchar(200) DEFAULT NULL,
+  `cb_lb_lengkap` enum('ya','tidak') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `data_checklist_laporan_bulanan_detail`
+--
+
+INSERT INTO `data_checklist_laporan_bulanan_detail` (`id_data_detail`, `id_cb_lb`, `kegiatan`, `cb_tgl_mulai`, `cb_tgl_selesai`, `lb_tgl_mulai`, `lb_tgl_selesai`, `keterangan`, `cb_lb_lengkap`) VALUES
+(1, 1, 'Perbaikan Web Utama', '2018-02-21', '2018-02-27', '2018-02-21', '2018-02-28', 'terlaksana', 'ya'),
+(2, 1, 'Perbaikan PMB ONLINE', '2018-03-01', '2018-03-10', '2018-03-01', '2018-03-17', 'terlaksana walaupun lama', 'ya'),
+(3, 1, 'Membuat dokumentasi web utama', '2018-03-11', '2018-03-17', '2018-03-14', '2018-03-19', 'belum selesai', 'ya'),
+(4, 1, 'Membuat dokumentasi pmb online', '2018-03-18', '2018-03-20', '2018-03-15', '2018-03-20', 'belum selesai', 'ya');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_insentif_op`
 --
 
 CREATE TABLE `data_insentif_op` (
@@ -188,7 +237,7 @@ CREATE TABLE `data_insentif_op` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_lembur`
+-- Table structure for table `data_lembur`
 --
 
 CREATE TABLE `data_lembur` (
@@ -205,17 +254,18 @@ CREATE TABLE `data_lembur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `data_lembur`
+-- Dumping data for table `data_lembur`
 --
 
 INSERT INTO `data_lembur` (`id_lembur`, `id_periode`, `nip`, `tgl_lembur`, `jam_mulai`, `jam_selesai`, `durasi`, `total`, `keterangan`, `acc`) VALUES
 (1, 3, '211115/UP45/0105', '2018-03-06', '19:30:00', '21:00:00', '01:30:00', NULL, 'persiapan visitasi', 'ya'),
-(2, 3, '230516/UP45/0117', '2018-03-06', '19:00:00', '21:30:00', '02:30:00', NULL, 'Persiapan visitasi Hukum', 'ya');
+(2, 3, '230516/UP45/0117', '2018-03-06', '19:00:00', '21:30:00', '02:30:00', NULL, 'Persiapan visitasi Hukum', 'ya'),
+(3, 3, '040917/UP45/0107', '2018-03-05', '16:00:00', '20:30:00', '04:30:00', NULL, 'Konfigurasi VPS UP45', 'belum');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_pegawai`
+-- Table structure for table `data_pegawai`
 --
 
 CREATE TABLE `data_pegawai` (
@@ -235,181 +285,183 @@ CREATE TABLE `data_pegawai` (
   `username` varchar(20) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `token` varchar(100) DEFAULT NULL,
-  `token_expired` date DEFAULT NULL
+  `token_expired` datetime DEFAULT NULL,
+  `aktivasi_token` varchar(100) DEFAULT NULL,
+  `aktivasi_token_expired` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `data_pegawai`
+-- Dumping data for table `data_pegawai`
 --
 
-INSERT INTO `data_pegawai` (`id`, `nik`, `nidn`, `nip`, `nama`, `departemen`, `email`, `jenis_kelamin`, `kode_status_pegawai`, `kode_jam_kerja`, `kode_unit`, `kode_jabatan`, `kode_prodi`, `username`, `password`, `token`, `token_expired`) VALUES
-(1, NULL, NULL, '210316/UP45/0223', 'Shofia Kurnia Putri, S.Psi', 'SDM', 'shofiakurnia@up45.ac.id', NULL, 'KAR', NULL, 'SDM', 'STAFF_SDM', NULL, 'shofia', '9031cabc1d1b73817d432a439698b145', NULL, NULL),
-(2, NULL, NULL, '160315/UP45/0211', 'Hartanti Widayani, S.Pd', 'SDM', NULL, NULL, 'KAR', NULL, 'SDM', 'KA_SDM_UMUM', NULL, 'hartanti', '11ea259b9c19ed5a461d45342f763f6c', NULL, NULL),
-(3, NULL, NULL, '111214/UP45/0213', 'Siti Aminatuzzuhriyah, SP', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'STAFF_AKD', NULL, 'amin', '30ae43ad1aa0a416699051b73a3dfcf6', NULL, NULL),
-(4, NULL, NULL, '010916/UP45/0207', 'Anggie Sitta Pradhanti, S.Si', 'SDM', NULL, NULL, 'KAR', NULL, 'SDM', 'STAFF_SDM', NULL, 'anggie', '959a07de79b44c9e77150e9b8dc92fbc', NULL, NULL),
-(5, NULL, NULL, '240815/UP45/0127', 'Totok Kunto Wibisono', 'Umum', NULL, NULL, NULL, NULL, 'UMUM', 'STAFF_UMUM', NULL, 'totok', '6f0193cec743d209f04845041b96e322', NULL, NULL),
-(6, NULL, NULL, '020113/UP45/0124', 'Beni Asrul Felani', 'Umum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, NULL, NULL, '030409/UP45/0104', 'Ari Triyono', 'Umum', NULL, NULL, 'KAR', NULL, 'UMUM', 'STAFF_UMUM', NULL, NULL, NULL, NULL, NULL),
-(8, NULL, NULL, '011116/UP45/0209', 'Diana Putri Wayani, A.Md', 'Umum', NULL, NULL, 'KAR', NULL, 'UMUM', 'STAFF_UMUM', NULL, 'diana', '3a23bb515e06d0e944ff916e79a7775c', NULL, NULL),
-(9, NULL, NULL, '030215/UP45/0212', 'Purna Wijayanti, S.Pd', 'Sekretariat & Legal', NULL, NULL, NULL, NULL, 'KSK', 'STAFF_KSK', NULL, 'purna', '1d0f5927bc02da2d0bfa7b9d1d3c1ea4', NULL, NULL),
-(10, NULL, NULL, '180416/UP45/0201', 'Ariesta Dewi Nilam Sari, S.I.Kom', 'Sekretariat & Legal', NULL, NULL, NULL, NULL, 'KSK', 'KA_KSK', NULL, 'ariesta', '3c11db032f76dd763ef8500fbd2e0f1f', NULL, NULL),
-(11, NULL, NULL, '120815/UP45/0220', 'Miftahul Jannah, SH', 'Sekretariat & Legal', NULL, NULL, NULL, NULL, 'KSK', 'STAFF_KSK', NULL, 'miftahul', '6e2f67896edc187c3064129f7ac0442e', NULL, NULL),
-(12, NULL, NULL, '200216/UP45/0116', 'Aryo Giri Nugroho', 'Sekretariat & Legal', NULL, NULL, 'KAR', NULL, NULL, NULL, NULL, 'aryo', '2ec87599180c059aa5444292cd98c5ff', NULL, NULL),
-(13, NULL, NULL, '030215/UP45/0220', 'Lisa Rian Pratiwi, SIP', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'KA_AKD_KMW', NULL, 'lisa', 'ed14f4a4d7ecddb6dae8e54900300b1e', NULL, NULL),
-(14, NULL, NULL, '080914/UP45/0104', 'Iqbalul Fadhillah, ST', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'STAFF_AKD', NULL, 'iqbalul', 'f863e8f28f8a4df5c00502ef48621850', NULL, NULL),
-(15, NULL, NULL, '290317/UP45/0203', 'Nita Rohmawati, M.Pd', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'STAFF_AKD', NULL, NULL, NULL, NULL, NULL),
-(16, NULL, NULL, '080515/UP45/0223', 'Octavia Arlina Sahara, Sos.I', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'STAFF_AKD', NULL, 'octavia', '89a169d5b06eac14607cdc244427d66f', NULL, NULL),
-(17, NULL, NULL, '140815/UP45/0123', 'Alfandy Raynal Saputra', 'Akademik', NULL, NULL, 'KAR', NULL, 'AKD', 'STAFF_AKD', NULL, 'alfandy', 'c592aa40fc3f9534db4de30a0b2ce89c', NULL, NULL),
-(18, NULL, NULL, '200817UP450207', 'Linawati, S.Sos', 'SDM', NULL, NULL, 'KAR', NULL, 'SDM', 'STAFF_SDM', NULL, 'linawati', 'bed51855b22b73a3b83aa98d6547efb6', NULL, NULL),
-(19, NULL, NULL, '101013/UP45/0102', 'Tri Susanto, S.Pd.Si', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'STAFF_AKD', NULL, 'tri', 'd2cfe69af2d64330670e08efb2c86df7', NULL, NULL),
-(20, NULL, NULL, '150803/UP45/0117', 'Surono', 'Akademik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(21, NULL, NULL, '140915/UP45/0216', 'Emi Eko Sulistyowati, SE', 'Keuangan', NULL, NULL, 'KAR', NULL, 'KEU', 'KA_KEU', NULL, 'emi', '12b41c761b41698d39ef68fdd9429578', NULL, NULL),
-(22, NULL, NULL, '241115/UP45/0105', 'Arif Kurniawan, S.Si', 'Keuangan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(23, NULL, NULL, '280314/UP45/0224', 'Nurul Fatimah Juliani, S.Pd', 'Keuangan', NULL, NULL, 'KAR', NULL, 'KEU', 'STAFF_KEU', NULL, 'nurul', '6968a2c57c3a4fee8fadc79a80355e4d', NULL, NULL),
-(24, NULL, NULL, '051216/UP45/0225', 'Hajar Melinda Triani, SE', 'Keuangan', NULL, NULL, 'KAR', NULL, 'KEU', 'STAFF_KEU', NULL, 'hajar', '9ccc598773c3b627675dcf47d1b16c5b', NULL, NULL),
-(25, NULL, NULL, '010317/UP45/0129', 'Muchamad Reza Maulana, SE.I', 'Keuangan', NULL, NULL, 'KAR', NULL, 'KEU', 'STAFF_KEU', NULL, 'muchamad', '4127fef01f93dd7965ac5e7da4fb69d5', NULL, NULL),
-(26, NULL, NULL, '230516/UP45/0117', 'Alex Kamal Hasan, SP', 'Umum', NULL, NULL, 'KAR', NULL, 'UMUM', 'KA_UMUM', NULL, 'alex', '534b44a19bf18d20b71ecc4eb77c572f', NULL, NULL),
-(27, NULL, NULL, '281111/UP45/0106', 'Ari Susetyo', 'Umum', NULL, NULL, 'KAR', NULL, 'UMUM', 'STAFF_UMUM', NULL, 'ari', 'fc292bd7df071858c2d0f955545673c1', NULL, NULL),
-(28, NULL, NULL, '101208/UP45/0125', 'Arif Setyo Wahyudi, SE', 'Umum', NULL, NULL, NULL, NULL, 'UMUM', 'STAFF_UMUM', NULL, NULL, NULL, NULL, NULL),
-(29, NULL, NULL, '220809/UP45/0114', 'Sarpan (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL),
-(30, NULL, NULL, '2.25/K.Y/UP.45', 'Suwadi', 'Satpam', NULL, NULL, NULL, NULL, 'SPM', 'SATPAM', NULL, NULL, NULL, NULL, NULL),
-(31, NULL, NULL, '250809/UP45/0113', 'Trianto (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL),
-(32, NULL, NULL, '180914/UP45/0103', 'Rudi Hartono', 'Satpam', NULL, NULL, NULL, NULL, 'SPM', 'SATPAM', NULL, NULL, NULL, NULL, NULL),
-(33, NULL, NULL, '250909/UP45/0117', 'Suyatno (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL),
-(34, NULL, NULL, '121115/UP45/0131', 'Purwanto Nugroho (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL),
-(35, NULL, NULL, '190716/UP45/0124', 'Tumiran (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL),
-(36, NULL, NULL, '190316/UP45/0126', 'Suwandi (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL),
-(37, NULL, NULL, '031115/UP45/0116', 'Mariyanto', 'Satpam', NULL, NULL, NULL, NULL, 'SPM', 'SATPAM', NULL, NULL, NULL, NULL, NULL),
-(38, NULL, NULL, '211115/UP45/0105', 'Agus Priyono, S.Psi', 'Umum', NULL, NULL, 'KAR', NULL, 'UMUM', 'STAFF_UMUM', NULL, 'agus', 'fdf169558242ee051cca1479770ebac3', NULL, NULL),
-(39, NULL, NULL, '200616/UP45/0121', 'Moh. Ali (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL),
-(40, NULL, NULL, '291116/UP45/0109', 'Solhani, S.Pd.I (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL),
-(41, NULL, NULL, '011016/UP45/0110', 'Fauzan Natsir., S.Kom', 'UPT Labkom', NULL, NULL, 'KAR', NULL, 'LABKOM', 'STAFF_LABKOM', NULL, 'fauzan', 'eacaf53cb2b533a68baa765faedf7e59', NULL, NULL),
-(42, NULL, NULL, '201013/UP45/0128', 'Muhammad Usman', 'UPT Labkom', NULL, NULL, 'KAR', NULL, 'LABKOM', 'STAFF_LABKOM', NULL, 'muhammad', 'a7777999e260290f68a1455cacdabf6c', NULL, NULL),
-(43, NULL, NULL, '080914/UP45/0118', 'Asep Nurjaman', 'UPT Labkom', NULL, NULL, 'KAR', NULL, 'LABKOM', 'STAFF_LABKOM', NULL, 'asep', 'dc855efb0dc7476760afaa1b281665f1', NULL, NULL),
-(44, NULL, NULL, '010416/UP45/0228', 'Sandi Danar Cynthia Sari, S.Pd., M.Pd', 'KPM', NULL, NULL, NULL, NULL, 'KPM', 'SEK_KPM', NULL, 'sandi', 'ac9b4e0b6a21758534db2a6324d34a54', NULL, NULL),
-(45, NULL, NULL, '211216/UP45/0101', 'Dadang Heksaputra, S.Kom,. M.Kom', 'UPT Labkom', NULL, NULL, NULL, NULL, 'LABKOM', 'STAFF_LABKOM', NULL, NULL, NULL, NULL, NULL),
-(46, NULL, NULL, '060217/UP45/0222', 'Pipit Febriana Dewi, S.Kom', 'UPT Labkom', NULL, NULL, 'KAR', NULL, 'LABKOM', 'STAFF_LABKOM', NULL, 'pipit', '5c40ee0ae05c339a9f8502d29a49541d', NULL, NULL),
-(47, NULL, NULL, '160217/UP45/0226', 'Dhina Puspitasari Wijaya, S.Kom., M.Kom', 'UPT Labkom', NULL, NULL, NULL, NULL, 'LABKOM', 'STAFF_LABKOM', NULL, NULL, NULL, NULL, NULL),
-(48, NULL, NULL, '280814/UP45/0103', 'Asmoro Bangun, S.Pd', 'PDE', NULL, NULL, 'KAR', NULL, 'PDE', 'STAFF_PDE', NULL, 'asmoro', '38ec8bdeac7aea7478f90a2abee0db21', NULL, NULL),
-(49, NULL, NULL, '290415/UP45/0105', 'Windi Novindra Pradika, S.Psi', 'PDE', NULL, NULL, 'KAR', NULL, 'PDE', 'STAFF_PDE', NULL, 'windi', '4e3ccde7dc705b1abcce17019905279b', NULL, NULL),
-(50, NULL, NULL, '1.144/D.Y/UP.45', 'Rahilla Apria Fatma, S.Kom., MT', 'PDE', NULL, NULL, 'KAR', NULL, 'PDE', 'KA_PDE', NULL, 'rahilla', 'bd38a1adb57de36cd2b82383d3507ef4', NULL, NULL),
-(51, NULL, NULL, '300112/UP45/0205', 'Umi Haryani, SE', 'Rektorat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'umi', 'e84f942d7f93ddc14d24b930d87e3da7', NULL, NULL),
-(52, NULL, NULL, '101016/UP45/0224', 'Dwi Purbowati, M.Pd', 'Rektorat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(53, NULL, NULL, '1.118/D.Y/UP.45', 'Syamsul Ma\'arif, ST., M.Eng', 'Wakil Rektor', NULL, NULL, NULL, NULL, 'WR1', 'WR1', NULL, 'syamsul', '564d5ea829ce8977fb848c0a654c7888', NULL, NULL),
-(54, NULL, NULL, '271014/UP45/0108', 'Wahyu Suroatmojo, S.IP', 'Wakil Rektor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(55, NULL, NULL, '190515/UP45/0206', 'Sulfi Amalia, S.H', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sulfi', 'bc1f2e97cdaa7b3e55d030d08f6647ec', NULL, NULL),
-(56, NULL, NULL, '021115/UP45/0120', 'Faizal Aco., M.IP', 'BPK & KUI', NULL, NULL, 'MUL', NULL, 'AS_WR3', 'AS_WR3_2', NULL, 'faizal', '22bf59bcca5b77263b4021cf4695288d', NULL, NULL),
-(57, NULL, NULL, '2.57/K.Y/UP.45', 'Narohadi, S.Pd', 'BPK & KUI', NULL, NULL, NULL, NULL, 'PMB', 'STAFF_PMB', NULL, 'narohadi', 'f1d74676ed103b2e2e6cd05dc4f971c2', NULL, NULL),
-(58, NULL, NULL, '011116/UP45/0293', 'Dewi Kapliani, S.Psi., M.Psi', 'BPK & KUI', NULL, NULL, 'MUL', NULL, 'PMB', 'STAFF_PMB', NULL, 'kapliani', '3b208bdc77c2eb3db985d3a180674dd7', NULL, NULL),
-(59, NULL, NULL, '011116/UP45/0204', 'Ristanti Wengku Prasongko, S.Psi', 'BPK & KUI', NULL, NULL, 'KAR', NULL, 'PMB', 'STAFF_PMB', NULL, 'ristanti', '6996215e47f8e910064f323c4c0f2a0a', NULL, NULL),
-(60, NULL, NULL, '010316/UP45/0213', 'Febriyanti Angelia Ginting, S.Pd., M.Sc', 'BPK & KUI', NULL, NULL, 'MUL', NULL, 'MARCOM', 'KA_MARKOM', NULL, 'febriyanti', '8d14db07b26000cbc8bb943aa4af5aa5', NULL, NULL),
-(61, NULL, NULL, '160315/UP45/0220', 'Doortje Gres Songjanan, S.Pd', 'BPK & KUI', NULL, NULL, 'KAR', NULL, 'MARCOM', 'STAFF_MARKOM', NULL, 'doortje', 'ed2759b065d7e57f81be756c5dd0ecd8', NULL, NULL),
-(62, NULL, NULL, '100214/UP45/0116', 'Shofi Malchani', 'BPK & KUI', NULL, NULL, 'KAR', NULL, 'MARCOM', 'STAFF_MARKOM', NULL, 'shofi', '036c6c6797229d650773282b2ce23b9f', NULL, NULL),
-(63, NULL, NULL, '111113/UP45/0102', 'Fitroh Dwi Nugroho, S.Pd.Si', 'BPK & KUI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(64, NULL, NULL, '211216/UP45/0225', 'Yusrotun Dwi Asrini, S.Pd', 'BPK & KUI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'yusrotun', '2474b7cf02255ed21a098faf5bed265c', NULL, NULL),
-(65, NULL, NULL, '080915/UP45/0102', 'Anjar Pamuji, SH.I', 'BPK & KUI', NULL, NULL, 'KAR', NULL, NULL, NULL, NULL, 'anjar', '1010665f6557f9fff40c82043a150bfd', NULL, NULL),
-(66, NULL, NULL, '080915/UP45/0122', 'Aji Prasetyo, S.Pd', 'BPK & KUI', NULL, NULL, 'KAR', NULL, 'PMB', 'STAFF_PMB', NULL, 'aji', '8d045450ae16dc81213a75b725ee2760', NULL, NULL),
-(67, NULL, NULL, '090217/UP45/0202', 'Yeni Rahmawati, M.Pd', 'UPT Perpustakaan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(68, NULL, NULL, '2.12/K.Y/UP.45', 'Sunarti', 'UPT Perpustakaan', NULL, NULL, NULL, NULL, 'PERPUS', 'STAFF_PERPUS', NULL, NULL, NULL, NULL, NULL),
-(69, NULL, NULL, '2.67/K.Y/UP.45', 'Tri Sula', 'UPT Perpustakaan', NULL, NULL, NULL, NULL, 'PERPUS', 'STAFF_PERPUS', NULL, NULL, NULL, NULL, NULL),
-(70, NULL, NULL, '2.58/K.Y/UP.45', 'Rustianingsih, S.IP', 'UPT Perpustakaan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(71, NULL, NULL, '260716/UP45/0127', 'Randi Adzin Murdiantoro., S.Si., M.Sc', 'LPPM', NULL, NULL, NULL, NULL, 'LPPM', 'STAFF_LPPM', NULL, NULL, NULL, NULL, NULL),
-(72, NULL, NULL, '010202/UP45/0216', 'Dwi Indarningsih, SH', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(73, NULL, NULL, '080515/UP45/0203', 'Ratih Wulansari, S.Pd', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ratih', 'a5bd72a3d2c4d1686415f93a46fc7a0a', NULL, NULL),
-(74, NULL, NULL, '240715/UP45/0225', 'Desi Nur Haryati, SE', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(75, NULL, NULL, '080915/UP45/0127', 'Ubaidillah, S.Pd.Si', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ubaidillah', '7e86187523146a12601e366701425d76', NULL, NULL),
-(76, NULL, NULL, '051216/UP45/0228', 'Rini Astuti, ST', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(77, NULL, NULL, '021113/UP45/0226', 'Wulan Susanti, S.Pd.', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'wulan', 'aae79912250d18756900f742270de7e1', NULL, NULL),
-(78, NULL, NULL, '101017/UP45/0225', 'Yanuarti Pradikta, S.Pd', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'yanuarti', '109d861bf4a0e20aee5e5e5ef43a6027', NULL, NULL),
-(79, NULL, NULL, '160315/UP45/0209', 'Yeni Purwaningsih, SIP', 'BPK & KUI', NULL, NULL, NULL, NULL, 'PERPUS', 'KA_PERPUS', NULL, 'yeni', '0fc37dce7e27a505363a2586f4483b92', NULL, NULL),
-(80, NULL, NULL, '010916/UP45/0224', 'Deni Santi Pertiwi, S.Psi', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'deni', '43f41d127a81c54d4c8f5f93daeb7118', NULL, NULL),
-(81, NULL, NULL, '310717/UP45/0108', 'Ir. Mat Sahudi', 'EMGI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(82, NULL, NULL, '260917/UP45/0205', 'Nurul Pikroh, S.I.Kom', 'Rektorat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(83, NULL, NULL, '010316/UP45/0209', 'Amin Nurrohmah, S.Pd., M.Sc', 'SCD', NULL, NULL, NULL, NULL, 'SCD', 'KA_SCD', NULL, NULL, NULL, NULL, NULL),
-(84, NULL, NULL, '060715/UP45/0126', 'R. Pandji Cepi Lesmana, SE', 'SCD', NULL, NULL, 'KAR', NULL, 'SCD', 'STAFF_SCD', NULL, 'cepi', '4adece3a2be11f79e2bc43d69561487b', NULL, NULL),
-(85, NULL, NULL, '091013/UP45/0113', 'Thoriq Aziz Habibi. S.E', 'SCD', NULL, NULL, 'KAR', NULL, 'SCD', 'STAFF_SCD', NULL, 'thoriq', 'c0176f364b73516947e8e45b8b3c9e97', NULL, NULL),
-(86, NULL, NULL, '261112/UP45/0221', 'Niken Widyastuti, SE.,MM.', 'CDC', NULL, NULL, NULL, NULL, 'CDC', 'KA_CDC', NULL, 'niken', '08bdba24f01f56d1404fb0a0a66f144b', NULL, NULL),
-(87, NULL, NULL, '300117/UP45/0209', 'Famella Jamal, S.I.Kom', 'CDC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(88, NULL, NULL, '010316/UP45/0129', 'Janser Aldomoro, S.R., S.Hut., M.Sc', 'Akreditasi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'janser', '320bc4fcd65c415ca680995fbfca4861', NULL, NULL),
-(89, NULL, NULL, '241115/UP45/0209', 'Nurmalasari., S.T., M.T', 'Akreditasi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'nurmalasari.,', 'fdc227d1fd36c12404a8e0ee3cfcb8f7', NULL, NULL),
-(90, NULL, NULL, '010317/UP45/0116', 'Joko Sanyoto, S.T', 'PSEL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(91, NULL, NULL, '240717/UP45/0112', 'Wahyu Fajar Winata, S.Si., M.Eng', 'PSEL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(92, NULL, NULL, '110817/UP45/0123', 'Ruben Rocky Montana Salomo', 'Wakil Rektor', NULL, NULL, NULL, NULL, 'KMW', 'KA_KMW', NULL, 'ruben', '32252792b9dccf239f5a5bd8e778dbc2', NULL, NULL),
-(93, NULL, NULL, '020914/UP45/0121', 'Daris Kusumawangsa, S.Psi', 'Kemawa', NULL, NULL, NULL, NULL, 'KMW', 'STAFF_KMW', NULL, 'daris', '8c7909c1c3a51bcfbcef322fa8b25b26', NULL, NULL),
-(94, NULL, NULL, '110817/UP45/0215', 'Ruth Yuni Trie Imanti', 'Wakil Rektor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ruth', '81ea66d57d6b827ef722f4f20f8a669c', NULL, NULL),
-(95, NULL, NULL, '1.134/D.Y.UP.45', 'Dyah Rosiana Puspitasari', 'Fak Hukum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'dyah', 'd9ec7a2bcb5f792f101501f700977ec7', NULL, NULL),
-(96, NULL, NULL, '195409131983032001', 'Dra. Siti Noor Hidayati, M.M', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(97, NULL, NULL, '1.32/D.Y/UP.45', 'Drs. Bambang Sugeng Dwiyanto, M.M', 'KPM', NULL, NULL, NULL, NULL, 'KPM', 'KA_KPM', NULL, NULL, NULL, NULL, NULL),
-(98, NULL, NULL, '1.55/D.Y/UP.45', 'Drs. Jemadi, M.M', 'LPPM', NULL, NULL, NULL, NULL, 'LPPM', 'KA_LPPM', NULL, NULL, NULL, NULL, NULL),
-(99, NULL, NULL, '1.35/D.Y/UP.45', 'Dra. Eny Sulistyowati, M.M', 'Fak Ekonomi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(100, NULL, NULL, '1.109/D.Y/UP.45', 'Djoko Wijono, S.E., M.M', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(101, NULL, NULL, '1.110/D.Y/UP.45', 'Andriya Risdwiyanto, S.E., M.Si', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'andriya', '88f1222d83758c1aabb2e41fbb6fdc68', NULL, NULL),
-(102, NULL, NULL, '1.133/D.Y/UP.45', 'Muhamad Ali Sukrajap, S.E., MBA', 'Wakil Rektor', NULL, NULL, NULL, NULL, 'WR3', 'WR3', NULL, NULL, NULL, NULL, NULL),
-(103, NULL, NULL, '1.46/D.Y/UP.45', 'Dwi Kuncahyo, SH., MH', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(104, NULL, NULL, '196001101987031004', 'Sukirno, SH., MH', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sukirno,', '5bf63f21f07376e98ece37f168581a57', NULL, NULL),
-(105, NULL, NULL, '1.47/D.Y/UP.45', 'Cecep Tedi Siswanto, S.H.C.N., MH', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(106, NULL, NULL, '1.111/D.Y/UP.45', 'Sobirin, SH., M.Hum', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sobirin,', '6a8a80d8aacd194f169dccd147aea492', NULL, NULL),
-(107, NULL, NULL, '1.91/SD.Y/UP.45', 'Sigit Wibowo, SH., M.Hum', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sigit', '223a0fa8f15933d622b3c7a13f186027', NULL, NULL),
-(108, NULL, NULL, '1.113/D.Y/UP.45', 'Puguh Windrawan, SH., MH', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'puguh', 'e81911174ce3bcb876d59359cfd25df0', NULL, NULL),
-(109, NULL, NULL, '1.135/D.Y.UP.45', 'Ilmal Yaqin, SH., LL.M', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(110, NULL, NULL, '1.132/D.Y.UP.45', 'Lucia Setyawahyuningtyas', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'lucia', '3ba430337eb30f5fd7569451b5dfdf32', NULL, NULL),
-(111, NULL, NULL, '1.146/D.Y/UP.46', 'Hindra Pamungkas, SH., MH', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(112, NULL, NULL, '1.24/D.Y/UP.44', 'Dra. Nining Sofiati Lestari, M.Sc', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(113, NULL, NULL, '131474315', 'Drs. Oberlin Silalahi, M.Si', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(114, NULL, NULL, '131761398', 'Drs. Teguh Budi Prasetya, M.Si', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(115, NULL, NULL, '1.121/D.Y/UP.45', 'Drs. Idham Ibty, S.IP., M.Si', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(116, NULL, NULL, '1.45/D.Y/UP.45', 'Dr. Bening Hadilinatih, M.Si', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(117, NULL, NULL, '1.126/D.Y/UP.45', 'Edward Bot, S.Fill.I', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(118, NULL, NULL, '1.160/D.Y/UP.45', 'Nurhadi, S.Pd., M.PA', 'Wakil Rektor', NULL, NULL, NULL, NULL, 'AS_WR3', 'AS_WR3', NULL, 'nurhadi,', 'aa0805c7ab5a37cdd4513bdde58d4744', NULL, NULL),
-(119, NULL, NULL, '131885875', 'Drs. Indra Wahyudi, M.Si', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(120, NULL, NULL, '1.60/D.Y/UP.45', 'Dr. Arundati Shinta, MA', 'Fak Psikologi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(121, NULL, NULL, '1.88/D.Y/UP.45', 'Dra. Muslimah Zahro Romas, M.Si', 'Fak Psikologi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(122, NULL, NULL, '1.125/D.Y/UP.45', 'Eni Rohyati, S.Psi., M.Psi', 'Fak Psikologi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'eni', 'e3d96c321f2a71cb81cd7d5f05f1a8d7', NULL, NULL),
-(123, NULL, NULL, '1.127/D.Y/UP.45', 'Dewi Handayani H., S.Psi., M.Psi', 'Wakil Rektor', NULL, NULL, NULL, NULL, 'WR2', 'WR2', NULL, NULL, NULL, NULL, NULL),
-(124, NULL, NULL, '1.137/D.Y/UP.45', 'FX. Wahyu Widiantoro', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(125, NULL, NULL, '131672537', 'Ir. R. Soelarso Pani, MT', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(126, NULL, NULL, '1.54/D.Y/UP.45', 'Ir. Wardoyo, MT', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(127, NULL, NULL, '1.96/D.Y/UP.45', 'Heribertus Sukarja, ST., M.Eng', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(128, NULL, NULL, '1.100/D.Y/UP.45', 'Sumpena, ST., M.Eng', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sumpena,', '22fd98520dc1a3f8f2a520d5eb73c5aa', NULL, NULL),
-(129, NULL, NULL, '1.141/D.Y/UP.45', 'Enda Apriani, ST., M.Eng', 'Wakil Rektor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'enda', 'b2cc1c88491cf099acfcfc7cc9f077ce', NULL, NULL),
-(130, NULL, NULL, '040917/UP45/0107', 'Devara Eko Katon Mahardika', 'BPK & KUI', 'devaraekokm@gmail.com', NULL, 'KAR', NULL, 'MARCOM', 'STAFF_MARKOM', NULL, 'devara', '79f899024cb4b8d0135cdaecbb10e815', NULL, NULL),
-(131, NULL, NULL, '1.162/D.Y/UP.45', 'Bledug Kusuma Prasaja Moesdradjad, ST., MT', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'bledug', '2e984543ddf3b225263bb9e4504713fb', NULL, NULL),
-(132, NULL, NULL, '1.116/D.Y/UP.45', 'Sri Haryono, ST., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(133, NULL, NULL, '1.93/D.Y/UP.45', 'Wirawan Widya Mandala, ST., MT', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'wirawan', '2f809b10d1abedbf2ec288f851b3ebbb', NULL, NULL),
-(134, NULL, NULL, '1.105/D.Y/UP.45', 'Ir. Edi Purwaka, MT', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(135, NULL, NULL, '1.117/D.Y/UP.45', 'Ir. Bambang Irjanto, MBA', 'Rektor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(136, NULL, NULL, '1.89/D.Y/UP.45', 'Sari Wulandari Hafsari, ST., M.Sc', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sari', 'a87bcf310c4fdf2a80f2f3d97f1f9424', NULL, NULL),
-(137, NULL, NULL, '1.120/D.Y/UP.45', 'M. Sigit Cahyono, ST., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(138, NULL, NULL, '1.143/D.Y/UP.45', 'Maria Ratih Puspita Liestiono, S.Si., M.Sc', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'maria', '263bce650e68ab4e23f28263760b9fa5', NULL, NULL),
-(139, NULL, NULL, '1.146/D.Y/UP.45', 'Lia Yunita, ST., M.Pd', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(140, NULL, NULL, '1.147/D.Y/UP.45', 'Anastasia Neni CP., S.Si., M.Sc', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anastasia', 'fa17f85c91125ebe136de0a5fdd47951', NULL, NULL),
-(141, NULL, NULL, '1.148/D.Y/UP.45', 'Syaiful Mansyur, ST., M.Sc', 'Akreditasi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(142, NULL, NULL, '1.149/D.Y/UP.45', 'Andri Azis Putra, Lc., M.Phil', 'PSEL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(143, NULL, NULL, '1.151/D.Y/UP.45', 'Rena Juwita Sari, S.Pd., M.Sc', 'BPK & KUI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'rena', 'a3b332d4506b767c216acba667d08434', NULL, NULL),
-(144, NULL, NULL, '1.155/D.Y/UP.45', 'Aisyah Indah Irmaya, ST., MT', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(145, NULL, NULL, '1.156/D.Y/UP.45', 'Ir. Listriyanto, MT', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(146, NULL, NULL, '1.157/D.Y/UP.45', 'Habib Abdillah Nurusman, ST., M.Eng., M.Sc', 'BAU', NULL, NULL, NULL, NULL, 'LABKOM', 'KA_LABKOM', NULL, 'habib', '1391921ec73a2f5dff54e075bbda7487', NULL, NULL),
-(147, NULL, NULL, '1.158/D.Y/UP.45', 'Muhammad Noviansyah Aridito, S.Pd., M.Sc', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(148, NULL, NULL, '1.159/D.Y/UP.45', 'Heni Dwi Kurniasari, ST., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'heni', 'cd07a63af5f14ac0d51b5bbbf6e93ae9', NULL, NULL),
-(149, NULL, NULL, '1.136/D.Y/UP.45', 'Wira Widyawidura, S.Si., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'wira', '6215f4770ee800ad5402bc02be783c26', NULL, NULL),
-(150, NULL, NULL, '1.150/D.Y/UP.45', 'Trisno Fallo, S.Hut., M.Sc', 'BPK & KUI', NULL, NULL, 'MUL', NULL, 'PMB', 'KA_PMB', NULL, 'trisno', 'fe1d8a9f01936c33598c2fbe7bc6c1ea', NULL, NULL),
-(151, NULL, NULL, '1.43/D.Y/UP.45', 'Drs. Totok Danangdjojo, MM', 'Fak Ekonomi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(152, NULL, NULL, '271117/UP45/0114', 'Sylvert Prian Tahalea, M.Cs', 'UPT Labkom', NULL, NULL, NULL, NULL, 'DM', 'STAFF_DM', NULL, 'sylvert', 'bb8417c65526fe18757519303ee85527', NULL, NULL),
-(153, NULL, NULL, '271117/UP45/0109', 'Eko Dwi Nugroho, S.Kom., M.Cs', 'UPT Labkom', NULL, NULL, NULL, NULL, 'DM', 'STAFF_DM', NULL, NULL, NULL, NULL, NULL),
-(154, NULL, NULL, '141217/UP45/0225', 'Desi Kusrini, S.T., M.T', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(155, NULL, NULL, '061217/UP45/0223', 'Rr. Putri Ana Nurani, S.S., M.M', 'BPK & KUI', NULL, NULL, NULL, NULL, 'KUI', 'KA_KUI', NULL, NULL, NULL, NULL, NULL),
-(156, NULL, NULL, '010715/UP45/0116', 'Syamsudin, MA', 'Wakil Rektor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(157, NULL, NULL, '181217/UP45/0102', 'Wahyu Edifikar, S.T., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(158, NULL, NULL, '040118/UP45/0105', 'Bramasto Cinde Adam, ST, M.Sc', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'bramasto', '9090297108c48a09fcc3deca39de44b5', NULL, NULL),
-(159, NULL, NULL, '310118/UP45/0211', 'Priskila Damaris Lokollo, S.Si., M.Cs', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'priskila', 'fa43d72ae115dae0ef71221c2ff458c5', NULL, NULL),
-(160, NULL, NULL, '060218/UP45/0211', 'Ayu Candra Dewi, S.Kom., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, 'PMB', 'STAFF_PMB', NULL, 'ayu', '29c65f781a1068a41f735e1b092546de', NULL, NULL),
-(161, NULL, NULL, '120218/UP45/0204', 'Dinar Lingga Damayanti, SH., MH', 'Fak Hukum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'dinar', '13d2c27d75f43e084f96904768e10fee', NULL, NULL),
-(162, NULL, NULL, '090318/UP45/0224', 'Mukti Cahyani, SH., MH', 'Fak Hukum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mukti', '9870707091e577de88930ce558347125', NULL, NULL);
+INSERT INTO `data_pegawai` (`id`, `nik`, `nidn`, `nip`, `nama`, `departemen`, `email`, `jenis_kelamin`, `kode_status_pegawai`, `kode_jam_kerja`, `kode_unit`, `kode_jabatan`, `kode_prodi`, `username`, `password`, `token`, `token_expired`, `aktivasi_token`, `aktivasi_token_expired`) VALUES
+(1, NULL, NULL, '210316/UP45/0223', 'Shofia Kurnia Putri, S.Psi', 'SDM', 'shofiakurnia@up45.ac.id', NULL, 'KAR', NULL, 'SDM', 'STAFF_SDM', NULL, 'shofia', '9031cabc1d1b73817d432a439698b145', NULL, NULL, NULL, NULL),
+(2, NULL, NULL, '160315/UP45/0211', 'Hartanti Widayani, S.Pd', 'SDM', NULL, NULL, 'KAR', NULL, 'SDM', 'KA_SDM_UMUM', NULL, 'hartanti', '11ea259b9c19ed5a461d45342f763f6c', NULL, NULL, NULL, NULL),
+(3, NULL, NULL, '111214/UP45/0213', 'Siti Aminatuzzuhriyah, SP', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'STAFF_AKD', NULL, 'amin', '30ae43ad1aa0a416699051b73a3dfcf6', NULL, NULL, NULL, NULL),
+(4, NULL, NULL, '010916/UP45/0207', 'Anggie Sitta Pradhanti, S.Si', 'SDM', NULL, NULL, 'KAR', NULL, 'SDM', 'STAFF_SDM', NULL, 'anggie', '959a07de79b44c9e77150e9b8dc92fbc', NULL, NULL, NULL, NULL),
+(5, NULL, NULL, '240815/UP45/0127', 'Totok Kunto Wibisono', 'Umum', NULL, NULL, NULL, NULL, 'UMUM', 'STAFF_UMUM', NULL, 'totok', '6f0193cec743d209f04845041b96e322', NULL, NULL, NULL, NULL),
+(6, NULL, NULL, '020113/UP45/0124', 'Beni Asrul Felani', 'Umum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, NULL, NULL, '030409/UP45/0104', 'Ari Triyono', 'Umum', NULL, NULL, 'KAR', NULL, 'UMUM', 'STAFF_UMUM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, NULL, NULL, '011116/UP45/0209', 'Diana Putri Wayani, A.Md', 'Umum', NULL, NULL, 'KAR', NULL, 'UMUM', 'STAFF_UMUM', NULL, 'diana', '3a23bb515e06d0e944ff916e79a7775c', NULL, NULL, NULL, NULL),
+(9, NULL, NULL, '030215/UP45/0212', 'Purna Wijayanti, S.Pd', 'Sekretariat & Legal', NULL, NULL, NULL, NULL, 'KSK', 'STAFF_KSK', NULL, 'purna', '1d0f5927bc02da2d0bfa7b9d1d3c1ea4', NULL, NULL, NULL, NULL),
+(10, NULL, NULL, '180416/UP45/0201', 'Ariesta Dewi Nilam Sari, S.I.Kom', 'Sekretariat & Legal', NULL, NULL, NULL, NULL, 'KSK', 'KA_KSK', NULL, 'ariesta', '3c11db032f76dd763ef8500fbd2e0f1f', NULL, NULL, NULL, NULL),
+(11, NULL, NULL, '120815/UP45/0220', 'Miftahul Jannah, SH', 'Sekretariat & Legal', NULL, NULL, NULL, NULL, 'KSK', 'STAFF_KSK', NULL, 'miftahul', '6e2f67896edc187c3064129f7ac0442e', NULL, NULL, NULL, NULL),
+(12, NULL, NULL, '200216/UP45/0116', 'Aryo Giri Nugroho', 'Sekretariat & Legal', NULL, NULL, 'KAR', NULL, NULL, NULL, NULL, 'aryo', '2ec87599180c059aa5444292cd98c5ff', NULL, NULL, NULL, NULL),
+(13, NULL, NULL, '030215/UP45/0220', 'Lisa Rian Pratiwi, SIP', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'KA_AKD_KMW', NULL, 'lisa', 'ed14f4a4d7ecddb6dae8e54900300b1e', NULL, NULL, NULL, NULL),
+(14, NULL, NULL, '080914/UP45/0104', 'Iqbalul Fadhillah, ST', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'STAFF_AKD', NULL, 'iqbalul', 'f863e8f28f8a4df5c00502ef48621850', NULL, NULL, NULL, NULL),
+(15, NULL, NULL, '290317/UP45/0203', 'Nita Rohmawati, M.Pd', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'STAFF_AKD', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(16, NULL, NULL, '080515/UP45/0223', 'Octavia Arlina Sahara, Sos.I', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'STAFF_AKD', NULL, 'octavia', '89a169d5b06eac14607cdc244427d66f', NULL, NULL, NULL, NULL),
+(17, NULL, NULL, '140815/UP45/0123', 'Alfandy Raynal Saputra', 'Akademik', NULL, NULL, 'KAR', NULL, 'AKD', 'STAFF_AKD', NULL, 'alfandy', 'c592aa40fc3f9534db4de30a0b2ce89c', NULL, NULL, NULL, NULL),
+(18, NULL, NULL, '200817UP450207', 'Linawati, S.Sos', 'SDM', NULL, NULL, 'KAR', NULL, 'SDM', 'STAFF_SDM', NULL, 'linawati', 'bed51855b22b73a3b83aa98d6547efb6', NULL, NULL, NULL, NULL),
+(19, NULL, NULL, '101013/UP45/0102', 'Tri Susanto, S.Pd.Si', 'Akademik', NULL, NULL, NULL, NULL, 'AKD', 'STAFF_AKD', NULL, 'tri', 'd2cfe69af2d64330670e08efb2c86df7', NULL, NULL, NULL, NULL),
+(20, NULL, NULL, '150803/UP45/0117', 'Surono', 'Akademik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, NULL, NULL, '140915/UP45/0216', 'Emi Eko Sulistyowati, SE', 'Keuangan', NULL, NULL, 'KAR', NULL, 'KEU', 'KA_KEU', NULL, 'emi', '12b41c761b41698d39ef68fdd9429578', NULL, NULL, NULL, NULL),
+(22, NULL, NULL, '241115/UP45/0105', 'Arif Kurniawan, S.Si', 'Keuangan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, NULL, NULL, '280314/UP45/0224', 'Nurul Fatimah Juliani, S.Pd', 'Keuangan', NULL, NULL, 'KAR', NULL, 'KEU', 'STAFF_KEU', NULL, 'nurul', '6968a2c57c3a4fee8fadc79a80355e4d', NULL, NULL, NULL, NULL),
+(24, NULL, NULL, '051216/UP45/0225', 'Hajar Melinda Triani, SE', 'Keuangan', NULL, NULL, 'KAR', NULL, 'KEU', 'STAFF_KEU', NULL, 'hajar', '9ccc598773c3b627675dcf47d1b16c5b', NULL, NULL, NULL, NULL),
+(25, NULL, NULL, '010317/UP45/0129', 'Muchamad Reza Maulana, SE.I', 'Keuangan', NULL, NULL, 'KAR', NULL, 'KEU', 'STAFF_KEU', NULL, 'muchamad', '4127fef01f93dd7965ac5e7da4fb69d5', NULL, NULL, NULL, NULL),
+(26, NULL, NULL, '230516/UP45/0117', 'Alex Kamal Hasan, SP', 'Umum', NULL, NULL, 'KAR', NULL, 'UMUM', 'KA_UMUM', NULL, 'alex', '534b44a19bf18d20b71ecc4eb77c572f', NULL, NULL, NULL, NULL),
+(27, NULL, NULL, '281111/UP45/0106', 'Ari Susetyo', 'Umum', NULL, NULL, 'KAR', NULL, 'UMUM', 'STAFF_UMUM', NULL, 'ari', 'fc292bd7df071858c2d0f955545673c1', NULL, NULL, NULL, NULL),
+(28, NULL, NULL, '101208/UP45/0125', 'Arif Setyo Wahyudi, SE', 'Umum', NULL, NULL, NULL, NULL, 'UMUM', 'STAFF_UMUM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(29, NULL, NULL, '220809/UP45/0114', 'Sarpan (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(30, NULL, NULL, '2.25/K.Y/UP.45', 'Suwadi', 'Satpam', NULL, NULL, NULL, NULL, 'SPM', 'SATPAM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, NULL, NULL, '250809/UP45/0113', 'Trianto (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(32, NULL, NULL, '180914/UP45/0103', 'Rudi Hartono', 'Satpam', NULL, NULL, NULL, NULL, 'SPM', 'SATPAM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(33, NULL, NULL, '250909/UP45/0117', 'Suyatno (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(34, NULL, NULL, '121115/UP45/0131', 'Purwanto Nugroho (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(35, NULL, NULL, '190716/UP45/0124', 'Tumiran (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(36, NULL, NULL, '190316/UP45/0126', 'Suwandi (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(37, NULL, NULL, '031115/UP45/0116', 'Mariyanto', 'Satpam', NULL, NULL, NULL, NULL, 'SPM', 'SATPAM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(38, NULL, NULL, '211115/UP45/0105', 'Agus Priyono, S.Psi', 'Umum', NULL, NULL, 'KAR', NULL, 'UMUM', 'STAFF_UMUM', NULL, 'agus', 'fdf169558242ee051cca1479770ebac3', NULL, NULL, NULL, NULL),
+(39, NULL, NULL, '200616/UP45/0121', 'Moh. Ali (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(40, NULL, NULL, '291116/UP45/0109', 'Solhani, S.Pd.I (OB)', 'Cleaning Servis', NULL, NULL, 'KAR', NULL, 'OB', 'OB', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(41, NULL, NULL, '011016/UP45/0110', 'Fauzan Natsir., S.Kom', 'UPT Labkom', NULL, NULL, 'KAR', NULL, 'LABKOM', 'STAFF_LABKOM', NULL, 'fauzan', 'eacaf53cb2b533a68baa765faedf7e59', NULL, NULL, NULL, NULL),
+(42, NULL, NULL, '201013/UP45/0128', 'Muhammad Usman', 'UPT Labkom', NULL, NULL, 'KAR', NULL, 'LABKOM', 'STAFF_LABKOM', NULL, 'muhammad', 'a7777999e260290f68a1455cacdabf6c', NULL, NULL, NULL, NULL),
+(43, NULL, NULL, '080914/UP45/0118', 'Asep Nurjaman', 'UPT Labkom', NULL, NULL, 'KAR', NULL, 'LABKOM', 'STAFF_LABKOM', NULL, 'asep', 'dc855efb0dc7476760afaa1b281665f1', NULL, NULL, NULL, NULL),
+(44, NULL, NULL, '010416/UP45/0228', 'Sandi Danar Cynthia Sari, S.Pd., M.Pd', 'KPM', NULL, NULL, NULL, NULL, 'KPM', 'SEK_KPM', NULL, 'sandi', 'ac9b4e0b6a21758534db2a6324d34a54', NULL, NULL, NULL, NULL),
+(45, NULL, NULL, '211216/UP45/0101', 'Dadang Heksaputra, S.Kom,. M.Kom', 'UPT Labkom', NULL, NULL, NULL, NULL, 'LABKOM', 'STAFF_LABKOM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(46, NULL, NULL, '060217/UP45/0222', 'Pipit Febriana Dewi, S.Kom', 'UPT Labkom', NULL, NULL, 'KAR', NULL, 'LABKOM', 'STAFF_LABKOM', NULL, 'pipit', '5c40ee0ae05c339a9f8502d29a49541d', NULL, NULL, NULL, NULL),
+(47, NULL, NULL, '160217/UP45/0226', 'Dhina Puspitasari Wijaya, S.Kom., M.Kom', 'UPT Labkom', NULL, NULL, NULL, NULL, 'LABKOM', 'STAFF_LABKOM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(48, NULL, NULL, '280814/UP45/0103', 'Asmoro Bangun, S.Pd', 'PDE', NULL, NULL, 'KAR', NULL, 'PDE', 'STAFF_PDE', NULL, 'asmoro', '38ec8bdeac7aea7478f90a2abee0db21', NULL, NULL, NULL, NULL),
+(49, NULL, NULL, '290415/UP45/0105', 'Windi Novindra Pradika, S.Psi', 'PDE', NULL, NULL, 'KAR', NULL, 'PDE', 'STAFF_PDE', NULL, 'windi', '4e3ccde7dc705b1abcce17019905279b', NULL, NULL, NULL, NULL),
+(50, NULL, NULL, '1.144/D.Y/UP.45', 'Rahilla Apria Fatma, S.Kom., MT', 'PDE', NULL, NULL, 'KAR', NULL, 'PDE', 'KA_PDE', NULL, 'rahilla', 'bd38a1adb57de36cd2b82383d3507ef4', NULL, NULL, NULL, NULL),
+(51, NULL, NULL, '300112/UP45/0205', 'Umi Haryani, SE', 'Rektorat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'umi', 'e84f942d7f93ddc14d24b930d87e3da7', NULL, NULL, NULL, NULL),
+(52, NULL, NULL, '101016/UP45/0224', 'Dwi Purbowati, M.Pd', 'Rektorat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(53, NULL, NULL, '1.118/D.Y/UP.45', 'Syamsul Ma\'arif, ST., M.Eng', 'Wakil Rektor', NULL, NULL, NULL, NULL, 'WR1', 'WR1', NULL, 'syamsul', '564d5ea829ce8977fb848c0a654c7888', NULL, NULL, NULL, NULL),
+(54, NULL, NULL, '271014/UP45/0108', 'Wahyu Suroatmojo, S.IP', 'Wakil Rektor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(55, NULL, NULL, '190515/UP45/0206', 'Sulfi Amalia, S.H', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sulfi', 'bc1f2e97cdaa7b3e55d030d08f6647ec', NULL, NULL, NULL, NULL),
+(56, NULL, NULL, '021115/UP45/0120', 'Faizal Aco., M.IP', 'BPK & KUI', NULL, NULL, 'MUL', NULL, 'AS_WR3', 'AS_WR3_2', NULL, 'faizal', '22bf59bcca5b77263b4021cf4695288d', NULL, NULL, NULL, NULL),
+(57, NULL, NULL, '2.57/K.Y/UP.45', 'Narohadi, S.Pd', 'BPK & KUI', NULL, NULL, NULL, NULL, 'PMB', 'STAFF_PMB', NULL, 'narohadi', 'f1d74676ed103b2e2e6cd05dc4f971c2', NULL, NULL, NULL, NULL),
+(58, NULL, NULL, '011116/UP45/0293', 'Dewi Kapliani, S.Psi., M.Psi', 'BPK & KUI', NULL, NULL, 'MUL', NULL, 'PMB', 'STAFF_PMB', NULL, 'kapliani', '3b208bdc77c2eb3db985d3a180674dd7', NULL, NULL, NULL, NULL),
+(59, NULL, NULL, '011116/UP45/0204', 'Ristanti Wengku Prasongko, S.Psi', 'BPK & KUI', NULL, NULL, 'KAR', NULL, 'PMB', 'STAFF_PMB', NULL, 'ristanti', '6996215e47f8e910064f323c4c0f2a0a', NULL, NULL, NULL, NULL),
+(60, NULL, NULL, '010316/UP45/0213', 'Febriyanti Angelia Ginting, S.Pd., M.Sc', 'BPK & KUI', NULL, NULL, 'MUL', NULL, 'MARCOM', 'KA_MARKOM', NULL, 'febriyanti', '8d14db07b26000cbc8bb943aa4af5aa5', NULL, NULL, NULL, NULL),
+(61, NULL, NULL, '160315/UP45/0220', 'Doortje Gres Songjanan, S.Pd', 'BPK & KUI', NULL, NULL, 'KAR', NULL, 'MARCOM', 'STAFF_MARKOM', NULL, 'doortje', 'ed2759b065d7e57f81be756c5dd0ecd8', NULL, NULL, NULL, NULL),
+(62, NULL, NULL, '100214/UP45/0116', 'Shofi Malchani', 'BPK & KUI', NULL, NULL, 'KAR', NULL, 'MARCOM', 'STAFF_MARKOM', NULL, 'shofi', '036c6c6797229d650773282b2ce23b9f', NULL, NULL, NULL, NULL),
+(63, NULL, NULL, '111113/UP45/0102', 'Fitroh Dwi Nugroho, S.Pd.Si', 'BPK & KUI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(64, NULL, NULL, '211216/UP45/0225', 'Yusrotun Dwi Asrini, S.Pd', 'BPK & KUI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'yusrotun', '2474b7cf02255ed21a098faf5bed265c', NULL, NULL, NULL, NULL),
+(65, NULL, NULL, '080915/UP45/0102', 'Anjar Pamuji, SH.I', 'BPK & KUI', NULL, NULL, 'KAR', NULL, 'CDC', 'STAFF_CDC', NULL, 'anjar', '1010665f6557f9fff40c82043a150bfd', NULL, NULL, NULL, NULL),
+(66, NULL, NULL, '080915/UP45/0122', 'Aji Prasetyo, S.Pd', 'BPK & KUI', NULL, NULL, 'KAR', NULL, 'PMB', 'STAFF_PMB', NULL, 'aji', '8d045450ae16dc81213a75b725ee2760', NULL, NULL, NULL, NULL),
+(67, NULL, NULL, '090217/UP45/0202', 'Yeni Rahmawati, M.Pd', 'UPT Perpustakaan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(68, NULL, NULL, '2.12/K.Y/UP.45', 'Sunarti', 'UPT Perpustakaan', NULL, NULL, NULL, NULL, 'PERPUS', 'STAFF_PERPUS', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(69, NULL, NULL, '2.67/K.Y/UP.45', 'Tri Sula', 'UPT Perpustakaan', NULL, NULL, NULL, NULL, 'PERPUS', 'STAFF_PERPUS', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(70, NULL, NULL, '2.58/K.Y/UP.45', 'Rustianingsih, S.IP', 'UPT Perpustakaan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(71, NULL, NULL, '260716/UP45/0127', 'Randi Adzin Murdiantoro., S.Si., M.Sc', 'LPPM', NULL, NULL, NULL, NULL, 'LPPM', 'STAFF_LPPM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(72, NULL, NULL, '010202/UP45/0216', 'Dwi Indarningsih, SH', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(73, NULL, NULL, '080515/UP45/0203', 'Ratih Wulansari, S.Pd', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ratih', 'a5bd72a3d2c4d1686415f93a46fc7a0a', NULL, NULL, NULL, NULL),
+(74, NULL, NULL, '240715/UP45/0225', 'Desi Nur Haryati, SE', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(75, NULL, NULL, '080915/UP45/0127', 'Ubaidillah, S.Pd.Si', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ubaidillah', '7e86187523146a12601e366701425d76', NULL, NULL, NULL, NULL),
+(76, NULL, NULL, '051216/UP45/0228', 'Rini Astuti, ST', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(77, NULL, NULL, '021113/UP45/0226', 'Wulan Susanti, S.Pd.', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'wulan', 'aae79912250d18756900f742270de7e1', NULL, NULL, NULL, NULL),
+(78, NULL, NULL, '101017/UP45/0225', 'Yanuarti Pradikta, S.Pd', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'yanuarti', '109d861bf4a0e20aee5e5e5ef43a6027', NULL, NULL, NULL, NULL),
+(79, NULL, NULL, '160315/UP45/0209', 'Yeni Purwaningsih, SIP', 'BPK & KUI', NULL, NULL, NULL, NULL, 'PERPUS', 'KA_PERPUS', NULL, 'yeni', '0fc37dce7e27a505363a2586f4483b92', NULL, NULL, NULL, NULL),
+(80, NULL, NULL, '010916/UP45/0224', 'Deni Santi Pertiwi, S.Psi', 'Staf Dekanat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'deni', '43f41d127a81c54d4c8f5f93daeb7118', NULL, NULL, NULL, NULL),
+(81, NULL, NULL, '310717/UP45/0108', 'Ir. Mat Sahudi', 'EMGI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(82, NULL, NULL, '260917/UP45/0205', 'Nurul Pikroh, S.I.Kom', 'Rektorat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(83, NULL, NULL, '010316/UP45/0209', 'Amin Nurrohmah, S.Pd., M.Sc', 'SCD', NULL, NULL, NULL, NULL, 'SCD', 'KA_SCD', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(84, NULL, NULL, '060715/UP45/0126', 'R. Pandji Cepi Lesmana, SE', 'SCD', NULL, NULL, 'KAR', NULL, 'SCD', 'STAFF_SCD', NULL, 'cepi', '4adece3a2be11f79e2bc43d69561487b', NULL, NULL, NULL, NULL),
+(85, NULL, NULL, '091013/UP45/0113', 'Thoriq Aziz Habibi. S.E', 'SCD', NULL, NULL, 'KAR', NULL, 'SCD', 'STAFF_SCD', NULL, 'thoriq', 'c0176f364b73516947e8e45b8b3c9e97', NULL, NULL, NULL, NULL),
+(86, NULL, NULL, '261112/UP45/0221', 'Niken Widyastuti, SE.,MM.', 'CDC', NULL, NULL, NULL, NULL, 'CDC', 'KA_CDC', NULL, 'niken', '08bdba24f01f56d1404fb0a0a66f144b', NULL, NULL, NULL, NULL),
+(87, NULL, NULL, '300117/UP45/0209', 'Famella Jamal, S.I.Kom', 'CDC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(88, NULL, NULL, '010316/UP45/0129', 'Janser Aldomoro, S.R., S.Hut., M.Sc', 'Akreditasi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'janser', '320bc4fcd65c415ca680995fbfca4861', NULL, NULL, NULL, NULL),
+(89, NULL, NULL, '241115/UP45/0209', 'Nurmalasari., S.T., M.T', 'Akreditasi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'nurmalasari.,', 'fdc227d1fd36c12404a8e0ee3cfcb8f7', NULL, NULL, NULL, NULL),
+(90, NULL, NULL, '010317/UP45/0116', 'Joko Sanyoto, S.T', 'PSEL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(91, NULL, NULL, '240717/UP45/0112', 'Wahyu Fajar Winata, S.Si., M.Eng', 'PSEL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(92, NULL, NULL, '110817/UP45/0123', 'Ruben Rocky Montana Salomo', 'Wakil Rektor', NULL, NULL, NULL, NULL, 'KMW', 'KA_KMW', NULL, 'ruben', '32252792b9dccf239f5a5bd8e778dbc2', NULL, NULL, NULL, NULL),
+(93, NULL, NULL, '020914/UP45/0121', 'Daris Kusumawangsa, S.Psi', 'Kemawa', NULL, NULL, NULL, NULL, 'KMW', 'STAFF_KMW', NULL, 'daris', '8c7909c1c3a51bcfbcef322fa8b25b26', NULL, NULL, NULL, NULL),
+(94, NULL, NULL, '110817/UP45/0215', 'Ruth Yuni Trie Imanti', 'Wakil Rektor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ruth', '81ea66d57d6b827ef722f4f20f8a669c', NULL, NULL, NULL, NULL),
+(95, NULL, NULL, '1.134/D.Y.UP.45', 'Dyah Rosiana Puspitasari', 'Fak Hukum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'dyah', 'd9ec7a2bcb5f792f101501f700977ec7', NULL, NULL, NULL, NULL),
+(96, NULL, NULL, '195409131983032001', 'Dra. Siti Noor Hidayati, M.M', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(97, NULL, NULL, '1.32/D.Y/UP.45', 'Drs. Bambang Sugeng Dwiyanto, M.M', 'KPM', NULL, NULL, NULL, NULL, 'KPM', 'KA_KPM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(98, NULL, NULL, '1.55/D.Y/UP.45', 'Drs. Jemadi, M.M', 'LPPM', NULL, NULL, NULL, NULL, 'LPPM', 'KA_LPPM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(99, NULL, NULL, '1.35/D.Y/UP.45', 'Dra. Eny Sulistyowati, M.M', 'Fak Ekonomi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(100, NULL, NULL, '1.109/D.Y/UP.45', 'Djoko Wijono, S.E., M.M', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(101, NULL, NULL, '1.110/D.Y/UP.45', 'Andriya Risdwiyanto, S.E., M.Si', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'andriya', '88f1222d83758c1aabb2e41fbb6fdc68', NULL, NULL, NULL, NULL),
+(102, NULL, NULL, '1.133/D.Y/UP.45', 'Muhamad Ali Sukrajap, S.E., MBA', 'Wakil Rektor', NULL, NULL, NULL, NULL, 'WR3', 'WR3', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(103, NULL, NULL, '1.46/D.Y/UP.45', 'Dwi Kuncahyo, SH., MH', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(104, NULL, NULL, '196001101987031004', 'Sukirno, SH., MH', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sukirno,', '5bf63f21f07376e98ece37f168581a57', NULL, NULL, NULL, NULL),
+(105, NULL, NULL, '1.47/D.Y/UP.45', 'Cecep Tedi Siswanto, S.H.C.N., MH', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(106, NULL, NULL, '1.111/D.Y/UP.45', 'Sobirin, SH., M.Hum', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sobirin,', '6a8a80d8aacd194f169dccd147aea492', NULL, NULL, NULL, NULL),
+(107, NULL, NULL, '1.91/SD.Y/UP.45', 'Sigit Wibowo, SH., M.Hum', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sigit', '223a0fa8f15933d622b3c7a13f186027', NULL, NULL, NULL, NULL),
+(108, NULL, NULL, '1.113/D.Y/UP.45', 'Puguh Windrawan, SH., MH', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'puguh', 'e81911174ce3bcb876d59359cfd25df0', NULL, NULL, NULL, NULL),
+(109, NULL, NULL, '1.135/D.Y.UP.45', 'Ilmal Yaqin, SH., LL.M', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(110, NULL, NULL, '1.132/D.Y.UP.45', 'Lucia Setyawahyuningtyas', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'lucia', '3ba430337eb30f5fd7569451b5dfdf32', NULL, NULL, NULL, NULL),
+(111, NULL, NULL, '1.146/D.Y/UP.46', 'Hindra Pamungkas, SH., MH', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(112, NULL, NULL, '1.24/D.Y/UP.44', 'Dra. Nining Sofiati Lestari, M.Sc', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(113, NULL, NULL, '131474315', 'Drs. Oberlin Silalahi, M.Si', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(114, NULL, NULL, '131761398', 'Drs. Teguh Budi Prasetya, M.Si', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(115, NULL, NULL, '1.121/D.Y/UP.45', 'Drs. Idham Ibty, S.IP., M.Si', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(116, NULL, NULL, '1.45/D.Y/UP.45', 'Dr. Bening Hadilinatih, M.Si', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(117, NULL, NULL, '1.126/D.Y/UP.45', 'Edward Bot, S.Fill.I', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(118, NULL, NULL, '1.160/D.Y/UP.45', 'Nurhadi, S.Pd., M.PA', 'Wakil Rektor', NULL, NULL, NULL, NULL, 'AS_WR3', 'AS_WR3', NULL, 'nurhadi,', 'aa0805c7ab5a37cdd4513bdde58d4744', NULL, NULL, NULL, NULL),
+(119, NULL, NULL, '131885875', 'Drs. Indra Wahyudi, M.Si', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(120, NULL, NULL, '1.60/D.Y/UP.45', 'Dr. Arundati Shinta, MA', 'Fak Psikologi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(121, NULL, NULL, '1.88/D.Y/UP.45', 'Dra. Muslimah Zahro Romas, M.Si', 'Fak Psikologi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(122, NULL, NULL, '1.125/D.Y/UP.45', 'Eni Rohyati, S.Psi., M.Psi', 'Fak Psikologi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'eni', 'e3d96c321f2a71cb81cd7d5f05f1a8d7', NULL, NULL, NULL, NULL),
+(123, NULL, NULL, '1.127/D.Y/UP.45', 'Dewi Handayani H., S.Psi., M.Psi', 'Wakil Rektor', NULL, NULL, NULL, NULL, 'WR2', 'WR2', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(124, NULL, NULL, '1.137/D.Y/UP.45', 'FX. Wahyu Widiantoro', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(125, NULL, NULL, '131672537', 'Ir. R. Soelarso Pani, MT', 'DPK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(126, NULL, NULL, '1.54/D.Y/UP.45', 'Ir. Wardoyo, MT', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(127, NULL, NULL, '1.96/D.Y/UP.45', 'Heribertus Sukarja, ST., M.Eng', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(128, NULL, NULL, '1.100/D.Y/UP.45', 'Sumpena, ST., M.Eng', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sumpena,', '22fd98520dc1a3f8f2a520d5eb73c5aa', NULL, NULL, NULL, NULL),
+(129, NULL, NULL, '1.141/D.Y/UP.45', 'Enda Apriani, ST., M.Eng', 'Wakil Rektor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'enda', 'b2cc1c88491cf099acfcfc7cc9f077ce', NULL, NULL, NULL, NULL),
+(130, NULL, NULL, '040917/UP45/0107', 'Devara Eko Katon Mahardika', 'BPK & KUI', 'devaraekokm@gmail.com', NULL, 'KAR', NULL, 'MARCOM', 'STAFF_MARKOM', NULL, 'devaraeko', '359a628dfe2c93abd1fafcaef959a0c9', 'dbc71628a154215e3ed5e3d181b8a60ae159bf3e16250763bfde8828088f7021', '2018-06-13 00:32:11', '00cdecda8081603e4a2ef6584f7f8e6a207c1e40abbfb41cf5fdf0499300523d', '2018-06-13 00:32:52'),
+(131, NULL, NULL, '1.162/D.Y/UP.45', 'Bledug Kusuma Prasaja Moesdradjad, ST., MT', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'bledug', '2e984543ddf3b225263bb9e4504713fb', NULL, NULL, NULL, NULL),
+(132, NULL, NULL, '1.116/D.Y/UP.45', 'Sri Haryono, ST., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(133, NULL, NULL, '1.93/D.Y/UP.45', 'Wirawan Widya Mandala, ST., MT', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'wirawan', '2f809b10d1abedbf2ec288f851b3ebbb', NULL, NULL, NULL, NULL),
+(134, NULL, NULL, '1.105/D.Y/UP.45', 'Ir. Edi Purwaka, MT', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(135, NULL, NULL, '1.117/D.Y/UP.45', 'Ir. Bambang Irjanto, MBA', 'Rektor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(136, NULL, NULL, '1.89/D.Y/UP.45', 'Sari Wulandari Hafsari, ST., M.Sc', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sari', 'a87bcf310c4fdf2a80f2f3d97f1f9424', NULL, NULL, NULL, NULL),
+(137, NULL, NULL, '1.120/D.Y/UP.45', 'M. Sigit Cahyono, ST., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(138, NULL, NULL, '1.143/D.Y/UP.45', 'Maria Ratih Puspita Liestiono, S.Si., M.Sc', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'maria', '263bce650e68ab4e23f28263760b9fa5', NULL, NULL, NULL, NULL),
+(139, NULL, NULL, '1.146/D.Y/UP.45', 'Lia Yunita, ST., M.Pd', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(140, NULL, NULL, '1.147/D.Y/UP.45', 'Anastasia Neni CP., S.Si., M.Sc', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anastasia', 'fa17f85c91125ebe136de0a5fdd47951', NULL, NULL, NULL, NULL),
+(141, NULL, NULL, '1.148/D.Y/UP.45', 'Syaiful Mansyur, ST., M.Sc', 'Akreditasi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(142, NULL, NULL, '1.149/D.Y/UP.45', 'Andri Azis Putra, Lc., M.Phil', 'PSEL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(143, NULL, NULL, '1.151/D.Y/UP.45', 'Rena Juwita Sari, S.Pd., M.Sc', 'BPK & KUI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'rena', 'a3b332d4506b767c216acba667d08434', NULL, NULL, NULL, NULL),
+(144, NULL, NULL, '1.155/D.Y/UP.45', 'Aisyah Indah Irmaya, ST., MT', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(145, NULL, NULL, '1.156/D.Y/UP.45', 'Ir. Listriyanto, MT', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(146, NULL, NULL, '1.157/D.Y/UP.45', 'Habib Abdillah Nurusman, ST., M.Eng., M.Sc', 'BAU', NULL, NULL, NULL, NULL, 'LABKOM', 'KA_LABKOM', NULL, 'habib', '1391921ec73a2f5dff54e075bbda7487', NULL, NULL, NULL, NULL),
+(147, NULL, NULL, '1.158/D.Y/UP.45', 'Muhammad Noviansyah Aridito, S.Pd., M.Sc', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(148, NULL, NULL, '1.159/D.Y/UP.45', 'Heni Dwi Kurniasari, ST., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'heni', 'cd07a63af5f14ac0d51b5bbbf6e93ae9', NULL, NULL, NULL, NULL),
+(149, NULL, NULL, '1.136/D.Y/UP.45', 'Wira Widyawidura, S.Si., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'wira', '6215f4770ee800ad5402bc02be783c26', NULL, NULL, NULL, NULL),
+(150, NULL, NULL, '1.150/D.Y/UP.45', 'Trisno Fallo, S.Hut., M.Sc', 'BPK & KUI', NULL, NULL, 'MUL', NULL, 'PMB', 'KA_PMB', NULL, 'trisno', 'fe1d8a9f01936c33598c2fbe7bc6c1ea', NULL, NULL, NULL, NULL),
+(151, NULL, NULL, '1.43/D.Y/UP.45', 'Drs. Totok Danangdjojo, MM', 'Fak Ekonomi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(152, NULL, NULL, '271117/UP45/0114', 'Sylvert Prian Tahalea, M.Cs', 'UPT Labkom', NULL, NULL, NULL, NULL, 'DM', 'STAFF_DM', NULL, 'sylvert', 'bb8417c65526fe18757519303ee85527', NULL, NULL, NULL, NULL),
+(153, NULL, NULL, '271117/UP45/0109', 'Eko Dwi Nugroho, S.Kom., M.Cs', 'UPT Labkom', NULL, NULL, NULL, NULL, 'DM', 'STAFF_DM', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(154, NULL, NULL, '141217/UP45/0225', 'Desi Kusrini, S.T., M.T', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(155, NULL, NULL, '061217/UP45/0223', 'Rr. Putri Ana Nurani, S.S., M.M', 'BPK & KUI', NULL, NULL, NULL, NULL, 'KUI', 'KA_KUI', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(156, NULL, NULL, '010715/UP45/0116', 'Syamsudin, MA', 'Wakil Rektor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(157, NULL, NULL, '181217/UP45/0102', 'Wahyu Edifikar, S.T., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(158, NULL, NULL, '040118/UP45/0105', 'Bramasto Cinde Adam, ST, M.Sc', 'Fak Teknik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'bramasto', '9090297108c48a09fcc3deca39de44b5', NULL, NULL, NULL, NULL),
+(159, NULL, NULL, '310118/UP45/0211', 'Priskila Damaris Lokollo, S.Si., M.Cs', 'Dosen', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'priskila', 'fa43d72ae115dae0ef71221c2ff458c5', NULL, NULL, NULL, NULL),
+(160, NULL, NULL, '060218/UP45/0211', 'Ayu Candra Dewi, S.Kom., M.Eng', 'Fak Teknik', NULL, NULL, NULL, NULL, 'PMB', 'STAFF_PMB', NULL, 'ayu', '29c65f781a1068a41f735e1b092546de', NULL, NULL, NULL, NULL),
+(161, NULL, NULL, '120218/UP45/0204', 'Dinar Lingga Damayanti, SH., MH', 'Fak Hukum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'dinar', '13d2c27d75f43e084f96904768e10fee', NULL, NULL, NULL, NULL),
+(162, NULL, NULL, '090318/UP45/0224', 'Mukti Cahyani, SH., MH', 'Fak Hukum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mukti', '9870707091e577de88930ce558347125', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_pegawai_detail`
+-- Table structure for table `data_pegawai_detail`
 --
 
 CREATE TABLE `data_pegawai_detail` (
@@ -439,7 +491,7 @@ CREATE TABLE `data_pegawai_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `data_pegawai_detail`
+-- Dumping data for table `data_pegawai_detail`
 --
 
 INSERT INTO `data_pegawai_detail` (`id`, `nip`, `id_agama`, `hp`, `email`, `gelar_depan`, `gelar_belakang`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `id_prov`, `id_kab`, `id_kec`, `id_kel`, `alamat`, `tanggal_masuk`, `nomor_sk`, `tanggal_sk`, `tanggal_awal_kontrak`, `tanggal_akhir_kontrak`, `keluar`, `tgl_keluar`, `cara_keluar`) VALUES
@@ -609,7 +661,7 @@ INSERT INTO `data_pegawai_detail` (`id`, `nip`, `id_agama`, `hp`, `email`, `gela
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_penilaian`
+-- Table structure for table `data_penilaian`
 --
 
 CREATE TABLE `data_penilaian` (
@@ -626,7 +678,7 @@ CREATE TABLE `data_penilaian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `data_penilaian`
+-- Dumping data for table `data_penilaian`
 --
 
 INSERT INTO `data_penilaian` (`id_penilaian`, `id_periode`, `nip`, `jam`, `kedisiplinan`, `loyalitas`, `pelayanan`, `propeka`, `total`, `ranking`) VALUES
@@ -638,7 +690,7 @@ INSERT INTO `data_penilaian` (`id_penilaian`, `id_periode`, `nip`, `jam`, `kedis
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_rapat`
+-- Table structure for table `data_rapat`
 --
 
 CREATE TABLE `data_rapat` (
@@ -650,7 +702,7 @@ CREATE TABLE `data_rapat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `data_rapat`
+-- Dumping data for table `data_rapat`
 --
 
 INSERT INTO `data_rapat` (`id_rapat`, `id_periode`, `tanggal_rapat`, `nama_rapat`, `keterangan`) VALUES
@@ -663,7 +715,7 @@ INSERT INTO `data_rapat` (`id_rapat`, `id_periode`, `tanggal_rapat`, `nama_rapat
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_rapat_peserta`
+-- Table structure for table `data_rapat_peserta`
 --
 
 CREATE TABLE `data_rapat_peserta` (
@@ -673,7 +725,7 @@ CREATE TABLE `data_rapat_peserta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `data_rapat_peserta`
+-- Dumping data for table `data_rapat_peserta`
 --
 
 INSERT INTO `data_rapat_peserta` (`id_rapat_peserta`, `id_rapat`, `nip`) VALUES
@@ -706,7 +758,7 @@ INSERT INTO `data_rapat_peserta` (`id_rapat_peserta`, `id_rapat`, `nip`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_rkhlh`
+-- Table structure for table `data_rkhlh`
 --
 
 CREATE TABLE `data_rkhlh` (
@@ -717,19 +769,21 @@ CREATE TABLE `data_rkhlh` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `data_rkhlh`
+-- Dumping data for table `data_rkhlh`
 --
 
 INSERT INTO `data_rkhlh` (`id_rkhlh`, `id_periode`, `tanggal`, `nip`) VALUES
 (1, 3, '2018-02-21', '040917/UP45/0107'),
 (2, 3, '2018-02-21', '160315/UP45/0211'),
 (3, 3, '2018-02-22', '160315/UP45/0211'),
-(4, 3, '2018-02-23', '160315/UP45/0211');
+(4, 3, '2018-02-23', '160315/UP45/0211'),
+(5, 3, '2018-02-21', '011016/UP45/0110'),
+(6, 3, '2018-02-22', '011016/UP45/0110');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_rkhlh_detail`
+-- Table structure for table `data_rkhlh_detail`
 --
 
 CREATE TABLE `data_rkhlh_detail` (
@@ -740,29 +794,36 @@ CREATE TABLE `data_rkhlh_detail` (
   `sampai` int(3) NOT NULL,
   `mulai_lh` int(3) DEFAULT NULL,
   `sampai_lh` int(3) DEFAULT NULL,
-  `keterangan` text
+  `keterangan` text,
+  `rkh_lh_lengkap` enum('ya','tidak') NOT NULL DEFAULT 'tidak'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `data_rkhlh_detail`
+-- Dumping data for table `data_rkhlh_detail`
 --
 
-INSERT INTO `data_rkhlh_detail` (`id_rkhlh_detail`, `id_rkhlh`, `kegiatan`, `dari`, `sampai`, `mulai_lh`, `sampai_lh`, `keterangan`) VALUES
-(1, 1, 'Backup Web Utama', 8, 12, NULL, NULL, NULL),
-(2, 1, 'Backup PMB', 13, 15, NULL, NULL, NULL),
-(3, 2, 'Mendata Karyawan tetap', 8, 10, NULL, NULL, NULL),
-(4, 2, 'Rekap absensi bulanan', 10, 12, NULL, NULL, NULL),
-(5, 2, 'Brifing dengan tim SDM', 13, 14, NULL, NULL, NULL),
-(6, 2, 'Rapat dengan WR 2', 14, 16, NULL, NULL, NULL),
-(7, 3, 'Evaluasi borang dosen', 8, 12, NULL, NULL, NULL),
-(8, 3, 'Membuat jobdes untuk acara seminar', 13, 14, NULL, NULL, NULL),
-(9, 3, 'Mengecek data lembur karyawan', 15, 16, NULL, NULL, NULL),
-(10, 4, 'Persiapan Visitasi Hukum', 9, 12, NULL, NULL, NULL);
+INSERT INTO `data_rkhlh_detail` (`id_rkhlh_detail`, `id_rkhlh`, `kegiatan`, `dari`, `sampai`, `mulai_lh`, `sampai_lh`, `keterangan`, `rkh_lh_lengkap`) VALUES
+(1, 1, 'Backup Web Utama', 8, 12, NULL, NULL, NULL, 'tidak'),
+(2, 1, 'Backup PMB', 13, 15, NULL, NULL, NULL, 'tidak'),
+(3, 2, 'Mendata Karyawan tetap', 8, 10, NULL, NULL, NULL, 'tidak'),
+(4, 2, 'Rekap absensi bulanan', 10, 12, NULL, NULL, NULL, 'tidak'),
+(5, 2, 'Brifing dengan tim SDM', 13, 14, NULL, NULL, NULL, 'tidak'),
+(6, 2, 'Rapat dengan WR 2', 14, 16, NULL, NULL, NULL, 'tidak'),
+(7, 3, 'Evaluasi borang dosen', 8, 12, NULL, NULL, NULL, 'tidak'),
+(8, 3, 'Membuat jobdes untuk acara seminar', 13, 14, NULL, NULL, NULL, 'tidak'),
+(9, 3, 'Mengecek data lembur karyawan', 15, 16, NULL, NULL, NULL, 'tidak'),
+(10, 4, 'Persiapan Visitasi Hukum', 9, 12, NULL, NULL, NULL, 'tidak'),
+(11, 5, 'Rapat dengan tim Labkom', 8, 9, 9, 10, 'terlaksana', 'ya'),
+(12, 5, 'Koordinasi dengan vendor siakad', 10, 12, 10, 12, 'terlaksana', 'ya'),
+(13, 5, 'Pindahan server', 13, 15, 13, 16, 'terlaksana tapi belum selesai', 'ya'),
+(14, 6, 'Membuat RKH dan LH', 8, 9, NULL, NULL, NULL, 'tidak'),
+(15, 6, 'Backup data siakad cPanel', 10, 12, NULL, NULL, NULL, 'tidak'),
+(16, 6, 'Backup data perpus cPanel', 13, 15, NULL, NULL, NULL, 'tidak');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_ujian`
+-- Table structure for table `data_ujian`
 --
 
 CREATE TABLE `data_ujian` (
@@ -771,28 +832,29 @@ CREATE TABLE `data_ujian` (
   `tanggal` date NOT NULL,
   `tipe` enum('uts','uas') NOT NULL,
   `kode_matakuliah` varchar(8) NOT NULL,
+  `jumlah_mahasiswa` int(11) NOT NULL DEFAULT '20',
   `keterangan` varchar(100) DEFAULT NULL,
   `selesai` enum('sudah','belum') NOT NULL DEFAULT 'belum',
   `koreksi` enum('belum','sudah') NOT NULL DEFAULT 'belum'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `data_ujian`
+-- Dumping data for table `data_ujian`
 --
 
-INSERT INTO `data_ujian` (`id_ujian`, `id_periode`, `tanggal`, `tipe`, `kode_matakuliah`, `keterangan`, `selesai`, `koreksi`) VALUES
-(1, 3, '2018-03-05', 'uas', 'SP1033', 'uas', 'sudah', 'belum'),
-(2, 3, '2018-03-05', 'uas', 'HK 1032', 'uas', 'sudah', 'belum'),
-(3, 3, '2018-03-05', 'uas', 'EM6163', 'uas', 'sudah', 'belum'),
-(4, 3, '2018-03-05', 'uas', 'PS1013', 'uas', 'sudah', 'sudah'),
-(5, 3, '2018-03-05', 'uas', 'TL1022', 'uas', 'belum', 'belum'),
-(6, 3, '2018-03-05', 'uas', 'TM1072', 'uas', 'belum', 'sudah'),
-(7, 3, '2018-03-06', 'uas', 'HK 3042', 'uas hukum pajak', 'sudah', 'belum');
+INSERT INTO `data_ujian` (`id_ujian`, `id_periode`, `tanggal`, `tipe`, `kode_matakuliah`, `jumlah_mahasiswa`, `keterangan`, `selesai`, `koreksi`) VALUES
+(1, 3, '2018-03-05', 'uas', 'SP1033', 20, 'uas', 'sudah', 'belum'),
+(2, 3, '2018-03-05', 'uas', 'HK 1032', 20, 'uas', 'sudah', 'belum'),
+(3, 3, '2018-03-05', 'uas', 'EM6163', 20, 'uas', 'sudah', 'belum'),
+(4, 3, '2018-03-05', 'uas', 'PS1013', 20, 'uas', 'sudah', 'sudah'),
+(5, 3, '2018-03-05', 'uas', 'TL1022', 20, 'uas', 'belum', 'belum'),
+(6, 3, '2018-03-05', 'uas', 'TM1072', 20, 'uas', 'belum', 'sudah'),
+(7, 3, '2018-03-06', 'uas', 'HK 3042', 20, 'uas hukum pajak', 'sudah', 'belum');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_ujian_korektor`
+-- Table structure for table `data_ujian_korektor`
 --
 
 CREATE TABLE `data_ujian_korektor` (
@@ -802,7 +864,7 @@ CREATE TABLE `data_ujian_korektor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `data_ujian_korektor`
+-- Dumping data for table `data_ujian_korektor`
 --
 
 INSERT INTO `data_ujian_korektor` (`id_korektor`, `id_ujian`, `nip`) VALUES
@@ -812,7 +874,7 @@ INSERT INTO `data_ujian_korektor` (`id_korektor`, `id_ujian`, `nip`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_ujian_pengawas`
+-- Table structure for table `data_ujian_pengawas`
 --
 
 CREATE TABLE `data_ujian_pengawas` (
@@ -822,7 +884,7 @@ CREATE TABLE `data_ujian_pengawas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `data_ujian_pengawas`
+-- Dumping data for table `data_ujian_pengawas`
 --
 
 INSERT INTO `data_ujian_pengawas` (`id_pengawas`, `id_ujian`, `nip`) VALUES
@@ -835,12 +897,12 @@ INSERT INTO `data_ujian_pengawas` (`id_pengawas`, `id_ujian`, `nip`) VALUES
 (7, 4, '011116/UP45/0293'),
 (8, 4, '011116/UP45/0204'),
 (9, 7, '200817UP450207'),
-(10, 7, '201013/UP45/0128');
+(10, 7, '040917/UP45/0107');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_user`
+-- Table structure for table `data_user`
 --
 
 CREATE TABLE `data_user` (
@@ -852,7 +914,7 @@ CREATE TABLE `data_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `data_user`
+-- Dumping data for table `data_user`
 --
 
 INSERT INTO `data_user` (`id_user`, `username`, `password`, `level`, `status`) VALUES
@@ -865,7 +927,7 @@ INSERT INTO `data_user` (`id_user`, `username`, `password`, `level`, `status`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_daerah`
+-- Table structure for table `jenis_daerah`
 --
 
 CREATE TABLE `jenis_daerah` (
@@ -874,7 +936,7 @@ CREATE TABLE `jenis_daerah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `jenis_daerah`
+-- Dumping data for table `jenis_daerah`
 --
 
 INSERT INTO `jenis_daerah` (`id_jenis`, `nama`) VALUES
@@ -886,7 +948,7 @@ INSERT INTO `jenis_daerah` (`id_jenis`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_agama`
+-- Table structure for table `master_agama`
 --
 
 CREATE TABLE `master_agama` (
@@ -895,7 +957,7 @@ CREATE TABLE `master_agama` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `master_agama`
+-- Dumping data for table `master_agama`
 --
 
 INSERT INTO `master_agama` (`kode_agama`, `nama_agama`) VALUES
@@ -909,7 +971,7 @@ INSERT INTO `master_agama` (`kode_agama`, `nama_agama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_bidang`
+-- Table structure for table `master_bidang`
 --
 
 CREATE TABLE `master_bidang` (
@@ -919,7 +981,7 @@ CREATE TABLE `master_bidang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `master_bidang`
+-- Dumping data for table `master_bidang`
 --
 
 INSERT INTO `master_bidang` (`kode_bidang`, `nama_bidang`, `keterangan`) VALUES
@@ -930,7 +992,7 @@ INSERT INTO `master_bidang` (`kode_bidang`, `nama_bidang`, `keterangan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_fakultas`
+-- Table structure for table `master_fakultas`
 --
 
 CREATE TABLE `master_fakultas` (
@@ -941,7 +1003,7 @@ CREATE TABLE `master_fakultas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `master_fakultas`
+-- Dumping data for table `master_fakultas`
 --
 
 INSERT INTO `master_fakultas` (`id_fak`, `kode_fakultas`, `nama_fakultas`, `kode_jenjang_pendidikan`) VALUES
@@ -954,7 +1016,7 @@ INSERT INTO `master_fakultas` (`id_fak`, `kode_fakultas`, `nama_fakultas`, `kode
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_jabatan`
+-- Table structure for table `master_jabatan`
 --
 
 CREATE TABLE `master_jabatan` (
@@ -969,7 +1031,7 @@ CREATE TABLE `master_jabatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `master_jabatan`
+-- Dumping data for table `master_jabatan`
 --
 
 INSERT INTO `master_jabatan` (`id_jabatan`, `kode_jabatan`, `nama_jabatan`, `tunjangan_jabatan`, `keterangan`, `under_of_jabatan`, `max_satu`, `tersedia`) VALUES
@@ -1043,7 +1105,7 @@ INSERT INTO `master_jabatan` (`id_jabatan`, `kode_jabatan`, `nama_jabatan`, `tun
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_jam_kerja`
+-- Table structure for table `master_jam_kerja`
 --
 
 CREATE TABLE `master_jam_kerja` (
@@ -1056,7 +1118,7 @@ CREATE TABLE `master_jam_kerja` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_kabupaten`
+-- Table structure for table `master_kabupaten`
 --
 
 CREATE TABLE `master_kabupaten` (
@@ -1067,7 +1129,7 @@ CREATE TABLE `master_kabupaten` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `master_kabupaten`
+-- Dumping data for table `master_kabupaten`
 --
 
 INSERT INTO `master_kabupaten` (`id_kab`, `id_prov`, `nama`, `id_jenis`) VALUES
@@ -1589,7 +1651,7 @@ INSERT INTO `master_kabupaten` (`id_kab`, `id_prov`, `nama`, `id_jenis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_kecamatan`
+-- Table structure for table `master_kecamatan`
 --
 
 CREATE TABLE `master_kecamatan` (
@@ -1599,7 +1661,7 @@ CREATE TABLE `master_kecamatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `master_kecamatan`
+-- Dumping data for table `master_kecamatan`
 --
 
 INSERT INTO `master_kecamatan` (`id_kec`, `id_kab`, `nama`) VALUES
@@ -8705,7 +8767,7 @@ INSERT INTO `master_kecamatan` (`id_kec`, `id_kab`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_kelurahan`
+-- Table structure for table `master_kelurahan`
 --
 
 CREATE TABLE `master_kelurahan` (
@@ -8716,7 +8778,7 @@ CREATE TABLE `master_kelurahan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `master_kelurahan`
+-- Dumping data for table `master_kelurahan`
 --
 
 INSERT INTO `master_kelurahan` (`id_kel`, `id_kec`, `nama`, `id_jenis`) VALUES
@@ -48561,7 +48623,7 @@ INSERT INTO `master_kelurahan` (`id_kel`, `id_kec`, `nama`, `id_jenis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_matakuliah`
+-- Table structure for table `master_matakuliah`
 --
 
 CREATE TABLE `master_matakuliah` (
@@ -48577,7 +48639,7 @@ CREATE TABLE `master_matakuliah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `master_matakuliah`
+-- Dumping data for table `master_matakuliah`
 --
 
 INSERT INTO `master_matakuliah` (`id_matakuliah`, `kode_matakuliah`, `nama_matakuliah`, `nama_matakuliah_inggris`, `sks_matakuliah`, `smt_matakuliah`, `kode_sifat_matakuliah`, `kode_program_studi`, `kode_fakultas`) VALUES
@@ -49127,7 +49189,7 @@ INSERT INTO `master_matakuliah` (`id_matakuliah`, `kode_matakuliah`, `nama_matak
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_nominal`
+-- Table structure for table `master_nominal`
 --
 
 CREATE TABLE `master_nominal` (
@@ -49147,7 +49209,7 @@ CREATE TABLE `master_nominal` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_pendidikan`
+-- Table structure for table `master_pendidikan`
 --
 
 CREATE TABLE `master_pendidikan` (
@@ -49157,7 +49219,7 @@ CREATE TABLE `master_pendidikan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `master_pendidikan`
+-- Dumping data for table `master_pendidikan`
 --
 
 INSERT INTO `master_pendidikan` (`pendidikan_id`, `pendidikan_nama`, `pendidikan_singkatan`) VALUES
@@ -49176,7 +49238,7 @@ INSERT INTO `master_pendidikan` (`pendidikan_id`, `pendidikan_nama`, `pendidikan
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_periode`
+-- Table structure for table `master_periode`
 --
 
 CREATE TABLE `master_periode` (
@@ -49191,7 +49253,7 @@ CREATE TABLE `master_periode` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `master_periode`
+-- Dumping data for table `master_periode`
 --
 
 INSERT INTO `master_periode` (`id_periode`, `tahun`, `bulan`, `mulai`, `akhir`, `hari_aktif`, `pembagi`, `aktif`) VALUES
@@ -49202,7 +49264,7 @@ INSERT INTO `master_periode` (`id_periode`, `tahun`, `bulan`, `mulai`, `akhir`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_program_studi`
+-- Table structure for table `master_program_studi`
 --
 
 CREATE TABLE `master_program_studi` (
@@ -49214,7 +49276,7 @@ CREATE TABLE `master_program_studi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `master_program_studi`
+-- Dumping data for table `master_program_studi`
 --
 
 INSERT INTO `master_program_studi` (`id_program_studi`, `kode_program_studi`, `kode_fakultas`, `nama_program_studi`, `keterangan`) VALUES
@@ -49229,7 +49291,7 @@ INSERT INTO `master_program_studi` (`id_program_studi`, `kode_program_studi`, `k
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_provinsi`
+-- Table structure for table `master_provinsi`
 --
 
 CREATE TABLE `master_provinsi` (
@@ -49238,7 +49300,7 @@ CREATE TABLE `master_provinsi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `master_provinsi`
+-- Dumping data for table `master_provinsi`
 --
 
 INSERT INTO `master_provinsi` (`id_prov`, `nama`) VALUES
@@ -49280,7 +49342,7 @@ INSERT INTO `master_provinsi` (`id_prov`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_status_pegawai`
+-- Table structure for table `master_status_pegawai`
 --
 
 CREATE TABLE `master_status_pegawai` (
@@ -49289,7 +49351,7 @@ CREATE TABLE `master_status_pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `master_status_pegawai`
+-- Dumping data for table `master_status_pegawai`
 --
 
 INSERT INTO `master_status_pegawai` (`kode_status_pegawai`, `nama_status`) VALUES
@@ -49300,7 +49362,7 @@ INSERT INTO `master_status_pegawai` (`kode_status_pegawai`, `nama_status`) VALUE
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_unit_kerja`
+-- Table structure for table `master_unit_kerja`
 --
 
 CREATE TABLE `master_unit_kerja` (
@@ -49312,7 +49374,7 @@ CREATE TABLE `master_unit_kerja` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `master_unit_kerja`
+-- Dumping data for table `master_unit_kerja`
 --
 
 INSERT INTO `master_unit_kerja` (`id_unit`, `kode_unit`, `kode_bidang`, `nama_unit`, `keterangan`) VALUES
@@ -49351,7 +49413,7 @@ INSERT INTO `master_unit_kerja` (`id_unit`, `kode_unit`, `kode_bidang`, `nama_un
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `simpeg_pegawai`
+-- Table structure for table `simpeg_pegawai`
 --
 
 CREATE TABLE `simpeg_pegawai` (
@@ -49389,7 +49451,7 @@ CREATE TABLE `simpeg_pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `simpeg_pegawai`
+-- Dumping data for table `simpeg_pegawai`
 --
 
 INSERT INTO `simpeg_pegawai` (`id`, `nik`, `nidn`, `nip`, `nama`, `id_agama`, `telp_rumah`, `hp`, `email`, `gelar_depan`, `gelar_belakang`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `id_prov`, `id_kab`, `id_kec`, `id_kel`, `alamat`, `tanggal_masuk`, `kode_status_pegawai`, `nomor_sk`, `tanggal_sk`, `tanggal_awal_kontrak`, `tanggal_akhir_kontrak`, `kode_prodi`, `keluar`, `tgl_keluar`, `cara_keluar`, `username`, `password`) VALUES
@@ -49570,6 +49632,18 @@ ALTER TABLE `absensi_data`
 --
 ALTER TABLE `absensi_rekap`
   ADD PRIMARY KEY (`id_rekap`);
+
+--
+-- Indexes for table `data_checklist_laporan_bulanan`
+--
+ALTER TABLE `data_checklist_laporan_bulanan`
+  ADD PRIMARY KEY (`id_cb_lb`);
+
+--
+-- Indexes for table `data_checklist_laporan_bulanan_detail`
+--
+ALTER TABLE `data_checklist_laporan_bulanan_detail`
+  ADD PRIMARY KEY (`id_data_detail`);
 
 --
 -- Indexes for table `data_insentif_op`
@@ -49773,6 +49847,18 @@ ALTER TABLE `absensi_rekap`
   MODIFY `id_rekap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `data_checklist_laporan_bulanan`
+--
+ALTER TABLE `data_checklist_laporan_bulanan`
+  MODIFY `id_cb_lb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `data_checklist_laporan_bulanan_detail`
+--
+ALTER TABLE `data_checklist_laporan_bulanan_detail`
+  MODIFY `id_data_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `data_insentif_op`
 --
 ALTER TABLE `data_insentif_op`
@@ -49782,7 +49868,7 @@ ALTER TABLE `data_insentif_op`
 -- AUTO_INCREMENT for table `data_lembur`
 --
 ALTER TABLE `data_lembur`
-  MODIFY `id_lembur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_lembur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `data_pegawai`
@@ -49818,13 +49904,13 @@ ALTER TABLE `data_rapat_peserta`
 -- AUTO_INCREMENT for table `data_rkhlh`
 --
 ALTER TABLE `data_rkhlh`
-  MODIFY `id_rkhlh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_rkhlh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `data_rkhlh_detail`
 --
 ALTER TABLE `data_rkhlh_detail`
-  MODIFY `id_rkhlh_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_rkhlh_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `data_ujian`
