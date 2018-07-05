@@ -141,7 +141,7 @@
 				<li>
 					<a><i class="fa fa-money"></i> Penggajian <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-						<li><a href="<?=karyawan()?>penggajian/tunjangan">Tunjangan</a></li>
+						<li><a href="<?=karyawan()?>penggajian/tunjangan">Tunjangan/Tambahan</a></li>
 						<li><a href="<?=karyawan()?>penggajian/potongan">Potongan</a></li>
 						<li><a href="<?=karyawan()?>penggajian/slip">Slip Gaji</a></li>
 					</ul>

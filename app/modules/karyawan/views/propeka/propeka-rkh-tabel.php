@@ -50,8 +50,9 @@
 				<td><?=hari_indo($pe->format("Y-m-d"))?></td>
 				<td>
 					<?php $cek = $this->my_lib->get_data('data_rkhlh',array('id_periode'=>$per->id_periode,'nip'=>$peg->nip,'tanggal'=>$pe->format("Y-m-d"))); 
+						$id_rkh = $this->my_lib->get_row('data_rkhlh',array('id_periode'=>$per->id_periode,'nip'=>$peg->nip,'tanggal'=>$pe->format("Y-m-d")),'id_rkhlh');
 					if($cek): ?>
-					<a class="btn btn-xs btn-success">Ada</a> | <a href="#" class="blue-text">Lihat</a>
+					<a class="btn btn-xs btn-success">Ada</a> | <a href="<?=$id_rkh?>" class="blue-text">Lihat</a>
 					<?php else: ?>
 						<a class="btn btn-xs btn-danger">Belum ada</a>
 					<?php endif; ?>
