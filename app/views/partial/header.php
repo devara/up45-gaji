@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Sistem Informasi Penggajian </title>
+    <title>Sistem Informasi Penggajian Universitas Proklamasi 45 </title>
 
     <link href="<?php echo base_url()?>assets/admin/css/app.css" rel="stylesheet">
     <link href="<?php echo base_url()?>assets/admin/css/animate/animate.min.css" rel="stylesheet">
