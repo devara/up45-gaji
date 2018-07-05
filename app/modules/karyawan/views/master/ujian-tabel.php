@@ -37,6 +37,9 @@
 			<table id="tblCekRapat" class="table table-striped table-bordered">
 				<thead>
 					<tr>
+						<th colspan="5" style="text-align: center;">Data <?=$tipe?></th>
+					</tr>
+					<tr>
 						<th>Tanggal</th>
 						<th>Hari</th>
 						<th>Kode Mata Kuliah</th>
@@ -67,7 +70,7 @@
 <script type="text/javascript">
 	$('#printAbsensi').on("click", function () {
       $('.printArea').printThis({
-      	header: "<h4>Data Rapat Pegawai</h5>",
+      	header: "<h4>Data Vakasi Pengawas/Korektor Ujian</h5>",
       });
     });
 </script>

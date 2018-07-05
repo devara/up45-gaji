@@ -40,6 +40,7 @@ class Ujian extends CI_Controller
 				$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
 				$data['cekData'] = $this->my_lib->get_data_join_triple('data_ujian','data_ujian_pengawas','master_matakuliah',$join1,$join2,$param);
 				$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+				$data['tipe'] = 'Pengawas Ujian';
 				$tabel = $this->load->view('master/ujian-tabel',$data,true);
 				$message[] = array('code'=>200,'message'=>'Data Tersedia.','tabel'=>$tabel);
 			}
@@ -53,6 +54,7 @@ class Ujian extends CI_Controller
 				$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
 				$data['cekData'] = $this->my_lib->get_data_join_triple('data_ujian','data_ujian_korektor','master_matakuliah',$join1,$join2,$param);
 				$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+				$data['tipe'] = 'Korektor Ujian';
 				$tabel = $this->load->view('master/ujian-tabel',$data,true);
 				$message[] = array('code'=>200,'message'=>'Data Tersedia.','tabel'=>$tabel);
 			}

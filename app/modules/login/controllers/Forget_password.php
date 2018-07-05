@@ -26,7 +26,7 @@ class Forget_password extends CI_Controller
 				$param = array(
 					'id' => $id
 				);
-				$pesan_html = $this->load->view('reset_password_mail_template',$data,true);
+				$pesan_html = $this->load->view('reset',$data,true);
 				
 				$mail = new PHPMailer;
 				$mail->isSMTP();
@@ -34,15 +34,15 @@ class Forget_password extends CI_Controller
 				$mail->do_debug = 0;
 				$mail->SMTPAuth = true;
 				$mail->SMTPSecure = 'tls';
-				$mail->Host = 'mail.gaji.up45.ac.id';
-				$mail->Port = 587;
-				$mail->Username = "info@gaji.up45.ac.id";
+				$mail->Host = 'ssl://smtp.gmail.com';
+				$mail->Port = 465;
+				$mail->Username = "developer.up45@gmail.com";
 				$mail->Password = "@Devara1995";
-				$mail->setFrom('info@gaji.up45.ac.id', 'Universitas Proklamasi 45');
+				$mail->setFrom('developer.up45@gmail.com', 'Universitas Proklamasi 45');
 				$mail->addAddress($email);
 				$mail->Subject = 'Reset Password';
 				$mail->isHTML(true);
-			  $mail->Body    = $pesan_html;
+			  $mail->Body = $pesan_html;
 			  if ($mail->send()) { #Jika email berhasil dikirim
 			  	$add_token = $this->my_lib->edit_row('data_pegawai',$value,$param);
 			  	if ($add_token) {

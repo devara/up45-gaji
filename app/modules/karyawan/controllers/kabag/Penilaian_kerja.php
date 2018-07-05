@@ -8,7 +8,7 @@ class Penilaian_kerja extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-    if ($this->lib_login->is_karyawan()==FALSE) {
+    if ($this->lib_login->is_kabag()==FALSE) {
     	redirect(base_url());
     }
 	}
@@ -26,10 +26,39 @@ class Penilaian_kerja extends CI_Controller
 		$this->load->view('kabag/penilaian-kerja',$data);
 	}
 
+	function cek()
+	{
+		$this->form_validation->set_rules('per', 'Periode Kerja', 'required');
+		$this->form_validation->set_rules('jab', 'Jabatan', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$per = $this->input->post('per');
+			$jab = $this->input->post('jab');
+			$param = array(
+				'id_periode' => $per,
+				'pemberi_nilai'	=> $jab
+			);
+			$cekData = $this->my_lib->cek('data_penilaian',$param);
+			if ($cekData == FALSE) {
+				$message[] = array('code'=>200,'message'=>'Available.','status'=>'Anda dapat mengisi penilaian');
+			}
+			else {
+				$message[] = array('code'=>500,'message'=>'Not available.','status'=>'Anda sudah memberikan penilaian untuk periode ini');
+			}
+			
+		}
+		else{
+			$message[] = array('code'=>404,'message' => validation_errors('<div class="error">', '</div>'));
+		}
+		$this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($message));
+	}
+
 	function input_penilaian()
 	{
 		$IDper = $this->input->post('idPer');
 		$nip = $this->input->post('nip');
+		$jab = $this->input->post('kd_jabatan');
 		$result = array();
 		foreach ($nip as $key => $value) {
 			$total = $_POST['jam'][$key] + $_POST['disiplin'][$key] + $_POST['loyalitas'][$key] + $_POST['pelayanan'][$key] + $_POST['propeka'][$key];
@@ -48,13 +77,15 @@ class Penilaian_kerja extends CI_Controller
 			$result[] = array(
 				'id_periode' => $IDper,
 	  	  'nip' 	=> $_POST['nip'][$key],
+	  	  'kode_unit' => $_POST['kd_unit'][$key],
 	  	  'jam' 	=> $_POST['jam'][$key],
 	  	  'kedisiplinan' 	=> $_POST['disiplin'][$key],
 	  	  'loyalitas' 	=> $_POST['loyalitas'][$key],
 	  	  'pelayanan' 	=> $_POST['pelayanan'][$key],
 	  	  'propeka' 	=> $_POST['propeka'][$key],
 	      'total' => $total,
-	      'ranking' => $rangking
+	      'ranking' => $rangking,
+	      'pemberi_nilai' => $jab
 	    );
 		}
 		$insert= $this->db->insert_batch('data_penilaian', $result);

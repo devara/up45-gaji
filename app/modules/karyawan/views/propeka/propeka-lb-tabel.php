@@ -27,11 +27,17 @@
 	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
-				<th>No</th>
-				<th>Kegiatan</th>
-				<th>Rencana</th>
-				<th>Realisasi</th>
-				<th>Keterangan</th>
+				<th rowspan="2" style="text-align: center;vertical-align: middle;">No</th>
+				<th rowspan="2" style="text-align: center;vertical-align: middle;">Kegiatan</th>
+				<th colspan="2" style="text-align: center;">Rencana</th>
+				<th colspan="2" style="text-align: center;">Realisasi</th>
+				<th rowspan="2" style="text-align: center;vertical-align: middle;">Keterangan</th>
+			</tr>
+			<tr>
+				<th style="text-align: center;">Dari</th>
+				<th style="text-align: center;">Sampai</th>
+				<th style="text-align: center;">Dari</th>
+				<th style="text-align: center;">Sampai</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -40,16 +46,22 @@
 				<td><?=$no?></td>
 				<td><?=$lap->kegiatan?></td>
 				<td>
-					<?=$lap->cb_tgl_mulai?> - <?=$lap->cb_tgl_selesai?>
+					<?=tanggal_indo($lap->cb_tgl_mulai)?>
 				</td>
 				<td>
-					<?=$lap->lb_tgl_mulai?> - <?=$lap->lb_tgl_selesai?>
+					<?=tanggal_indo($lap->cb_tgl_selesai)?>
+				</td>
+				<td>
+					<?=tanggal_indo($lap->lb_tgl_mulai)?>
+				</td>
+				<td>
+					<?=tanggal_indo($lap->lb_tgl_selesai)?>
 				</td>
 				<td><?=$lap->keterangan?></td>
 			</tr>
 		<?php $no++; endforeach; else: ?>
 			<tr>
-				<td colspan="5" align="center">Tidak ada data untuk periode ini</td>
+				<td colspan="7" align="center">Tidak ada data untuk periode ini</td>
 			</tr>
 		<?php endif; ?>
 		</tbody>

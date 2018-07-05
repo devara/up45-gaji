@@ -3,7 +3,7 @@
  * 
  */
 use PHPMailer\PHPMailer\PHPMailer;
-class Aktivasi extends CI_Controller
+class Aktivasi_backup extends CI_Controller
 {
 	
 	function submit()
@@ -31,7 +31,7 @@ class Aktivasi extends CI_Controller
 				$param = array(
 					'id' => $id
 				);
-				$pesan_html = $this->load->view('aktivasi',$data,true);
+				$pesan_html = $this->load->view('aktivasi_akun',$data,true);
 				$mail = new PHPMailer;
 				$mail->isSMTP();
 				$mail->SMTPDebug = false;
@@ -40,9 +40,9 @@ class Aktivasi extends CI_Controller
 				$mail->SMTPSecure = 'tls';
 				$mail->Host = 'ssl://smtp.gmail.com';
 				$mail->Port = 465;
-				$mail->Username = "developer.up45@gmail.com";
+				$mail->Username = "web.bisindo@gmail.com";
 				$mail->Password = "@Devara1995";
-				$mail->setFrom('developer.up45@gmail.com', 'Universitas Proklamasi 45');
+				$mail->setFrom('web.bisindo@gmail.com', 'Universitas Proklamasi 45');
 				$mail->addAddress($email);
 				$mail->Subject = 'Aktivasi Akun';
 				$mail->isHTML(true);

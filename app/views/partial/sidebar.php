@@ -162,7 +162,13 @@
 	          <li><a href="<?=karyawan()?>kabag/cek_laporan">Laporan Bulanan Staff</a></li>
 	        </ul>
 				</li>
-				<li><a href="<?=karyawan()?>kabag/penilaian_kerja"><i class="fa fa-thumbs-up"></i> Penilaian Kinerja</a></li>
+				<li>
+					<a><i class="fa fa-files-o"></i> Penilaian Kinerja <span class="fa fa-chevron-down"></span></a>
+					<ul class="nav child_menu">
+						<li><a href="<?=karyawan()?>kabag/penilaian_kerja">Isi Penilaian Kinerja</a></li>
+						<li><a href="<?=karyawan()?>kabag/data_penilaian_kerja">Data Penilaian Kinerja</a></li>
+					</ul>
+				</li>
 				<li><a href="<?=karyawan()?>kabag/cek_absensi_susulan"><i class="fa fa-clock-o"></i> Permintaan Absensi Susulan</a></li>
 			</ul>
 		</div>
