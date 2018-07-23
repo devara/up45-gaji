@@ -1,9 +1,20 @@
 <script type="text/javascript">
 $(document).ready(function() {
-	//datatables
-	tampil_data_jabatan();
-  $('#table-jab').dataTable();
-
+  $('#table-jab').dataTable({
+    "pageLength": 10,
+    "language": {
+      "lengthMenu": "Tampilkan _MENU_ data per halaman",
+      "zeroRecords": "Maaf, hasil pencarian tidak ada",
+      "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+      "infoEmpty": "Tidak ada data",
+      "infoFiltered": "(Filter dari _MAX_ jumlah data)",
+      "search": "Cari ",
+      "paginate": {
+        "next":       "Selanjutnya",
+        "previous":   "Sebelumnya"
+      }
+    },
+  });
 });
   function tampil_data_jabatan(){
     $.ajax({

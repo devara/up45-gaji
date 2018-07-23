@@ -102,4 +102,15 @@ class Lh extends CI_Controller
 		}
 	}
 
+	function lihat_detail($id)
+	{
+		$data['detail'] = $this->my_lib->get_data('data_rkhlh_detail',array('id_rkhlh'=>$id));
+		$detailRKH = $this->load->view('propeka/propeka-lh-detail',$data,true);
+		$message[] = array('code'=>200,'message'=>'Data Tersedia.','detail'=>$detailRKH);
+
+		$this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($message));
+	}
+
 }

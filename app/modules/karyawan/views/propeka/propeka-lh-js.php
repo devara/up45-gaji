@@ -60,4 +60,21 @@ function getRKH(){
     }
   });
 }
+
+function tampil_detail(id){
+	$.ajax({
+    url: "<?php echo karyawan().'propeka/lh/lihat_detail/'; ?>"+id,
+    beforeSend: function(){
+      $("#loading-detail").html(loader_green);
+    },
+    success: function(response){
+      $("#loading-detail").html("");
+      if (response[0].code!=404) {
+      	$("#detailLH").html(response[0].detail);
+      } else{
+        $("#loading-detail").html(alert_red(response[0].message));
+      }
+    }
+  });
+}
 </script>

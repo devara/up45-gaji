@@ -17,6 +17,7 @@ class Unit_kerja extends CI_Controller
 		$data['unit'] = $this->my_lib->get_data('master_unit_kerja');
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('referensi/unit-kerja-js',$data,true);
+		$data['unit'] = $this->my_lib->get_data('master_unit_kerja');
 		$this->load->view('referensi/unit-kerja',$data);
 	}
 

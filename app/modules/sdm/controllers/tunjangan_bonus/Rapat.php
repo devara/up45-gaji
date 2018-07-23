@@ -30,6 +30,7 @@ class Rapat extends CI_Controller
 		$periode = $this->input->post('periode');
 		$tgl = $this->input->post('tanggal');
 		$ket = $this->input->post('keterangan');
+		$nominal_insentif = $this->my_lib->get_row('master_nominal',array('id_nominal'=>1),'rapat');
 		
 		$data = array(
 			'id_periode'	=> $periode,
@@ -43,12 +44,37 @@ class Rapat extends CI_Controller
 			$nm = $this->input->post('peserta');
 			$result = array();
 	    foreach($nm AS $key => $val){
-	     $result[] = array(
-	      'id_rapat'		=> $rapatID,
-	      'nip' 	=> $_POST['peserta'][$key]
-	     );
+	    	$result[] = array(
+	      	'id_rapat'		=> $rapatID,
+	      	'nip' 	=> $_POST['peserta'][$key]
+	     	);
+	     	$nip = $_POST['peserta'][$key];
+	    	$cek_data_insentif = $this->my_lib->cek('gaji_rapat',array('id_periode'=>$periode,'nip'=>$nip));
+	    	if ($cek_data_insentif == TRUE) {
+	    		$data_insentif = $this->my_lib->get_data_row('gaji_rapat',array('id_periode'=>$periode,'nip'=>$nip));
+	    		$hadir = $data_insentif->row('jml_hadir');
+	    		$insentif = $data_insentif->row('jml_insentif');
+
+	    		$hadir_new = $hadir + 1;
+	    		$insentif_new = $insentif + $nominal_insentif;
+
+	    		$new_value = array(
+	    			'jml_hadir' => $hadir_new,
+	    			'jml_insentif' => $insentif_new
+	    		);
+	    		$this->my_lib->edit_row('gaji_rapat',$new_value,array('id_periode'=>$periode,'nip'=>$nip));
+	    	}
+	    	else{
+	    		$value = array(
+	    			'id_periode' => $periode,
+	    			'nip' => $nip,
+	    			'jml_hadir' => 1,
+	    			'jml_insentif' => $nominal_insentif
+	    		);
+	    		$this->my_lib->add_row('gaji_rapat',$value);
+	    	}
 	    }
-	    $test= $this->db->insert_batch('data_rapat_peserta', $result);
+	    $input_peserta_rapat = $this->db->insert_batch('data_rapat_peserta', $result);
 		}
 		$alert_type = "success";
     $alert_title = "Berhasil disimpan";

@@ -92,10 +92,31 @@
 	        </ul>
 				</li>
 				<li>
-					<a><i class="fa fa-home"></i> Data Ujian <span class="fa fa-chevron-down"></span></a>
+					<a><i class="fa fa-home"></i> Master Ujian <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-	          <li><a href="<?php echo akademik()?>ujian">UTS/UAS</a></li>
+	          <li><a href="<?php echo akademik()?>ujian">Data UTS/UAS</a></li>
+	          <li><a href="<?php echo akademik()?>pengawas">Pengawas UTS/UAS</a></li>
 	          <li><a href="<?php echo akademik()?>koreksi">Koreksi UTS/UAS</a></li>
+	        </ul>
+				</li>
+			</ul>
+		</div>
+		<?php endif;?>
+
+		<?php 
+		if($this->session->userdata('level') == 'KEU'): ?>
+		<div class="menu_section">
+			<a href=""><h3><i class="fa fa-home"></i> Dashboard</h3></a>
+		</div>
+		<div class="menu_section">
+			<h3>Modul Keuangan</h3>
+			<ul class="nav side-menu">
+				<li>
+					<a><i class="fa fa-money"></i> Master Penggajian <span class="fa fa-chevron-down"></span></a>
+					<ul class="nav child_menu">
+	          <li><a href="#">Data Tunjangan Gaji</a></li>
+	          <li><a href="#">Data Potongan Gaji</a></li>
+	          <li><a href="#">Generate Slip Gaji</a></li>
 	        </ul>
 				</li>
 			</ul>

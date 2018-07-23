@@ -86,7 +86,24 @@ function cekRKH(){
 				document.getElementById('btnSubmit').disabled = false;
       }
       else{
-        $("#loading").html(alert_red(response[0].message));
+        $("#cekloading").html(alert_red(response[0].message));
+      }
+    }
+  });
+}
+
+function tampil_detail(id){
+	$.ajax({
+    url: "<?php echo karyawan().'propeka/rkh/lihat_detail/'; ?>"+id,
+    beforeSend: function(){
+      $("#loading-detail").html(loader_green);
+    },
+    success: function(response){
+      $("#loading-detail").html("");
+      if (response[0].code!=404) {
+      	$("#detailRKH").html(response[0].detail);
+      } else{
+        $("#loading-detail").html(alert_red(response[0].message));
       }
     }
   });

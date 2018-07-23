@@ -120,24 +120,38 @@
               	<div role="tabpanel" class="tab-pane fade" id="pengawas" aria-labelledby="pengawas-tab">
               		<form id="demo-form" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?=akademik()?>koreksi/input_korektor">
               			<div class="form-group">
+              				<label for="ujianlist" class="control-label col-md-2 col-sm-3 col-xs-12">Pilih Periode <span class="required">*</span></label>
+              				<div class="col-md-6 col-sm-6 col-xs-12">
+              					<select name="periode" id="periode" class="select2_single form-control" required="" title="Pilih Periode" onchange="get_ujian()" style="width: 100% !important;padding: 0;">
+              						<option disabled="" selected="">Pilih Periode</option>
+                          <?php foreach ($periode as $per) { 
+							          		$mulai = $this->lib_calendar->convert($per->mulai);
+							          		$akhir = $this->lib_calendar->convert($per->akhir);
+							          	 ?>
+							          		<option value="<?=$per->id_periode?>">Periode <?php echo "".$per->bulan." ".$per->tahun." ( ".$mulai." - ".$akhir." )"; ?></option>
+							          	<?php } ?>
+              					</select>
+              				</div>
+              			</div>
+              			<div class="form-group">
+              				<div class="col-md-offset-2 col-md-6">
+              					<div id="loadujian"></div>
+              				</div>
+              			</div>
+              			<div class="form-group">
               				<label for="ujianlist" class="control-label col-md-2 col-sm-3 col-xs-12">Pilih Ujian <span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="ujianlist" id="ujianlist" class="select2_single form-control" required="required" title="Pilih Ujian" style="width: 100% !important;padding: 0;">
                         	<option selected="" disabled="">Pilih Ujian</option>
-                        <?php 
-                        $listujian = $this->my_lib->get_data('data_ujian',array('koreksi'=>'belum'));
-                        if($listujian):
-                        foreach ($listujian as $u) { 
-                        	$nm = field_value('master_matakuliah','kode_matakuliah',$u->kode_matakuliah,'nama_matakuliah');?> ?>
-                          <option value="<?=$u->id_ujian?>"><?=$nm?></option>
-                        <?php } endif; ?>
+                        
                        	</select>
                       </div>
               			</div>
               			<div class="form-group">
               				<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Pilih Pegawai <span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="peg_ganda[]" id="peg_ganda" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
+                        <select name="peg_single" id="peg_single" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
+                        	<option selected="" disabled="">Pilih Korektor</option>
                         <?php 
                         foreach ($pegawai as $row) { ?>
                           <option value="<?=$row->nip?>"><?=$row->nama?></option>

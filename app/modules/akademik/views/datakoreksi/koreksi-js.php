@@ -4,6 +4,34 @@ $(document).ready(function() {
   
 });
 
+function get_ujian(){
+	var periode = $('#periode').val();
+	$.ajax({
+		url: "<?php echo akademik();?>koreksi/get_ujian/"+periode+"",
+		dataType:"json",
+		beforeSend: function(){
+      $("#loadujian").html(loader_green);
+    },
+    success: function(data){
+      $("#loadujian").html("");
+      if (data[0].code==200) {
+        var html = '';
+        var i;
+        var jum = data.length;
+        for(i=0; i<jum; i++){
+        	html += '<option value="'+data[i].id_ujian+'">';
+        	html += ''+data[i].nama_ujian+'';
+        	html += '</option>';
+        }
+        $('#ujianlist').html(html);
+      } else{
+      	$('#ujianlist').html('<option selected="" disabled="">Pilih Ujian</option>');
+        $("#loadujian").html(alert_red(data[0].message));
+      }
+    }
+	});
+}
+
 $('#btn_cek').click(function(e){
   var idPer = $('#cekPeriode').val();
   var nip = $('#cekPeg').val();

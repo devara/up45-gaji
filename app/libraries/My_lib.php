@@ -169,6 +169,37 @@ class My_lib {
 		}
 	}
 
+	function get_data_row($table,$where=array(),$order='',$group='',$limit=null,$start=null){
+
+
+		if(!empty($table))	{
+			if(!empty($where)){
+				$this->CI->db->where($where);
+			}
+
+			if(!empty($order)){
+				$this->CI->db->order_by($order);
+			}
+
+			if(!empty($group)){
+				$this->CI->db->group_by($group);
+			}
+
+			if(!empty($limit)){
+				$this->CI->db->limit($limit,$start);
+			}
+
+			$result=$this->CI->db->get($table);
+			if($result->num_rows() > 0){
+				return $result;
+			}else{
+				return null;
+			}
+		}else{
+			$this->noTable();
+		}
+	}
+
 	function get_data_join($table1,$table2,$where=array(),$join){
 
 

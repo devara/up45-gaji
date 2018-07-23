@@ -60,9 +60,6 @@
                 <li role="presentation" class="" id="li-pengawas">
                 	<a href="#pengawas" id="pengawas-tab" role="tab" data-toggle="tab" aria-expanded="false">Pengawas UTS/UAS</a>
                 </li>
-                <li role="presentation" class="" id="li-cekpeng">
-                	<a href="#cekpeng" id="cekpeng-tab" role="tab" data-toggle="tab" aria-expanded="false">Cek Data Pengawas UTS/UAS</a>
-                </li>
               </ul>
               <div id="myTabContent" class="tab-content">
               	<div role="tabpanel" class="tab-pane fade <?php if($aktifTab == 'data'): ?> active in <?php endif; ?>" id="data" aria-labelledby="data-tab">
@@ -157,51 +154,6 @@
               			</div>
               		</form>
               	</div>
-              	<div role="tabpanel" class="tab-pane fade" id="cekpeng" aria-labelledby="cekpeng-tab">
-              		<form id="demo-form" data-parsley-validate class="form-horizontal form-label-left">
-              			<div class="form-group">
-                      <label class="control-label col-md-1 col-sm-3 col-xs-12" for="cekPeriode">Periode <span class="required">*</span>
-                      </label>
-                      <div class="col-md-5 col-sm-6 col-xs-12">
-                        <select name="cekPeriode" id="cekPeriode" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;">
-                          <option disabled="" selected="">Pilih Periode</option>
-                          <?php foreach ($periode as $per) { 
-							          		$mulai = $this->lib_calendar->convert($per->mulai);
-							          		$akhir = $this->lib_calendar->convert($per->akhir);
-							          	 ?>
-							          		<option value="<?=$per->id_periode?>">Periode <?php echo "".$per->bulan." ".$per->tahun." ( ".$mulai." - ".$akhir." )"; ?></option>
-							          	<?php } ?>
-                        </select>
-                      </div>
-                    </div>
-              			<div class="form-group">
-                      <label for="cekPeg" class="control-label col-md-1 col-sm-3 col-xs-12">Pegawai <span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-6 col-xs-12">
-                        <select name="cekPeg" id="cekPeg" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
-                        	<option selected="" disabled="">Pilih</option>
-                          <?php foreach ($pegawai as $row) { ?>
-                              <option value="<?=$row->nip?>"><?=$row->nama?></option>
-                            <?php } ?>
-                        </select>
-                    	</div>
-                    </div>
-                    <div class="form-group">
-                    	<div class="col-md-offset-1 col-md-4">
-                    		<button type="button" id="btn_cek" class="btn btn-sm btn-success">Cek Data</button>
-                    	</div>
-                    </div>
-                    <div class="form-group">
-                    	<div class="col-md-offset-1 col-md-5">
-                    		<div id="cekloading"></div>
-                    	</div>
-                    </div>
-              		</form>
-              		<br>
-              		<br>
-              		<div id="tampilCekPengawas">
-              			
-              		</div>
-              	</div>
               </div>
 						</div>
 					</div>
@@ -242,6 +194,17 @@
 		        </label>
 		        <div class="col-md-4 col-sm-6 col-xs-12">
 		          <input type="date" id="tgl" name="tgl" required="required" class="form-control col-md-7 col-xs-12">
+		        </div>
+		      </div>
+		      <div class="form-group">
+		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipe">Jam Ujian <span class="required">*</span>
+		        </label>
+		        <div class="col-md-4 col-sm-6 col-xs-12">
+		          <select class="form-control" name="jam" id="jam" required="required">
+		        		<option selected="" disabled="">Pilih</option>
+		         		<option value="reguler">Jam Reguler</option>
+		         		<option value="malam">Jam Malam</option>
+		         	</select>
 		        </div>
 		      </div>
 		      <div class="form-group">

@@ -107,4 +107,15 @@ class Rkh extends CI_Controller
 		}
 		redirect(karyawan().'propeka/rkh');
 	}
+
+	function lihat_detail($id)
+	{
+		$data['detail'] = $this->my_lib->get_data('data_rkhlh_detail',array('id_rkhlh'=>$id));
+		$detailRKH = $this->load->view('propeka/propeka-rkh-detail',$data,true);
+		$message[] = array('code'=>200,'message'=>'Data Tersedia.','detail'=>$detailRKH);
+
+		$this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($message));
+	}
 }

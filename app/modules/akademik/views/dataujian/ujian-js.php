@@ -63,6 +63,7 @@ function get_makul(){
 $('#btn_tambah').click(function(e){
 	var idper = $('#id_per').val();
 	var tgl = $('#tgl').val();
+	var jam = $('#jam').val();
 	var tipe = $('#tipe').val();
 	var makul = $('#makul').val();
 	var jum_mhs = $('#addjum').val();
@@ -71,7 +72,7 @@ $('#btn_tambah').click(function(e){
 		type: "POST",
 		url: "<?php echo akademik()?>ujian/tambah",
 		dataType: "json",
-		data: {idper:idper, tgl:tgl, tipe:tipe, makul:makul, jum:jum_mhs, ket:ket},
+		data: {idper:idper, tgl:tgl, jam:jam, tipe:tipe, makul:makul, jum:jum_mhs, ket:ket},
 		beforeSend: function(){
 			$("#loading").html(loader_green);
 		},
@@ -80,6 +81,7 @@ $('#btn_tambah').click(function(e){
 			if (response[0].code==200) {
 				$('#id_per').val(0);
 				$('#tgl').val("");
+				$('#jam').val("");
 				$('#tipe').val("");
 				$('#prodi').val(0);
 				$('#makul').html("");
@@ -108,46 +110,6 @@ $('#btn_tambah').click(function(e){
 		}
 	});
 	e.preventDefault();
-});
-
-$('#btn_cek').click(function(e){
-  var idPer = $('#cekPeriode').val();
-  var nip = $('#cekPeg').val();
-  $.ajax({
-    type  : "POST",
-    url   : "<?php echo akademik()?>ujian/cek_data_pengawas",
-    dataType : "json",
-    data : {per:idPer, nip:nip},
-    beforeSend: function(){
-      $("#cekloading").html(loader_green);
-      $("#tampilCekPengawas").html("");
-    },
-    success: function(response){
-      $("#cekloading").html("");
-      if (response[0].code==200) {
-        $("#tampilCekPengawas").html(response[0].tabel);
-        $('#tblCekPengawas').dataTable({
-          "pageLength": 10,
-          "language": {
-            "lengthMenu": "Tampilkan _MENU_ data per halaman",
-            "zeroRecords": "Maaf, hasil pencarian tidak ada",
-            "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-            "infoEmpty": "Tidak ada data",
-            "infoFiltered": "(Filter dari _MAX_ jumlah data)",
-            "search": "Cari ",
-            "paginate": {
-              "next":       "Selanjutnya",
-              "previous":   "Sebelumnya"
-            }
-          },
-        });
-      }
-      else{
-        $("#cekloading").html(alert_red(response[0].message));
-      }
-    }
-  });
-  e.preventDefault();
 });
 
 function showData(){

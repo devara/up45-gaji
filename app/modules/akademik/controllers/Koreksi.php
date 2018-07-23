@@ -17,32 +17,95 @@ class Koreksi extends CI_Controller
 	{
 		$data['ujian'] = $this->my_lib->get_data('data_ujian');
 		$data['periode'] = $this->my_lib->get_data('master_periode');
-		$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('kode_status_pegawai'=>'MUL'));
+		$data['pegawai'] = $this->my_lib->get_data('data_pegawai');
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('datakoreksi/koreksi-js',$data,true);
 		$data['aktifTab'] = 'data';
 		$this->load->view('datakoreksi/koreksi',$data);
 	}
 
+	function get_ujian($periode=FALSE)
+	{
+		$param = array(
+			'id_periode' => $periode,
+			'koreksi' => 'belum'
+		);
+		$join = 'data_ujian.kode_matakuliah = master_matakuliah.kode_matakuliah';
+		$ujian = $this->my_lib->get_data_join('data_ujian','master_matakuliah',$param,$join);
+		if ($ujian) {
+			foreach ($ujian as $row) {
+				$data[] = array(
+					'code'	=> '200',
+					'id_ujian' => $row->id_ujian,
+					'nama_ujian' => $row->nama_matakuliah,
+				);
+			}
+		}
+		else{
+			$data[] = array('code'=>'404','message'=>'Tidak ditemukan...');
+		}
+		$this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($data));
+	}
+
 	function input_korektor()
 	{
-		$idUjian = $this->input->post('ujianlist');
-		$nm = $this->input->post('peg_ganda');
-		$result = array();
-	  foreach($nm AS $key => $val){
-	    $result[] = array(
-	    	'id_ujian' => $idUjian,
-	  	  'nip' 	=> $_POST['peg_ganda'][$key]
-	    );
-	  }
-	  $update = $this->my_lib->edit_row('data_ujian',array('koreksi'=>'sudah'),array('id_ujian'=>$idUjian));
-	  $insert= $this->db->insert_batch('data_ujian_korektor',$result);
-	  if ($insert) {
-	  	$alert_type = "success";
-      $alert_title ="Berhasil input korektor Ujian";
-			set_header_message($alert_type,'Input Korektor Ujian',$alert_title);
-			redirect(akademik().'koreksi');
-	  }
+		$this->form_validation->set_rules('periode', 'Periode Kerja', 'required');
+		$this->form_validation->set_rules('ujianlist', 'Nama Ujian', 'required');
+		$this->form_validation->set_rules('peg_single', 'NIP Pegawai', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$periode = $this->input->post('periode');
+			$idUjian = $this->input->post('ujianlist');
+			$nip = $this->input->post('peg_single');
+			$nominal = $this->my_lib->get_data_row('master_nominal',array('status'=>'aktif'));
+			$jml_mhs = $this->my_lib->get_row('data_ujian',array('id_ujian'=>$idUjian),'jumlah_mahasiswa');
+			$insentif = $jml_mhs*$nominal->row('koreksi');
+			$param = array(
+				'id_periode' => $periode,
+				'nip' => $nip
+			);
+			$cek_data_insentif = $this->my_lib->cek('gaji_korektor',$param);
+			if ($cek_data_insentif == TRUE) {
+				$data_insentif = $this->my_lib->get_data_row('gaji_korektor',$param);
+					$koreksi_old = $data_insentif->row('jml_koreksi');
+					$insentif_old = $data_insentif->row('jml_insentif');
+
+					$koreksi_new = $koreksi_old + 1;
+					$insentif_new = $insentif_old + $insentif;
+
+					$new_value_insentif = array(
+						'jml_koreksi' => $koreksi_new,
+						'jml_insentif' => $insentif_new
+					);
+					$this->my_lib->edit_row('gaji_korektor',$new_value_insentif,$param);
+			}
+			else{
+				$value_insentif = array(
+						'id_periode' => $periode,
+						'nip' => $nip,
+						'jml_koreksi' => 1,
+						'jml_insentif' => $insentif
+					);
+					$this->my_lib->add_row('gaji_korektor',$value_insentif);
+			}
+			
+			$data = array(
+				'id_ujian' => $idUjian,
+				'nip' => $nip
+			);
+			$input_data_korektor = $this->my_lib->add_row('data_ujian_korektor',$data);
+		  $update_status_ujian = $this->my_lib->edit_row('data_ujian',array('koreksi'=>'sudah'),array('id_ujian'=>$idUjian));
+		  if ($input_data_korektor && $update_status_ujian) {
+		  	$alert_type = "success";
+	      $alert_title ="Berhasil input korektor Ujian";
+				set_header_message($alert_type,'Input Korektor Ujian',$alert_title);
+				redirect(akademik().'koreksi');
+		  }
+		}
+		else{
+
+		}
 	}
 
 	function cek_data_korektor()

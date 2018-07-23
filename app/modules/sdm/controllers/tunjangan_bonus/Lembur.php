@@ -95,10 +95,20 @@ class Lembur extends CI_Controller
 			$sampai = $this->input->post('addsampai');
 			$ket = $this->input->post('addket');
 
+			$nominal = $this->my_lib->get_data_row('master_nominal',array('status'=>'aktif'));
+
 			$time_mulai = explode_time($this->input->post('addmulai'));
 			$time_sampai = explode_time($this->input->post('addsampai'));
 			$time_durasi = $time_sampai - $time_mulai;
+			$satu_jam = explode_time('01:00:00');
+			$dua_jam = explode_time('02:00:00');
 			$durasi = convert_second($time_durasi);
+			if ($time_durasi > $dua_jam) {
+				$insentif = (($time_durasi/$satu_jam)*$nominal->row('lembur'))+$nominal->row('uang_makan');
+			}
+			else{
+				$insentif = ($time_durasi/$satu_jam)*$nominal->row('lembur');
+			}			
 			
 			$value = array(
 				'id_periode' => $per,
@@ -107,14 +117,55 @@ class Lembur extends CI_Controller
 				'jam_mulai' => $mulai,
 				'jam_selesai' => $sampai,
 				'durasi' => $durasi,
+				'total' => $insentif,
 				'keterangan' => $ket,
 				'acc' => 'ya'
 			);
-			$insert = $this->my_lib->add_row('data_lembur',$value);
-			if ($insert) {
-				$message[] = array('code'=>200,'message'=>'Data Lembur Berhasil Disimpan.');
+			$param = array(
+				'id_periode' => $per,
+				'nip' => $nip
+			);
+			$input_data_lembur = $this->my_lib->add_row('data_lembur',$value);
+			if ($input_data_lembur) { #jika berhasil menyimpan data lembur
+				$cek_data_insentif = $this->my_lib->cek('gaji_lembur',$param);
+				if ($cek_data_insentif == TRUE) { #jika data insentif lembur sudah ada
+					$data_insentif = $this->my_lib->get_data_row('gaji_lembur',$param);
+					$lembur_old = $data_insentif->row('jml_lembur');
+					$insentif_old = $data_insentif->row('jml_insentif');
+
+					$lembur_new = $lembur_old + 1;
+					$insentif_new = $insentif_old + $insentif;
+
+					$new_value_insentif = array(
+						'jml_lembur' => $lembur_new,
+						'jml_insentif' => $insentif_new
+					);
+					$update_data_insentif = $this->my_lib->edit_row('gaji_lembur',$new_value_insentif,$param);
+					if ($update_data_insentif) {
+						$message[] = array('code'=>200,'message'=>'Data Lembur Berhasil Disimpan.');
+					}
+					else{
+						$message[] = array('code'=>500,'message'=>'Data Lembur Gagal disimpan.');
+					}
+				}
+				else{ #jika data insentif lembur belum ada
+					$value_insentif = array(
+						'id_periode' => $per,
+						'nip' => $nip,
+						'jml_lembur' => 1,
+						'jml_insentif' => $insentif
+					);
+					$input_data_insentif = $this->my_lib->add_row('gaji_lembur',$value_insentif);
+					if ($input_data_insentif) {
+						$message[] = array('code'=>200,'message'=>'Data Lembur Berhasil Disimpan.');
+					}
+					else{
+						$message[] = array('code'=>500,'message'=>'Data Lembur Gagal disimpan.');
+					}
+				}
+				
 			}
-			else{
+			else{ #jika gagal menyimpan data lembur
 				$message[] = array('code'=>500,'message'=>'Data Lembur Gagal disimpan.');
 			}
 		}

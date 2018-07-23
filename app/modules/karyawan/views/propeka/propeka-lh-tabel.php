@@ -53,10 +53,11 @@
 					if($cek_rkh): ?>
 						<?php $id_rkhlh = $this->my_lib->get_row('data_rkhlh',array('id_periode'=>$per->id_periode,'tanggal'=>$pe->format("Y-m-d"),'nip'=>$peg->nip),'id_rkhlh');
 						$cek_lh = $this->my_lib->cek('data_rkhlh_detail',array('id_rkhlh'=>$id_rkhlh,'rkh_lh_lengkap'=>'tidak'));
+						$id_lh = $this->my_lib->get_row('data_rkhlh',array('id_periode'=>$per->id_periode,'nip'=>$peg->nip,'tanggal'=>$pe->format("Y-m-d")),'id_rkhlh');
 						if($cek_lh == TRUE): ?>
 							<a class="btn btn-sm btn-primary">LH belum di isi</a>
 						<?php else: ?>
-							<a class="btn btn-sm btn-success">RKH dan LH lengkap</a> | <a href="#" class="blue-text">Lihat</a>
+							<a class="btn btn-sm btn-success">RKH dan LH lengkap</a> |&nbsp;&nbsp;<a class="btn btn-success btn-xs item_edit" onclick="tampil_detail(<?php echo $id_lh ?>)" data-toggle="modal" data-target="#ModalLihat"><i class="fa fa-eye"></i> Lihat</a>
 						<?php endif; ?>
 					
 					<?php else: ?>
@@ -69,3 +70,22 @@
 			<?php endforeach; ?>
 		</tbody>
 	</table>
+
+
+	<div class="modal fade bs-example-modal-md" id="ModalLihat" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+	        </button>
+	        <h4 class="modal-title" id="myModalLabel">Lihat Laporan Harian</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div id="loading-detail"></div>
+	      	<div id="detailLH">
+	      		
+	      	</div>
+	      </div>
+			</div>
+		</div>
+	</div>
