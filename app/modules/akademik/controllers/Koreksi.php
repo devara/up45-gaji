@@ -65,29 +65,29 @@ class Koreksi extends CI_Controller
 				'id_periode' => $periode,
 				'nip' => $nip
 			);
-			$cek_data_insentif = $this->my_lib->cek('gaji_korektor',$param);
+			$cek_data_insentif = $this->my_lib->cek('data_upah_korektor',$param);
 			if ($cek_data_insentif == TRUE) {
-				$data_insentif = $this->my_lib->get_data_row('gaji_korektor',$param);
+				$data_insentif = $this->my_lib->get_data_row('data_upah_korektor',$param);
 					$koreksi_old = $data_insentif->row('jml_koreksi');
-					$insentif_old = $data_insentif->row('jml_insentif');
+					$insentif_old = $data_insentif->row('jml_upah');
 
 					$koreksi_new = $koreksi_old + 1;
 					$insentif_new = $insentif_old + $insentif;
 
 					$new_value_insentif = array(
 						'jml_koreksi' => $koreksi_new,
-						'jml_insentif' => $insentif_new
+						'jml_upah' => $insentif_new
 					);
-					$this->my_lib->edit_row('gaji_korektor',$new_value_insentif,$param);
+					$this->my_lib->edit_row('data_upah_korektor',$new_value_insentif,$param);
 			}
 			else{
 				$value_insentif = array(
 						'id_periode' => $periode,
 						'nip' => $nip,
 						'jml_koreksi' => 1,
-						'jml_insentif' => $insentif
+						'jml_upah' => $insentif
 					);
-					$this->my_lib->add_row('gaji_korektor',$value_insentif);
+					$this->my_lib->add_row('data_upah_korektor',$value_insentif);
 			}
 			
 			$data = array(

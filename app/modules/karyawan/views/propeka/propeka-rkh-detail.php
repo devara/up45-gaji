@@ -15,8 +15,8 @@
 								<tr>
 									<td><?=$no?></td>
 									<td><?=$row->kegiatan?></td>
-									<td align="center"><?=$row->dari?></td>
-									<td align="center"><?=$row->sampai?></td>
+									<td align="center"><?=$row->mulai_rkh?></td>
+									<td align="center"><?=$row->sampai_rkh?></td>
 								</tr>
 							<?php $no++; endforeach; ?>
 						</tbody>

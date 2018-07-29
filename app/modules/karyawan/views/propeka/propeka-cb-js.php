@@ -25,18 +25,50 @@ $('#tampilChecklist').click(function(e){
 });
 
 $('#btnTambah').click(function(e){
+	var per = $('#periode').val();
 	var isi = '';
-	isi += '<div class="form-group">';
-		isi += '<div class="col-md-offset-1 col-md-5 col-sm-6 col-xs-12">';
-		isi += '<input type="text" name="keg[]" class="form-control" placeholder="Nama Kegiatan" required>';
-		isi += '</div>';
-		isi += '<div class="col-md-3">';
-		isi += '<input type="date" name="dari[]" class="form-control" placeholder="Dari tanggal" required>';
-		isi += '</div>';
-		isi += '<div class="col-md-3">';
-		isi += '<input type="date" name="sampai[]" class="form-control" placeholder="Sampai tanggal" required>';
-		isi += '</div>';
-		isi += '</div>';
+	$.ajax({
+    url: "<?php echo ajaxpublic_url().'cekper/'; ?>"+per,
+    beforeSend: function(){
+      
+    },
+    success: function(response){      
+      if (response[0].code!=404) {
+      	isi += '<div class="form-group">';
+				isi += '<div class="col-md-offset-1 col-md-5 col-sm-6 col-xs-12">';
+				isi += '<input type="text" name="keg[]" class="form-control" placeholder="Nama Kegiatan" required>';
+				isi += '</div>';
+				isi += '<div class="col-md-3">';
+				isi += '<input type="date" name="dari[]" class="form-control" min="'+response[0].min+'" max="'+response[0].max+'" placeholder="Dari tanggal" required>';
+				isi += '</div>';
+				isi += '<div class="col-md-3">';
+				isi += '<input type="date" name="sampai[]" class="form-control" min="'+response[0].min+'" max="'+response[0].max+'" placeholder="Sampai tanggal" required>';
+				isi += '</div>';
+				isi += '</div>';
+				$("#formAdd").append(isi);
+      } else{
+        
+      }
+    }
+  });
+	e.preventDefault();
+});
+
+$('#btn_tambah').click(function(e){
+	var minimal = $('#batas_awal').val();
+	var maksimal = $('#batas_akhir').val();
+	var isi = '';
+  isi += '<div class="form-group">';
+	isi += '<div class="col-md-offset-1 col-md-5 col-sm-6 col-xs-12">';
+	isi += '<input type="text" name="keg[]" class="form-control" placeholder="Nama Kegiatan" required>';
+	isi += '</div>';
+	isi += '<div class="col-md-3">';
+	isi += '<input type="date" name="dari[]" class="form-control" min="'+minimal+'" max="'+maksimal+'" placeholder="Dari tanggal" required>';
+	isi += '</div>';
+	isi += '<div class="col-md-3">';
+	isi += '<input type="date" name="sampai[]" class="form-control" min="'+minimal+'" max="'+maksimal+'" placeholder="Sampai tanggal" required>';
+	isi += '</div>';
+	isi += '</div>';
 	$("#formAdd").append(isi);
 	e.preventDefault();
 });
@@ -57,14 +89,20 @@ function cekData(){
 			$("#cekloading").html("");
 			if (response[0].code==200) {
 				$("#cekloading").html(alert_red(response[0].status));
-				$("#formAdd").hide();
+				$("#formAdd").html("");
 				$btnsmt.removeClass('btn-success').addClass('btn-danger');
 				document.getElementById('btnSubmit').disabled = true;
+				document.getElementById('btn_tambah').disabled = true;
 			}
-			else if (response[0].code==500) {      	
-				$("#formAdd").show();
+			else if (response[0].code==500) {
+				$("#awal").val(response[0].min_text);
+				$("#akhir").val(response[0].max_text);
+				$("#batas_awal").val(response[0].min);
+				$("#batas_akhir").val(response[0].max);
+				$("#formAdd").html(response[0].form);
 				$btnsmt.removeClass('btn-danger').addClass('btn-success');
 				document.getElementById('btnSubmit').disabled = false;
+				document.getElementById('btn_tambah').disabled = false;
 			}
 			else{
 				$("#cekloading").html(alert_red(response[0].message));

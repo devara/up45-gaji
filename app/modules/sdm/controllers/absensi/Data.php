@@ -58,6 +58,8 @@ class Data extends CI_Controller
 				);
 				$join = 'absensi_data.nip = data_pegawai.nip';
 				$data['absensi'] = $this->my_lib->get_data_join('absensi_data','data_pegawai',$param,$join);
+				$data['periode'] = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
+				$data['unit'] = $this->my_lib->get_data_row('master_unit_kerja',array('kode_unit'=>$unit));
 				$data['jenis'] = 'multiple';
 			}
 			else{

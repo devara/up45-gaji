@@ -1,5 +1,10 @@
 <script type="text/javascript">
-$('#btn_tampil').click(function(e){
+function tampil_data()
+{
+
+}
+function tampil()
+{
 	var idPer = $('#idPer').val();
 	var nip = $('#pegawai').val();
 	$.ajax({
@@ -36,6 +41,32 @@ $('#btn_tampil').click(function(e){
 			}
 		}
 	});
-	e.preventDefault();
-});
+}
+
+function modal_edit(id)
+{
+	$.ajax({
+    url: "<?php echo sdm().'absensi/kelola/tampil_edit/'; ?>"+id,
+    beforeSend: function(){
+      $("#loading-edit").html(loader_green);
+    },
+    success: function(response){
+      $("#loading-edit").html("");
+      if (response[0].code==200) {
+      	$('#idabsensi').val(response[0].id);
+      	$('#id_periode').val(response[0].periode);
+      	$('#nip').val(response[0].nip);
+      	$('#tgl_absensi').val(response[0].tanggal);
+      	$('#hari_absensi').val(response[0].hari);
+      	$('#datang').val(response[0].datang);
+      	$('#pulang').val(response[0].pulang);
+      	$('#ket_absensi').val(response[0].keterangan);
+      } else{
+        $("#loading-edit").html(alert_red(response[0].message));
+      }
+    }
+  });
+}
+
+
 </script>

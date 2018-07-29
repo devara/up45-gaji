@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-6 col-sm-6">
 		<table class="table table-striped table-bordered">
 			<tr>
 				<td>Periode</td>
@@ -24,7 +24,7 @@
 		</table>		
 		<br>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-6 col-sm-6">
 		<table class="table table-striped table-bordered">
 		<?php if($rekap): ?>
 			<?php foreach ($rekap as $re) { 
@@ -65,7 +65,7 @@
 		<?php endif; ?>
 		</table>
 	</div>
-	<div class="col-md-12">
+	<div class="col-md-12 col-sm-12">
 		<div class="table-responsive">
 			<table id="tblabsensi2" class="table table-striped table-bordered">
 				<thead>
@@ -90,7 +90,9 @@
 							<td><?=$row->pulang?></td>
 							<td><?=$row->lama_kerja?></td>
 							<td><?=$row->keterangan?></td>
-							<td><a href="<?=sdm()?>absensi/kelola/edit_absensi?id_periode=<?=$id_per?>&id_absensi=<?=$row->id_absensi?>&nip=<?=$nip?>" target="_blank" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i>&nbsp;Edit</a></td>
+							<td>
+								<a class="btn btn-success btn-xs item_edit" data-toggle="modal" data-target="#ModalEdit" onclick="modal_edit(<?=$row->id_absensi?>)"><i class="fa fa-edit"></i>&nbsp;Edit Absensi</a>
+							</td>
 						</tr>
 					<?php $no++; endforeach; endif; ?>
 				</tbody>
@@ -98,3 +100,119 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade bs-example-modal-md" id="ModalEdit" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Edit Absensi Pegawai</h4>
+      </div>
+      <div class="modal-body">
+      	<div id="loading-edit"></div>
+      	<div id="form-edit">
+	      	<form id="editform" data-parsley-validate class="form-horizontal form-label-left">
+	      		<input type="hidden" name="idabsensi" id="idabsensi">
+	      		<input type="hidden" name="id_periode" id="id_periode">
+						<input type="hidden" name="nip" id="nip">
+	      		<div class="form-group">
+			        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_absensi">Tanggal</label>
+			        <div class="col-md-4 col-sm-6 col-xs-12">
+			          <input type="date" id="tgl_absensi" name="tgl_absensi" required="required" class="form-control col-md-7 col-xs-12" readonly="">
+			        </div>
+			      </div>
+			      <div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="hari_absensi">Hari</label>
+							<div class="col-md-4 col-sm-6 col-xs-6">
+								<input type="text" name="hari_absensi" id="hari_absensi" class="form-control" readonly>
+							</div>
+						</div>
+			      <div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="datang">Time IN</label>
+							<div class="col-md-4 col-sm-4">
+		           	<div class='input-group' id='in'>
+		              <input type="text" name="datang" id="datang" class="form-control"/>
+		              <span class="input-group-addon">
+		               	<span class="glyphicon glyphicon-time"></span>
+		             	</span>
+		            </div>
+		          </div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="pulang">Time OUT</label>
+							<div class="col-md-4 col-sm-4">
+		           	<div class='input-group' id='out'>
+		          	  <input type="text" name="pulang" id="pulang" class="form-control"/>
+		              <span class="input-group-addon">
+		               	<span class="glyphicon glyphicon-time"></span>
+		             	</span>
+		            </div>
+		          </div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ket_absensi">Keterangan</label>
+							<div class="col-md-4 col-sm-6 col-xs-6">
+								<textarea class="form-control" name="ket_absensi" id="ket_absensi"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-4 col-md-offset-3 col-sm-4 col-sm-offset-3">
+								<button type="button" class="btn btn-sm btn-success" id="btn_edit">Update</button>
+							</div>
+						</div>
+	      	</form>
+      	</div>
+      </div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$('#in').datetimepicker({
+  format: 'HH:mm:ss'
+});
+$('#out').datetimepicker({
+  format: 'HH:mm:ss'
+});
+$('#btn_edit').click(function(e){
+		var $form = get_formdata($("#editform"));
+		$.ajax({
+			type  : "POST",
+			url   : "<?php echo sdm()?>absensi/kelola/update_absensi",
+			dataType : "json",
+			data : $form,
+			beforeSend: function(){
+				$("#loading-edit").html(loader_green);
+			},
+			success: function(response){
+				$("#loading-edit").html("");
+				if (response[0].code==200) {
+					swal({
+						type: 'success',
+						title: 'Berhasil',
+						html: ""+response[0].message+"",
+						showConfirmButton: true,
+						allowOutsideClick: false
+					}).then(function(){
+						$("#ModalEdit").on("hidden.bs.modal", function () {
+						  tampil();
+						});
+					})
+				} else if(response[0].code==404){
+					
+					swal({
+						type: 'error',
+						title: 'Gagal',
+						text: ''+response[0].message+'',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					})
+				}
+				else{
+					$("#loading-edit").html(alert_red(response[0].message));
+				}
+			}
+		});
+		e.preventDefault();
+	});
+</script>

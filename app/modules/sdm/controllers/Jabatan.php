@@ -65,21 +65,21 @@ class Jabatan extends CI_Controller
 
 	function edit()
 	{
-		$this->form_validation->set_rules('id', 'ID Jabatan', 'required');
-		$this->form_validation->set_rules('kode', 'Kode Jabatan', 'required');
-		$this->form_validation->set_rules('nama', 'Nama Jabatan', 'required');
-		$this->form_validation->set_rules('tunj', 'Tunjangan Jabatan', 'required');
-		$this->form_validation->set_rules('under', 'Dibawahi Oleh', 'required');
-		$this->form_validation->set_rules('kap', 'Kapasitas Jabatan', 'required');
-		$this->form_validation->set_rules('ket', 'Keterangan Jabatan', 'required');
+		$this->form_validation->set_rules('id_jab', 'ID Jabatan', 'required');
+		$this->form_validation->set_rules('kd_jab', 'Kode Jabatan', 'required');
+		$this->form_validation->set_rules('nm_jab', 'Nama Jabatan', 'required');
+		$this->form_validation->set_rules('tunj_jab', 'Tunjangan Jabatan', 'required');
+		$this->form_validation->set_rules('under_jab', 'Dibawahi Oleh', 'required');
+		$this->form_validation->set_rules('kap_jab', 'Kapasitas Jabatan', 'required');
+		$this->form_validation->set_rules('ket_jab', 'Keterangan Jabatan', 'required');
 		if ($this->form_validation->run() == TRUE) {
-			$id = $this->input->post('id');
-			$kode = $this->input->post('kode');
-			$nama = $this->input->post('nama');
-			$tunj = $this->input->post('tunj');
-			$ket	= $this->input->post('ket');
-			$under = $this->input->post('under');
-			$max	= $this->input->post('kap');
+			$id = $this->input->post('id_jab');
+			$kode = $this->input->post('kd_jab');
+			$nama = $this->input->post('nm_jab');
+			$tunj = $this->input->post('tunj_jab');
+			$ket	= $this->input->post('ket_jab');
+			$under = $this->input->post('under_jab');
+			$max	= $this->input->post('kap_jab');
 
 			$param = array(
 				'id_jabatan' => $id

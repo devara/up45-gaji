@@ -1,4 +1,72 @@
 <?php include_once( APPPATH.'views/partial/header.php' ); ?>
+<style type="text/css">
+#delloading{
+	position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+#loader {
+  display: block;
+  position: relative;
+  left: 49%;
+  top: 20%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: -75px 0 0 -75px;
+  border: 5px solid transparent;
+  border-top-color:#3498db; 
+  border-bottom-color: #3498db; 
+  z-index: 1001;
+    animation: spin 1s linear infinite ;
+}
+
+#loader:before {
+ content: "";
+ position: absolute;
+ top: 10px;
+ left: 10px;
+ right: 10px;
+ bottom: 10px;
+ border: 5px solid transparent;
+ border-radius: 50%;
+ border-left-color: #e74c3c;
+ border-right-color:  #e74c3c;
+ z-index: 1001;
+ animation: spin 0.5s ease-in-out infinite ;
+ }
+
+#loader:after {
+ content: "";
+ position: absolute;
+ top: 40px;
+ left: 40px;
+ right: 40px;
+ bottom: 40px;
+ border-radius: 50%;
+ border: 5px solid transparent;
+ border-top-color: #f9c922;
+ border-bottom-color:  #f9c922;
+ z-index: 1001;
+ animation: spin 1s ease infinite ;
+ }
+ @keyframes spin {
+  0% {
+      transform: rotate(0deg) ;
+    
+  }
+
+  100% {
+      transform: rotate(360deg);
+  }
+}
+</style>
+<div id="delloading" style="display:none;">
+  <div id="loader"></div>
+</div>
 <div class="right_col" role="main">
 	<div>
 		<div class="page-title">
@@ -139,13 +207,13 @@
       </div>
       <div class="modal-body">
         <div id="editloading"></div>
-        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+        <form id="editform" data-parsley-validate class="form-horizontal form-label-left">
         	<input type="hidden" name="id_jab" id="id_jab">
           <div class="form-group">
 		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kd_jab">Kode Jabatan <span class="required">*</span>
 		        </label>
 		        <div class="col-md-6 col-sm-6 col-xs-12">
-		          <input type="text" id="kd_jab" name="kd_jab" required="required" class="form-control col-md-7 col-xs-12" disabled="">
+		          <input type="text" id="kd_jab" name="kd_jab" required="required" class="form-control col-md-7 col-xs-12" readonly="">
 		        </div>
 		      </div>
 		      <div class="form-group">

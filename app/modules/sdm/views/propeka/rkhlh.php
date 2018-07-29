@@ -4,7 +4,7 @@
 	<div>
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Absensi</h3>
+				<h3>Rencana Kerja dan Laporan Harian Pegawai</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -12,7 +12,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Data Absensi</h2>
+						<h2>Data RKH & LH</h2>
 						<ul class="nav navbar-right panel_toolbox">
               <li>
               	<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -69,26 +69,39 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="pegawai">Pilih Pegawai <span class="required">*</span></label>
+									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="kdUnit">Pilih Unit Kerja <span class="required">*</span></label>
 									<div class="col-md-4 col-sm-6 col-xs-12">
-										<select class="form-control select2_single" name="pegawai" id="pegawai" required="required">
-					          	<option disabled="" selected="">Pilih</option>
-					          	<?php foreach($pegawai as $peg): ?>
-					          		<option value="<?=$peg->nip?>"><?=$peg->nama?></option>
-					          	<?php endforeach; ?>
+										<select class="form-control select2_single" name="kdUnit" id="kdUnit" required="required" onchange="lisPeg()">
+					          	<option selected="" disabled="">Pilih</option>
+					          	<?php foreach ($unit as $un) { ?>
+					          		<option value="<?=$un->kode_unit?>"><?=$un->nama_unit?></option>
+					          	<?php } ?>
 					          </select>
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-md-offset-2 col-md-4 col-sm-offset-3 col-sm-4">
-										<button type="button" id="btn_tampil" class="btn btn-sm btn-success" onclick="tampil()">Tampilkan</button>
+									<div class="col-md-offset-2 col-md-4">
+										<div id="loadPeg"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="pegawai">Pilih Pegawai <span class="required">*</span></label>
+									<div class="col-md-4 col-sm-6 col-xs-12">
+										<select class="form-control select2_single" name="pegawai" id="pegawai" required="required">
+					          	
+					          </select>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-offset-2 col-md-4">
+										<button type="button" id="btn_tampil" class="btn btn-sm btn-success">Tampilkan</button>
 									</div>
 								</div>
 							</form>
 							<div id="loading"></div>
 							<br><br>
 						</div>
-						<div id="tampilAbsensi">
+						<div id="tampilData">
 							
 						</div>
 					</div>

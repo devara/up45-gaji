@@ -53,6 +53,30 @@ class Kelola extends CI_Controller
       ->set_output(json_encode($message));
 	}
 
+	function tampil_edit($id=FALSE)
+	{
+		$absensi = $this->my_lib->get_data_row('absensi_data',array('id_absensi'=>$id));
+		if ($absensi) {
+			$data[] = array(
+				'code' => 200,
+				'id' => $absensi->row('id_absensi'),
+				'periode' => $absensi->row('id_periode'),
+				'tanggal' => $absensi->row('tanggal'),
+				'hari' => $absensi->row('hari'),
+				'nip' => $absensi->row('nip'),
+				'datang' => $absensi->row('datang'),
+				'pulang' => $absensi->row('pulang'),
+				'keterangan' => $absensi->row('keterangan')
+      );
+		}
+		else{
+			$data[] = array('code'=>500,'message'=>'Data Tidak Valid.');
+		}
+		$this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($data));
+	}
+
 	function edit_absensi()
 	{
 		$id_periode = $this->input->get('id_periode');
@@ -141,6 +165,89 @@ class Kelola extends CI_Controller
 		else{
 
 		}
+	}
+
+	function update_absensi()
+	{
+		$this->form_validation->set_rules('id_periode', 'ID Periode', 'required');
+		$this->form_validation->set_rules('nip', 'NIP Pegawai', 'required');
+		$this->form_validation->set_rules('idabsensi', 'ID Absensi', 'required');
+		$this->form_validation->set_rules('tgl_absensi', 'Tanggal Absensi', 'required');
+		$this->form_validation->set_rules('hari_absensi', 'Hari Absensi', 'required');
+		$this->form_validation->set_rules('datang', 'Jam Datang', 'required');
+		$this->form_validation->set_rules('pulang', 'Jam Pulang', 'required');
+		$this->form_validation->set_rules('ket_absensi', 'Keterangan Absensi', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$per = $this->input->post('id_periode');
+			$nip = $this->input->post('nip');
+			$id_abs = $this->input->post('idabsensi');
+			$tgl = $this->input->post('tgl_absensi');
+			$hari = $this->input->post('hari_absensi');
+			$in = $this->input->post('datang');
+			$out = $this->input->post('pulang');
+			$ket = $this->input->post('ket_absensi');
+
+			if ($hari == 'Sabtu') {
+				$break = explode_time('00:00:00');
+			}
+			else{
+				$break = explode_time('01:00:00');
+			}
+			$in_time = explode_time($in);
+			$out_time = explode_time($out);
+			
+			$lama = $out_time - $in_time - $break;
+      $lama_kerja = convert_second($lama);
+
+      $nilai_toleransi = explode_time('08:15:00');
+      if ($in_time <= $nilai_toleransi) {
+        $telat = 0;
+      }
+      else {
+        $telat = 1;
+      }
+
+      $param = array('id_absensi'=>$id_abs);
+      $value = array(
+      	'datang' => $in,
+      	'pulang' => $out,
+      	'lama_kerja' => $lama_kerja,
+      	'telat' => $telat
+      );
+      $update_absensi = $this->my_lib->edit_row('absensi_data',$value,$param);
+      if ($update_absensi) {
+      	$tot =0;
+    		$tepat_waktu = $this->my_lib->row_count('absensi_data',array('id_periode'=>$per,'nip'=>$nip,'telat'=>0));
+    		$data_absen = $this->my_lib->get_data('absensi_data',array('id_periode'=>$per,'nip'=>$nip));
+      	foreach ($data_absen as $absen) {
+          $tot += explode_time($absen->lama_kerja);
+        }
+        $total_lama = convert_second($tot);
+
+        $rata2 = $tot / 4;
+        $new_rata2 = convert_second($rata2);
+
+        $param_rekap = array('id_periode'=>$per,'nip'=>$nip);
+        $value_rekap = array(
+        	'total_jam' => $total_lama,
+        	'rerata' => $new_rata2,
+        	'tepat_waktu' => $tepat_waktu
+        );
+        $update_rekap = $this->my_lib->edit_row('absensi_rekap',$value_rekap,$param_rekap);
+        if ($update_rekap) {
+        	$data[] = array('code'=>200,'message'=>'Data Absensi Berhasil Diperbarui.');
+        }
+      }
+      else{
+      	$data[] = array('code'=>404,'message'=>'Data Absensi Gagal Diperbarui.');
+      }
+		}
+		else{
+			$data[] = array('code'=>500,'message' => validation_errors('<div class="error">', '</div>'));
+		}
+		$this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($data));
 	}
 
 }

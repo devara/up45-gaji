@@ -105,7 +105,7 @@
 			              			<div class="form-group">
 		                        <label class="control-label col-md-1 col-sm-3 col-xs-12" for="periode">Periode
 		                        </label>
-		                        <div class="col-md-5 col-sm-6 col-xs-12">
+		                        <div class="col-md-7 col-sm-6 col-xs-12">
 		                          <select name="periode" id="periode" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;" onchange="cekData()">
 		                            <option disabled="" selected="">Pilih Periode</option>
 		                            <?php foreach ($periode as $per) { 
@@ -116,6 +116,22 @@
 		                            <?php } ?>
 		                          </select>
 		                        </div>
+		                        <div class="col-md-2">
+		                        	<input type="hidden" id="batas_awal" name="batas_awal" class="form-control" readonly="">
+		                        </div>
+		                        <div class="col-md-2">
+		                        	<input type="hidden" id="batas_akhir" name="batas_akhir" class="form-control" readonly="">
+		                        </div>
+		                      </div>
+		                      <div class="form-group">
+		                      	<label class="control-label col-md-1">Awal</label>
+		                      	<div class="col-md-3">
+		                      		<input type="text" id="awal" name="awal" class="form-control" readonly="">
+		                      	</div>
+		                      	<label class="control-label col-md-1">Akhir</label>
+		                      	<div class="col-md-3">
+		                      		<input type="text" id="akhir" name="akhir" class="form-control" readonly="">
+		                      	</div>
 		                      </div>
 		                      <div class="form-group">
 		                      	<div class="col-md-5 col-md-offset-1">
@@ -123,27 +139,17 @@
 		                      	</div>
 		                      </div>		                      
 		                      <div id="formAdd">
-			                      <div class="form-group">
-			                      	<div class="col-md-offset-1 col-md-5 col-sm-6 col-xs-12">
-			                      		<input type="text" name="keg[]" class="form-control" placeholder="Nama Kegiatan" required="required">
-			                      	</div>
-			                      	<div class="col-md-3">
-			                      		<input type="date" name="dari[]" class="form-control" placeholder="Dari tanggal" required="required">
-			                      	</div>
-			                      	<div class="col-md-3">
-			                      		<input type="date" name="sampai[]" class="form-control" placeholder="Sampai tanggal" required="required">
-			                      	</div>
-			                      </div>
+			                      
                       		</div>
                       		<div class="form-group">
 		                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-1">
-		                          <button type="submit" id="btnSubmit" class="btn btn-success">Submit</button>
+		                          <button type="submit" id="btnSubmit" class="btn btn-success" disabled="">Submit</button>
 		                        </div>
 		                      </div>
 			              		</form>
               			</div>
               			<div class="col-md-2">
-              				<a id="btnTambah" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah Kegiatan</a>
+              				<button type="button" id="btn_tambah" class="btn btn-sm btn-success" disabled><i class="fa fa-plus"></i> Tambah Kegiatan</button>
               			</div>
               		</div>
               	</div>

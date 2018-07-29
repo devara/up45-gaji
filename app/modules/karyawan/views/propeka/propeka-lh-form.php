@@ -1,6 +1,7 @@
 <?php if($status == 1): ?>
 <h4>Laporan Harian untuk tanggal <?php echo $this->lib_calendar->convert($tanggal);?></h4>
 <form method="POST" action="<?=karyawan()?>propeka/lh/buat_lh">
+	<input type="hidden" name="idrkhlh" value="<?=$idrkhlh?>">
 	<input type="hidden" name="tanggal" value="<?=$tanggal?>">
 	<table class="table table-striped table-bordered">
 		<thead>
@@ -24,8 +25,8 @@
 				<input type="hidden" name="id[]" value="<?=$row->id_rkhlh_detail?>">
 				<td><?=$no?></td>
 				<td><?=$row->kegiatan?></td>
-				<td align="center"><?=$row->dari?></td>
-				<td align="center"><?=$row->sampai?></td>
+				<td align="center"><?=$row->mulai_rkh?></td>
+				<td align="center"><?=$row->sampai_rkh?></td>
 				<td width="100px"><input type="number" min="8" max="21" name="lh_mulai[]" class="form-control" required="required"></td>
 				<td width="100px"><input type="number" name="lh_sampai[]" class="form-control" required="required"></td>
 				<td><textarea name="ket[]" class="form-control" required="required"></textarea></td>

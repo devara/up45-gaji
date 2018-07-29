@@ -26,8 +26,8 @@
 				<td><?=$row->kegiatan?></td>
 				<td align="center"><?=$row->cb_tgl_mulai?></td>
 				<td align="center"><?=$row->cb_tgl_selesai?></td>
-				<td width="100px"><input type="date" name="lb_mulai[]" class="form-control" required="required"></td>
-				<td width="100px"><input type="date" name="lb_sampai[]" class="form-control" required="required"></td>
+				<td width="100px"><input type="date" name="lb_mulai[]" min="<?=$min_tgl?>" max="<?=$max_tgl?>" class="form-control" required="required"></td>
+				<td width="100px"><input type="date" name="lb_sampai[]" min="<?=$min_tgl?>" max="<?=$max_tgl?>" class="form-control" required="required"></td>
 				<td><textarea name="ket[]" class="form-control" required="required"></textarea></td>
 			</tr>
 		<?php $no++; endforeach; ?>

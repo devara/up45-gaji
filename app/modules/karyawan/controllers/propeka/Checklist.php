@@ -33,7 +33,7 @@ class Checklist extends CI_Controller
 				'nip'	=> $nip
 			);
 			$cek_id_data = $this->my_lib->get_row('data_checklist_laporan_bulanan',$param,'id_cb_lb');
-
+			$data['tgl_buat'] = tanggal_indo($this->my_lib->get_row('data_checklist_laporan_bulanan',$param,'tgl_buat_checklist'));
 			$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
 			$data['checklist'] = $this->my_lib->get_data('data_checklist_laporan_bulanan_detail',array('id_cb_lb'=>$cek_id_data));
 			$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
@@ -55,6 +55,10 @@ class Checklist extends CI_Controller
 		if ($this->form_validation->run() == TRUE) {
 			$per = $this->input->post('per');
 			$nip = $this->input->post('nip');
+			$min = $this->my_lib->get_row('master_periode',array('id_periode'=>$per),'mulai');
+			$max = $this->my_lib->get_row('master_periode',array('id_periode'=>$per),'akhir');
+			$min_text = tanggal_indo($min);
+			$max_text = tanggal_indo($max);
 			$param = array(
 				'id_periode' => $per,
 				'nip'	=> $nip
@@ -64,7 +68,18 @@ class Checklist extends CI_Controller
 				$message[] = array('code'=>200,'message'=>'Data Tersedia.','status'=>'Anda sudah membuat Checklist untuk periode ini');
 			}
 			else {
-				$message[] = array('code'=>500,'message'=>'Data Belum Tersedia.','status'=>'tidak');
+				$data['minimal'] = $min;
+				$data['maksimal'] = $max;
+				$formCB = $this->load->view('propeka/propeka-cb-form',$data,true);
+				$message[] = array(
+					'code'=>500,
+					'min'=>$min,
+					'max'=>$max,
+					'min_text'=>$min_text,
+					'max_text'=>$max_text,
+					'form'=>$formCB,
+					'message'=>'Data Belum Tersedia.',
+					'status'=>'tidak');
 			}
 			
 		}

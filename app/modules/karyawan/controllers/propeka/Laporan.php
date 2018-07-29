@@ -71,6 +71,8 @@ class Laporan extends CI_Controller
 
 		$data['detail'] = $this->my_lib->get_data('data_checklist_laporan_bulanan_detail',array('id_cb_lb'=>$id_cblb));
 		$data['periode'] = $periode;
+		$data['min_tgl'] = $this->my_lib->get_row('master_periode',array('id_periode'=>$periode),'mulai');
+		$data['max_tgl'] = $this->my_lib->get_row('master_periode',array('id_periode'=>$periode),'akhir');
 		$formRKH = $this->load->view('propeka/propeka-lb-form',$data,true);
 		$message[] = array('code'=>200,'message'=>'Data Tersedia.','form'=>$formRKH);
 

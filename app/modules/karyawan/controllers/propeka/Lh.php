@@ -69,6 +69,7 @@ class Lh extends CI_Controller
 		}
 
 		$data['detail'] = $this->my_lib->get_data('data_rkhlh_detail',array('id_rkhlh'=>$id_rkhlh));
+		$data['idrkhlh'] = $id_rkhlh;
 		$data['tanggal'] = $tgl;
 		$formRKH = $this->load->view('propeka/propeka-lh-form',$data,true);
 		$message[] = array('code'=>200,'message'=>'Data Tersedia.','form'=>$formRKH);
@@ -80,6 +81,7 @@ class Lh extends CI_Controller
 
 	function buat_lh()
 	{
+		$idrkhlh = $this->input->post('idrkhlh');
 		$tgl = $this->input->post('tanggal');
 		$tgl_indo = $this->lib_calendar->convert($tgl);
 		$id = $this->input->post('id');
@@ -93,8 +95,10 @@ class Lh extends CI_Controller
 				'rkh_lh_lengkap' => 'ya'
 			);
 		}
-		$update= $this->db->update_batch('data_rkhlh_detail', $result,'id_rkhlh_detail');
-		if ($update) {
+		$val = array('tgl_buat_lh' => date('Y-m-d H:i:s'));
+		$update = $this->db->update_batch('data_rkhlh_detail', $result,'id_rkhlh_detail');
+		$update_rkhlh = $this->my_lib->edit_row('data_rkhlh',$val,array('id_rkhlh'=>$idrkhlh));
+		if ($update && $update_rkhlh) {
 			$alert_type = "success";
       $alert_title ="Berhasil Membuat Laporan Harian ".$tgl_indo."";
 			set_header_message($alert_type,'Submit Laporan Harian',$alert_title);

@@ -72,29 +72,29 @@ class Pengawas extends CI_Controller
 		  	  'nip' 	=> $_POST['peg_ganda'][$key]
 		    );
 		    $nip = $_POST['peg_ganda'][$key];
-		    $cek_data_insentif = $this->my_lib->cek('gaji_pengawas',array('id_periode'=>$periode,'nip'=>$nip));
+		    $cek_data_insentif = $this->my_lib->cek('data_upah_pengawas',array('id_periode'=>$periode,'nip'=>$nip));
 		    if ($cek_data_insentif == TRUE) {
-		    	$data_insentif = $this->my_lib->get_data_row('gaji_pengawas',array('id_periode'=>$periode,'nip'=>$nip));
+		    	$data_insentif = $this->my_lib->get_data_row('data_upah_pengawas',array('id_periode'=>$periode,'nip'=>$nip));
 					$hadir_old = $data_insentif->row('jml_hadir');
-					$insentif_old = $data_insentif->row('jml_insentif');
+					$insentif_old = $data_insentif->row('jml_upah');
 
 					$hadir_new = $hadir_old + 1;
 					$insentif_new = $insentif_old + $insentif;
 
 					$new_value_insentif = array(
 						'jml_hadir' => $hadir_new,
-						'jml_insentif' => $insentif_new
+						'jml_upah' => $insentif_new
 					);
-					$this->my_lib->edit_row('gaji_pengawas',$new_value_insentif,array('id_periode'=>$periode,'nip'=>$nip));
+					$this->my_lib->edit_row('data_upah_pengawas',$new_value_insentif,array('id_periode'=>$periode,'nip'=>$nip));
 		    }
 		    else{
 		    	$value_insentif = array(
 						'id_periode' => $periode,
 						'nip' => $nip,
 						'jml_hadir' => 1,
-						'jml_insentif' => $insentif
+						'jml_upah' => $insentif
 					);
-					$this->my_lib->add_row('gaji_pengawas',$value_insentif);
+					$this->my_lib->add_row('data_upah_pengawas',$value_insentif);
 		    }
 
 		  }

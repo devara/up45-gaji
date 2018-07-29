@@ -16,6 +16,25 @@ $(document).ready(function() {
   });
 });
 
+function get_tanggal(){
+	var per = $('#periode').val();
+	$.ajax({
+    url: "<?php echo ajaxpublic_url().'cekper/'; ?>"+per,
+    beforeSend: function(){
+      $("#tanggal").disabled = true;
+    },
+    success: function(response){      
+      if (response[0].code!=404) {
+      	document.getElementById("tanggal").disabled = false;
+      	document.getElementById("tanggal").min = response[0].min;
+      	document.getElementById("tanggal").max = response[0].max;
+      } else{
+        $("#tanggal").disabled = true;
+      }
+    }
+  });
+}
+
 $('#btn_cek').click(function(e){
   var idPer = $('#cekPer').val();
   var nip = $('#cekPeg').val();

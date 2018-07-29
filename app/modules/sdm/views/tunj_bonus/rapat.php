@@ -128,7 +128,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Periode <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="periode" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;">
+                        <select name="periode" id="periode" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;" onchange="get_tanggal()">
                           <option disabled="" selected="">Pilih Periode</option>
                           <?php foreach ($periode as $per) { 
 							          		$mulai = $this->lib_calendar->convert($per->mulai);
@@ -143,7 +143,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tanggal">Tanggal <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="tanggal" name="tanggal" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="date" id="tanggal" name="tanggal" required="required" class="form-control col-md-7 col-xs-12" disabled="">
                       </div>
                     </div>
                     <div class="form-group">

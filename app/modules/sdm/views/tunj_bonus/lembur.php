@@ -53,10 +53,10 @@
 						</div>
 						<div class="" role="tabpanel" data-example-id="togglable-tabs">
 							<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-								<li role="presentation" class="active">
+								<li role="presentation" class="<?php if($aktifTab == 'data'): ?> active <?php endif; ?>">
                 	<a href="#data" role="tab" id="data-tab" data-toggle="tab" aria-expanded="true">Data Lembur</a>
                 </li>
-                <li role="presentation" class="">
+                <li role="presentation" class="<?php if($aktifTab == 'input'): ?> active <?php endif; ?>">
                 	<a href="#input" role="tab" id="input-tab" data-toggle="tab" aria-expanded="true">Input Lembur</a>
                 </li>
                 <li role="presentation" class="">
@@ -64,7 +64,7 @@
                 </li>
               </ul>
               <div id="myTabContent" class="tab-content">
-              	<div role="tabpanel" class="tab-pane fade active in" id="data" aria-labelledby="data-tab">
+              	<div role="tabpanel" class="tab-pane fade <?php if($aktifTab == 'data'): ?> active in <?php endif; ?>" id="data" aria-labelledby="data-tab">
               		<br/>
               		<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
               			<div class="form-group">
@@ -124,7 +124,7 @@
               			
               		</div>
               	</div>
-              	<div role="tabpanel" class="tab-pane fade" id="input" aria-labelledby="input-tab">
+              	<div role="tabpanel" class="tab-pane fade <?php if($aktifTab == 'input'): ?> active in <?php endif; ?>" id="input" aria-labelledby="input-tab">
               		<form id="demo-form" data-parsley-validate class="form-horizontal form-label-left">
               			<div class="form-group">
               				<label class="control-label col-md-2 col-sm-3 col-xs-12" for="idPeriode">Periode <span class="required">*</span>
@@ -165,7 +165,7 @@
                       </label>
                       <div class="col-md-2">
                       	<div class='input-group' id='begin'>
-                          <input type="text" name="addmulai" id="addmulai" class="form-control" placeholder="Mulai" />
+                          <input type="text" name="addmulai" id="addmulai" class="form-control" placeholder="Mulai" required="" />
                           <span class="input-group-addon">
                           	<span class="fa fa-clock-o"></span>
                         	</span>
@@ -173,7 +173,7 @@
                       </div>
                       <div class="col-md-2">
                       	<div class='input-group' id='end'>
-                          <input type="text" name="addsampai" id="addsampai" class="form-control" placeholder="Sampai" />
+                          <input type="text" name="addsampai" id="addsampai" class="form-control" placeholder="Sampai" required="" />
                           <span class="input-group-addon">
                           	<span class="fa fa-clock-o"></span>
                         	</span>

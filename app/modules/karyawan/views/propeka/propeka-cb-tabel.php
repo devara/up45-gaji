@@ -21,6 +21,10 @@
 					<?php } ?>
 				</td>
 			</tr>
+			<tr>
+				<td>Tanggal Buat Checklist</td>
+				<td><?=$tgl_buat?></td>
+			</tr>
 		</table>		
 		<br>
 	</div>

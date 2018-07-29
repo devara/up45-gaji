@@ -41,13 +41,31 @@
 </div>
 <div class="printAllArea">
 	<div class="row">
+		<div class="col-md-6">
+			<table class="table table-striped table-bordered">
+				<tr>
+					<td>Periode</td>
+					<td>
+						<?php 
+						$mulai = $this->lib_calendar->convert($periode->row('mulai'));
+						$akhir = $this->lib_calendar->convert($periode->row('akhir')); ?>
+						<?php echo "".$periode->row('bulan')." ".$periode->row('tahun')." ( ".$mulai." - ".$akhir." )"; ?>
+					</td>
+				</tr>
+				<tr>
+					<td>Unit Kerja</td>
+					<td><?=$unit->row('nama_unit')?></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-md-12">
 			<table id="tblAllAbsensi" class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th>Tanggal</th>
 						<th>Hari</th>
-						<th>NIP</th>
 						<th>Nama</th>
 						<th>Time IN</th>
 						<th>Time OUT</th>
@@ -58,9 +76,8 @@
 				<tbody>
 					<?php if($absensi): foreach ($absensi as $row): ?>
 						<tr>
-							<td><?=$row->tanggal?></td>
+							<td><?=tanggal_indo($row->tanggal)?></td>
 							<td><?=$row->hari?></td>
-							<td><?=$row->nip?></td>
 							<td><?=$row->nama?></td>
 							<td><?=$row->datang?></td>
 							<td><?=$row->pulang?></td>
@@ -81,7 +98,6 @@
 		<a href="<?=sdm()?>absensi/data/absensi_pdf?per=<?=$id_per?>&nip=<?=$nip?>&time=<?=time()?>" class="btn btn-primary" title="PDF"><i class="fa fa-file-pdf-o"></i>&nbsp;Download PDF</a>
 	</div>
 </div>
-</br>
 <div class="printArea">
 <div class="row">
 	<div class="col-md-6">
@@ -106,8 +122,7 @@
 				<td><?=$peg->nama?></td>
 			</tr>
 			<?php } ?>			
-		</table>		
-		<br>
+		</table>
 	</div>
 	<div class="col-md-6">
 		<table class="table table-striped table-bordered">
@@ -168,7 +183,7 @@
 					<?php if($absensi): $no = 1; foreach ($absensi as $row): ?>
 						<tr>
 							<td><?=$no?></td>
-							<td><?=$row->tanggal?></td>
+							<td><?=tanggal_indo($row->tanggal)?></td>
 							<td><?=$row->hari?></td>
 							<td><?=$row->datang?></td>
 							<td><?=$row->pulang?></td>

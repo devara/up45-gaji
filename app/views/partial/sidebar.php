@@ -66,9 +66,8 @@
 				<li>
 					<a>Propeka (Cooming Soon)<span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-	          <li><a href="<?php echo sdm()?>rkh">Rencana Kerja Harian</a></li>
-	          <li><a href="<?php echo sdm()?>rkhlh">Laporan Harian</a></li>
-	          <li><a href="<?php echo sdm()?>checklist_lap">Checklist & Laporan Bulanan</a></li>
+	          <li><a href="<?php echo sdm()?>propeka/rkhlh">RKH & LH</a></li>
+	          <li><a href="<?php echo sdm()?>propeka/cblb">Checklist & Laporan Harian</a></li>
 	        </ul>
 				</li>
 			</ul>

@@ -16,6 +16,12 @@ class Lembur extends CI_Controller
 
 	function index()
 	{
+		if (!empty($this->input->get('ref'))) {
+			$data['aktifTab'] = $this->input->get('ref');
+		}
+		else{
+			$data['aktifTab'] = 'data';
+		}
 		$data['periode'] = $this->my_lib->get_data('master_periode');
 		$data['unit'] = $this->my_lib->get_data('master_unit_kerja','','nama_unit ASC');
 		$data['pegawai'] = $this->my_lib->get_data('data_pegawai','','nama ASC');
@@ -127,20 +133,20 @@ class Lembur extends CI_Controller
 			);
 			$input_data_lembur = $this->my_lib->add_row('data_lembur',$value);
 			if ($input_data_lembur) { #jika berhasil menyimpan data lembur
-				$cek_data_insentif = $this->my_lib->cek('gaji_lembur',$param);
+				$cek_data_insentif = $this->my_lib->cek('data_upah_lembur',$param);
 				if ($cek_data_insentif == TRUE) { #jika data insentif lembur sudah ada
-					$data_insentif = $this->my_lib->get_data_row('gaji_lembur',$param);
+					$data_insentif = $this->my_lib->get_data_row('data_upah_lembur',$param);
 					$lembur_old = $data_insentif->row('jml_lembur');
-					$insentif_old = $data_insentif->row('jml_insentif');
+					$insentif_old = $data_insentif->row('jml_upah');
 
 					$lembur_new = $lembur_old + 1;
 					$insentif_new = $insentif_old + $insentif;
 
 					$new_value_insentif = array(
 						'jml_lembur' => $lembur_new,
-						'jml_insentif' => $insentif_new
+						'jml_upah' => $insentif_new
 					);
-					$update_data_insentif = $this->my_lib->edit_row('gaji_lembur',$new_value_insentif,$param);
+					$update_data_insentif = $this->my_lib->edit_row('data_upah_lembur',$new_value_insentif,$param);
 					if ($update_data_insentif) {
 						$message[] = array('code'=>200,'message'=>'Data Lembur Berhasil Disimpan.');
 					}
@@ -153,9 +159,9 @@ class Lembur extends CI_Controller
 						'id_periode' => $per,
 						'nip' => $nip,
 						'jml_lembur' => 1,
-						'jml_insentif' => $insentif
+						'jml_upah' => $insentif
 					);
-					$input_data_insentif = $this->my_lib->add_row('gaji_lembur',$value_insentif);
+					$input_data_insentif = $this->my_lib->add_row('data_upah_lembur',$value_insentif);
 					if ($input_data_insentif) {
 						$message[] = array('code'=>200,'message'=>'Data Lembur Berhasil Disimpan.');
 					}

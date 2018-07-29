@@ -85,7 +85,8 @@ class Rkh extends CI_Controller
 		$data = array(
 			'id_periode'	=> $periode,
 			'tanggal' => $tgl,
-			'nip'	=> $nip
+			'nip'	=> $nip,
+			'tgl_buat_rkh' => date('Y-m-d H:i:s')
 		);
 		$addrkh = $this->db->insert('data_rkhlh',$data);
 
@@ -97,8 +98,8 @@ class Rkh extends CI_Controller
 				$result[] = array(
 	      'id_rkhlh'	=> $rkhID,
 	      'kegiatan' 	=> $_POST['keg'][$key],
-	      'dari'	=> $_POST['dari'][$key],
-	      'sampai' => $_POST['sampai'][$key],
+	      'mulai_rkh'	=> $_POST['dari'][$key],
+	      'sampai_rkh' => $_POST['sampai'][$key],
 	    	);				
 			}
 
