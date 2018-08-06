@@ -33,12 +33,20 @@ class Upload extends CI_Controller
     	$data = array('upload_data' => $this->upload->data());
     	$upload_data = $this->upload->data();
     	$filename = $upload_data['file_name'];
-    	$this->upload_absensi->up_absensi($filename,$idPer);
-    	$alert_type = "success";
-	    $alert_title =" Upload Absensi berhasil";
-			set_header_message($alert_type,'Upload Absensi',$alert_title);
-    	redirect(sdm().'absensi/upload/');
-    } else{
+    	if ($this->upload_absensi->up_absensi($filename,$idPer) == TRUE) {
+    		$alert_type = "success";
+		    $alert_title ="Upload Absensi berhasil";
+				set_header_message($alert_type,'Upload Absensi',$alert_title);
+	    	redirect(sdm().'absensi/upload/');
+    	}
+    	else{
+    		$alert_type = "danger";
+		    $alert_title ="Anda sudah upload Absensi untuk periode ini";
+				set_header_message($alert_type,'Upload Absensi',$alert_title);
+	    	redirect(sdm().'absensi/upload/');
+    	}    	
+    	
+    }else{
     	$alert_type = "danger";
       $alert_title =" Upload Absensi gagal";
 			set_header_message($alert_type,'Upload Absensi',$alert_title);

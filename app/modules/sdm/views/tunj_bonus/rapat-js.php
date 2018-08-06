@@ -44,12 +44,13 @@ $('#btn_cek').click(function(e){
     dataType : "json",
     data : {per:idPer, nip:nip},
     beforeSend: function(){
-      $("#loading").html(loader_green);
+      showSpinningProgressLoading();
       $("#tampilCekRapat").html("");
     },
     success: function(response){
-      $("#loading").html("");
+      hideSpinningProgressLoading();
       if (response[0].code==200) {
+      	$("#loading").html("");
         $("#tampilCekRapat").html(response[0].tabel);
         $('#tblCekRapat').dataTable({
           "pageLength": 10,

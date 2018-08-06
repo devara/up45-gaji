@@ -60,7 +60,7 @@
                 	<a href="#input" role="tab" id="input-tab" data-toggle="tab" aria-expanded="true">Input Lembur</a>
                 </li>
                 <li role="presentation" class="">
-                	<a href="#pengajuan" id="pengajuan-tab" role="tab" data-toggle="tab" aria-expanded="false">Data Pengajuan Lembur (Coming Soon)</a>
+                	<a href="#pengajuan" id="pengajuan-tab" role="tab" data-toggle="tab" aria-expanded="false">Data Pengajuan Lembur</a>
                 </li>
               </ul>
               <div id="myTabContent" class="tab-content">

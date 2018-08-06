@@ -32,7 +32,6 @@ class Get extends CI_Controller
 		if ($pegawai) {
 			foreach ($pegawai as $row) {
 				$data[] = array(
-					'id'	=> $row->id,
 					'nip'	=> $row->nip,
 					'nama'=> $row->nama
 				);

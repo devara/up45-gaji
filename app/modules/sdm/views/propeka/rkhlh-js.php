@@ -37,12 +37,13 @@ $('#btn_tampil').click(function(e){
 		dataType : "json",
 		data : {per:idPer , unit:kdUnit, nip:nip},
 		beforeSend: function(){
-			$("#loading").html(loader_green);
+			showSpinningProgressLoading();
 			$("#tampilData").html("");
 		},
 		success: function(response){
-			$("#loading").html("");
+			hideSpinningProgressLoading();
 			if (response[0].code==200) {
+				$("#loading").html("");
 				$("#tampilData").html(response[0].tabel);
 				$('#tblabsensi').dataTable({
 					"pageLength": 25,

@@ -16,7 +16,6 @@ class Checklist extends CI_Controller
 	function index()
 	{
 		$data['periode'] = $this->my_lib->get_data('master_periode');
-		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('propeka/propeka-cb-js',$data,true);
 		$this->load->view('propeka/propeka-cb',$data);
 	}

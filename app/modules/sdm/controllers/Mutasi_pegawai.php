@@ -16,29 +16,29 @@ class Mutasi_pegawai extends CI_Controller
 	{
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('pegawai/mutasi-pegawai-js',$data,true);
+		$data['pegawai'] = $this->my_lib->get_data('data_pegawai','','nama ASC');
 		$this->load->view('pegawai/mutasi-pegawai',$data);
 	}
 
-	function cek($id=FALSE)
+	function cek()
 	{
-		$peg = $this->my_lib->get_data('data_pegawai',array('id'=>$id));
+		$nip = $this->input->post('nip');
+		$peg = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
 		if ($peg) {
 			foreach ($peg as $row) {
 				$unit = field_value('master_unit_kerja','kode_unit',$row->kode_unit,'nama_unit');
 				$jab = field_value('master_jabatan','kode_jabatan',$row->kode_jabatan,'nama_jabatan');
 				$data[] = array(
 					'code'	=> '200',
-          'id'      => $row->id,
           'nip'		=> $row->nip,
           'nama'    => $row->nama,
-          'dep'			=> $row->departemen,
           'unit'	=> $unit,
           'jab'		=> $jab
         );
 			}
 		}
 		else {
-			$data = array('code'=>'404','message'=>'Tidak ditemukan...');
+			$data[] = array('code'=>'404','message'=>'Tidak ditemukan...');
 		}
 
 		$this->output
@@ -48,18 +48,18 @@ class Mutasi_pegawai extends CI_Controller
 
 	function mutasi()
 	{
-		$id = $this->input->post('pegawai');
+		$nip = $this->input->post('pegawai');
 		$unit = $this->input->post('unit');
 		$jab	= $this->input->post('jabatan2');
 
-		$jab_before = field_value('data_pegawai','id',$id,'kode_jabatan');
+		$jab_before = field_value('data_pegawai','nip',$nip,'kode_jabatan');
 		$cek_jab_before = field_value('master_jabatan','kode_jabatan',$jab_before,'max_satu');
 		if ($cek_jab_before == 'ya') {
 			$this->my_lib->edit_row('master_jabatan',array('tersedia'=>'ya'),array('kode_jabatan'=>$jab_before));
 		}
 		
 		$param = array(
-			'id'	=> $id
+			'nip'	=> $nip
 		);
 		$val = array(
 			'kode_unit'	=> $unit,
@@ -74,7 +74,7 @@ class Mutasi_pegawai extends CI_Controller
 			$this->my_lib->edit_row('master_jabatan',array('tersedia'=>'tidak'),array('kode_jabatan'=>$jab));
 		}
 		if ($edit) {
-			$nama = field_value('data_pegawai','id',$id,'nama');
+			$nama = field_value('data_pegawai','nip',$nip,'nama');
 			$alert_type = "success";
       $alert_title = $nama." berhasil di mutasi";
 			set_header_message($alert_type,'Mutasi Pegawai',$alert_title);

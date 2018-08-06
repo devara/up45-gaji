@@ -89,13 +89,26 @@ class Rapat extends CI_Controller
 		if ($this->form_validation->run() == TRUE) {
 			$per = $this->input->post('per');
 			$nip = $this->input->post('nip');
-			$param = array(
-				'id_periode'=>$per,
-				'nip'=>$nip
-			);
-			$join = 'data_rapat_peserta.id_rapat = data_rapat.id_rapat';
-			$data['cekRapat'] = $this->my_lib->get_data_join('data_rapat_peserta','data_rapat',$param,$join);
-			$data['cekPegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+			if ($nip == 'all') {
+				$param = array(
+					'id_periode'=>$per
+				);
+				$data['rapat'] = $this->my_lib->get_data('data_rapat',$param,'tanggal_rapat ASC');
+				$data['periode'] = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
+				$data['jenis'] = 'multiple';
+			}
+			else{
+				$param = array(
+					'id_periode'=>$per,
+					'nip'=>$nip
+				);
+				$join = 'data_rapat_peserta.id_rapat = data_rapat.id_rapat';
+				$data['rapat'] = $this->my_lib->get_data_join('data_rapat_peserta','data_rapat',$param,$join,'tanggal_rapat ASC');
+				$data['periode'] = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
+				$data['pegawai'] = $this->my_lib->get_data_row('data_pegawai',array('nip'=>$nip));
+				$data['jenis'] = 'single';
+			}
+			
 			$tabel = $this->load->view('tunj_bonus/rapat-tabel',$data,true);
 			$message[] = array('code'=>200,'message'=>'Data Tersedia.','tabel'=>$tabel);
 		}

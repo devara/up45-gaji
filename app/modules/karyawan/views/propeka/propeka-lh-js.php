@@ -8,12 +8,13 @@ $('#tampilLH').click(function(e){
     dataType : "json",
     data : {per:idPer, nip:nip},
     beforeSend: function(){
-      $("#loading").html(loader_green);
+      showSpinningProgressLoading();
       $("#tabelLH").html("");
     },
     success: function(response){
-      $("#loading").html("");
+    	hideSpinningProgressLoading();
       if (response[0].code==200) {
+      	$("#loading").html("");
         $("#tabelLH").html(response[0].tabel);
       }
       else{

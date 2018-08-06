@@ -1,9 +1,11 @@
 <script type="text/javascript">
 function cek(){
-	var id = $('#pegawai').val();
+	var nip = $('#pegawai').val();
 	$.ajax({
-		url: "<?php echo sdm();?>mutasi_pegawai/cek/"+id+"",
+		type: "POST",
+		url: "<?php echo sdm();?>mutasi_pegawai/cek/",
 		dataType:"json",
+		data : {nip:nip},
 		beforeSend: function(){
       $("#loading").html(loader_green);
     },

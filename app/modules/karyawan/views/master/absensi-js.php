@@ -9,12 +9,13 @@ $('#btn_tampil').click(function(e){
     dataType : "json",
     data : {nip:nip, per:idPer},
     beforeSend: function(){
-      $("#loading").html(loader_green);
+      showSpinningProgressLoading();
       $("#tampilAbsensi").html("");
     },
     success: function(response){
-      $("#loading").html("");
+    	hideSpinningProgressLoading();
       if (response[0].code==200) {
+      	$("#loading").html("");
         $("#tampilAbsensi").html(response[0].tabel);
         
       }

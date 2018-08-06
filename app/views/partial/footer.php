@@ -9,6 +9,7 @@
     </div>
   </div>
     <script src="<?php echo base_url()?>assets/admin/js/app.js"></script>
+    <script src="<?php echo base_url()?>assets/admin/js/jquery.blockUI.js"></script>
     <script src="<?php echo base_url()?>assets/admin/js/style.js"></script>
     <script src="<?php echo base_url()?>assets/admin/js/sweetalert2.min.js"></script>
     <script src="<?php echo base_url()?>assets/admin/js/printThis.js"></script>

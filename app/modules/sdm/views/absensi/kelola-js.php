@@ -13,12 +13,13 @@ function tampil()
 		dataType : "json",
 		data : {per:idPer, nip:nip},
 		beforeSend: function(){
-			$("#loading").html(loader_green);
+			showSpinningProgressLoading();
 			$("#tampilAbsensi").html("");
 		},
 		success: function(response){
-			$("#loading").html("");
+			hideSpinningProgressLoading();
 			if (response[0].code==200) {
+				$("#loading").html("");
 				$("#tampilAbsensi").html(response[0].tabel);
 				$('#tblabsensi').dataTable({
 					"pageLength": 25,

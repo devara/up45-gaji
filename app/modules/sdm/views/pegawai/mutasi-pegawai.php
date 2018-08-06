@@ -55,26 +55,24 @@
 						<div>
 							<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?=sdm()?>mutasi_pegawai/mutasi">
 								<div class="form-group">
-									<label for="pegawai" class="control-label col-md-2 col-sm-3 col-xs-12">Pegawai</label>
-                  <div class="col-md-4 col-sm-6 col-xs-12">
+									<label for="pegawai" class="control-label col-lg-1">Pegawai</label>
+                  <div class="col-lg-4">
                     <select name="pegawai" id="pegawai" class="select2_single form-control" required="required" title="Pilih Pegawai" onchange="cek()">
                     	<option selected="" disabled="">Pilih Pegawai</option>
-                    <?php 
-                    $pegawai = $this->my_lib->get_data('data_pegawai','','nama ASC');
-                  	foreach ($pegawai as $row) { ?>
-                      <option value="<?=$row->id?>"><?=$row->nama?></option>
+                    <?php foreach ($pegawai as $row) { ?>
+                      <option value="<?=$row->nip?>"><?=$row->nama?></option>
                     <?php } ?>
                     </select>
                   </div>
 								</div>
 								<div id="loading"></div>
 								<div class="form-group">
-									<label for="posisi" class="control-label col-md-2 col-sm-3 col-xs-12">Unit Kerja</label>
-									<div class="col-md-4 col-sm-6 col-xs-12">
-										<input type="text" name="posisi" id="posisi" class="form-control col-md-7 col-xs-12">
+									<label for="posisi" class="control-label col-lg-1">Unit Kerja</label>
+									<div class="col-lg-4">
+										<input type="text" name="posisi" id="posisi" class="form-control" readonly="">
 									</div>
-									<label class="control-label col-md-2 col-sm-1 col-xs-1">Mutasi ke Unit&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></label>
-									<div class="col-md-4 col-sm-6 col-xs-12">
+									<label class="control-label col-lg-2">Mutasi ke Unit&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></label>
+									<div class="col-lg-4">
 										<select name="unit" id="unit" class="select2_single form-control" required="required" title="Pilih Unit">
                     	<option selected="" disabled="">Pilih Unit Kerja</option>
                     <?php 
@@ -86,12 +84,12 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="jabatan" class="control-label col-md-2 col-sm-3 col-xs-12">Jabatan</label>
-									<div class="col-md-4 col-sm-6 col-xs-12">
-										<input type="text" name="jabatan" id="jabatan" class="form-control col-md-7 col-xs-12">
+									<label for="jabatan" class="control-label col-lg-1">Jabatan</label>
+									<div class="col-lg-4">
+										<input type="text" name="jabatan" id="jabatan" class="form-control" readonly="">
 									</div>
-									<label class="control-label col-md-2 col-sm-1 col-xs-1">Mutasi ke Jabatan&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></label>
-									<div class="col-md-4 col-sm-6 col-xs-12">
+									<label class="control-label col-lg-2">Mutasi ke Jabatan&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></label>
+									<div class="col-lg-4">
 										<select name="jabatan2" id="jabatan2" class="select2_single form-control" required="required" title="Pilih Jabatan">
                     	<option selected="" disabled="">Pilih Jabatan</option>
                     <?php 
@@ -103,8 +101,8 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-md-offset-2 col-md-4">
-										<button type="submit" class="btn btn-xs btn-success">Mutasi</button>
+									<div class="col-lg-offset-1 col-md-4">
+										<button type="submit" class="btn btn-sm btn-success"><i class="fa fa-arrow-right"></i>&nbsp;&nbsp;Mutasi</button>
 									</div>
 								</div>
 							</form>

@@ -67,11 +67,11 @@ class Data extends CI_Controller
 					'id_periode'=>$per,
 					'nip'=>$nip
 				);
-				$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
+				$data['periode'] = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
 				$data['absensi'] = $this->my_lib->get_data('absensi_data',$param);
-				$data['rekap'] = $this->my_lib->get_data('absensi_rekap',$param);
+				$data['rekap'] = $this->my_lib->get_data_row('absensi_rekap',$param);
 				$data['jenis'] = 'single';
-				$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+				$data['pegawai'] = $this->my_lib->get_data_row('data_pegawai',array('nip'=>$nip));
 				$data['nip'] = $nip;
 				$data['id_per'] = $per;
 			}
@@ -103,6 +103,6 @@ class Data extends CI_Controller
 		$nama = field_value('data_pegawai','nip',$nip,'nama');
 		$mpdf = new \Mpdf\Mpdf();
 		$mpdf->WriteHTML($pdf_content);
-		$mpdf->Output('Rekap Absensi '.$nama.'.pdf','D');
+		$mpdf->Output('Rekap Absensi-'.$nama.'.pdf','D');
 	}
 }

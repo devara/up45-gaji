@@ -69,10 +69,8 @@
               				<label for="middle-name" class="control-label col-md-2 col-sm-3 col-xs-12">Pilih Pegawai <span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="peg_ganda[]" class="select2_single form-control" multiple required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
-                        <?php 
-                        $pegawai = $this->my_lib->get_data('data_pegawai','','nama ASC');
-                        foreach ($pegawai as $row) { ?>
-                          <option value="<?=$row->id?>"><?=$row->nama?></option>
+                        <?php foreach ($pegawai as $row) { ?>
+                          <option value="<?=$row->nip?>"><?=$row->nama?></option>
                         <?php } ?>
                        	</select>
                       </div>
@@ -106,10 +104,8 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="peg_tunggal" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
                         	<option selected="" disabled="">Pilih</option>
-                        <?php 
-                        $pegawai = $this->my_lib->get_data('data_pegawai','','nama ASC');
-                        foreach ($pegawai as $row) { ?>
-                          <option value="<?=$row->id?>"><?=$row->nama?></option>
+                        <?php foreach ($pegawai as $row) { ?>
+                          <option value="<?=$row->nip?>"><?=$row->nama?></option>
                         <?php } ?>
                        	</select>
                       </div>

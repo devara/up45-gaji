@@ -23,7 +23,8 @@ class Data_pegawai extends CI_Controller
 	{
 		$join1 = 'data_pegawai.nip = data_pegawai_detail.nip';
 		$join2 = 'data_pegawai.kode_unit = master_unit_kerja.kode_unit';
-		$data['pegawai'] = $this->my_lib->get_data_join_triple('data_pegawai','data_pegawai_detail','master_unit_kerja',$join1,$join2);
+		$join3 = 'data_pegawai.kode_jabatan = master_jabatan.kode_jabatan';
+		$data['pegawai'] = $this->my_lib->get_data_join_quad('data_pegawai','data_pegawai_detail','master_unit_kerja','master_jabatan',$join1,$join2,$join3);
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('pegawai/data-pegawai-js',$data,true);
 		$this->load->view('pegawai/data-pegawai',$data);

@@ -28,7 +28,7 @@
 									<th>Nama</th>
 									<th>NIP</th>
 									<th>Unit Kerja</th>
-									<th>Nomor Telp</th>
+									<th>Jabatan</th>
 									<th>Pilihan</th>
 								</tr>
 							</thead>
@@ -41,11 +41,11 @@
 									</td>
 									<td><?php echo $row->nip ?></td>									
 									<td><?php echo $row->nama_unit ?></td>
-									<td><?php echo $row->hp ?></td>
+									<td><?php echo $row->nama_jabatan ?></td>
 									<td align="center">
 										<a class="btn btn-success btn-xs item_edit" onclick="detail_peg(<?php echo $row->id ?>)" data-toggle="modal" data-target="#ModalDetail"><i class="fa fa-eye"></i> </a>
-										<a href="javascript:;" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-										<a href="javascript:;" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</a>
+										<a href="javascript:;" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+										<a href="javascript:;" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
 									</td>
 								</tr>
 								<?php endforeach; endif; ?>

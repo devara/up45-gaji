@@ -61,7 +61,7 @@
                 	<a href="#tambah" id="tambah-tab" role="tab" data-toggle="tab" aria-expanded="false">Tambah Data</a>
                 </li>
                 <li role="presentation" class="">
-                	<a href="#peserta" id="peserta-tab" role="tab" data-toggle="tab" aria-expanded="false">Cek Data Peserta Rapat</a>
+                	<a href="#peserta" id="peserta-tab" role="tab" data-toggle="tab" aria-expanded="false">Data Rapat Pegawai</a>
                 </li>
               </ul>
               <div id="myTabContent" class="tab-content">
@@ -193,7 +193,7 @@
                       <label for="cekPeg" class="control-label col-md-1 col-sm-3 col-xs-12">Pegawai <span class="required">*</span></label>
                       <div class="col-md-4 col-sm-6 col-xs-12">
                         <select name="cekPeg" id="cekPeg" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
-                        	<option selected="" disabled="">Pilih</option>
+                        	<option value="all">Semua Data</option>
                           <?php foreach ($pegawai as $row) { ?>
                               <option value="<?=$row->nip?>"><?=$row->nama?></option>
                             <?php } ?>
@@ -202,7 +202,7 @@
                     </div>
                     <div class="form-group">
                     	<div class="col-md-offset-1 col-md-4">
-                    		<button type="button" id="btn_cek" class="btn btn-sm btn-success">Cek Data</button>
+                    		<button type="button" id="btn_cek" class="btn btn-sm btn-success">Tampilkan Data</button>
                     	</div>
                     </div>
                     <div class="form-group">

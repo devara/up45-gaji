@@ -36,3 +36,18 @@ function get_formdata($form){
   });
   return indexed_array;
 }
+var showSpinningProgressLoading=function(e){
+  $.blockUI({
+    message: '<img src="http://localhost/up45-gaji/assets/admin/loader/gears.svg"/><br><h4 style="color:#ecf0f1;">Tunggu sebentar...</h4>',
+    css: {
+      border: 'none',
+      padding: '15px',
+      backgroundColor: 'none',
+      opacity: 1,
+      zIndex: 20000,
+    }
+  });
+};
+var hideSpinningProgressLoading=function(e){
+  setTimeout($.unblockUI, 500);
+};

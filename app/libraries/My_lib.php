@@ -200,7 +200,7 @@ class My_lib {
 		}
 	}
 
-	function get_data_join($table1,$table2,$where=array(),$join){
+	function get_data_join($table1,$table2,$where=array(),$join,$order=''){
 
 
 		if(!empty($table1) && !empty($table2))	{
@@ -210,6 +210,9 @@ class My_lib {
 			$this->CI->db->join($table2,$join);
 			if(!empty($where)){
 				$this->CI->db->where($where);
+			}
+			if(!empty($order)){
+				$this->CI->db->order_by($order);
 			}
 						
 			$result=$this->CI->db->get();

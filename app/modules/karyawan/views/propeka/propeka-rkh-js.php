@@ -8,12 +8,13 @@ $('#tampilRKH').click(function(e){
     dataType : "json",
     data : {per:idPer, nip:nip},
     beforeSend: function(){
-      $("#loading").html(loader_green);
+      showSpinningProgressLoading();
       $("#tabelRKH").html("");
     },
     success: function(response){
-      $("#loading").html("");
+    	hideSpinningProgressLoading();      
       if (response[0].code==200) {
+      	$("#loading").html("");
         $("#tabelRKH").html(response[0].tabel);
       }
       else{

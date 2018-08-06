@@ -3,7 +3,6 @@
 		<button type="button" id="printAbsensi" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</button>
 	</div>
 </div>
-</br>
 <div class="printArea">
 	<div class="row">
 		<div class="col-md-5">
@@ -28,8 +27,7 @@
 						<?php } ?>
 					</td>
 				</tr>
-			</table>		
-			<br>
+			</table>
 		</div>
 	</div>
 	<div class="row">

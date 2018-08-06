@@ -46,6 +46,7 @@ class Lembur extends CI_Controller
 				$data['jenis'] = 'all_unit';
 				$join = 'data_pegawai.nip = data_lembur.nip';
 				$data['cekLembur'] = $this->my_lib->get_data_join('data_pegawai','data_lembur',$param,$join);
+				$data['periode'] = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
 			}
 			else{
 				if ($nip == NULL || $nip == 'all') {
@@ -56,8 +57,8 @@ class Lembur extends CI_Controller
 					);
 					$data['jenis'] = 'one_unit';
 					$join = 'data_pegawai.nip = data_lembur.nip';
-					$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
-					$data['unit'] = $this->my_lib->get_data('master_unit_kerja',array('kode_unit'=>$unit));
+					$data['periode'] = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
+					$data['unit'] = $this->my_lib->get_data_row('master_unit_kerja',array('kode_unit'=>$unit));
 					$data['cekLembur'] = $this->my_lib->get_data_join('data_pegawai','data_lembur',$param,$join);
 				}
 				else{
@@ -68,8 +69,8 @@ class Lembur extends CI_Controller
 					);
 					$data['jenis'] = 'one_person';
 					$join = 'data_pegawai.nip = data_lembur.nip';
-					$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
-					$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+					$data['periode'] = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
+					$data['pegawai'] = $this->my_lib->get_data_row('data_pegawai',array('nip'=>$nip));
 					$data['cekLembur'] = $this->my_lib->get_data_join('data_pegawai','data_lembur',$param,$join);
 				}
 				

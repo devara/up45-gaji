@@ -16,16 +16,17 @@ class Status_pegawai extends CI_Controller
 	function index()
 	{
 		$data['datatables'] = 'yes';
+		$data['pegawai'] = $this->my_lib->get_data('data_pegawai','','nama ASC');
 		$this->load->view('pegawai/status-pegawai',$data);
 	}
 
 	function tunggal()
 	{
-		$id = $this->input->post('peg_tunggal');
+		$nip = $this->input->post('peg_tunggal');
 		$stat = $this->input->post('stat_tunggal');
 
 		$param = array(
-			'id' => $id
+			'nip' => $nip
 		);
 		$val = array(
 			'kode_status_pegawai' => $stat
@@ -48,11 +49,11 @@ class Status_pegawai extends CI_Controller
 		$result = array();
 	  foreach($nm AS $key => $val){
 	    $result[] = array(
-	  	  'id' 	=> $_POST['peg_ganda'][$key],
+	  	  'nip' 	=> $_POST['peg_ganda'][$key],
 	      'kode_status_pegawai' => $stat
 	    );
 	  }
-	  $update= $this->db->update_batch('data_pegawai', $result,'id');
+	  $update= $this->db->update_batch('data_pegawai', $result,'nip');
 	  if ($update) {
 	  	$alert_type = "success";
       $alert_title ="Berhasil update status pegawai";
