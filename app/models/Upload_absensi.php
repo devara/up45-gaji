@@ -98,17 +98,7 @@ class Upload_absensi extends CI_Model
 					}
 				}
 
-				if ($this->my_lib->cek('absensi_data',array('id_periode'=>$idPer,'tanggal'=>$new_date,'nip'=>$nip)) == TRUE) {
-					$val_update = array(
-						"datang"     => $in,
-						"pulang"     => $out,
-						"lama_kerja" => $lama_kerja,
-						"telat"      => $telat,
-						"keterangan" => $keterangan
-					);
-					$this->my_lib->edit_row('absensi_data',$val_update,array('id_periode'=>$idPer,'tanggal'=>$new_date,'nip'=>$nip));
-				}
-				else{
+				if ($this->my_lib->cek('absensi_data',array('id_periode'=>$idPer,'tanggal'=>$new_date,'nip'=>$nip)) == FALSE) {
 					$val_insert = array(
 						"id_periode" => $idPer,
 						"tanggal"    => $new_date,
@@ -121,8 +111,7 @@ class Upload_absensi extends CI_Model
 						"keterangan" => $keterangan
 					);
 					$this->my_lib->add_row('absensi_data',$val_insert);
-				}
-				
+				}				
 			}
 		}
 		$peg = $this->my_lib->get_data('data_pegawai');
