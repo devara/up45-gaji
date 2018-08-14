@@ -38,7 +38,7 @@ function get_formdata($form){
 }
 var showSpinningProgressLoading=function(e){
   $.blockUI({
-    message: '<img src="http://localhost/up45-gaji/assets/admin/loader/gears.svg"/><br><h4 style="color:#ecf0f1;">Tunggu sebentar...</h4>',
+    message: '<img src="http://localhost/up45-gaji/assets/admin/loader/loader.gif"/><br><h4 style="color:#ecf0f1;">Tunggu sebentar...</h4>',
     css: {
       border: 'none',
       padding: '15px',
@@ -49,5 +49,5 @@ var showSpinningProgressLoading=function(e){
   });
 };
 var hideSpinningProgressLoading=function(e){
-  setTimeout($.unblockUI, 500);
+  setTimeout($.unblockUI, 700);
 };

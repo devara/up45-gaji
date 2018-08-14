@@ -64,7 +64,6 @@ class Upload_absensi extends CI_Model
 							$break = explode_time('01:00:00');
 							$out_param = '16:00:00';
 						}
-
 						if ($worksheet[$i]["G"] == "") { //JIKA JAM DATANG KOSONG
 							$in = '08:00:00';
 							$new_in = explode_time('08:00:00');
@@ -120,24 +119,19 @@ class Upload_absensi extends CI_Model
 			$tot =0;
 			$tepat_waktu = $this->my_lib->row_count('absensi_data',array('id_periode'=>$idPer,'nip'=>$nip_peg,'telat'=>0));
 			$data_absen = $this->my_lib->get_data('absensi_data',array('id_periode'=>$idPer,'nip'=>$nip_peg));
-
 			if (!empty($data_absen)) {
 				foreach ($data_absen as $absen) {
 					$tot += explode_time($absen->lama_kerja);
 				}
-
 				$total_lama = convert_second($tot);
-
 				$rata2 = $tot / 4;
 				$new_rata2 = convert_second($rata2);
-
 				if ($this->my_lib->cek('absensi_rekap',array('id_periode'=>$idPer,'nip'=>$nip_peg)) == TRUE) {
 					$rekap_update = array(
 						"total_jam" => $total_lama,
 						"rerata" => $new_rata2,
 						"tepat_waktu" =>$tepat_waktu
 					);
-
 					$this->my_lib->edit_row('absensi_rekap',$rekap_update,array('id_periode'=>$idPer,'nip'=>$nip_peg));
 				}
 				else{
@@ -148,10 +142,8 @@ class Upload_absensi extends CI_Model
 						"rerata" => $new_rata2,
 						"tepat_waktu" =>$tepat_waktu
 					);
-
 					$this->my_lib->add_row('absensi_rekap',$rekap_insert);
-				}
-				
+				}				
 			}
 		}
 		return TRUE;

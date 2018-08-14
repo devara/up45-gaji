@@ -118,9 +118,9 @@
 <div class="row">
 	<div class="col-md-12">
 		<button type="button" id="printOnePerson" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</button>
+		<a href="" class="btn btn-sm btn-danger" title="PDF"><i class="fa fa-file-pdf-o"></i>&nbsp;Download PDF</a>
 	</div>
 </div>
-</br>
 <div class="oneperson_area">
 	<div class="row">
 		<div class="col-md-6">
@@ -150,7 +150,7 @@
 			<table id="tblLembur" class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Tanggal Lembur</th>
+						<th>Hari, Tanggal Lembur</th>
 						<th>Dari Jam</th>
 						<th>Sampai Jam</th>
 						<th>Total Jam</th>
@@ -160,7 +160,7 @@
 				<tbody>
 					<?php if($cekLembur): foreach ($cekLembur as $row): ?>
 						<tr>
-							<td><?=tanggal_indo($row->tgl_lembur)?></td>
+							<td><?=hari_indo($row->tgl_lembur)?>, <?=tanggal_indo($row->tgl_lembur)?></td>
 							<td><?=$row->jam_mulai?></td>
 							<td><?=$row->jam_selesai?></td>
 							<td><?=$row->durasi?></td>

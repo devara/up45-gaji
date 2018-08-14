@@ -25,33 +25,43 @@ class Upload extends CI_Controller
 
 	function do_upload()
 	{
-		$idPer = $this->input->post('idPer');
-		$config['upload_path'] = FCPATH.'uploads/file/absensi/';
-    $config['allowed_types'] = 'xlsx|xls';
-    $this->load->library('upload', $config);
-    if ($this->upload->do_upload('addfile')) {
-    	$data = array('upload_data' => $this->upload->data());
-    	$upload_data = $this->upload->data();
-    	$filename = $upload_data['file_name'];
-    	if ($this->upload_absensi->up_absensi($filename,$idPer) == TRUE) {
-    		$alert_type = "success";
-		    $alert_title ="Upload Absensi berhasil";
+		$this->form_validation->set_rules('idPer', 'Periode Kerja', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$idPer = $this->input->post('idPer');
+			$config['upload_path'] = FCPATH.'uploads/file/absensi/';
+	    $config['allowed_types'] = 'xlsx|xls';
+	    $this->load->library('upload', $config);
+	    if ($this->upload->do_upload('addfile')) {
+	    	$data = array('upload_data' => $this->upload->data());
+	    	$upload_data = $this->upload->data();
+	    	$filename = $upload_data['file_name'];
+	    	if ($this->upload_absensi->up_absensi($filename,$idPer) == TRUE) {
+	    		$alert_type = "success";
+			    $alert_title ="Upload Absensi berhasil";
+					set_header_message($alert_type,'Upload Absensi',$alert_title);
+		    	redirect(sdm().'absensi/upload/');
+	    	}
+	    	else{
+	    		$alert_type = "danger";
+			    $alert_title ="Anda sudah upload Absensi untuk periode ini";
+					set_header_message($alert_type,'Upload Absensi',$alert_title);
+		    	redirect(sdm().'absensi/upload/');
+	    	}    	
+	    	
+	    }else{
+	    	$alert_type = "danger";
+	      $alert_title =" Upload Absensi gagal";
 				set_header_message($alert_type,'Upload Absensi',$alert_title);
-	    	redirect(sdm().'absensi/upload/');
-    	}
-    	else{
-    		$alert_type = "danger";
-		    $alert_title ="Anda sudah upload Absensi untuk periode ini";
-				set_header_message($alert_type,'Upload Absensi',$alert_title);
-	    	redirect(sdm().'absensi/upload/');
-    	}    	
-    	
-    }else{
-    	$alert_type = "danger";
-      $alert_title =" Upload Absensi gagal";
+				redirect(sdm().'absensi/upload');
+	    }
+		}
+		else{
+			$alert_type = "danger";
+	    $alert_title =" Upload Absensi gagal";
 			set_header_message($alert_type,'Upload Absensi',$alert_title);
 			redirect(sdm().'absensi/upload');
-    }
+		}
+		
 	}
 
 	function berhasil($filename)

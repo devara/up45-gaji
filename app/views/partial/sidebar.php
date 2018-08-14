@@ -23,17 +23,17 @@
 			<h3>Modul SDM</h3>
 			<ul class="nav side-menu">
 				<li>
-					<a><i class="fa fa-users"></i> Master Pegawai <span class="fa fa-chevron-down"></span></a>
+					<a><i class="fa fa-users"></i> Master Karyawan <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-	          <li><a href="<?php echo sdm()?>data_pegawai">Data Pegawai</a></li>
-	          <li><a href="<?php echo sdm()?>mutasi_pegawai">Mutasi Pegawai</a></li>
-	          <li><a href="<?php echo sdm()?>status_pegawai">Status Pegawai</a></li>
-	          <li><a href="<?php echo sdm()?>pemberhentian_pegawai">Pemberhentian Pegawai</a></li>
+	          <li><a href="<?php echo sdm()?>data_pegawai">Data Karyawan</a></li>
+	          <li><a href="<?php echo sdm()?>mutasi_pegawai">Mutasi Karyawan</a></li>
+	          <li><a href="<?php echo sdm()?>status_pegawai">Status Karyawan</a></li>
+	          <li><a href="<?php echo sdm()?>pemberhentian_pegawai">Pemberhentian Karyawan</a></li>
 	          <li><a href="<?php echo sdm()?>akun_pegawai">Generate Akun</a></li>
 	        </ul>
 				</li>
 				<li>
-					<a><i class="fa fa-user"></i> Referensi Pegawai <span class="fa fa-chevron-down"></span></a>
+					<a><i class="fa fa-user"></i> Referensi Karyawan <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
 						<li><a href="<?php echo sdm()?>unit_kerja">Unit Kerja</a></li>
 	          <li><a href="<?php echo sdm()?>jabatan">Jabatan</a></li>

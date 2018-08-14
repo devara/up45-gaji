@@ -29,6 +29,7 @@
 										<th>Kode Unit</th>
 										<th>Nama Unit Kerja</th>
 										<th>Bidang</th>
+										<th>Jumlah Karyawan</th>
 										<th>Pilihan</th>
 									</tr>
 								</thead>
@@ -45,6 +46,9 @@
 											<?php else: ?>
 												Bidang 3
 											<?php endif; ?>
+										</td>
+										<td width="150">
+											<?php echo $this->my_lib->row_count('data_pegawai',array('kode_unit'=>$row->kode_unit)); ?> orang
 										</td>
 										<td align="center">
 											<a class="btn btn-success btn-xs item_edit" onclick="edit_unit(<?=$row->id_unit?>)" data-toggle="modal" data-target="#ModalEdit"><i class="fa fa-pencil"></i> Edit</a>
