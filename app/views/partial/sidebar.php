@@ -26,6 +26,7 @@
 					<a><i class="fa fa-users"></i> Master Karyawan <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
 	          <li><a href="<?php echo sdm()?>data_pegawai">Data Karyawan</a></li>
+	          <li class="hidden"><a href="<?php echo sdm()?>data_pegawai/detail_pegawai">Detail Karyawan</a></li>
 	          <li><a href="<?php echo sdm()?>mutasi_pegawai">Mutasi Karyawan</a></li>
 	          <li><a href="<?php echo sdm()?>status_pegawai">Status Karyawan</a></li>
 	          <li><a href="<?php echo sdm()?>pemberhentian_pegawai">Pemberhentian Karyawan</a></li>
@@ -61,6 +62,7 @@
 					<ul class="nav child_menu">
 	          <li><a href="<?php echo sdm()?>tunjangan_bonus/lembur">Lembur</a></li>
 	          <li><a href="<?php echo sdm()?>tunjangan_bonus/rapat">Rapat</a></li>
+	          <li><a href="<?php echo sdm()?>tunjangan_bonus/rekap">Rekap Upah Rapat & Lembur</a></li>
 	        </ul>
 				</li>
 				<li>
@@ -113,9 +115,15 @@
 				<li>
 					<a><i class="fa fa-money"></i> Master Penggajian <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-	          <li><a href="#">Data Tunjangan Gaji</a></li>
-	          <li><a href="#">Data Potongan Gaji</a></li>
-	          <li><a href="#">Generate Slip Gaji</a></li>
+	          <li><a href="<?=keuangan()?>master/generate_slip">Generate Slip Gaji</a></li>
+	          <li><a href="<?=keuangan()?>master/data_slip">Data Slip Gaji</a></li>
+	        </ul>
+				</li>
+				<li>
+					<a><i class="fa fa-files-o"></i> Laporan Penggajian <span class="fa fa-chevron-down"></span></a>
+					<ul class="nav child_menu">
+	          <li><a href="<?=keuangan()?>laporan/data_gaji">Data Gaji</a></li>
+	          <li><a href="<?=keuangan()?>laporan/laporan_penggajian">Lihat Laporan Penggajian</a></li>
 	        </ul>
 				</li>
 			</ul>
@@ -175,7 +183,7 @@
 			<h3>Modul Kepala Bagian/Unit</h3>
 			<ul class="nav side-menu">
 				<li>
-					<a><i class="fa fa-files-o"></i> Propeka Staff <span class="fa fa-chevron-down"></span></a>
+					<a><i class="fa fa-files-o"></i> Propeka Bawahan <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
 	          <li><a href="<?=karyawan()?>kabag/cek_rkhlh">RKH & LH Staff</a></li>
 	          <li><a href="<?=karyawan()?>kabag/cek_checklist">Checklist Bulanan Staff</a></li>
@@ -183,7 +191,14 @@
 	        </ul>
 				</li>
 				<li>
-					<a><i class="fa fa-files-o"></i> Penilaian Kinerja <span class="fa fa-chevron-down"></span></a>
+					<a><i class="fa fa-gift"></i> Insentif Operasional <span class="fa fa-chevron-down"></span></a>
+					<ul class="nav child_menu">
+						<li><a href="<?=karyawan()?>kabag/insentif_op">Isi Insentif Operasional</a></li>
+						<li><a href="<?=karyawan()?>kabag/data_insentif_op">Data Insentif Operasional</a></li>
+					</ul>
+				</li>
+				<li>
+					<a><i class="fa fa-edit"></i> Penilaian Kinerja <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
 						<li><a href="<?=karyawan()?>kabag/penilaian_kerja">Isi Penilaian Kinerja</a></li>
 						<li><a href="<?=karyawan()?>kabag/data_penilaian_kerja">Data Penilaian Kinerja</a></li>
@@ -214,6 +229,10 @@
 	  </a>
 		<?php elseif($this->session->userdata('level') == 'AKD'): ?>
 		<a data-toggle="tooltip" data-placement="top" title="Profil" href="<?=akademik()?>profil">
+	    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+	  </a>
+	  <?php elseif($this->session->userdata('level') == 'KEU'): ?>
+		<a data-toggle="tooltip" data-placement="top" title="Profil" href="<?=keuangan()?>profil">
 	    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 	  </a>
 		<?php endif; ?>

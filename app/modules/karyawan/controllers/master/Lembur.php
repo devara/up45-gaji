@@ -15,7 +15,7 @@ class Lembur extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('master/lembur-js',$data,true);
 		$this->load->view('master/lembur',$data);

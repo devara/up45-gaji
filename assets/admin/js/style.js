@@ -51,3 +51,10 @@ var showSpinningProgressLoading=function(e){
 var hideSpinningProgressLoading=function(e){
   setTimeout($.unblockUI, 700);
 };
+
+if($("#message_header").length)
+  {
+    setTimeout(function(){
+      $("#message_header").hide("fade");
+    },3000);
+  }

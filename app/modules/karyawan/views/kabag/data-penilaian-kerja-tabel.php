@@ -5,17 +5,17 @@
 </div>
 </br>
 <div class="printArea">
+<form method="POST" action="<?=karyawan()?>kabag/penilaian_kerja/edit_penilaian">
+	<input type="hidden" name="periode" value="<?=$periode->row('id_periode')?>">
 	<div class="row">
 		<div class="col-md-6">
 			<table class="table table-striped table-bordered">
 				<tr>
 					<td>Periode</td>
 					<td>
-						<?php foreach ($periode as $per) { 
-						$mulai = $this->lib_calendar->convert($per->mulai);
-						$akhir = $this->lib_calendar->convert($per->akhir); ?>
-						<?php echo "".$per->bulan." ".$per->tahun." ( ".$mulai." - ".$akhir." )"; ?>
-						<?php } ?>
+					<?php	$mulai = $this->lib_calendar->convert($periode->row('mulai'));
+						$akhir = $this->lib_calendar->convert($periode->row('akhir')); ?>
+						<?php echo "".$periode->row('bulan')." ".$periode->row('tahun')." ( ".$mulai." - ".$akhir." )"; ?>
 					</td>
 				</tr>		
 			</table>
@@ -39,17 +39,20 @@
 				<tbody>
 					<?php if($penilaian): foreach ($penilaian as $row): ?>
 						<tr>
-							<td><?=$row->nama?></td>
-							<td><?=$row->jam?></td>
-							<td><?=$row->kedisiplinan?></td>
-							<td><?=$row->loyalitas?></td>
-							<td><?=$row->pelayanan?></td>
-							<td><?=$row->propeka?></td>
+							<td><?=$row->nama?> <input type="hidden" name="nip[]" value="<?=$row->nip?>"> </td>
+							<td><input type="number" class="form-control" name="jam[]" value="<?=$row->jam?>"></td>
+							<td><input type="number" class="form-control" name="disiplin[]" value="<?=$row->kedisiplinan?>"></td>
+							<td><input type="number" class="form-control" name="loyalitas[]" value="<?=$row->loyalitas?>"></td>
+							<td><input type="number" class="form-control" name="pelayanan[]" value="<?=$row->pelayanan?>"></td>
+							<td><input type="number" class="form-control" name="propeka[]" value="<?=$row->propeka?>"></td>
 							<td><?=$row->total?></td>
 							<td><?=$row->ranking?></td>
 						</tr>
-					<?php endforeach; 
-					else: ?>
+					<?php endforeach; ?>
+						<tr>
+							<td colspan="8" align="center"><button type="submit" class="btn btn-success">Perbarui</button></td>
+						</tr>
+					<?php else: ?>
 						<tr>
 							<td colspan="8" align="center">Anda belum memberikan penilaian untuk periode ini</td>
 						</tr>
@@ -58,6 +61,7 @@
 			</table>
 		</div>
 	</div>
+</form>
 </div>
 	
 <script type="text/javascript">

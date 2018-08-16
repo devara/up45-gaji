@@ -17,7 +17,7 @@ class Rapat extends CI_Controller
 	function index()
 	{
 		$data['rapat'] = $this->my_lib->get_data('data_rapat');
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['pegawai'] = $this->my_lib->get_data('data_pegawai','','nama ASC');
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('tunj_bonus/rapat-js',$data,true);
@@ -30,11 +30,12 @@ class Rapat extends CI_Controller
 		$periode = $this->input->post('periode');
 		$tgl = $this->input->post('tanggal');
 		$ket = $this->input->post('keterangan');
+		$tanggal = date("Y-m-d",strtotime($tgl));
 		$nominal_insentif = $this->my_lib->get_row('master_nominal',array('id_nominal'=>1),'rapat');
 		
 		$data = array(
 			'id_periode'	=> $periode,
-			'tanggal_rapat' => $tgl,
+			'tanggal_rapat' => $tanggal,
 			'nama_rapat'	=> $rapat,
 			'keterangan'	=> $ket
 		);

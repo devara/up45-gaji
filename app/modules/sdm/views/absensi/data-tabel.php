@@ -50,7 +50,12 @@
 							<td><?=$row->lama_kerja?></td>
 							<td><?=$row->keterangan?></td>
 						</tr>
-					<?php endforeach; endif; ?>
+					<?php endforeach;
+					else: ?>
+						<tr>
+							<td colspan="7" align="center">Belum ada data untuk periode ini</td>
+						</tr>
+					<?php endif; ?>
 				</tbody>
 			</table>
 		</div>
@@ -153,7 +158,12 @@
 							<td><?=$row->lama_kerja?></td>
 							<td><?=$row->keterangan?></td>
 						</tr>
-					<?php $no++; endforeach; endif; ?>
+					<?php $no++; endforeach;
+					else: ?>
+						<tr>
+							<td colspan="7" align="center">Belum ada data untuk periode ini</td>
+						</tr>
+					<?php endif; ?>
 				</tbody>
 			</table>
 		</div>

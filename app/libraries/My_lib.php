@@ -252,7 +252,6 @@ class My_lib {
 
 	function get_data_join_quad($table1,$table2,$table3,$table4,$join1,$join2,$join3,$where=array()){
 
-
 		if(!empty($table1) && !empty($table2))	{
 			
 			$this->CI->db->select('*');

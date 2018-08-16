@@ -15,7 +15,7 @@ class Req_lembur extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['javascript'] = $this->load->view('form/req-lembur-js',$data,true);
 		$this->load->view('form/req-lembur',$data);
 	}
@@ -49,6 +49,7 @@ class Req_lembur extends CI_Controller
 				'jam_selesai' => $sampai,
 				'durasi' => $durasi,
 				'keterangan' => $ket,
+				'input_tipe' => 'karyawan',
 				'acc' => 'belum'
 			);
 
@@ -85,7 +86,8 @@ class Req_lembur extends CI_Controller
 
 			$param = array(
 				'id_periode'=>$periode,
-				'data_lembur.nip' => $nip
+				'data_lembur.nip' => $nip,
+				'input_tipe' => 'karyawan'
 			);
 					
 			$join = 'data_pegawai.nip = data_lembur.nip';

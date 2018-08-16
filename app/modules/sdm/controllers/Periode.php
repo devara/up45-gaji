@@ -15,10 +15,53 @@ class Periode extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('periode/periode-js',$data,true);
 		$this->load->view('periode/periode',$data);
+	}
+
+	function set_aktif()
+	{
+		$this->form_validation->set_rules('idperiode', 'Periode Kerja', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$idper = $this->input->post('idperiode');
+			$param = array('id_periode'=>$idper);
+			if ($idper != 0) {
+				$get_periode_aktif = $this->my_lib->get_row('master_periode',array('aktif'=>'ya'),'id_periode');
+				if ($get_periode_aktif) {
+					$this->my_lib->edit_row('master_periode',array('aktif'=>'tidak'),array('id_periode'=>$get_periode_aktif));
+					$set_aktif = $this->my_lib->edit_row('master_periode',array('aktif'=>'ya'),$param);
+					if ($set_aktif) {
+						$alert_type = "success";
+			      $alert_title = "Aktivasi periode kerja berhasil";
+						set_header_message($alert_type,'Set Aktif Periode Kerja',$alert_title);
+						redirect(sdm().'periode');
+					}
+				}
+				else{					
+					$set_aktif = $this->my_lib->edit_row('master_periode',array('aktif'=>'ya'),$param);
+					if ($set_aktif) {
+						$alert_type = "success";
+			      $alert_title = "Aktivasi periode kerja berhasil";
+						set_header_message($alert_type,'Set Aktif Periode Kerja',$alert_title);
+						redirect(sdm().'periode');
+					}
+				}
+			}
+			else{
+				$alert_type = "danger";
+			  $alert_title = "Aktivasi periode kerja gagal";
+				set_header_message($alert_type,'Set Aktif Periode Kerja',$alert_title);
+				redirect(sdm().'periode');
+			}
+		}
+		else{
+			$alert_type = "danger";
+			$alert_title = "Aktivasi periode kerja gagal";
+			set_header_message($alert_type,'Set Aktif Periode Kerja',$alert_title);
+			redirect(sdm().'periode');
+		}
 	}
 
 	function tambah()

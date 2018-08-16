@@ -7,6 +7,7 @@ class Data_pegawai extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->model("m_pegawai");
     if ($this->lib_login->is_sdm()==FALSE) {
     	redirect(base_url());
     }
@@ -28,6 +29,26 @@ class Data_pegawai extends CI_Controller
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('pegawai/data-pegawai-js',$data,true);
 		$this->load->view('pegawai/data-pegawai',$data);
+	}
+
+	function detail_pegawai()
+	{
+		$nip = $this->input->get('nip');
+		if (!empty($nip)) {
+			$cek_data = $this->my_lib->get_data_row('data_pegawai',array('nip'=>$nip));
+			if ($cek_data) {				
+				$data['pegawai'] = $this->m_pegawai->detail_pegawai($nip);
+				$data['agama'] = $this->my_lib->get_data('master_agama');
+				$data['javascript'] = $this->load->view('pegawai/detail-pegawai-js',$data,true);
+				$this->load->view('pegawai/detail-pegawai',$data);
+			}
+			else{
+				redirect(sdm()."data_pegawai");
+			}
+		}
+		else{
+			redirect(sdm()."data_pegawai");
+		}
 	}
 
 	function detail($id=FALSE)

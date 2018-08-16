@@ -15,7 +15,7 @@ class Rapat extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('master/rapat-js',$data,true);
 		$this->load->view('master/rapat',$data);
@@ -33,9 +33,10 @@ class Rapat extends CI_Controller
 				'nip'=>$nip
 			);
 			$join = 'data_rapat_peserta.id_rapat = data_rapat.id_rapat';
-			$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
+			$data['periode'] = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
 			$data['cekRapat'] = $this->my_lib->get_data_join('data_rapat_peserta','data_rapat',$param,$join);
-			$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+			$data['nominal'] = $this->my_lib->get_data_row('master_nominal',array('status'=>'aktif'));
+			$data['pegawai'] = $this->my_lib->get_data_row('data_pegawai',array('nip'=>$nip));
 			$tabel = $this->load->view('master/rapat-tabel',$data,true);
 			$message[] = array('code'=>200,'message'=>'Data Tersedia.','tabel'=>$tabel);
 		}

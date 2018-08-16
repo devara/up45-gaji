@@ -35,19 +35,17 @@
 			<table id="tblCekLembur" class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Tanggal</th>
-						<th>Hari</th>
+						<th>Hari, Tanggal</th>
 						<th>Keterangan Lembur</th>
 						<th>Jam Lembur</th>
 						<th>Durasi</th>
-						<th>Tunjangan Lembur</th>
+						<th>Upah Lembur</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php if($cekLembur): foreach ($cekLembur as $row): ?>
 						<tr>
-							<td><?=tanggal_indo($row->tgl_lembur);?></td>
-							<td><?=hari_indo($row->tgl_lembur);?></td>
+							<td><?=hari_indo($row->tgl_lembur);?>, <?=tanggal_indo($row->tgl_lembur);?></td>
 							<td><?=$row->keterangan?></td>
 							<td><?=$row->jam_mulai?> - <?=$row->jam_selesai?></td>
 							<td><?=$row->durasi?></td>

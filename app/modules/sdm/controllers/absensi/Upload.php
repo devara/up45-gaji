@@ -17,7 +17,7 @@ class Upload extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('absensi/upload-js',$data,true);
 		$this->load->view('absensi/upload',$data);
@@ -25,6 +25,7 @@ class Upload extends CI_Controller
 
 	function do_upload()
 	{
+		$start = microtime(TRUE);
 		$this->form_validation->set_rules('idPer', 'Periode Kerja', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			$idPer = $this->input->post('idPer');
@@ -36,8 +37,10 @@ class Upload extends CI_Controller
 	    	$upload_data = $this->upload->data();
 	    	$filename = $upload_data['file_name'];
 	    	if ($this->upload_absensi->up_absensi($filename,$idPer) == TRUE) {
+	    		$finish = microtime(TRUE);
+	    		$totaltime = $finish - $start;
 	    		$alert_type = "success";
-			    $alert_title ="Upload Absensi berhasil";
+			    $alert_title ="Upload Absensi berhasil dengan waktu ".$totaltime." detik";
 					set_header_message($alert_type,'Upload Absensi',$alert_title);
 		    	redirect(sdm().'absensi/upload/');
 	    	}

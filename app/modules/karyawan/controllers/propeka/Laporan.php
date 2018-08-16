@@ -15,7 +15,7 @@ class Laporan extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['javascript'] = $this->load->view('propeka/propeka-lb-js',$data,true);
 		$this->load->view('propeka/propeka-lb',$data);
 	}

@@ -54,68 +54,16 @@
 						</div>
 						<div class="" role="tabpanel" data-example-id="togglable-tabs">
 							<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-								<li role="presentation" class="active">
-                	<a href="#data" role="tab" id="data-tab" data-toggle="tab" aria-expanded="true">Data Rapat</a>
+                <li role="presentation" class="active">
+                	<a href="#tambah" id="tambah-tab" role="tab" data-toggle="tab" aria-expanded="true">Tambah Data</a>
                 </li>
                 <li role="presentation" class="">
-                	<a href="#tambah" id="tambah-tab" role="tab" data-toggle="tab" aria-expanded="false">Tambah Data</a>
-                </li>
-                <li role="presentation" class="">
-                	<a href="#peserta" id="peserta-tab" role="tab" data-toggle="tab" aria-expanded="false">Data Rapat Pegawai</a>
+                	<a href="#peserta" id="peserta-tab" role="tab" data-toggle="tab" aria-expanded="false">Data Rapat Karyawan</a>
                 </li>
               </ul>
               <div id="myTabContent" class="tab-content">
-              	<div role="tabpanel" class="tab-pane fade active in" id="data" aria-labelledby="data-tab">
-              		
-									<br/><br/>
-									<table id="tblrapat" class="table table-striped table-bordered">
-										<thead>
-											<tr>
-												<th>Periode</th>
-												<th>Tanggal</th>
-												<th>Nama Rapat</th>
-												<th>Peserta</th>
-												<th>Keterangan</th>
-												<th>Pilihan</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php if($rapat): foreach($rapat as $row): 
-											$id = $row->id_rapat;
-											$per = $row->id_periode; ?>
-											<tr>
-												<td>
-													<?php $getPer = $this->my_lib->get_data('master_periode',array('id_periode'=>$per)); ?>
-													<?php foreach($getPer as $p): ?>
-													<b><?=$p->bulan.' '.$p->tahun?></b>
-													<?php endforeach; ?>
-												</td>
-												<td><?=$row->tanggal_rapat?></td>
-												<td><?=$row->nama_rapat?></td>
-												<td>
-												<?php $peserta = $this->my_lib->get_data('data_rapat_peserta',array('id_rapat'=>$id));
-												if ($peserta) { ?>
-													<ul>
-													<?php foreach ($peserta as $pe) { ?>
-														<li><?=field_value('data_pegawai','nip',$pe->nip,'nama')?></li>
-												<?php	} ?>
-												 	</ul>
-												<?php } else { ?>
-													Belum di input
-												<?php } ?>
-												</td>
-												<td><?=$row->keterangan?></td>
-												<td align="center">
-													<a class="btn btn-success btn-xs item_edit" onclick="" data-toggle="modal" data-target="#ModalEdit"><i class="fa fa-pencil"></i> Edit</a>
-													<a class="btn btn-danger btn-xs item_hapus" onclick="" data-toggle="modal" data-target="#DelUnit"><i class="fa fa-trash"></i> Hapus</a>
-												</td>
-											</tr>
-											<?php endforeach; endif; ?>
-										</tbody>
-									</table>
-              	</div>
-
-              	<div role="tabpanel" class="tab-pane fade" id="tambah" aria-labelledby="tambah-tab">
+              	
+              	<div role="tabpanel" class="tab-pane fade active in" id="tambah" aria-labelledby="tambah-tab">
               		<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?=sdm()?>tunjangan_bonus/rapat/tambah">
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Rapat <span class="required">*</span>
@@ -143,7 +91,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tanggal">Tanggal <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="tanggal" name="tanggal" required="required" class="form-control col-md-7 col-xs-12" disabled="">
+                        <input type="text" id="tanggal" name="tanggal" required="required" class="form-control col-md-7 col-xs-12" disabled="">
                       </div>
                     </div>
                     <div class="form-group">
@@ -175,7 +123,7 @@
               	<div role="tabpanel" class="tab-pane fade" id="peserta" aria-labelledby="peserta-tab">
               		<form id="demo-form" data-parsley-validate class="form-horizontal form-label-left">
               			<div class="form-group">
-                      <label class="control-label col-md-1 col-sm-3 col-xs-12" for="cekPer">Periode <span class="required">*</span>
+                      <label class="control-label col-md-2 col-sm-3 col-xs-12" for="cekPer">Periode <span class="required">*</span>
                       </label>
                       <div class="col-md-5 col-sm-6 col-xs-12">
                         <select name="cekPer" id="cekPer" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;">
@@ -190,9 +138,9 @@
                       </div>
                     </div>
               			<div class="form-group">
-                      <label for="cekPeg" class="control-label col-md-1 col-sm-3 col-xs-12">Pegawai <span class="required">*</span></label>
+                      <label for="cekPeg" class="control-label col-md-2 col-sm-3 col-xs-12">Karyawan <span class="required">*</span></label>
                       <div class="col-md-4 col-sm-6 col-xs-12">
-                        <select name="cekPeg" id="cekPeg" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
+                        <select name="cekPeg" id="cekPeg" class="select2_single form-control" required="required" title="Pilih Karyawan" style="width: 100% !important;padding: 0;">
                         	<option value="all">Semua Data</option>
                           <?php foreach ($pegawai as $row) { ?>
                               <option value="<?=$row->nip?>"><?=$row->nama?></option>
@@ -201,7 +149,7 @@
                     	</div>
                     </div>
                     <div class="form-group">
-                    	<div class="col-md-offset-1 col-md-4">
+                    	<div class="col-md-offset-2 col-md-4">
                     		<button type="button" id="btn_cek" class="btn btn-sm btn-success">Tampilkan Data</button>
                     	</div>
                     </div>

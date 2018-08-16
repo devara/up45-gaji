@@ -15,8 +15,7 @@ class Penilaian_kerja extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
-		$data['datatables'] = 'yes';
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['javascript'] = $this->load->view('kabag/penilaian-kerja-js',$data,true);
 		$param = array(
 			'under_of_jabatan'=> $this->session->userdata('jabatan')
@@ -95,5 +94,62 @@ class Penilaian_kerja extends CI_Controller
 			set_header_message($alert_type,'Input Penilaian Kerja',$alert_title);
 			redirect(karyawan().'kabag/penilaian_kerja');
 	  }
+	}
+
+	function edit_penilaian()
+	{
+		$this->form_validation->set_rules('periode', 'Periode Kerja', 'required');
+		if ($this->form_validation->run() == TRUE) {
+			$IDper = $this->input->post('periode');
+			$nip = $this->input->post('nip');
+			$result = array();
+			foreach ($nip as $key => $value) {
+				$total = $_POST['jam'][$key] + $_POST['disiplin'][$key] + $_POST['loyalitas'][$key] + $_POST['pelayanan'][$key] + $_POST['propeka'][$key];
+				if ($total >= 425) {
+					$rangking = 1;
+				}
+				elseif ($total >= 350 && $total <= 424) {
+					$rangking = 2;
+				}
+				elseif ($total >= 275 && $total <= 349) {
+					$rangking = 3;
+				}
+				elseif ($total <= 274) {
+					$rangking = 4;
+				}
+				$result[] = array(
+					'id_periode' => $IDper,
+		  	  'nip' 	=> $_POST['nip'][$key],
+		  	  'jam' 	=> $_POST['jam'][$key],
+		  	  'kedisiplinan' 	=> $_POST['disiplin'][$key],
+		  	  'loyalitas' 	=> $_POST['loyalitas'][$key],
+		  	  'pelayanan' 	=> $_POST['pelayanan'][$key],
+		  	  'propeka' 	=> $_POST['propeka'][$key],
+		      'total' => $total,
+		      'ranking' => $rangking,
+		      'pemberi_nilai' => $this->session->userdata('jabatan')
+		    );
+			}
+			$this->db->where('id_periode',$IDper);
+			$update = $this->db->update_batch('data_penilaian', $result,'nip');
+			if ($update) {
+		  	$alert_type = "success";
+	      $alert_title ="Berhasil edit penilaian kerja karyawan";
+				set_header_message($alert_type,'Edit Penilaian Kerja',$alert_title);
+				redirect(karyawan().'kabag/data_penilaian_kerja');
+		  }
+		  else{
+		  	$alert_type = "danger";
+	      $alert_title ="Tidak ada data yang diperbarui";
+				set_header_message($alert_type,'Edit Penilaian Kerja',$alert_title);
+				redirect(karyawan().'kabag/data_penilaian_kerja');
+		  }
+		}
+		else{
+			$alert_type = "danger";
+      $alert_title = validation_errors('<div class="error">', '</div>');
+			set_header_message($alert_type,'Edit Penilaian Kerja',$alert_title);
+			redirect(karyawan().'kabag/data_penilaian_kerja');
+		}
 	}
 }

@@ -15,7 +15,7 @@ class Data_penilaian_kerja extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['javascript'] = $this->load->view('kabag/penilaian-kerja-js',$data,true);
 		$param = array(
 			'under_of_jabatan'=> $this->session->userdata('jabatan')
@@ -37,7 +37,7 @@ class Data_penilaian_kerja extends CI_Controller
 				'pemberi_nilai'	=> $jab
 			);
 			$join = 'data_pegawai.nip = data_penilaian.nip';
-			$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
+			$data['periode'] = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
 			$data['penilaian'] = $this->my_lib->get_data_join('data_pegawai','data_penilaian',$param,$join);
 			$tabel = $this->load->view('kabag/data-penilaian-kerja-tabel',$data,true);
 			$message[] = array('code'=>200,'message'=>'Data Tersedia.','tabel'=>$tabel);

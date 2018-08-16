@@ -94,7 +94,7 @@
 								</table>
 								<div class="form-group">
 									<div class="col-md-4">
-										<button type="submit" id="btnSubmit" class="btn btn-sm btn-primary">Simpan Penilaian</button>
+										<button type="submit" id="btnsimpan" class="btn btn-sm btn-primary">Simpan Penilaian</button>
 									</div>
 								</div>
 							</form>

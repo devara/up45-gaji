@@ -22,8 +22,63 @@
             <div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ModalAdd"><i class="fa fa-plus"></i> Tambah Periode Kerja</a>
-						<br/><br/>
+						<div>
+							<?php
+							$msgHeader=$this->session->flashdata('message_header');
+							if(!empty($msgHeader))
+							{
+							$msgTipe=$msgHeader['tipe'];
+							$msgIcon="";
+							switch($msgTipe){
+									case "danger":
+										$msgIcon="fa-ban";
+										break;						
+									case "success":
+										$msgIcon="fa-check";
+										break;
+									case "warning":
+										$msgIcon="fa-warning";
+										break;
+									case "info":
+										$msgIcon="fa-info";
+										break;
+								}
+							?>
+							<div class="alert alert-<?=$msgTipe;?> alert-dismissable" id="message_header">
+							    <button type="button" class="close" data-dismiss="alert">&times;</button>
+							    <h4><?=$msgHeader['title'];?></h4>
+							    <?=$msgHeader['message'];?>
+							</div>				                
+							<?php	
+							}
+							?>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ModalAdd"><i class="fa fa-plus"></i> Tambah Periode Kerja</a>
+							</div>
+							<div class="col-md-6" style="padding-top:10px;border:#eee 1px solid;">
+								<form class="form-horizontal" method="POST" action="<?=sdm()?>periode/set_aktif">
+									<div class="form-group">
+										<div class="col-md-9">
+											<select name="idperiode" class="form-control select2_single" required="">
+												<option value="0" selected="" disabled="">Pilih</option>
+												<?php foreach ($periode as $per) { 
+													$mulai = $this->lib_calendar->convert($per->mulai);
+													$akhir = $this->lib_calendar->convert($per->akhir);
+												?>
+												<option value="<?=$per->id_periode?>">Periode <?php echo "".$per->bulan." ".$per->tahun." ( ".$mulai." - ".$akhir." )"; ?></option>
+												<?php } ?>
+											</select>
+										</div>
+										<div class="col-md-3">
+											<button type="submit" class="btn btn-primary"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Set Aktif</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<br>
 						<table id="tblPeriode" class="table table-striped table-bordered">
 							<thead>
 								<tr>
@@ -49,7 +104,7 @@
 									<?php if ($stat == 'ya') {
 										echo "Periode Aktif";
 									} else {
-										echo "Periode Berakhir";
+										echo "Periode Tidak Aktif";
 									} ?>
 									</td>
 									<td align="center">

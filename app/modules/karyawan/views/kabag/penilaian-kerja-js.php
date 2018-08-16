@@ -2,25 +2,26 @@
 function cekData(){
 	var periode = $('#idPer').val();
 	var jabatan = $('#kd_jabatan').val();
-	var $btnsmt = $('#btnSubmit');
+	var $btnsmt = $('#btnsimpan');
 	$.ajax({
 		type  : "POST",
 		url   : "<?php echo karyawan()?>kabag/penilaian_kerja/cek",
 		dataType : "json",
 		data : {per:periode, jab:jabatan},
 		beforeSend: function(){
-			$("#cekloading").html(loader_green);
+			showSpinningProgressLoading();
 		},
 		success: function(response){
-			$("#cekloading").html("");
+			hideSpinningProgressLoading();
 			if (response[0].code==500) {
 				$("#cekloading").html(alert_red(response[0].status));
 				$btnsmt.removeClass('btn-success').addClass('btn-danger');
-				document.getElementById('btnSubmit').disabled = true;
+				document.getElementById('btnsimpan').disabled = true;
 			}
 			else if (response[0].code==200) {
+				$("#cekloading").html("");
 				$btnsmt.removeClass('btn-danger').addClass('btn-success');
-				document.getElementById('btnSubmit').disabled = false;
+				document.getElementById('btnsimpan').disabled = false;
 			}
 			else{
 				$("#cekloading").html(alert_red(response[0].message));
@@ -38,13 +39,14 @@ $('#btnSubmit').click(function(e){
 		dataType : "json",
 		data : {per:periode, jab:jabatan},
 		beforeSend: function(){
-			$("#loading").html(loader_green);
+			showSpinningProgressLoading();
 			$("#tabel_penilaian").html("");
 		},
 		success: function(response){
-			$("#loading").html("");
+			hideSpinningProgressLoading();
 			if (response[0].code==200) {
 				$("#tabel_penilaian").html(response[0].tabel);
+				$("#loading").html("");
 			}
 			else{
 				$("#loading").html(alert_red(response[0].message));

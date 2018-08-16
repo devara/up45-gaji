@@ -43,7 +43,7 @@
 									<td><?php echo $row->nama_unit ?></td>
 									<td><?php echo $row->nama_jabatan ?></td>
 									<td align="center" width="100">
-										<a class="btn btn-success btn-xs item_edit" onclick="detail_peg(<?php echo $row->id ?>)" data-toggle="modal" data-target="#ModalDetail"><i class="fa fa-eye"></i> </a>
+										<a href="<?=sdm()?>data_pegawai/detail_pegawai?nip=<?=$row->nip?>" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> </a>
 										<a href="javascript:;" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
 										<a href="javascript:;" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
 									</td>

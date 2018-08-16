@@ -1,5 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
+
   $('#tblrapat').dataTable({
   	"language": {
     	"lengthMenu": "Tampilkan _MENU_ data per halaman",
@@ -26,8 +27,11 @@ function get_tanggal(){
     success: function(response){      
       if (response[0].code!=404) {
       	document.getElementById("tanggal").disabled = false;
-      	document.getElementById("tanggal").min = response[0].min;
-      	document.getElementById("tanggal").max = response[0].max;
+      	$('#tanggal').datetimepicker({
+				  format: 'L',
+				  minDate: ''+response[0].min+'',
+				  maxDate: ''+response[0].max+''
+				});
       } else{
         $("#tanggal").disabled = true;
       }

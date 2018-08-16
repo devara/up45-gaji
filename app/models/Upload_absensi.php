@@ -18,6 +18,8 @@ class Upload_absensi extends CI_Model
 		$numRows = count($worksheet);
 		for ($i=1; $i < ($numRows+1) ; $i++) {
 			$nip = $worksheet[$i]["D"];
+			$kode_jamkerja = $this->my_lib->get_row('data_pegawai',array('nip'=>$nip),'kode_jam_kerja');
+			$jamkerja = $this->my_lib->get_data_row('master_jam_kerja',array('kode_jam_kerja'=>$kode_jamkerja));
 			$date = strtotime($worksheet[$i]["A"]);
 			$new_date = date('Y-m-d',$date);
 
@@ -40,16 +42,16 @@ class Upload_absensi extends CI_Model
 					if ($status[0] == 'Cuti' || $status[0] == 'Izin') { // JIKA CUTI ATAU IZIN
 						if ($day_name == 'saturday') { //JIKA CUTI ATAU IZIN HARI SABTU
 							$hari = $this->lib_calendar->get_day($new_date);
-							$in = '08:00:00';
-							$out = '13:00:00';
+							$in = $jamkerja->row('jam_datang_sabtu');
+							$out = $jamkerja->row('jam_pulang_sabtu');
 							$lama_kerja = '05:00:00';
 							$telat = 0;
 							$keterangan = $worksheet[$i]["I"];
 						}
 						else{ //JIKA CUTI ATAU IZIN SELAIN HARI SABTU
 							$hari = $this->lib_calendar->get_day($new_date);
-							$in = '08:00:00';
-							$out = '16:00:00';
+							$in = $jamkerja->row('jam_datang');
+							$out = $jamkerja->row('jam_pulang');
 							$lama_kerja = '07:00:00';
 							$telat = 0;
 							$keterangan = $worksheet[$i]["I"];
@@ -57,23 +59,27 @@ class Upload_absensi extends CI_Model
 					}
 					else{ //JIKA HADIR
 						if ($day_name == "saturday") {
-							$break = explode_time('00:00:00');
-							$out_param = '13:00:00';
+							$break = explode_time($jamkerja->row('jam_istirahat_sabtu'));
+							$in_param = $jamkerja->row('jam_datang_sabtu');
+							$out_param = $jamkerja->row('jam_pulang_sabtu');
+							$telat_param = $jamkerja->row('toleransi_sabtu');
 						}
 						else {
-							$break = explode_time('01:00:00');
-							$out_param = '16:00:00';
+							$break = explode_time($jamkerja->row('jam_istirahat'));
+							$in_param = $jamkerja->row('jam_datang');
+							$out_param = $jamkerja->row('jam_pulang');
+							$telat_param = $jamkerja->row('toleransi');
 						}
 						if ($worksheet[$i]["G"] == "") { //JIKA JAM DATANG KOSONG
-							$in = '08:00:00';
-							$new_in = explode_time('08:00:00');
+							$in = $in_param;
+							$new_in = explode_time($in_param);
 						}
 						else {
 							$in = $worksheet[$i]["G"];
 							$new_in = explode_time($worksheet[$i]["G"]);
 						}
 
-						if ($worksheet[$i]["H"] == "") {
+						if ($worksheet[$i]["H"] == "") { //JIKA JAM PULANG KOSONG
 							$out = $out_param;
 							$new_out = explode_time($out_param);
 						}
@@ -85,7 +91,7 @@ class Upload_absensi extends CI_Model
 						$lama = $new_out - $new_in - $break;
 						$lama_kerja = convert_second($lama);
 
-						$nilai_toleransi = explode_time('08:15:00');
+						$nilai_toleransi = explode_time($telat_param);
 						if ($new_in <= $nilai_toleransi) {
 							$telat = 0;
 						}

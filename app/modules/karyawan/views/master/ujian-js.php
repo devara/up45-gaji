@@ -10,12 +10,13 @@ $('#btn_tampil').click(function(e){
 		dataType : "json",
 		data : {nip:nip, elemen:ele, per:idPer},
 		beforeSend: function(){
-			$("#loading").html(loader_green);
+			showSpinningProgressLoading();
 			$("#tampilData").html("");
 		},
 		success: function(response){
-			$("#loading").html("");
+			hideSpinningProgressLoading();
 			if (response[0].code==200) {
+      	$("#loading").html("");
 				$("#tampilData").html(response[0].tabel);
 				
 			}

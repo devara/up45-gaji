@@ -16,7 +16,7 @@ class Data extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['unit'] = $this->my_lib->get_data('master_unit_kerja');
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('absensi/data-js',$data,true);

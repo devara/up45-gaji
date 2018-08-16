@@ -22,7 +22,7 @@ class Lembur extends CI_Controller
 		else{
 			$data['aktifTab'] = 'data';
 		}
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['unit'] = $this->my_lib->get_data('master_unit_kerja','','nama_unit ASC');
 		$data['pegawai'] = $this->my_lib->get_data('data_pegawai','','nama ASC');
 		$data['datatables'] = 'yes';

@@ -40,8 +40,8 @@
 						<th colspan="5" style="text-align: center;">Data <?=$tipe?></th>
 					</tr>
 					<tr>
-						<th>Tanggal</th>
-						<th>Hari</th>
+						<th>Hari, Tanggal</th>
+						<th>Jam Ujian</th>
 						<th>Kode Mata Kuliah</th>
 						<th>Nama Mata Kuliah</th>
 						<th>Tipe Ujian</th>
@@ -50,8 +50,8 @@
 				<tbody>
 					<?php if($cekData): foreach ($cekData as $row): ?>
 						<tr>
-							<td><?=tanggal_indo($row->tanggal);?></td>
-							<td><?=hari_indo($row->tanggal);?></td>
+							<td><?=hari_indo($row->tanggal);?>, <?=tanggal_indo($row->tanggal);?></td>
+							<td><?=$row->jam_ujian?></td>
 							<td><?=$row->kode_matakuliah?></td>
 							<td><?=$row->nama_matakuliah?></td>
 							<td style="text-transform: uppercase;"><?=$row->tipe?></td>

@@ -16,7 +16,7 @@ class Kelola extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['pegawai'] = $this->my_lib->get_data('data_pegawai');
 		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('absensi/kelola-js',$data,true);
@@ -212,7 +212,8 @@ class Kelola extends CI_Controller
       	'datang' => $in,
       	'pulang' => $out,
       	'lama_kerja' => $lama_kerja,
-      	'telat' => $telat
+      	'telat' => $telat,
+      	'keterangan' => $ket
       );
       $update_absensi = $this->my_lib->edit_row('absensi_data',$value,$param);
       if ($update_absensi) {
