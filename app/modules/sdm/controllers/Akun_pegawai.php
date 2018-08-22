@@ -15,23 +15,22 @@ class Akun_pegawai extends CI_Controller
 	function index()
 	{
 		$data['datatables'] = 'yes';
-		$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('username'=>NULL),'nama ASC');
+		$data['pegawai'] = $this->my_lib->get_data('data_pegawai','','nama ASC');
 		$this->load->view('pegawai/akun-pegawai',$data);
 	}
 
 	function single_generate()
 	{
-		$id = $this->input->post('peg_tunggal');
-		$stat = $this->input->post('stat_tunggal');
+		$nip = $this->input->post('peg_tunggal');
 
-		$nama = field_value('data_pegawai','id',$id,'nama');
+		$nama = field_value('data_pegawai','nip',$nip,'nama');
 		$nama_kcl = strtolower($nama);
 		$nama_exp = explode(" ", $nama_kcl);
 		$username = $nama_exp[0];
-		$password = md5($username);
+		$password = password_hash($username, PASSWORD_BCRYPT, ['cost' => 10]);
 
 		$param = array(
-			'id' => $id
+			'nip' => $nip
 		);
 		$val = array(
 			'username' => $username,
@@ -49,23 +48,21 @@ class Akun_pegawai extends CI_Controller
 
 	function multi_generate()
 	{
-		$stat = $this->input->post('stat_ganda');
-
 		$nm = $this->input->post('peg_ganda');
 		$result = array();
 	  foreach($nm AS $key => $val){
-	  	$nama = field_value('data_pegawai','id',$_POST['peg_ganda'][$key],'nama');
+	  	$nama = field_value('data_pegawai','nip',$_POST['peg_ganda'][$key],'nama');
 			$nama_kcl = strtolower($nama);
 			$nama_exp = explode(" ", $nama_kcl);
 			$username = $nama_exp[0];
-			$password = md5($username);
+			$password = password_hash($username, PASSWORD_BCRYPT, ['cost' => 10]);
 	    $result[] = array(
-	  	  'id' 	=> $_POST['peg_ganda'][$key],
+	  	  'nip' 	=> $_POST['peg_ganda'][$key],
 	      'username' => $username,
 				'password' => $password
 	    );
 	  }
-	  $update= $this->db->update_batch('data_pegawai', $result,'id');
+	  $update= $this->db->update_batch('data_pegawai', $result,'nip');
 	  if ($update) {
 	  	$alert_type = "success";
       $alert_title ="Berhasil generate akun pegawai";

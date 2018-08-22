@@ -4,7 +4,7 @@
 	<div>
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Absensi</h3>
+				<h3>Absensi Karyawan</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -13,11 +13,6 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>Import/Upload Data Absensi</h2>
-						<ul class="nav navbar-right panel_toolbox">
-              <li>
-              	<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-            </ul>
             <div class="clearfix"></div>
 					</div>
 					<div class="x_content">

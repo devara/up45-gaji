@@ -44,7 +44,7 @@
 						</div>
 					</div>
 					<div class="content-copyright">
-						<p>&copy; 2018 Universitas Prokalamasi 45 <br> made with &#128147; by Devara Eko</p>
+						<p>&copy; 2018 Universitas Prokalamasi 45</p>
 					</div>
 				</div>
 				<div class="col-md-5">
@@ -158,7 +158,7 @@
 					            <label for="email_pegawai">Alamat Email Anda</label>
 					            <div class="input-group">
 					              <div class="input-group-addon"><i class="icon ion-ios-email" style="font-size: 18px;"></i></div>
-					              <input type="text" class="form-control" name="email_pegawai" id="email_pegawai" placeholder="Masukan Email Anda" autocomplete="off" required="" />
+					              <input type="email" class="form-control" name="email_pegawai" id="email_pegawai" placeholder="Masukan Email Anda" autocomplete="off" required="" />
 					            </div>
 					          </div>
 					         
@@ -166,10 +166,9 @@
 					        	 	<button id="btn_aktivasi" class="btn red darken-2 z-depth-1 login-btn" type="submit" disabled="">Aktivasi Akun&nbsp;&nbsp;<span class="navicon-right"><i class="icon ion-unlocked"></i></span></button>
 					          </div>
 					          <div class="form-group">
-					          	<div class="alert alert-danger alert-dismissible text-center" role="alert">
-						            Format Input NIP<br>
-						            Input NIP tanpa tanda titik (.) dan (/)
-						          </div>
+					          	<div class="text-center">
+					          		<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ModalPanduan">Panduan Aktivasi Akun</a>
+					          	</div>
 						          <div>
 					           		<a class="white-text activate-section" href="#" data-section="login-section">Login</a>
 					           	</div>
@@ -181,6 +180,32 @@
 
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade bs-example-modal-md" id="ModalPanduan" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+	        </button>
+	        <h4 class="modal-title" id="myModalLabel">Panduan Aktivasi Akun</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="row">
+	      		<div class="col-md-12">
+	      			<h5>Panduan Aktivasi:</h5>
+	      			<ul>
+	      				<li>Masukkan NIP Anda. Abaikan tanda titik ( . ) dan tanda garis miring ( / ) pada NIP jika ada.</li>
+	      				<li>Tekan tombol <strong>Cek</strong>, dan sistem akan melakukan pengecekan apakah NIP yang Anda masukkan valid.</li>
+	      				<li>Apabila NIP valid, tombol <strong>Aktivasi Akun</strong> akan berubah menjadi warna biru.</li>
+	      				<li>Masukkan alamat email Anda yang valid.</li>
+	      				<li>Tekan tombol <strong>Aktivasi Akun</strong>, dan sistem akan memproses permintaan Anda.</li>
+	      				<li>Apabila email Anda valid, maka sistem akan mengirimkan email kepada Anda. Silakan cek kotak masuk email Anda.</li>
+	      			</ul>
+	      		</div>
+	      	</div>
+	      </div>
 			</div>
 		</div>
 	</div>

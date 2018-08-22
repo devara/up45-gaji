@@ -58,7 +58,7 @@
 	        </ul>
 				</li>
 				<li>
-					<a><i class="fa fa-clock-o"></i> Lembur & Rapat <span class="fa fa-chevron-down"></span></a>
+					<a><i class="fa fa-briefcase"></i> Lembur & Rapat <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
 	          <li><a href="<?php echo sdm()?>tunjangan_bonus/lembur">Lembur</a></li>
 	          <li><a href="<?php echo sdm()?>tunjangan_bonus/rapat">Rapat</a></li>

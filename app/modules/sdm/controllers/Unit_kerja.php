@@ -66,20 +66,18 @@ class Unit_kerja extends CI_Controller
 
 	function edit()
 	{
-		$this->form_validation->set_rules('id', 'Kode Unit', 'required');
 		$this->form_validation->set_rules('kode', 'Kode Unit', 'required');
 		$this->form_validation->set_rules('bidang', 'Bidang', 'required');
 		$this->form_validation->set_rules('nama', 'Nama Unit', 'required');
 		$this->form_validation->set_rules('ket', 'Keterangan Unit', 'required');
 		if ($this->form_validation->run() == TRUE) {
-			$id = $this->input->post('id');
 			$kode = $this->input->post('kode');
 			$bid = $this->input->post('bidang');
 			$nama = $this->input->post('nama');
 			$ket = $this->input->post('ket');
 
 			$param = array(
-				'id_unit' => $id
+				'kode_unit' => $kode
 			);
 			$val = array(
 				'kode_unit' => $kode,
@@ -107,10 +105,10 @@ class Unit_kerja extends CI_Controller
 
 	function hapus()
 	{
-		$id = $this->input->post('id');
+		$kode = $this->input->post('kd');
 		$nama = $this->input->post('nama');
 
-		$del = $this->my_lib->delete_row('master_unit_kerja',array('id_unit'=>$id));
+		$del = $this->my_lib->delete_row('master_unit_kerja',array('kode_unit'=>$kode));
 		if ($del) {
 			$message[] = array('code'=>200,'message' => 'Unit Kerja '.$nama.' berhasil dihapus dari database Master Unit Kerja');
 		}
@@ -123,13 +121,13 @@ class Unit_kerja extends CI_Controller
         ->set_output(json_encode($message));
 	}
 
-	function cek_edit($id=FALSE)
+	function cek_edit($kode=FALSE)
 	{
-		$unit = $this->my_lib->get_data('master_unit_kerja',array('id_unit'=>$id));
+		$unit = $this->my_lib->get_data('master_unit_kerja',array('kode_unit'=>$kode));
 		if ($unit) {
 			foreach ($unit as $row) {
 				$data[] = array(
-          'id'      => $row->id_unit,
+					'code'		=> 200,
           'kode'		=> $row->kode_unit,
           'bidang'	=> $row->kode_bidang,
           'nama'    => $row->nama_unit,
@@ -138,7 +136,7 @@ class Unit_kerja extends CI_Controller
 			}
 		}
 		else {
-			$data = array('code'=>'404','message'=>'Tidak ditemukan...');
+			$data[] = array('code'=>'404','message'=>'Tidak ditemukan...');
 		}
 
 		$this->output
@@ -146,11 +144,10 @@ class Unit_kerja extends CI_Controller
         ->set_output(json_encode($data));
 	}
 
-	function cek_hapus($id=FALSE)
+	function cek_hapus($kode=FALSE)
 	{
-		$unit = $this->my_lib->get_data('master_unit_kerja',array('id_unit'=>$id));
+		$unit = $this->my_lib->get_data('master_unit_kerja',array('kode_unit'=>$kode));
 		if ($unit) {
-			$kode = field_value('master_unit_kerja','id_unit',$id,'kode_unit');
 			$cek = $this->my_lib->get_data('data_pegawai',array('kode_unit'=>$kode));
 			if ($cek) {
 				$data[] = array('code'=>'500','message'=>'Unit Kerja tidak dapat dihapus.','list'=>$cek);
@@ -159,7 +156,6 @@ class Unit_kerja extends CI_Controller
 				foreach ($unit as $row) {
 					$data[] = array(
 						'code'		=> '200',
-	          'id'      => $row->id_unit,
 	          'kode'		=> $row->kode_unit,
 	          'bidang'	=> $row->kode_bidang,
 	          'nama'    => $row->nama_unit,

@@ -88,15 +88,15 @@ $('#btn_simpan').click(function(e){
     e.preventDefault();
   });
 function edit_unit(id){
+	var kode = $('#kode'+id).val();
   $.ajax({
-    url: "<?php echo sdm().'unit_kerja/cek_edit/'; ?>"+id,
+    url: "<?php echo sdm().'unit_kerja/cek_edit/'; ?>"+kode,
     beforeSend: function(){
       $("#editloading").html(loader_green);
     },
     success: function(response){
       $("#editloading").html("");
       if (response[0].code!=404) {
-        $('#id_unit1').val(response[0].id);
         $('#kd_unit1').val(response[0].kode);
         $('#bidang1').val(response[0].bidang);
         $('#nm_unit1').val(response[0].nama);
@@ -108,7 +108,6 @@ function edit_unit(id){
   });
 }
 $('#btn_edit').click(function(e){
-    var id = $('#id_unit1').val();
     var kode = $('#kd_unit1').val();
     var bidang = $('#bidang1').val();
     var nama = $('#nm_unit1').val();
@@ -117,7 +116,7 @@ $('#btn_edit').click(function(e){
       type  : "POST",
       url   : "<?php echo sdm()?>unit_kerja/edit",
       dataType : "json",
-      data : {id:id, kode:kode , bidang:bidang, nama:nama, ket:ket},
+      data : {kode:kode , bidang:bidang, nama:nama, ket:ket},
       beforeSend: function(){
         $("#editloading").html(loader_green);
       },
@@ -150,10 +149,11 @@ $('#btn_edit').click(function(e){
     e.preventDefault();
   });
 function del_unit(id){
+	var kode = $('#kode'+id).val();
   $.ajax({
-    url: "<?php echo sdm().'unit_kerja/cek_hapus/'; ?>"+id,
+    url: "<?php echo sdm().'unit_kerja/cek_hapus/'; ?>"+kode,
     success: function(response){
-      var idUnit = response[0].id;
+      var kdUnit = response[0].kode;
       var nmUnit = response[0].nama;
       if (response[0].code==500) {
         var isi = '';
@@ -189,7 +189,7 @@ function del_unit(id){
               type  : "POST",
               url   : "<?php echo sdm()?>unit_kerja/hapus",
               dataType : "json",
-              data : {id:idUnit, nama:nmUnit},
+              data : {kd:kdUnit, nama:nmUnit},
               success: function(resp){
                 if (resp[0].code==200) {
                   swal({

@@ -38,7 +38,9 @@ class Reset extends CI_Controller
 
 			$param = array('username'=>$username);
 			$value = array(
-				'password'=>md5($new_pass)
+				'password'=>password_hash($new_pass, PASSWORD_BCRYPT, ['cost' => 10]),
+				'token'=>'',
+				'token_expired'=>''
 			);
 			$update_password = $this->my_lib->edit_row('data_pegawai',$value,$param);
 			if ($update_password) {

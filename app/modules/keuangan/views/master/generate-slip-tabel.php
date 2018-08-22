@@ -35,16 +35,16 @@
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th>Nama</th>
-					<th>Penerimaan</th>
-					<th>Potongan</th>
-					<th>Status</th>
+					<th class="text-center" style="vertical-align: middle;">Nama</th>
+					<th class="text-center" style="vertical-align: middle;">Penerimaan</th>
+					<th class="text-center" style="vertical-align: middle;">Potongan</th>
+					<th class="text-center" style="vertical-align: middle;">Status</th>
 				</tr>
 			</thead>
 			<tbody>
 			<?php if($pegawai): foreach($pegawai as $peg): ?>
 				<tr>
-					<td width="300"><?=$peg->nama?></td>
+					<td width="150"><?=$peg->nama?></td>
 						<?php 
 						$param_jam = explode_time('35:00:00');
 						$cek_absensi = $this->my_lib->get_data_row('absensi_rekap',array('id_periode'=>$IDper,'nip'=>$peg->nip));						
@@ -70,170 +70,167 @@
 						?>
 					<td>
 						<div class="row">
-							<div class="col-md-5">
-								Gaji Pokok
-							</div>
-							<div class="col-md-1">
-								:
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-md-6">
+										Gaji Pokok
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. <?=number_format($peg->gaji_pokok,2,',','.')?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										TGPPW
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. <?=number_format($peg->tgppw,2,',','.')?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										TPD
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. <?=number_format($tpd,2,',','.')?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										Tunj. Jabatan
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. <?php if($tunj_jab!=0) echo number_format($tunj_jab,2,',','.'); else echo "-" ?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										Tunj. Fungsional
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. -
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										Tunj. BPJS
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. <?=number_format($nominal->row('tunjangan_bpjs'),2,',','.')?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										Tunj. SKS
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. -
+									</div>
+								</div>
 							</div>
 							<div class="col-md-6">
-								Rp. <?=number_format($peg->gaji_pokok,2,',','.')?>
+								<div class="row">
+									<div class="col-md-6">
+										Transport Mengajar
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. -
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										Ins. Operasional
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. <?php if($insentif) echo number_format($insentif,2,',','.'); else echo "-"; ?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										Hal Khusus
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. <?=number_format($nominal->row('hal_khusus'),2,',','.')?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										Rapat
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. <?php if($rapat) echo number_format($rapat,2,',','.'); else echo "-"; ?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										Lembur
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. <?php if($lembur) echo number_format($lembur,2,',','.'); else echo "-"; ?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										Pengawas Ujian
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										RP. <?php if($pengawas) echo number_format($pengawas,2,',','.'); else echo "-"; ?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										Korektor Ujian
+									</div>
+									<div class="col-md-1">
+										:
+									</div>
+									<div class="col-md-5">
+										Rp. <?php if($korektor) echo number_format($korektor,2,',','.'); else echo "-"; ?>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-5">
-								TGPPW
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. <?=number_format($peg->tgppw,2,',','.')?>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								TPD
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. <?=number_format($tpd,2,',','.')?>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Tunjangan Jabatan
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. <?php if($tunj_jab!=0) echo number_format($tunj_jab,2,',','.'); else echo "-" ?>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Tunjangan Fungsional
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. -
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Tunjangan Operasional
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. -
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Tunjangan BPJS
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. <?=number_format($nominal->row('tunjangan_bpjs'),2,',','.')?>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Tunjangan SKS
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. -
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Transport Mengajar
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. -
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Ins. Operasional
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. <?php if($insentif) echo number_format($insentif,2,',','.'); else echo "-"; ?>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Hal Khusus
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. <?=number_format($nominal->row('hal_khusus'),2,',','.')?>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Rapat
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. <?php if($rapat) echo number_format($rapat,2,',','.'); else echo "-"; ?>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Lembur
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. <?php if($lembur) echo number_format($lembur,2,',','.'); else echo "-"; ?>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Pengawas Ujian
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								RP. <?php if($pengawas) echo number_format($pengawas,2,',','.'); else echo "-"; ?>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-5">
-								Korektor Ujian
-							</div>
-							<div class="col-md-1">
-								:
-							</div>
-							<div class="col-md-6">
-								Rp. <?php if($korektor) echo number_format($korektor,2,',','.'); else echo "-"; ?>
-							</div>
-						</div>
+						
+						
 					</td>
 					<td>
 						<div class="row">

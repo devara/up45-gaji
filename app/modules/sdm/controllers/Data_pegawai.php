@@ -51,6 +51,68 @@ class Data_pegawai extends CI_Controller
 		}
 	}
 
+	function edit_pegawai_submit()
+	{
+		$nip = $this->input->post('nip');
+		$this->form_validation->set_rules('nama', 'Nama Karyawan', 'required');
+		$this->form_validation->set_rules('gaji_pokok', 'Gaji Pokok', 'required');
+		$this->form_validation->set_rules('tgppw', 'TGPPW', 'required');
+		if ($this->form_validation->run() == TRUE) {			
+			$nama = $this->input->post('nama');
+			$gender = $this->input->post('gender');
+			$agama = $this->input->post('agama');
+			$tmpt_lahir = $this->input->post('tempat_lahir');
+			$tgl_lahir = $this->input->post('tgl_lahir');
+			$telp = $this->input->post('telepon');
+			$email = $this->input->post('email');
+			$tgl_masuk = $this->input->post('tgl_masuk');
+			$no_sk = $this->input->post('no_sk');
+			$tgl_sk = $this->input->post('tgl_sk');
+			$tgl_awal_kontrak = $this->input->post('tgl_awal_kontrak');
+			$tgl_akhir_kontrak = $this->input->post('tgl_akhir_kontrak');
+			$gapok = $this->input->post('gaji_pokok');
+			$tgppw = $this->input->post('tgppw');
+
+			$param = array('nip'=>$nip);
+			$val1 = array(
+				'nama' => $nama,
+				'email' => $email
+			);
+			$val2 = array(
+				'gender' => $gender,
+				'kode_agama' => $agama,
+				'hp' => $telp,
+				'tempat_lahir' => $tmpt_lahir,
+				'tanggal_lahir' => $tgl_lahir,
+				'tanggal_masuk' => $tgl_masuk,
+				'nomor_sk' => $no_sk,
+				'tanggal_sk' => $tgl_sk,
+				'tanggal_awal_kontrak' => $tgl_awal_kontrak,
+				'tanggal_akhir_kontrak' => $tgl_akhir_kontrak
+			);
+			$update_karyawan = $this->my_lib->edit_row('data_pegawai',$val1,$param);
+			$update_karyawan_detail = $this->my_lib->edit_row('data_pegawai_detail',$val2,$param);
+			if ($update_karyawan && $update_karyawan_detail) {
+				$alert_type = "success";
+	      $alert_title ="Berhasil perbarui data ".$nama;
+				set_header_message($alert_type,'Perbarui Data Karyawan',$alert_title);
+				redirect(sdm().'data_pegawai/detail_pegawai?nip='.$nip);
+			}
+			else{
+				$alert_type = "danger";
+	      $alert_title ="Gagal perbarui data ".$nama;
+				set_header_message($alert_type,'Perbarui Data Karyawan',$alert_title);
+				redirect(sdm().'data_pegawai/detail_pegawai?nip='.$nip);
+			}
+		}
+		else{
+			$alert_type = "danger";
+      $alert_title ="Gagal perbarui data ".$nama;
+			set_header_message($alert_type,'Perbarui Data Karyawan',$alert_title);
+			redirect(sdm().'data_pegawai/detail_pegawai?nip='.$nip);
+		}
+	}
+
 	function detail($id=FALSE)
 	{
 		$nip = field_value('data_pegawai','id',$id,'nip');

@@ -15,7 +15,7 @@ class Aktivasi extends CI_Controller
 			$email = $this->input->post('email_pegawai');
 			$cek_nip = $this->my_lib->cek('data_pegawai',array('nip'=>$nip));
 			if ($cek_nip == TRUE) {
-				$id = $this->my_lib->get_row('data_pegawai',array('nip'=>$nip),'id');
+				$token_enkripsi = password_hash($nip,PASSWORD_DEFAULT);
 				$encrypted_id = bin2hex(random_bytes(32));
 				$startDate = time();
 				$expired = date('Y-m-d H:i:s', strtotime('+1 day', $startDate));
@@ -29,7 +29,7 @@ class Aktivasi extends CI_Controller
 					'aktivasi_token_expired' => $expired
 				);
 				$param = array(
-					'id' => $id
+					'nip' => $nip
 				);
 				$pesan_html = $this->load->view('aktivasi',$data,true);
 				$mail = new PHPMailer;
@@ -42,7 +42,7 @@ class Aktivasi extends CI_Controller
 				$mail->Port = 465;
 				$mail->Username = "developer.up45@gmail.com";
 				$mail->Password = "@Devara1995";
-				$mail->setFrom('developer.up45@gmail.com', 'Universitas Proklamasi 45');
+				$mail->setFrom('developer.up45@gmail.com', 'Sistem Informasi Penggajian UP45');
 				$mail->addAddress($email);
 				$mail->Subject = 'Aktivasi Akun';
 				$mail->isHTML(true);

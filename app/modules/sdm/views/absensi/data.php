@@ -4,7 +4,7 @@
 	<div>
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Absensi</h3>
+				<h3>Absensi Karyawan</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -13,11 +13,7 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>Data Absensi</h2>
-						<ul class="nav navbar-right panel_toolbox">
-              <li>
-              	<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-            </ul>
+						
             <div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -85,7 +81,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="pegawai">Pilih Pegawai <span class="required">*</span></label>
+									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="pegawai">Pilih Karyawan <span class="required">*</span></label>
 									<div class="col-md-4 col-sm-6 col-xs-12">
 										<select class="form-control select2_single" name="pegawai" id="pegawai">
 					          	

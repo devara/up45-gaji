@@ -14,10 +14,6 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>Manajemen Akun Pegawai</h2>
-						<ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-            </ul>
             <div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -70,24 +66,11 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="peg_ganda[]" class="select2_single form-control" multiple required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
                         <?php foreach ($pegawai as $row) { ?>
-                          <option value="<?=$row->id?>"><?=$row->nama?></option>
+                          <option value="<?=$row->nip?>"><?=$row->nama?></option>
                         <?php } ?>
                        	</select>
                       </div>
               			</div>
-              			<div class="form-group">
-                      <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Status <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                      	<select name="stat_ganda" class="select2_single form-control" required="required" title="Pilih Status" style="width: 100% !important;padding: 0;">
-                        <?php 
-                        $status = $this->my_lib->get_data('master_status_pegawai','','nama_status ASC');
-                        foreach ($status as $stat) { ?>
-                          <option value="<?=$stat->kode_status_pegawai?>"><?=$stat->nama_status?></option>
-                        <?php } ?>
-                       	</select>
-                      </div>
-                    </div>
                     <div class="form-group">
                     	<div class="col-md-offset-2 col-md-6">
                     		<button type="submit" class="btn btn-sm btn-success">Update</button>
@@ -105,24 +88,11 @@
                         <select name="peg_tunggal" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
                         	<option selected="" disabled="">Pilih</option>
                         <?php foreach ($pegawai as $row) { ?>
-                          <option value="<?=$row->id?>"><?=$row->nama?></option>
+                          <option value="<?=$row->nip?>"><?=$row->nama?></option>
                         <?php } ?>
                        	</select>
                       </div>
               			</div>
-              			<div class="form-group">
-                      <label class="control-label col-md-2 col-sm-3 col-xs-12" for="first-name">Status <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                      	<select name="stat_tunggal" class="select2_single form-control" required="required" title="Pilih Status" style="width: 100% !important;padding: 0;">
-                        <?php 
-                        $status = $this->my_lib->get_data('master_status_pegawai','','nama_status ASC');
-                        foreach ($status as $stat) { ?>
-                          <option value="<?=$stat->kode_status_pegawai?>"><?=$stat->nama_status?></option>
-                        <?php } ?>
-                       	</select>
-                      </div>
-                    </div>
                     <div class="form-group">
                     	<div class="col-md-offset-2 col-md-6">
                     		<button type="submit" class="btn btn-sm btn-success">Update</button>

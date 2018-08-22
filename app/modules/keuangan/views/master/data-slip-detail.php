@@ -1,3 +1,8 @@
+<style type="text/css">
+	.table td {
+		padding: 3px;
+	}
+</style>
 <table class="table table-bordered">
 	<tr>
 		<td>Periode</td>

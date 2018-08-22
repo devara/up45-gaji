@@ -35,7 +35,7 @@
 		</tbody>
 	</table>
 	<div class="pull-right">
-		<button type="submit" class="btn btn-sm btn-success">Submit LH</button>
+		<button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Simpan Data</button>
 	</div>
 </form>
 <?php elseif($status == 2): ?>

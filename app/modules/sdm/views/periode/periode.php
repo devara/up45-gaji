@@ -4,7 +4,7 @@
 	<div>
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Periode Kerja</h3>
+				<h3>Manajemen Periode Kerja</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>

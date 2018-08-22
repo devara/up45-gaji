@@ -62,7 +62,7 @@ class Lib_login{
 		
 		if ($level=='karyawan') {
 			if ($user) {
-				if ($user->row('password') == md5($pwd)) {
+				if (password_verify($pwd, $user->row('password'))) {
 					$jab = field_value('data_pegawai','username',$uname,'kode_jabatan');
 					$cek_kabag = $this->ci->my_lib->get_data('master_jabatan',array('under_of_jabatan'=>$jab));
 					if ($cek_kabag) {
@@ -103,7 +103,7 @@ class Lib_login{
 		else {
 			if ($user) {
 				if ($user->row('kode_unit') == $level) {
-					if ($user->row('password') == md5($pwd)) {
+					if (password_verify($pwd, $user->row('password'))) {
 						$this->ci->session->set_userdata(array(
 							'nip'		=> $user->row('nip'),
               'nama'	=> $user->row('nama'),

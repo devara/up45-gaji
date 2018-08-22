@@ -19,25 +19,24 @@
 					
 				</td>
 			</tr>
-		</table>		
-		<br>
+		</table>
 	</div>
 
 	<div class="col-md-12">
 		<table id="tblRKH" class="table table-striped table-bordered">
 			<thead>
 				<tr>
-					<th rowspan="2">No</th>
-					<th rowspan="2">Tanggal</th>
-					<th rowspan="2">Hari</th>
-					<th colspan="2">RKH</th>
-					<th colspan="2">LH</th>
+					<th rowspan="2" class="text-center" style="vertical-align: middle;">No</th>
+					<th rowspan="2" class="text-center" style="vertical-align: middle;">Tanggal</th>
+					<th rowspan="2" class="text-center" style="vertical-align: middle;">Hari</th>
+					<th colspan="2" class="text-center" style="vertical-align: middle;">Rencana Kerja</th>
+					<th colspan="2" class="text-center" style="vertical-align: middle;">Laporan</th>
 				</tr>
 				<tr>
-					<th>Status</th>
-					<th>Tanggal Buat</th>
-					<th>Status</th>
-					<th>Tanggal Buat</th>
+					<th class="text-center" style="vertical-align: middle;">Status</th>
+					<th class="text-center" style="vertical-align: middle;">Tanggal Buat</th>
+					<th class="text-center" style="vertical-align: middle;">Status</th>
+					<th class="text-center" style="vertical-align: middle;">Tanggal Buat</th>
 				</tr>
 			</thead>
 			<tbody>

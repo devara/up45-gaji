@@ -13,10 +13,6 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>Manajemen Data RKH</h2>
-						<ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-            </ul>
             <div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -144,13 +140,13 @@
                       		</div>
                       		<div class="form-group">
 		                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-1">
-		                          <button type="submit" id="btnSubmit" class="btn btn-success">Submit</button>
+		                          <button type="submit" id="btnSubmit" class="btn btn-success"><i class="fa fa-save"></i> Simpan Data</button>
 		                        </div>
 		                      </div>
 			              		</form>
               			</div>
               			<div class="col-md-2">
-              				<a id="btnTambah" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah Kegiatan</a>
+              				<a id="btnTambah" class="btn btn-sm btn-warning"><i class="fa fa-plus"></i> Tambah Kegiatan</a>
               			</div>
               		</div>
               	</div>

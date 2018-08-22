@@ -20,12 +20,12 @@
 			<table id="tblLembur" class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Nama Pegawai</th>
+						<th width="200">Nama Karyawan</th>
 						<th>Ins. Penilaian</th>
 						<th>Ins. Tepat Waktu</th>
 						<th>Ins. Propeka</th>
 						<th>Ins. MT</th>
-						<th>Total Insentif</th>
+						<th>Total</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,7 +40,7 @@
 						</tr>
 					<?php endforeach; ?>
 						<tr>
-							<td colspan="6" align="center"><button type="submit" class="btn btn-success">Perbarui</button></td>
+							<td colspan="6" align="center"><button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Perbarui</button></td>
 						</tr>
 					<?php else: ?>
 						<tr>

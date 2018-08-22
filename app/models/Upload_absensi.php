@@ -119,7 +119,7 @@ class Upload_absensi extends CI_Model
 				}				
 			}
 		}
-		$peg = $this->my_lib->get_data('data_pegawai');
+		$peg = $this->my_lib->get_data('data_pegawai'); //AMBIL DATA KARYAWAN
 		foreach ($peg as $p) {
 			$nip_peg = $p->nip;
 			$tot =0;

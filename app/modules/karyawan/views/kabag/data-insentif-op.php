@@ -13,11 +13,6 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>Data Insentif Operasional Karyawan</h2>
-						<ul class="nav navbar-right panel_toolbox">
-              <li>
-              	<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-            </ul>
             <div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -71,7 +66,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-4 col-md-offset-2">
-										<button type="button" id="btnSubmit" class="btn btn-sm btn-primary">Lihat Data</button>
+										<button type="button" id="btnSubmit" class="btn btn-sm btn-success">Tampilkan Data</button>
 									</div>
 								</div>
 							</form>

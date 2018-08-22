@@ -3,7 +3,7 @@
 	<div>
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Unit Kerja</h3>
+				<h3>Manajemen Unit Kerja</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -34,9 +34,12 @@
 									</tr>
 								</thead>
 								<tbody id="show_data">
-								<?php if($unit): foreach($unit as $row): ?>
+								<?php if($unit): $i=1; foreach($unit as $row): ?>
 									<tr>
-										<td><?=$row->kode_unit?></td>
+										<td>
+											<input type="hidden" id="kode<?=$i?>" value="<?=$row->kode_unit?>">
+											<?=$row->kode_unit?>
+										</td>
 										<td><?=$row->nama_unit?></td>
 										<td>
 											<?php if($row->kode_bidang == 'BD1'): ?>
@@ -51,11 +54,11 @@
 											<?php echo $this->my_lib->row_count('data_pegawai',array('kode_unit'=>$row->kode_unit)); ?> orang
 										</td>
 										<td align="center">
-											<a class="btn btn-success btn-xs item_edit" onclick="edit_unit(<?=$row->id_unit?>)" data-toggle="modal" data-target="#ModalEdit"><i class="fa fa-pencil"></i> Edit</a>
-											<a class="btn btn-danger btn-xs item_hapus" onclick="del_unit(<?=$row->id_unit?>)" data-toggle="modal" data-target="#DelUnit"><i class="fa fa-trash"></i> Hapus</a>
+											<a class="btn btn-success btn-xs item_edit" onclick="edit_unit(<?=$i?>)" data-toggle="modal" data-target="#ModalEdit"><i class="fa fa-pencil"></i> Edit</a>
+											<a class="btn btn-danger btn-xs item_hapus" onclick="del_unit(<?=$i?>)" data-toggle="modal" data-target="#DelUnit"><i class="fa fa-trash"></i> Hapus</a>
 										</td>
 									</tr>
-								<?php endforeach; endif; ?>
+								<?php $i++; endforeach; endif; ?>
 								</tbody>
 							</table>
 						</div>

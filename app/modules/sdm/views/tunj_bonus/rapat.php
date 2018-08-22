@@ -4,7 +4,7 @@
 	<div>
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Data Rapat</h3>
+				<h3>Manajemen Data Rapat</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -13,11 +13,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Manajemen Data Rapat</h2>
-						<ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-            </ul>
+						<h2>Data Rapat</h2>
             <div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -113,8 +109,8 @@
                     </div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button class="btn btn-primary" type="button">Cancel</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button class="btn btn-primary" type="reset">Reset</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                       </div>
                     </div>
                   </form>
