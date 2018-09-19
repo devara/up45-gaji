@@ -15,6 +15,7 @@ $(document).ready(function() {
     },
   });
 });
+
 function detail_peg(id){
   $.ajax({
     url: "<?php echo sdm().'data_pegawai/detail/';?>"+id,

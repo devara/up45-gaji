@@ -15,9 +15,8 @@ class Rkhlh extends CI_Controller
 
 	function index()
 	{
-		$data['periode'] = $this->my_lib->get_data('master_periode');
+		$data['periode'] = $this->my_lib->get_data('master_periode','','mulai ASC');
 		$data['unit'] = $this->my_lib->get_data('master_unit_kerja');
-		$data['datatables'] = 'yes';
 		$data['javascript'] = $this->load->view('propeka/rkhlh-js',$data,true);
 		$this->load->view('propeka/rkhlh',$data);
 	}
@@ -44,6 +43,17 @@ class Rkhlh extends CI_Controller
 		else{
 			$message[] = array('code'=>404,'message' => validation_errors('<div class="error">', '</div>'));
 		}
+		$this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($message));
+	}
+
+	function lihat_rkh($id)
+	{
+		$data['detail'] = $this->my_lib->get_data('data_rkhlh_detail',array('id_rkhlh'=>$id));
+		$detailRKH = $this->load->view('propeka/rkh-detail',$data,true);
+		$message[] = array('code'=>200,'message'=>'Data Tersedia.','detail'=>$detailRKH);
+
 		$this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($message));

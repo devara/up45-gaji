@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Aplikasi Penggajian Universitas Proklamasi 45</title>
+	<title>Sistem Informasi Penggajian Universitas Proklamasi 45</title>
 	<meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -58,7 +58,7 @@
 				          <div class="panel-body">
 				          	<div class="form-group">
 					         		<label>Pilih Level</label>
-					         		<select class="form-control" name="level">
+					         		<select class="form-control" name="level" required="">
 					         			<option selected="" disabled="">Pilih</option>
 					         			<option value="karyawan">Karyawan</option>
 					         			<option value="SDM">SDM</option>
@@ -71,14 +71,14 @@
 					            <label for="username">Username</label>
 					            <div class="input-group">
 					              <div class="input-group-addon"><i class="icon ion-person" style="font-size: 18px;"></i></div>
-					              <input type="text" class="form-control" name="username" id="username" placeholder="Username" autocomplete="off" />
+					              <input type="text" class="form-control" name="username" id="username" placeholder="Username" autocomplete="off" required="" />
 					            </div>
 					          </div>
 					          <div class="form-group">
 					            <label for="password">Password</label>
 					            <div class="input-group">
 					              <div class="input-group-addon"><i class="icon ion-locked" style="font-size: 18px;"></i></div>
-					              <input type="password" class="form-control" name="password" id="password-field" placeholder="Password" autocomplete="off" />
+					              <input type="password" class="form-control" name="password" id="password-field" placeholder="Password" autocomplete="off" required="" />
 					              <span toggle="#password-field" class="icon ion-eye field-icon toggle-password"></span>
 					            </div>
 					          </div>

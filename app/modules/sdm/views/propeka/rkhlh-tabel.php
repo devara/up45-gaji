@@ -57,7 +57,7 @@
 					<?php if($cek_rkh): $id_rkhlh = $cek_rkh->row('id_rkhlh'); ?>
 						
 						<td align="center">
-							<a class="btn btn-xs btn-primary">Ada</a>&nbsp;<a class="btn btn-warning btn-xs"><i class="fa fa-search"></i>&nbsp;Lihat</a>
+							<a class="btn btn-xs btn-primary">Ada</a>&nbsp;<a class="btn btn-warning btn-xs" onclick="tampil_rkh(<?=$id_rkhlh?>)" data-toggle="modal" data-target="#Modalrkh"><i class="fa fa-search"></i>&nbsp;Lihat</a>
 						</td>
 						<td>
 							<?=tanggal_indo($cek_rkh->row('tgl_buat_rkh'))?>
@@ -70,7 +70,7 @@
 							<td> - </td>
 						<?php else: ?>
 							<td align="center">
-								<a class="btn btn-xs btn-primary">Ada</a>&nbsp;<a class="btn btn-warning btn-xs item_edit" onclick="tampil_detail(<?=$id_rkhlh?>)" data-toggle="modal" data-target="#ModalLihat"><i class="fa fa-search"></i>&nbsp;Lihat</a>
+								<a class="btn btn-xs btn-primary">Ada</a>&nbsp;<a class="btn btn-warning btn-xs" onclick="tampil_detail(<?=$id_rkhlh?>)" data-toggle="modal" data-target="#ModalLihat"><i class="fa fa-search"></i>&nbsp;Lihat</a>
 							</td>
 							<td>
 								<?=tanggal_indo($cek_rkh->row('tgl_buat_lh'))?>
@@ -89,13 +89,30 @@
 		</table>
 	</div>
 
+	<div class="modal fade bs-example-modal-md" id="Modalrkh" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+	        </button>
+	        <h4 class="modal-title" id="rkhlabel">Lihat Rencana Kerja Harian</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div id="loading-rkh"></div>
+	      	<div id="detailRKH">
+	      		
+	      	</div>
+	      </div>
+			</div>
+		</div>
+	</div>
 	<div class="modal fade bs-example-modal-md" id="ModalLihat" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 	        </button>
-	        <h4 class="modal-title" id="myModalLabel">Lihat Laporan Harian</h4>
+	        <h4 class="modal-title" id="myModalLabel">Lihat Laporan Kerja Harian</h4>
 	      </div>
 	      <div class="modal-body">
 	      	<div id="loading-detail"></div>

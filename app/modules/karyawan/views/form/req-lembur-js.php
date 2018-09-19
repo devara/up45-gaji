@@ -8,14 +8,15 @@ $('#btn_tampil').click(function(e){
 		dataType : "json",
 		data : {per:idPer, nip:nip},
 		beforeSend: function(){
-			$("#loading").html(loader_green);
+			showSpinningProgressLoading();
+			$("#loading").html("");
 			$("#tampilLembur").html("");
 		},
 		success: function(response){
-			$("#loading").html("");
+			hideSpinningProgressLoading();
 			if (response[0].code==200) {
-				$("#tampilLembur").html(response[0].tabel);
-				
+				$("#loading").html("");
+				$("#tampilLembur").html(response[0].tabel);				
 			}
 			else{
 				$("#loading").html(alert_red(response[0].message));

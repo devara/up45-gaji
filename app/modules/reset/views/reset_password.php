@@ -40,7 +40,7 @@
 						</div>
 					</div>
 					<div class="content-copyright">
-						<p>&copy; 2018 Universitas Prokalamasi 45 <br> made with &#128147; by Devara Eko</p>
+						<p>&copy; 2018 Universitas Prokalamasi 45 <br> made with &#128147;</p>
 					</div>
 				</div>
 				<div class="col-md-5">

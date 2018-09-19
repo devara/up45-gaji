@@ -7,20 +7,18 @@ class Get extends CI_Controller
 	
 	function cekper($per=FALSE)
 	{
-		$periode = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
+		$periode = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
 		if ($periode) {
-			foreach ($periode as $row) {
 				$data[] = array(
-					'id'			=> $row->id_periode,
-          'min'		=> $row->mulai,
-          'max'    => $row->akhir
+					'code'	=> '200',
+					'id'		=> $periode->row('id_periode'),
+          'min'		=> $periode->row('mulai'),
+          'max'   => $periode->row('akhir')
         );
-			}
 		}
 		else {
-			$data = array('code'=>'404','message'=>'Tidak ditemukan...');
+			$data[] = array('code'=>'404','message'=>'Tidak ditemukan...');
 		}
-
 		$this->output
         ->set_content_type('application/json')
         ->set_output(json_encode($data));

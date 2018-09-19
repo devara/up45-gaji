@@ -1,31 +1,31 @@
 <script type="text/javascript">
-
-$('#btn_tampil').click(function(e){
-	var nip = $('#nip').val();
-	var idPer = $('#idPer').val();
+function cek()
+{
+	var periode = $('#idPer').val();
+	var jabatan = $('#kd_jabatan').val();
 	$.ajax({
 		type  : "POST",
-		url   : "<?php echo karyawan()?>master/penilaian/tampil",
+		url   : "<?php echo karyawan()?>kabag/pengajuan_lembur/cek_pengajuan",
 		dataType : "json",
-		data : {nip:nip, per:idPer},
+		data : {per:periode, jab:jabatan},
 		beforeSend: function(){
 			showSpinningProgressLoading();
-			$("#loading").html("");
-			$("#tampilPenilaian").html("");
+			$("#tabel_pengajuan").html("");
 		},
 		success: function(response){
 			hideSpinningProgressLoading();
 			if (response[0].code==200) {
 				$("#loading").html("");
-				$("#tampilPenilaian").html(response[0].tabel);				
+				$("#tabel_pengajuan").html(response[0].tabel);        
 			}
 			else{
 				$("#loading").html(alert_red(response[0].message));
 			}
 		}
 	});
-	e.preventDefault();
-});
-
-
+}
+function modal_acc(id)
+{
+	$('#lembur_id').val(id);
+}
 </script>

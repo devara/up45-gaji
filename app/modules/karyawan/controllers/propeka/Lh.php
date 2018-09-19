@@ -66,7 +66,6 @@ class Lh extends CI_Controller
 		else{
 			$data['status'] = 0; // RKH belum ada
 		}
-
 		$data['detail'] = $this->my_lib->get_data('data_rkhlh_detail',array('id_rkhlh'=>$id_rkhlh));
 		$data['idrkhlh'] = $id_rkhlh;
 		$data['tanggal'] = $tgl;

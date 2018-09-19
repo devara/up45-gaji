@@ -69,6 +69,22 @@ $('#btn_tampil').click(function(e){
 	e.preventDefault();
 });
 
+function tampil_rkh(id){
+	$.ajax({
+    url: "<?php echo sdm().'propeka/rkhlh/lihat_rkh/'; ?>"+id,
+    beforeSend: function(){
+      $("#loading-rkh").html(loader_green);
+    },
+    success: function(response){
+      $("#loading-rkh").html("");
+      if (response[0].code!=404) {
+      	$("#detailRKH").html(response[0].detail);
+      } else{
+        $("#loading-rkh").html(alert_red(response[0].message));
+      }
+    }
+  });
+}
 function tampil_detail(id){
 	$.ajax({
     url: "<?php echo sdm().'propeka/rkhlh/lihat_detail/'; ?>"+id,

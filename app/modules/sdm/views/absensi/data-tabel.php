@@ -65,7 +65,7 @@
 <?php } else { ?>
 <div class="row">
 	<div class="col-md-12">
-		<button type="button" id="printAbsensi" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</button>
+		<a type="button" target="_blank" id="printAbsensi" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</a>
 		<a href="<?=sdm()?>absensi/data/absensi_pdf?per=<?=$id_per?>&nip=<?=$nip?>&time=<?=time()?>" class="btn btn-sm btn-danger" title="PDF"><i class="fa fa-file-pdf-o"></i>&nbsp;Download PDF</a>
 	</div>
 </div>

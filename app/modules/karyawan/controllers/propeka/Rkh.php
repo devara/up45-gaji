@@ -82,30 +82,39 @@ class Rkh extends CI_Controller
 		$tgl = $this->input->post('tanggal');
 		$nip = $this->input->post('pegawai');
 		$data = array(
-			'id_periode'	=> $periode,
-			'tanggal' => $tgl,
-			'nip'	=> $nip,
-			'tgl_buat_rkh' => date('Y-m-d H:i:s')
+			'id_periode' => $periode,'tanggal' => $tgl,
+			'nip' => $nip,'tgl_buat_rkh' => date('Y-m-d H:i:s')
 		);
 		$addrkh = $this->db->insert('data_rkhlh',$data);
-
 		if ($addrkh) {
 			$rkhID = $this->my_lib->last_insert_id();
 			$keg = $this->input->post('keg');
 			$result = array();
 			foreach ($keg as $key => $val) {
 				$result[] = array(
-	      'id_rkhlh'	=> $rkhID,
-	      'kegiatan' 	=> $_POST['keg'][$key],
-	      'mulai_rkh'	=> $_POST['dari'][$key],
-	      'sampai_rkh' => $_POST['sampai'][$key],
+	      'id_rkhlh'	=> $rkhID,'kegiatan' 	=> $_POST['keg'][$key],
+	      'mulai_rkh'	=> $_POST['dari'][$key],'sampai_rkh' => $_POST['sampai'][$key]
 	    	);				
 			}
-
-			$test= $this->db->insert_batch('data_rkhlh_detail', $result);
-
+			$insert_kegiatan = $this->db->insert_batch('data_rkhlh_detail', $result);
+			if ($insert_kegiatan) {
+				$alert_type = "success";
+	      $alert_title ="Berhasil Membuat Rencana Kerja Harian";
+				set_header_message($alert_type,'Submit Rencana Kerja Harian',$alert_title);
+				redirect(karyawan().'propeka/rkh');
+			}else{
+				$this->my_lib->delete_row('data_rkhlh',array('id_rkhlh'=>$rkhID));
+				$alert_type = "danger";
+	      $alert_title ="Gagal Membuat Rencana Kerja Harian";
+				set_header_message($alert_type,'Submit Rencana Kerja Harian',$alert_title);
+				redirect(karyawan().'propeka/rkh');
+			}
+		}else{
+			$alert_type = "danger";
+      $alert_title ="Gagal Membuat Rencana Kerja Harian";
+			set_header_message($alert_type,'Submit Rencana Kerja Harian',$alert_title);
+			redirect(karyawan().'propeka/rkh');
 		}
-		redirect(karyawan().'propeka/rkh');
 	}
 
 	function lihat_detail($id)

@@ -104,7 +104,7 @@
 										</div>
                     <div class="form-group">
                     	<div class="col-md-offset-2 col-md-4">
-                    		<button type="button" id="btn_tampil" class="btn btn-sm btn-success">Tampilkan Data</button>
+                    		<button type="button" id="btn_tampil" class="btn btn-sm btn-success" onclick="tampil()">Tampilkan Data</button>
                     	</div>
                     </div>
                     <div class="form-group">
@@ -114,8 +114,6 @@
                     </div>
               		</form>
 
-              		<br>
-              		<br>
               		<div id="tampilLembur">
               			
               		</div>
@@ -196,7 +194,47 @@
               		</form>
               	</div>
               	<div role="tabpanel" class="tab-pane fade" id="pengajuan" aria-labelledby="pengajuan-tab">
-              		
+              		<form id="demo-form1" data-parsley-validate class="form-horizontal form-label-left">
+              			<div class="form-group">
+                      <label class="control-label col-md-2 col-sm-3 col-xs-12" for="cek_periode">Periode <span class="required">*</span>
+                      </label>
+                      <div class="col-md-5 col-sm-6 col-xs-12">
+                        <select name="cek_periode" id="cek_periode" class="form-control select2_single" required="required" style="width: 100% !important;padding: 0;">
+                          <option disabled="" selected="">Pilih Periode</option>
+                          <?php foreach ($periode as $per) { 
+							          		$mulai = $this->lib_calendar->convert($per->mulai);
+							          		$akhir = $this->lib_calendar->convert($per->akhir);
+							          	 ?>
+							          		<option value="<?=$per->id_periode?>">Periode <?php echo "".$per->bulan." ".$per->tahun." ( ".$mulai." - ".$akhir." )"; ?></option>
+							          	<?php } ?>
+                        </select>
+                      </div>
+                    </div>
+              			<div class="form-group">
+                      <label for="cek_unit" class="control-label col-md-2 col-sm-3 col-xs-12">Unit Kerja <span class="required">*</span></label>
+                      <div class="col-md-4 col-sm-6 col-xs-12">
+                        <select name="cek_unit" id="cek_unit" class="select2_single form-control" required="required" title="Pilih Pegawai" style="width: 100% !important;padding: 0;">
+                        	<option value="all" selected="">Semua</option>
+                          <?php foreach ($unit as $un) { ?>
+                              <option value="<?=$un->kode_unit?>"><?=$un->nama_unit?></option>
+                            <?php } ?>
+                        </select>
+                    	</div>
+                    </div>
+                    <div class="form-group">
+                    	<div class="col-md-offset-2 col-md-4">
+                    		<button type="button" id="btn_cek" class="btn btn-sm btn-success" onclick="cek()">Tampilkan Data</button>
+                    	</div>
+                    </div>
+                    <div class="form-group">
+                    	<div class="col-md-offset-2 col-md-5">
+                    		<div id="loading-cek"></div>
+                    	</div>
+                    </div>
+              		</form>
+              		<div id="tampilPengajuan">
+              			
+              		</div>
               	</div>
               </div>
 						</div>

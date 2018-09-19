@@ -200,8 +200,27 @@ class My_lib {
 		}
 	}
 
-	function get_data_join($table1,$table2,$where=array(),$join,$order=''){
+	function get_data_row_join($table1,$table2,$join,$where=array()){
+		if(!empty($table1) && !empty($table2))	{
+			
+			$this->CI->db->select('*');
+			$this->CI->db->from($table1);
+			$this->CI->db->join($table2,$join);
+			if(!empty($where)){
+				$this->CI->db->where($where);
+			}						
+			$result=$this->CI->db->get();
+			if($result->num_rows() > 0){
+				return $result;
+			}else{
+				return null;
+			}
+		}else{
+			$this->noTable();
+		}
+	}
 
+	function get_data_join($table1,$table2,$where=array(),$join,$order=''){
 
 		if(!empty($table1) && !empty($table2))	{
 			
@@ -226,7 +245,7 @@ class My_lib {
 		}
 	}
 
-	function get_data_join_triple($table1,$table2,$table3,$join1,$join2,$where=array()){
+	function get_data_join_triple($table1,$table2,$table3,$join1,$join2,$where=array(),$order=''){
 
 
 		if(!empty($table1) && !empty($table2))	{
@@ -237,6 +256,9 @@ class My_lib {
 			$this->CI->db->join($table3,$join2);
 			if(!empty($where)){
 				$this->CI->db->where($where);
+			}
+			if(!empty($order)){
+				$this->CI->db->order_by($order);
 			}
 						
 			$result=$this->CI->db->get();

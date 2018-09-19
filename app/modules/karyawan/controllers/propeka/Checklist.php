@@ -31,11 +31,9 @@ class Checklist extends CI_Controller
 				'id_periode' => $per,
 				'nip'	=> $nip
 			);
-			$cek_id_data = $this->my_lib->get_row('data_checklist_laporan_bulanan',$param,'id_cb_lb');
-			$data['tgl_buat'] = tanggal_indo($this->my_lib->get_row('data_checklist_laporan_bulanan',$param,'tgl_buat_checklist'));
-			$data['periode'] = $this->my_lib->get_data('master_periode',array('id_periode'=>$per));
-			$data['checklist'] = $this->my_lib->get_data('data_checklist_laporan_bulanan_detail',array('id_cb_lb'=>$cek_id_data));
-			$data['pegawai'] = $this->my_lib->get_data('data_pegawai',array('nip'=>$nip));
+			$data['periode'] = $this->my_lib->get_data_row('master_periode',array('id_periode'=>$per));
+			$data['checklist'] = $this->my_lib->get_data_row('data_checklist_laporan_bulanan',$param);
+			$data['pegawai'] = $this->my_lib->get_data_row('data_pegawai',array('nip'=>$nip));
 			$tabel = $this->load->view('propeka/propeka-cb-tabel',$data,true);
 			$message[] = array('code'=>200,'message'=>'Data Tersedia.','tabel'=>$tabel);
 		}

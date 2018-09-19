@@ -41,7 +41,7 @@ class Aktivasi extends CI_Controller
 			$param = array('nip'=>$nip);
 			$value = array(
 				'username' => $username,
-				'password' => md5($password),
+				'password' => password_hash($password, PASSWORD_BCRYPT, ['cost' => 10]),
 				'aktivasi_token' => "",
 				'aktivasi_token_expired' => NULL
 			);

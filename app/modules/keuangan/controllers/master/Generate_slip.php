@@ -51,6 +51,7 @@ class Generate_slip extends CI_Controller
 		if ($this->form_validation->run() == TRUE) {
 			$per = $this->input->post('idperiode');
 			$unit = $this->input->post('kodeunit');
+			$nama_unit = $this->my_lib->get_row('master_unit_kerja',array('kode_unit'=>$unit),'nama_unit');
 			$nominal = $this->my_lib->get_data_row('master_nominal',array('status'=>'aktif'));
 			$pegawai = $this->my_lib->get_data('data_pegawai',array('kode_unit'=>$unit));
 			foreach ($pegawai as $peg) {
@@ -68,8 +69,7 @@ class Generate_slip extends CI_Controller
 				}
 				else{
 					$tpd = 0;
-				}
-				
+				}				
 				$tunj_jab =  $this->my_lib->get_row('master_jabatan',array('kode_jabatan'=>$peg->kode_jabatan),'tunjangan_jabatan');
 				$tunj_bpjs = $nominal->row('tunjangan_bpjs');
 				$tunj_fungsional = 0;
@@ -195,7 +195,7 @@ class Generate_slip extends CI_Controller
 				
 			}
 			$alert_type = "success";
-	    $alert_title ="Generate slip gaji berhasil";
+	    $alert_title ="Generate slip gaji untuk Unit Kerja ".$nama_unit." berhasil";
 			set_header_message($alert_type,'Generate Slip Gaji',$alert_title);
 			redirect(keuangan()."master/generate_slip");
 		}

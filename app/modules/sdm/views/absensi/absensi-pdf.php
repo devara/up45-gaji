@@ -5,7 +5,7 @@
     <!-- Meta, title, CSS, favicons, etc. -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/frontend/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" media="print" type="text/css" href="<?=base_url()?>assets/frontend/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">

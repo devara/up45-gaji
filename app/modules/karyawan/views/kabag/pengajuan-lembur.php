@@ -4,7 +4,7 @@
 	<div>
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Kelola Absensi</h3>
+				<h3>Pengajuan Lembur Karyawan</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -12,7 +12,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Data Absensi</h2>
+						<h2>Data Pengajuan Lembur Karyawan</h2>
             <div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -49,9 +49,10 @@
 						</div>
 						<div>
 							<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+								<input type="hidden" name="kd_jabatan" id="kd_jabatan" value="<?=$this->session->userdata('jabatan')?>">
 								<div class="form-group">
-									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="idPer">Pilih Periode <span class="required">*</span></label>
-									<div class="col-md-4 col-sm-6 col-xs-12">
+									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="idPer">Periode <span class="required">*</span></label>
+									<div class="col-md-5 col-sm-6 col-xs-12">
 										<select class="form-control select2_single" name="idPer" id="idPer" required="required">
 					          	<option selected="" disabled="">Pilih</option>
 					          	<?php foreach ($periode as $per) { 
@@ -64,27 +65,16 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="pegawai">Pilih Pegawai <span class="required">*</span></label>
-									<div class="col-md-4 col-sm-6 col-xs-12">
-										<select class="form-control select2_single" name="pegawai" id="pegawai" required="required">
-					          	<option disabled="" selected="">Pilih</option>
-					          	<?php foreach($pegawai as $peg): ?>
-					          		<option value="<?=$peg->nip?>"><?=$peg->nama?></option>
-					          	<?php endforeach; ?>
-					          </select>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-md-offset-2 col-md-4 col-sm-offset-3 col-sm-4">
-										<button type="button" id="btn_tampil" class="btn btn-sm btn-success" onclick="tampil()">Tampilkan</button>
+									<div class="col-md-4 col-md-offset-2">
+										<button type="button" id="btnSubmit" class="btn btn-sm btn-success" onclick="cek()">Tampilkan Data</button>
 									</div>
 								</div>
 							</form>
 							<div id="loading"></div>
 							<br><br>
-						</div>
-						<div id="tampilAbsensi">
-							
+							<div id="tabel_pengajuan">
+              			
+              </div>
 						</div>
 					</div>
 				</div>

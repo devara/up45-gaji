@@ -36,6 +36,14 @@ if (!function_exists('explode_time')) {
 	}
 }
 
+if (!function_exists('convert_time')) {
+	function convert_time($time) { //explode time and convert into seconds
+        $time = explode(':', $time);
+        $time = $time[0] * 3600 + $time[1] * 60;
+        return $time;
+	}
+}
+
 if (!function_exists('convert_second')) {
 	function convert_second($time) { //convert seconds to hh:mm
         $hour = floor($time / 3600);
@@ -66,14 +74,22 @@ if (!function_exists('convert_second')) {
 if (!function_exists('tanggal_indo')) {
 	function tanggal_indo($tgl){
 		$day = date('d',strtotime($tgl));
-	    $month = date('m',strtotime($tgl));
-	    $year = date('Y',strtotime($tgl));
-	    $month_new = str_replace(
-            array('01','02','03','04','05','06','07','08','09','10','11','12'),
-            array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'),
-            $month
-        );
-        return $day.' '.$month_new.' '.$year;
+	  $month = date('m',strtotime($tgl));
+	  $year = date('Y',strtotime($tgl));
+	  $month_new = str_replace(
+      array('01','02','03','04','05','06','07','08','09','10','11','12'),
+      array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'),
+      $month
+    );
+    return $day.' '.$month_new.' '.$year;
+	}
+}
+
+if (!function_exists('jam_indo')) {
+	function jam_indo($tgl){
+		$jam = date('H',strtotime($tgl));
+		$menit = date('i',strtotime($tgl));
+    return $jam.':'.$menit.' WIB';
 	}
 }
 

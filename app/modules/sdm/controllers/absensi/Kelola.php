@@ -55,7 +55,8 @@ class Kelola extends CI_Controller
 
 	function tampil_edit($id=FALSE)
 	{
-		$absensi = $this->my_lib->get_data_row('absensi_data',array('id_absensi'=>$id));
+		$join = 'absensi_data.nip = data_pegawai.nip';
+		$absensi = $this->my_lib->get_data_row_join('absensi_data','data_pegawai',$join,array('id_absensi'=>$id));
 		if ($absensi) {
 			$data[] = array(
 				'code' => 200,
@@ -64,6 +65,7 @@ class Kelola extends CI_Controller
 				'tanggal' => $absensi->row('tanggal'),
 				'hari' => $absensi->row('hari'),
 				'nip' => $absensi->row('nip'),
+				'nama' => $absensi->row('nama'),
 				'datang' => $absensi->row('datang'),
 				'pulang' => $absensi->row('pulang'),
 				'keterangan' => $absensi->row('keterangan')

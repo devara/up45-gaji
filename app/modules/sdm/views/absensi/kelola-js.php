@@ -57,6 +57,7 @@ function modal_edit(id)
       	$('#idabsensi').val(response[0].id);
       	$('#id_periode').val(response[0].periode);
       	$('#nip').val(response[0].nip);
+      	$('#nama_karyawan').val(response[0].nama);
       	$('#tgl_absensi').val(response[0].tanggal);
       	$('#hari_absensi').val(response[0].hari);
       	$('#datang').val(response[0].datang);

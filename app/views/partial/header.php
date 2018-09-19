@@ -12,6 +12,7 @@
 	  <link rel="shortcut icon" href="<?php echo base_url()."favicon.ico"; ?>" type="image/x-icon" />
 
     <link href="<?php echo base_url()?>assets/admin/css/app.css" rel="stylesheet">
+    <link href="<?php echo base_url()?>assets/admin/css/color.css" rel="stylesheet">
     <link href="<?php echo base_url()?>assets/admin/css/animate/animate.min.css" rel="stylesheet">
     <link href="<?php echo base_url()?>assets/admin/css/form.css" rel="stylesheet">
     <?php

@@ -1,9 +1,3 @@
-<div class="row">
-	<div class="col-md-12">
-		<button type="button" id="printAbsensi" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Cetak</button>
-	</div>
-</div>
-</br>
 <div class="printArea">
 <form method="POST" action="<?=karyawan()?>kabag/penilaian_kerja/edit_penilaian">
 	<input type="hidden" name="periode" value="<?=$periode->row('id_periode')?>">

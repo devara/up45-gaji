@@ -106,7 +106,7 @@
 			<div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Edit Absensi Pegawai</h4>
+        <h4 class="modal-title" id="myModalLabel">Edit Absensi Karyawan</h4>
       </div>
       <div class="modal-body">
       	<div id="loading-edit"></div>
@@ -115,21 +115,27 @@
 	      		<input type="hidden" name="idabsensi" id="idabsensi">
 	      		<input type="hidden" name="id_periode" id="id_periode">
 						<input type="hidden" name="nip" id="nip">
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="hari_absensi">Nama</label>
+							<div class="col-md-8 col-sm-8 col-xs-6">
+								<input type="text" name="nama_karyawan" id="nama_karyawan" class="form-control" readonly>
+							</div>
+						</div>
 	      		<div class="form-group">
 			        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_absensi">Tanggal</label>
-			        <div class="col-md-4 col-sm-6 col-xs-12">
+			        <div class="col-md-8 col-sm-8 col-xs-12">
 			          <input type="date" id="tgl_absensi" name="tgl_absensi" required="required" class="form-control col-md-7 col-xs-12" readonly="">
 			        </div>
 			      </div>
 			      <div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="hari_absensi">Hari</label>
-							<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="col-md-8 col-sm-8 col-xs-6">
 								<input type="text" name="hari_absensi" id="hari_absensi" class="form-control" readonly>
 							</div>
 						</div>
 			      <div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="datang">Time IN</label>
-							<div class="col-md-4 col-sm-4">
+							<div class="col-md-8 col-sm-8">
 		           	<div class='input-group' id='in'>
 		              <input type="text" name="datang" id="datang" class="form-control"/>
 		              <span class="input-group-addon">
@@ -140,7 +146,7 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="pulang">Time OUT</label>
-							<div class="col-md-4 col-sm-4">
+							<div class="col-md-8 col-sm-8">
 		           	<div class='input-group' id='out'>
 		          	  <input type="text" name="pulang" id="pulang" class="form-control"/>
 		              <span class="input-group-addon">
@@ -151,13 +157,13 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ket_absensi">Keterangan</label>
-							<div class="col-md-4 col-sm-6 col-xs-6">
+							<div class="col-md-8 col-sm-8">
 								<textarea class="form-control" name="ket_absensi" id="ket_absensi"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-md-4 col-md-offset-3 col-sm-4 col-sm-offset-3">
-								<button type="button" class="btn btn-sm btn-success" id="btn_edit">Update</button>
+							<div class="col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3">
+								<button type="button" class="btn btn-sm btn-success" id="btn_edit"><i class="fa fa-edit"></i> Update Absensi</button>
 							</div>
 						</div>
 	      	</form>

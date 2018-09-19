@@ -205,6 +205,7 @@
 					</ul>
 				</li>
 				<li><a href="<?=karyawan()?>kabag/cek_absensi_susulan"><i class="fa fa-clock-o"></i> Permintaan Absensi Susulan</a></li>
+				<li><a href="<?=karyawan()?>kabag/pengajuan_lembur"><i class="fa fa-briefcase"></i> Pengajuan Lembur Karyawan</a></li>
 			</ul>
 		</div>
 		<?php endif;?>

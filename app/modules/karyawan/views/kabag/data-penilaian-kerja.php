@@ -57,7 +57,7 @@
 								<input type="hidden" name="kd_jabatan" id="kd_jabatan" value="<?=$this->session->userdata('jabatan')?>">
 								<div class="form-group">
 									<label class="control-label col-md-2 col-sm-3 col-xs-12" for="idPer">Periode <span class="required">*</span></label>
-									<div class="col-md-4 col-sm-6 col-xs-12">
+									<div class="col-md-5 col-sm-6 col-xs-12">
 										<select class="form-control select2_single" name="idPer" id="idPer" required="required">
 					          	<option selected="" disabled="">Pilih</option>
 					          	<?php foreach ($periode as $per) { 
@@ -71,7 +71,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-4 col-md-offset-2">
-										<button type="button" id="btnSubmit" class="btn btn-sm btn-primary">Lihat Data</button>
+										<button type="button" id="btnSubmit" class="btn btn-sm btn-success">Tampilkan Data</button>
 									</div>
 								</div>
 							</form>

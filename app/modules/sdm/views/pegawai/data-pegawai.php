@@ -12,15 +12,11 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>List Karyawan <small>Berdasar database sistem</small></h2>
-						<ul class="nav navbar-right panel_toolbox">
-							<li>
-								<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-							</li>
-						</ul>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<a href="" class="btn btn-danger">Tambah Data Karyawan</a>
+						<a href="" class="btn btn-success"><i class="fa fa-plus-square"></i> Tambah Data Karyawan</a>
+						
 						<br/><br/>
 						<table id="tablepegawai" class="table table-striped table-bordered">
 							<thead>

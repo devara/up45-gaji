@@ -35,12 +35,19 @@ class Req_lembur extends CI_Controller
 			$mulai = $this->input->post('addmulai');
 			$sampai = $this->input->post('addsampai');
 			$ket = $this->input->post('addket');
-
+			$nominal = $this->my_lib->get_data_row('master_nominal',array('status'=>'aktif'));
 			$time_mulai = explode_time($this->input->post('addmulai'));
 			$time_sampai = explode_time($this->input->post('addsampai'));
 			$time_durasi = $time_sampai - $time_mulai;
+			$satu_jam = convert_time('01:00');
+			$dua_jam = convert_time('02:00');
 			$durasi = convert_second($time_durasi);
-
+			if ($time_durasi > $dua_jam) {
+				$insentif = (($time_durasi/$satu_jam)*$nominal->row('lembur'))+$nominal->row('uang_makan');
+			}
+			else{
+				$insentif = ($time_durasi/$satu_jam)*$nominal->row('lembur');
+			}
 			$value = array(
 				'id_periode' => $per,
 				'nip' => $nip,
@@ -48,8 +55,10 @@ class Req_lembur extends CI_Controller
 				'jam_mulai' => $mulai,
 				'jam_selesai' => $sampai,
 				'durasi' => $durasi,
+				'total' => $insentif,
 				'keterangan' => $ket,
 				'input_tipe' => 'karyawan',
+				'acc_kabag'=>'belum',
 				'acc' => 'belum'
 			);
 

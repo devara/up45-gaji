@@ -4,7 +4,7 @@
 	<div>
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Mutasi Pegawai</h3>
+				<h3>Mutasi Karyawan</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -12,12 +12,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Mutasi Pegawai</h2>
-						<ul class="nav navbar-right panel_toolbox">
-              <li>
-              	<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-            </ul>
+						<h2>Mutasi Karyawan</h2>
             <div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -55,10 +50,10 @@
 						<div>
 							<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?=sdm()?>mutasi_pegawai/mutasi">
 								<div class="form-group">
-									<label for="pegawai" class="control-label col-lg-1">Pegawai</label>
+									<label for="pegawai" class="control-label col-lg-1">Karyawan</label>
                   <div class="col-lg-4">
                     <select name="pegawai" id="pegawai" class="select2_single form-control" required="required" title="Pilih Pegawai" onchange="cek()">
-                    	<option selected="" disabled="">Pilih Pegawai</option>
+                    	<option selected="" disabled="">Pilih Karyawan</option>
                     <?php foreach ($pegawai as $row) { ?>
                       <option value="<?=$row->nip?>"><?=$row->nama?></option>
                     <?php } ?>
@@ -101,8 +96,10 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-lg-offset-1 col-md-4">
-										<button type="submit" class="btn btn-sm btn-success"><i class="fa fa-arrow-right"></i>&nbsp;&nbsp;Mutasi</button>
+									<div class="col-lg-11">
+										<div class="text-right">
+											<button type="submit" class="btn btn-sm btn-success"><i class="fa fa-arrow-right"></i>&nbsp;&nbsp;Terapkan Mutasi</button>
+										</div>
 									</div>
 								</div>
 							</form>
