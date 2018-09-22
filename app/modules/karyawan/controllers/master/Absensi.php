@@ -45,4 +45,30 @@ class Absensi extends CI_Controller
       ->set_content_type('application/json')
       ->set_output(json_encode($message));
 	}
+
+	function pengajuan($id=FALSE)
+	{
+		$join = 'absensi_data.nip = data_pegawai.nip';
+		$absensi = $this->my_lib->get_data_row_join('absensi_data','data_pegawai',$join,array('id_absensi'=>$id));
+		if ($absensi) {
+			$data[] = array(
+				'code' => 200,
+				'id' => $absensi->row('id_absensi'),
+				'periode' => $absensi->row('id_periode'),
+				'tanggal' => $absensi->row('tanggal'),
+				'hari' => $absensi->row('hari'),
+				'nip' => $absensi->row('nip'),
+				'nama' => $absensi->row('nama'),
+				'datang' => $absensi->row('datang'),
+				'pulang' => $absensi->row('pulang'),
+				'keterangan' => $absensi->row('keterangan')
+      );
+		}
+		else{
+			$data[] = array('code'=>500,'message'=>'Data Tidak Valid.');
+		}
+		$this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($data));
+	}
 }

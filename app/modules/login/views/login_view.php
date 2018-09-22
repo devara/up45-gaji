@@ -8,9 +8,9 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <link rel="icon" href="<?php echo base_url()."favicon.ico"; ?>" type="image/x-icon" />
   <link rel="shortcut icon" href="<?php echo base_url()."favicon.ico"; ?>" type="image/x-icon" />
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/bootstrap/css/bootstrap.min.css"; ?>" media="screen,projection" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/bootstrap/css/bootstrap.min.css"; ?>" media="screen" />
   <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/ionicons.min.css";?>">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/login.css"; ?>" media="screen,projection" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/login.css"; ?>" media="screen" />
   <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/frontend/style/css/color.css"; ?>" />
   <style type="text/css">
   	.field-icon {
@@ -31,8 +31,8 @@
 <body id="login">
 	<div class="container">
 		<div class="content">
-			<div class="row">
-				<div class="col-md-7">
+			<div class="row justify-content-center">
+				<div class="col-md-7 col-sm-12">
 					<div class="content-logo">
 						<center>
 							<img src="<?=base_url()?>assets/frontend/style/img/logo/logo.png" class="img-responsive">
@@ -43,11 +43,11 @@
 							<h1 class="title">Sistem Informasi Penggajian<br>Universitas Proklamasi 45</h1>
 						</div>
 					</div>
-					<div class="content-copyright">
+					<div class="content-copyright copyright-big">
 						<p>&copy; 2018 Universitas Prokalamasi 45</p>
 					</div>
 				</div>
-				<div class="col-md-5">
+				<div class="col-md-5 col-sm-7">
 					<div id="action-box">
 						<div class="action-section login-section">
 							<form method="POST" action="<?=base_url()?>login/open_login">
@@ -64,7 +64,7 @@
 					         			<option value="SDM">SDM</option>
 					         			<option value="AKD">Akademik</option>
 					         			<option value="KEU">Keuangan</option>
-					         			<option value="pimpinan">Pimpinan</option>
+					         			<option value="REK">Pimpinan</option>
 					         		</select>
 					         	</div>
 					          <div class="form-group">
@@ -178,6 +178,12 @@
 							</form>
 						</div>
 
+					</div>
+					<br>
+					<div class="copyright-wrapper">
+						<div class="content-copyright copyright-small">
+							<p>&copy; 2018 Universitas Prokalamasi 45</p>
+						</div>
 					</div>
 				</div>
 			</div>

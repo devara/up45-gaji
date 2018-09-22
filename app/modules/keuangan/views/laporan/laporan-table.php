@@ -24,12 +24,11 @@
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
+					<th>NIP</th>
 					<th>Nama</th>
-					<th>Email</th>
 					<th>Penerimaan</th>
 					<th>Potongan</th>
 					<th>Gaji Bersih</th>
-					<th>Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -37,15 +36,11 @@
 			$slip = $this->my_lib->get_data_row('data_slip_gaji',array('id_periode'=>$IDper,'nip'=>$peg->nip)); ?>
 				<tr>
 				<?php if($slip): ?>
+					<td><?=$peg->nip?></td>
 					<td><?=$peg->nama?></td>
-					<td><?=$peg->email?></td>
 					<td><?=$slip->row('gaji_bruto')?></td>
 					<td><?=$slip->row('jml_potongan')?></td>
 					<td><?=$slip->row('gaji_bersih')?></td>
-					<td align="center">
-						<a class="btn btn-success btn-xs" onclick="tampil_detail(<?=$slip->row('id_slip_gaji')?>)" data-toggle="modal" data-target="#ModalDetail"><i class="fa fa-eye"></i>&nbsp;Detail</a>
-						<a class="btn btn-warning btn-xs" onclick="tampil_kirim(<?=$slip->row('id_slip_gaji')?>)" data-toggle="modal" data-target="#ModalKirim"><i class="fa fa-envelope"></i>&nbsp;Kirim Email</a>
-					</td>
 				<?php else: ?>
 					<td><?=$peg->nama?></td>
 					<td colspan="5" align="center">Belum ada data</td>

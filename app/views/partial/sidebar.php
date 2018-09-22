@@ -122,7 +122,6 @@
 				<li>
 					<a><i class="fa fa-files-o"></i> Laporan Penggajian <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-	          <li><a href="<?=keuangan()?>laporan/data_gaji">Data Gaji</a></li>
 	          <li><a href="<?=keuangan()?>laporan/laporan_penggajian">Lihat Laporan Penggajian</a></li>
 	        </ul>
 				</li>
@@ -152,7 +151,6 @@
 					<a><i class="fa fa-pencil"></i> Form Pengajuan <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
 	          <li><a href="<?=karyawan()?>form/req_lembur">Pengajuan Lembur</a></li>
-	          <li><a href="#">Absensi Susulan (Coming Soon)</a></li>
 	          <li><a href="#">Ijin (Coming Soon)</a></li>
 	          <li><a href="#">Cuti (Coming Soon)</a></li>
 	        </ul>
@@ -169,8 +167,6 @@
 				<li>
 					<a><i class="fa fa-money"></i> Penggajian <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-						<li><a href="<?=karyawan()?>penggajian/tunjangan">Tunjangan/Tambahan</a></li>
-						<li><a href="<?=karyawan()?>penggajian/potongan">Potongan</a></li>
 						<li><a href="<?=karyawan()?>penggajian/slip">Slip Gaji</a></li>
 					</ul>
 				</li>
@@ -185,9 +181,8 @@
 				<li>
 					<a><i class="fa fa-files-o"></i> Propeka Bawahan <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-	          <li><a href="<?=karyawan()?>kabag/cek_rkhlh">RKH & LH Staff</a></li>
-	          <li><a href="<?=karyawan()?>kabag/cek_checklist">Checklist Bulanan Staff</a></li>
-	          <li><a href="<?=karyawan()?>kabag/cek_laporan">Laporan Bulanan Staff</a></li>
+	          <li><a href="<?=karyawan()?>kabag/rkhlh">RKH & LH Staff</a></li>
+	          <li><a href="<?=karyawan()?>kabag/cblb">Checklist & Laporan Bulanan Staff</a></li>
 	        </ul>
 				</li>
 				<li>
@@ -206,6 +201,23 @@
 				</li>
 				<li><a href="<?=karyawan()?>kabag/cek_absensi_susulan"><i class="fa fa-clock-o"></i> Permintaan Absensi Susulan</a></li>
 				<li><a href="<?=karyawan()?>kabag/pengajuan_lembur"><i class="fa fa-briefcase"></i> Pengajuan Lembur Karyawan</a></li>
+			</ul>
+		</div>
+		<?php endif;?>
+		<?php 
+		if($this->session->userdata('level') == 'REK'): ?>
+		<div class="menu_section">
+			<a href=""><h3><i class="fa fa-home"></i> Dashboard</h3></a>
+		</div>
+		<div class="menu_section">
+			<h3>Modul Pimpinan</h3>
+			<ul class="nav side-menu">
+				<li>
+					<a><i class="fa fa-files-o"></i> Laporan Penggajian <span class="fa fa-chevron-down"></span></a>
+					<ul class="nav child_menu">
+	          <li><a href="<?=pimpinan()?>laporan/laporan_penggajian">Lihat Laporan Penggajian</a></li>
+	        </ul>
+				</li>
 			</ul>
 		</div>
 		<?php endif;?>

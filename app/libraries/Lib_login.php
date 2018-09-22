@@ -46,6 +46,16 @@ class Lib_login{
 		}
 	}
 
+	function is_pimpinan()
+	{
+		if ($this->ci->session->userdata('level')=='REK') {
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 	function is_kabag()
 	{
 		if ($this->ci->session->userdata('kabag')=='yes') {

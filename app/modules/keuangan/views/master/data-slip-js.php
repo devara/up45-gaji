@@ -44,4 +44,26 @@ function tampil_detail(id){
     }
   });
 }
+function tampil_kirim(id){
+	var id_slip = id;
+	$.ajax({
+    type  : "POST",
+		url   : "<?php echo keuangan()?>master/data_slip/tampil_kirim",
+		dataType : "json",
+		data : {id_slip:id_slip},
+    beforeSend: function(){
+      $("#loading-kirim").html(loader_green);
+    },
+    success: function(response){
+      $("#loading-kirim").html("");
+      if (response[0].code!=404) {
+      	$("#slipid").val(response[0].id);
+      	$("#nama").val(response[0].nama);
+      	$("#email").val(response[0].email);
+      } else{
+        $("#loading-kirim").html(alert_red(response[0].message));
+      }
+    }
+  });
+}
 </script>

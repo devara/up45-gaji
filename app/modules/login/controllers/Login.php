@@ -47,6 +47,9 @@ class Login extends CI_Controller
         elseif ($login['level']=='karyawan') {
           redirect(base_url().'karyawan/');
         }
+        elseif ($login['level']=='REK') {
+        	redirect(base_url().'pimpinan/');
+        }
     	}
       elseif ($login['status']==404) {
         $this->session->set_flashdata('login_message','Username atau password Anda salah.');
