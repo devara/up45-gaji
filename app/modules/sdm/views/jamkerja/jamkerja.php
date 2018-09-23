@@ -101,17 +101,17 @@
         <div id="loading"></div>
         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
           <div class="form-group">
-		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="addtahun">Kode Jam Kerja <span class="required">*</span>
+		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="addkode">Kode Jam Kerja <span class="required">*</span>
 		        </label>
 		        <div class="col-md-6 col-sm-6 col-xs-12">
-		          <input type="text" name="addkode" id="addkode" class="form-control">
+		          <input type="text" name="addkode" id="addkode" class="form-control" required="required">
 		        </div>
 		      </div>
 		      <div class="form-group">
-		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="addbulan">Nama Jam Kerja <span class="required">*</span>
+		        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="addnama">Nama Jam Kerja <span class="required">*</span>
 		        </label>
 		        <div class="col-md-6 col-sm-6 col-xs-12">
-		          <input type="text" name="addnama" id="addnama" class="form-control">
+		          <input type="text" name="addnama" id="addnama" class="form-control" required="required">
 		        </div>
 		      </div>
 		      <div class="form-group">
