@@ -62,7 +62,6 @@
 					<ul class="nav child_menu">
 	          <li><a href="<?php echo sdm()?>tunjangan_bonus/lembur">Lembur</a></li>
 	          <li><a href="<?php echo sdm()?>tunjangan_bonus/rapat">Rapat</a></li>
-	          <li><a href="<?php echo sdm()?>tunjangan_bonus/rekap">Rekap Upah Rapat & Lembur</a></li>
 	        </ul>
 				</li>
 				<li>

@@ -2,11 +2,12 @@
 /**
  * 
  */
-use PHPMailer\PHPMailer\PHPMailer;
+use \Mailjet\Resources;
 class Forget_password extends CI_Controller
 {
 	function submit()
 	{
+		$mj = new \Mailjet\Client('8c4c7d65acd6ec0449e6f3312e291275','44582ddc644bf30c8368d8369f7e44ac',true,['version' => 'v3.1']);
 		$this->form_validation->set_rules('email', 'Alamat Email', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			$email = $this->input->post('email');
@@ -28,23 +29,26 @@ class Forget_password extends CI_Controller
 					'nip' => $nip
 				);
 				$pesan_html = $this->load->view('reset',$data,true);
-				
-				$mail = new PHPMailer;
-				$mail->isSMTP();
-				$mail->SMTPDebug = false;
-				$mail->do_debug = 0;
-				$mail->SMTPAuth = true;
-				$mail->SMTPSecure = 'tls';
-				$mail->Host = 'ssl://smtp.gmail.com';
-				$mail->Port = 465;
-				$mail->Username = "developer.up45@gmail.com";
-				$mail->Password = "@Devara1995";
-				$mail->setFrom('developer.up45@gmail.com', 'Sistem Informasi Penggajian UP45');
-				$mail->addAddress($email);
-				$mail->Subject = 'Reset Password';
-				$mail->isHTML(true);
-			  $mail->Body = $pesan_html;
-			  if ($mail->send()) { #Jika email berhasil dikirim
+				$body = [
+			    'Messages' => [
+			      [
+			      	'From' => [
+			      		'Email' => "developer.up45@gmail.com",
+			      		'Name' => "Sistem Gaji"
+			      	],
+			      	'To' => [
+			      		[
+			      			'Email' => $email,
+			      			'Name' => $data['nama']
+			      		]
+			      	],
+			      	'Subject' => "Reset Password",
+			      	'HTMLPart' => $pesan_html
+			      ]
+			    ]
+				];
+				$response = $mj->post(Resources::$Email, ['body' => $body]);
+			  if ($response->success()) { #Jika email berhasil dikirim
 			  	$add_token = $this->my_lib->edit_row('data_pegawai',$value,$param);
 			  	if ($add_token) {
 			  		echo "<script>window.alert('Selamat! Periksa email anda untuk verifikasi !');window.location=('".base_url()."')</script>";
